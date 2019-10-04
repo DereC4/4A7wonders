@@ -1,3 +1,7 @@
 # 4asians-7wonders
 **SLHS Compsci II**
-<br>~bancos~
+Classes: 
+1. Card
+2. Deck
+3. Player
+4. Board
