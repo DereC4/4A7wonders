@@ -8,6 +8,9 @@ Classes:
     1. Playable(Board b)
       a. Player has resources
       b. Can be built off another played Card
+    2. get/set methods
+    3. toString
+    4. 
 2. Deck
 3. Player
   a. ArrayList<Cards>CardsPlayed
@@ -15,10 +18,19 @@ Classes:
     2. Used for building/chaining cards
   b. Wonder w
     1. Set in constuctor
+    2. Randomly chosen by Board
   c. ArrayList<Card>Hand
     1. Has every card the player has
     2. Contains options for wonder (ie 3 stone thing for wonder 1)
 4. Board
   a. ArrayList<Wonder>
     1. Holds all 7 wonders
+  b. Start method
+    1. Create decks for each age (Age 1, 2, 3- 21 cards in each age's deck)
+      a. Randomize 5 Guild cards to add for Age 3
+    2. calls deal(1)
+  c. deal(int age)
+    1. deal cards of (int age)
 5. Wonder
+6. GameState
+  a. 
