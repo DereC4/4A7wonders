@@ -3,14 +3,13 @@ Classes:
   a. Variables:
     1. Cost
     2. Type (Color and type of science) (integer code?)
-    3. Prerequiste Cards/Building Cards/Chaining Cards
+    3. Prerequiste Cards/Building Cards/Chaining Cards (ArrayList<Card>)
   b. Methods
     1. Playable(Board b)
       a. Player has resources
       b. Can be built off another played Card
     2. get/set methods
     3. toString
-    4. 
 2. Deck
 3. Player
   a. ArrayList<Cards>CardsPlayed
@@ -29,7 +28,7 @@ Classes:
     1. Create decks for each age (Age 1, 2, 3- 21 cards in each age's deck)
       a. Randomize 5 Guild cards to add for Age 3
     2. calls deal(1)
-    3. gives each player a wonder (randomly Math.random()*wonder.size()
+    3. gives each player a wonder (randomly Math.random()*wonder.size(), remove wonder after choosing for a player)
   c. deal(int age)
     1. deal cards of (int age)
 5. Wonder
