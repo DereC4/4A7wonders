@@ -1,5 +1,14 @@
 Classes:
 1. Card
+  a. Variables:
+    1. Cost
+    2. Type (Color and type of science) (integer code?)
+    3. Prerequiste Cards/Building Cards/Chaining Cards
+  b. Methods
+    1. Playable(Board b)
+      a. Player has resources
+      b. Can be built off another played Card
 2. Deck
 3. Player
+  a. 
 4. Board 
