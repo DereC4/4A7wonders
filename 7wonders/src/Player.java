@@ -2,9 +2,7 @@
 public class Player 
 {
 
-	
-	
-	sadxaqxcwsc
+
 	
 	
 	
