@@ -25,7 +25,10 @@ Classes:
   c. ArrayList<Card>Hand
     1. Has every card the player has
     2. Contains options for wonder (ie 3 stone thing for wonder 1)
-   d. ArrayList
+   d. ArrayList<Resources>resourceList
+   e. int money (amount of coins)
+   f. int warMinus
+   g. int warPlus
 4. Board
   a. ArrayList<Wonder>wonder
     1. Holds all 7 wonders
@@ -44,6 +47,6 @@ Classes:
 	4. Resource produced by Wonder
 6. GameState
   a. 
-7. Graphic 
+7. Graphics
 8. Resource
 
