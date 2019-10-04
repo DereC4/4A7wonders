@@ -10,5 +10,15 @@ Classes:
       b. Can be built off another played Card
 2. Deck
 3. Player
-  a. 
-4. Board 
+  a. ArrayList<Cards>CardsPlayed
+    1. Holds cards the player has played
+    2. Used for building/chaining cards
+  b. Wonder w
+    1. Set in constuctor
+  c. ArrayList<Card>Hand
+    1. Has every card the player has
+    2. Contains options for wonder (ie 3 stone thing for wonder 1)
+4. Board
+  a. ArrayList<Wonder>
+    1. Holds all 7 wonders
+5. Wonder
