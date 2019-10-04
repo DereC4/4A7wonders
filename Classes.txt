@@ -11,6 +11,10 @@ Classes:
     2. get/set methods
     3. toString
 2. Deck
+	a. ArrayList<Cards>deckAge1
+	b. ArrayList<Cards>deckAge2
+	c. ArrayList<Cards>deckAge3
+	d. ArrayList<Cards>discard
 3. Player
   a. ArrayList<Cards>CardsPlayed
     1. Holds cards the player has played
@@ -21,6 +25,7 @@ Classes:
   c. ArrayList<Card>Hand
     1. Has every card the player has
     2. Contains options for wonder (ie 3 stone thing for wonder 1)
+   d. ArrayList
 4. Board
   a. ArrayList<Wonder>wonder
     1. Holds all 7 wonders
@@ -31,6 +36,14 @@ Classes:
     3. gives each player a wonder (randomly Math.random()*wonder.size(), remove wonder after choosing for a player)
   c. deal(int age)
     1. deal cards of (int age)
+    2. 7 per player
 5. Wonder
+	1. Name
+	2. Levels (and effects)
+	3. int LevelOn
+	4. Resource produced by Wonder
 6. GameState
   a. 
+7. Graphic 
+8. Resource
+
