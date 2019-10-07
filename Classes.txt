@@ -4,6 +4,7 @@ Classes:
     1. Cost
     2. Type (Color and type of science) (integer code?)
     3. Prerequiste Cards/Building Cards/Chaining Cards (ArrayList<Card>)
+    4. VPboolean (can card give VP)
   b. Methods
     1. Playable(Board b)
       a. Player has resources
@@ -27,8 +28,13 @@ Classes:
     2. Contains options for wonder (ie 3 stone thing for wonder 1)
    d. ArrayList<Resources>resourceList
    e. int money (amount of coins)
-   f. int warMinus
-   g. int warPlus
+   f. int warMinusPoints
+   g. int warPlusPoints
+   h. int armies
+   i. int sciGear
+   j. int sciTablet
+   k. int sciLit
+   
 4. Board
   a. ArrayList<Wonder>wonder
     1. Holds all 7 wonders
@@ -40,13 +46,28 @@ Classes:
   c. deal(int age)
     1. deal cards of (int age)
     2. 7 per player
+  d. calcPoints() (Victory Points and Sciences)
+  	ArrayList<Integer>VP
+  	1. warMinusPoints+warPlusPoints
+  	2. Cards (Gold, Blue, Purple)
+  		a. Go through player hand for gold/blue/purple cards
+  		b. if the type can give VP then add VP
+  	3. WonderStages
+  		a. Go through a player's wonder and check for VP
+  	4. Coin
+  		a. Coins for player/3
+  	5. Science
+  		a. (MinOfAllSciInts)*7 (for each set of all 3 sciences, add 7 VP)
+  		b. (sciInts)^2 (square each science int)
+  e. 
 5. Wonder
 	1. Name
 	2. Levels (and effects)
-	3. int LevelOn
+	3. int CurrentStage
 	4. Resource produced by Wonder
 6. GameState
   a. 
 7. Graphics
 8. Resource
+	a. Type (Wood, Stone, Clay, etc)
 
