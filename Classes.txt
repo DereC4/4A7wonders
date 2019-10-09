@@ -3,7 +3,7 @@ Classes:
   a. Variables:
     1. Cost
     2. Type (Color and type of science) (integer code?)
-    3. Prerequiste Cards/Building Cards/Chaining Cards (ArrayList<Card>)
+    3. Prerequisite Cards/Building Cards/Chaining Cards (ArrayList<Card>)
     4. VPboolean (can card give VP)
   b. Methods
     1. Playable(Board b)
@@ -21,7 +21,7 @@ Classes:
     1. Holds cards the player has played
     2. Used for building/chaining cards
   b. Wonder w
-    1. Set in constuctor
+    1. Set in constructor
     2. Randomly chosen by Board
   c. ArrayList<Card>Hand
     1. Has every card the player has
