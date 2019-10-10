@@ -2,4 +2,12 @@
 
 A pipe refers to the keyboard symbol "|" that you use for OR operators
 
-stroud took my paper so I can't remember what I wrote but i'll get it back tomorrow. That's all for now. 
+Age (int) use IF statement
+
+Name (String) 
+
+Cost (String and String, count each type it will be separated by space)
+
+Chain (IF Statement to check if the previous has been played)
+
+Free (IF card is free)
