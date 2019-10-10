@@ -68,6 +68,9 @@ Classes:
 6. GameState
   a. 
 7. Graphics
+	public BufferedImage DisplayPlayer(int index)
+	public BufferedImage DisplayCard (Card c)
+	public void DisplayBoard (int index)
 8. Resource
 	a. Type (Wood, Stone, Clay, etc)
 
