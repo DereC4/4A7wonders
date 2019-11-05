@@ -10,6 +10,8 @@ public class Card
 	private String type; //also color
 	private String effect;
 	
+	public Card()
+	
 	public String toString()
 	{
 		return getName() + "," + getEffect();
@@ -84,7 +86,4 @@ public class Card
 	{
 		this.effect = effect;
 	}
-	
-	
-	
 }
