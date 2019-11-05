@@ -19,10 +19,14 @@ public class Card implements Comparable
 	{
 		this.age = age;
 		this.name = name;
-		//Read in string of resources and turn it into an arraylist
 		this.type = type;
 		this.chain = chain;
 		this.effect = effect;
+		String[] temp = cost.split(";");
+		this.cost = new ArrayList<Resource>();
+		for (int i = 0; i < temp.length; i++)
+			this.cost.add(new Resource(temp[i]));
+		
 	}
 	
 	public int compareTo(Object obj)
