@@ -1,8 +1,6 @@
-
 public class Resource 
 {
 	private String resource;
-	
 	public Resource(String resource)
 	{
 		this.resource = resource;
