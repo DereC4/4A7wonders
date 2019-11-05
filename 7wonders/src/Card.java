@@ -11,6 +11,19 @@ public class Card
 	private String effect;
 	
 	public Card()
+	{
+		this(0, "", "", "", "", "");
+	}
+	
+	public Card(int age, String name, String cost, String chain, String type, String effect)
+	{
+		this.age = age;
+		this.name = name;
+		//Read in string of resources and turn it into an arraylist
+		this.type = type;
+		this.chain = chain;
+		this.effect = effect;
+	}
 	
 	public String toString()
 	{
