@@ -9,7 +9,8 @@ public class Board {
 	private int Age1CardQuantity;
 	private int Age2CardQuantity;
 	private int Age3CardQuantity;
-
+	
+	
 	public int totalVP() 
 	{
 		int vp = 0;
