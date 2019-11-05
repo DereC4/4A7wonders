@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Card 
+public class Card implements Comparable
 {
 	private int age;
 	private String name;
@@ -23,6 +23,21 @@ public class Card
 		this.type = type;
 		this.chain = chain;
 		this.effect = effect;
+	}
+	
+	public int compareTo(Object obj)
+	{
+		Card card = (Card) obj;
+		
+		if (getType().compareTo(card.getType()) > 0)
+			return 1;
+		else if (getType().compareTo(card.getType()) < 0)
+			return -1;
+		else if (getName().compareTo(card.getName()) > 0)
+			return 1;
+		else if (getName().compareTo(card.getName()) < 0)
+			return -1;
+		return 0;
 	}
 	
 	public String toString()
