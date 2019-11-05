@@ -4,11 +4,16 @@ public class Card
 {
 	private int age;
 	private String name;
-	private ArrayList<String> cost; //Resource cost
+	private ArrayList<Resource> cost; //Resource cost
 	private String chain;
 	private boolean isFree;
 	private String type; //also color
 	private String effect;
+	
+	public String toString()
+	{
+		return getName() + "," + getEffect();
+	}
 	
 	public int getAge() 
 	{
@@ -30,12 +35,12 @@ public class Card
 		this.name = name;
 	}
 	
-	public ArrayList<String> getCost() 
+	public ArrayList<Resource> getCost() 
 	{
 		return cost;
 	}
 	
-	public void setCost(ArrayList<String> cost) 
+	public void setCost(ArrayList<Resource> cost) 
 	{
 		this.cost = cost;
 	}
