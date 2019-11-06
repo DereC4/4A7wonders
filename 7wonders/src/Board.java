@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
-public class Board {
+public class Board 
+{
 	private int currentAge;
 	private boolean onWards; // direction of rotation
 	private int currentPlayer;
@@ -11,15 +12,18 @@ public class Board {
 	private int Age3CardQuantity;
 	
 	
+	
 	public int totalVP() 
 	{
 		int vp = 0;
 		vp += calcSci();
 		ArrayList<Card> temp = playedCards.get("blue");
-		for (Card c : temp) {
+		for (Card c : temp) 
+		{
 			String effect = c.getEffect();
 			String[] com = effect.split(" ");
-			if (com[0].equals("VP")) {
+			if (com[0].equals("VP")) 
+			{
 				vp += Integer.parseInt(com[1]);
 			}
 		}
