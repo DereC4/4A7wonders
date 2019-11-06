@@ -26,7 +26,6 @@ public class Card implements Comparable
 		this.cost = new ArrayList<Resource>();
 		for (int i = 0; i < temp.length; i++)
 			this.cost.add(new Resource(temp[i]));
-		
 	}
 	
 	public int compareTo(Object obj)
