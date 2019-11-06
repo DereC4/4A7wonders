@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Deck {
 private ArrayList<Card> ageOne;
@@ -38,6 +40,29 @@ public void draw(Player p, int age)
 		//ad card to player
 	}
 	
+}
+public void shuffle(int age)
+{
+	if(age==1)
+	{
+		Random rnd = ThreadLocalRandom.current();
+	    for (int i = ageOne.size()-1; i > 0; i--)
+	    {
+	      int index = rnd.nextInt(i + 1);
+	      // Simple swap
+	      int a = ageOne.get(i);
+	     ageOne.get(index) = ageOne.get(i);
+	      ar[i] = a;
+	    }
+	}
+	else if(age==2)
+	{
+		
+	}
+	else if(age==3)
+	{
+		
+	}
 }
  
 }
