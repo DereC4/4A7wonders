@@ -4,7 +4,7 @@ public class Card implements Comparable
 {
 	private int age;
 	private String name;
-	private ArrayList<Resource> cost; //Resource cost
+	private ArrayList<Resources> cost; //Resource cost
 	private String chain;
 	private boolean isFree;
 	private String type; //also color
@@ -24,9 +24,9 @@ public class Card implements Comparable
 		this.chain = chain;
 		this.effect = effect;
 		String[] temp = cost.split(";");
-		this.cost = new ArrayList<Resource>();
+		this.cost = new ArrayList<Resources>();
 		for (int i = 0; i < temp.length; i++)
-			this.cost.add(new Resource(temp[i]));
+			this.cost.add(new Resources(temp[i]));
 	}
 	
 	public int compareTo(Object obj)
@@ -69,12 +69,12 @@ public class Card implements Comparable
 		this.name = name;
 	}
 	
-	public ArrayList<Resource> getCost() 
+	public ArrayList<Resources> getCost() 
 	{
 		return cost;
 	}
 	
-	public void setCost(ArrayList<Resource> cost) 
+	public void setCost(ArrayList<Resources> cost) 
 	{
 		this.cost = cost;
 	}

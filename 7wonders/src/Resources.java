@@ -1,8 +1,8 @@
-public class Resource 
+public class Resources 
 {
 	private String resource;
 	
-	public Resource(String resource)
+	public Resources(String resource)
 	{
 		this.resource = resource;
 	}
