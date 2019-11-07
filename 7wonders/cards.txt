@@ -1,0 +1,12 @@
+Academy|S math|
+Altar|VP 2
+Apothecary|
+Aqueduct|
+Archeryrange|
+Arena|
+Arsenal|
+Barracks|
+Baths|
+Bazar|
+Brickyard|
+Buildersguild| 
