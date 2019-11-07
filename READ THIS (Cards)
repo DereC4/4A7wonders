@@ -1,13 +1,20 @@
 **READ**
 
-A pipe refers to the keyboard symbol "|" that you use for OR operators
+A pipe is a "|"
 
-Age (int) use IF statement
+NAME|EFFECT|AGE|Chaining|Free|Color|Cost
 
-Name (String) 
+Cost Reading
 
-Cost (String and String, count each type it will be separated by space)
+Resource,Resource
 
-Chain (IF Statement to check if the previous has been played)
-
-Free (IF card is free)
+Effect Strings
+VP [number] for blue
+R [resource]
+VP LR [color] for guild (minusWar for defeat guild)
+VP LRD for builder's guild
+VP 
+S [sciresource]
+math
+lit
+gear
