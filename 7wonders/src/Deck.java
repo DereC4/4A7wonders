@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Random;
-import static java.lang.System.*;
 
 public class Deck
 {
