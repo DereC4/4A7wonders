@@ -3,19 +3,20 @@ import java.util.TreeMap;
 
 public class Player 
 {
-	private int money, warMinusPoints, warPlusPoints, armies;
+	private int money, warMinusPoints, warPlusPoints, armies, index;
 	private TreeMap<String, Boolean> reducedList;
 	private TreeMap<String, Integer> sciList;
 	private TreeMap<String, ArrayList<Card>> playedCards;
 	private ArrayList<Card> hand;
 
-	public Player() 
+	public Player(int index) 
 	{
 		money = 3;
 		warMinusPoints = 0;
 		warPlusPoints = 0;
 		armies = 0;
 		reducedList = new TreeMap<String, Boolean>();
+		this.index=index;
 
 		reducedList.put("leftR", false); // left Resource
 		reducedList.put("leftC", false); // left Commodities
@@ -30,6 +31,80 @@ public class Player
 
 		playedCards = new TreeMap<String, ArrayList<Card>>();
 		hand = new ArrayList<Card>();
+	}
+	public void addToHand(Card c) {
+		hand.add(c);
+	}
+	public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
+
+	public int getWarMinusPoints() {
+		return warMinusPoints;
+	}
+
+	public void setWarMinusPoints(int warMinusPoints) {
+		this.warMinusPoints = warMinusPoints;
+	}
+
+	public int getWarPlusPoints() {
+		return warPlusPoints;
+	}
+
+	public void setWarPlusPoints(int warPlusPoints) {
+		this.warPlusPoints = warPlusPoints;
+	}
+
+	public int getArmies() {
+		return armies;
+	}
+
+	public void setArmies(int armies) {
+		this.armies = armies;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+	public TreeMap<String, Boolean> getReducedList() {
+		return reducedList;
+	}
+
+	public void setReducedList(TreeMap<String, Boolean> reducedList) {
+		this.reducedList = reducedList;
+	}
+
+	public TreeMap<String, Integer> getSciList() {
+		return sciList;
+	}
+
+	public void setSciList(TreeMap<String, Integer> sciList) {
+		this.sciList = sciList;
+	}
+
+	public TreeMap<String, ArrayList<Card>> getPlayedCards() {
+		return playedCards;
+	}
+
+	public void setPlayedCards(TreeMap<String, ArrayList<Card>> playedCards) {
+		this.playedCards = playedCards;
+	}
+
+	public ArrayList<Card> getHand() {
+		return hand;
+	}
+
+	public void setHand(ArrayList<Card> hand) {
+		this.hand = hand;
 	}
 
 	public void addToPlayedCards(Card c) 
@@ -49,17 +124,6 @@ public class Player
 		}
 	}
 
-	public int calcSci() 
-	{
-		int vp = 0;
-		int s1 = sciList.get("lit");
-		int s2 = sciList.get("math");
-		int s3 = sciList.get("gear");
-		vp += Math.pow(s1, 2);
-		vp += Math.pow(s2, 2);
-		vp += Math.pow(s3, 2);
-		vp += (Math.min(Math.min(s1, s2), s3) * 7);
-		return vp;
-	}
+	
 
 }
