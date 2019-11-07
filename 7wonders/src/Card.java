@@ -9,6 +9,7 @@ public class Card implements Comparable
 	private boolean isFree;
 	private String type; //also color
 	private String effect;
+	//public static final String[] cards; //Will read in text file
 	
 	public Card()
 	{
