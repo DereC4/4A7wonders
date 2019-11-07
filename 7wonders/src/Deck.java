@@ -58,18 +58,16 @@ public void draw(Player p, int age)
 {
 	if(age==1)
 	{
-		ageOne.remove(ageOne.size()-1);
-		//add card to player
+		p.addToHand(ageOne.remove(ageOne.size()-1));
+		
 	}
 	else if(age==2)
 	{
-		ageTwo.remove(ageTwo.size()-1);
-		//add card to player
+		p.addToHand(ageTwo.remove(ageTwo.size()-1));
 	}
 	else if(age==3)
 	{
-		ageThree.remove(ageThree.size()-1);
-		//ad card to player
+		p.addToHand(ageThree.remove(ageThree.size()-1));
 	}
 	
 }
