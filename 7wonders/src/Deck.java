@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.Random;
+import static java.lang.System.*;
+import java.io.*;
+import java.util.Scanner;
 
 public class Deck
 {
@@ -18,7 +21,7 @@ public class Deck
     {
         return ageOne;
     }
-    public ArrayList < Card > getAgeTWo()
+    public ArrayList < Card > getAgeTwo()
     {
         return ageTwo;
     }
@@ -122,10 +125,31 @@ public class Deck
                 ageThree.set(j, obj);
             }
         }
-    }
-    public void readInCards()
+    } 
+    
+    public void readInCards(File file) throws IOException
     {
-
+    	Scanner sc = new Scanner(file);
+    	
+    	while (sc.hasNextLine())
+    	{
+    		String input = sc.nextLine();
+    		Scanner sc2 = new Scanner(input);
+    		
+    		int age = Integer.parseInt(sc2.next());
+    		String name = sc2.next();
+    		String chain = sc2.next();
+    		String type = sc2.next();
+    		String effect = sc2.next();
+    		String cost = sc2.next();
+    		Card card = new Card(age, name, chain, type, effect, cost);
+    		if (age == 1)
+    			getAgeOne().add(card);
+    		else if (age == 2)
+    			getAgeTwo().add(card);
+    		else if (age == 3)
+    			getAgeThree().add(card);
+    	}
     }
 
 }
