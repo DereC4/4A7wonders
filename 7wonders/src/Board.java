@@ -11,7 +11,9 @@ public class Board {
 	private int Age2CardQuantity;
 	private int Age3CardQuantity;
 	
-	
+	public void decodeEffect(Card c, Player p) {
+		String effect=c.getEffect();
+	}
 	public int totalVP(Player p) 
 	{
 		TreeMap<String, ArrayList<Card>>playedCards=p.getPlayedCards();
