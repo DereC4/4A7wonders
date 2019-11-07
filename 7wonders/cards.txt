@@ -1,5 +1,5 @@
-Academy|S math|
-Altar|VP 2
+Academy|S math|AGE|School|false|Green|Stone,Stone,Stone,Glass
+Altar|VP 2|AGE| |true|blue| 
 Apothecary|
 Aqueduct|
 Archeryrange|
