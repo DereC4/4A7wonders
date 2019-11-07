@@ -16,15 +16,16 @@ public class Card implements Comparable
 		this(0, "", "", "", "", "");
 	}
 	
-	public Card(int age, String name, String cost, String chain, String type, String effect)
+	public Card(int age, String name, String chain, String type, String effect, String cost)
 	{
 		this.age = age;
 		this.name = name;
 		this.type = type;
 		this.chain = chain;
 		this.effect = effect;
-		String[] temp = cost.split(";");
+		
 		this.cost = new ArrayList<Resources>();
+		String[] temp = cost.split(";");
 		for (int i = 0; i < temp.length; i++)
 			this.cost.add(new Resources(temp[i]));
 	}
