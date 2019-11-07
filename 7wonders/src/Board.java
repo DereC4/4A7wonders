@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class Board {
 	private int currentAge;
@@ -11,10 +12,12 @@ public class Board {
 	private int Age3CardQuantity;
 	
 	
-	public int totalVP() 
+	public int totalVP(Player p) 
 	{
+		TreeMap<String, ArrayList<Card>>playedCards=p.getPlayedCards();
 		int vp = 0;
-		vp += calcSci();
+		vp+=p.getMoney()/3;
+		vp += calcSci(p);
 		ArrayList<Card> temp = playedCards.get("blue");
 		for (Card c : temp) {
 			String effect = c.getEffect();
@@ -35,16 +38,62 @@ public class Board {
 			}
 		}
 
-		temp = playedCards.get("purple");
+		temp = playedCards.get("purple"); //Examples: VP LR blue, VP LRD wonder
 		for (Card c : temp) 
 		{
 			String effect = c.getEffect();
 			String[] com = effect.split(" ");
 			if (com[0].equals("VP")) 
 			{
-				// placeholder, will add later
+				if (com[1].equals("LR")) { 
+					//com 2 is the type of card searching for
+					int index=p.getIndex();
+					int lower=index--;
+					if (lower==-1) {
+						lower=playerList.size()-1;
+					}
+					int upper=index++;
+					if (upper==playerList.size()) {
+						upper=0;
+					}
+					Player pl=playerList.get(lower);
+					Player p2=playerList.get(upper);
+					if (com[2].equals("minusWar")) {
+						vp+=pl.getWarMinusPoints();
+						vp+=p2.getWarMinusPoints();
+					}
+					else if(com[2].equals("silver")) {
+						ArrayList<Card>te=pl.getPlayedCards().get(com[2]);
+						vp+=te.size()*2;
+						ArrayList<Card>ta=p2.getPlayedCards().get(com[2]);
+						vp+=ta.size()*2;
+					}
+					else {
+						ArrayList<Card>te=pl.getPlayedCards().get(com[2]);
+						vp+=te.size();
+						ArrayList<Card>ta=p2.getPlayedCards().get(com[2]);
+						vp+=ta.size();
+					}										
+				}
+			}
+			if (com[1].equals("LRD")) {
+				
 			}
 		}
+		return vp;
+	}
+	
+	public int calcSci(Player p) 
+	{
+		TreeMap<String,Integer>sciList=p.getSciList();
+		int vp = 0;
+		int s1 = sciList.get("lit");
+		int s2 = sciList.get("math");
+		int s3 = sciList.get("gear");
+		vp += Math.pow(s1, 2);
+		vp += Math.pow(s2, 2);
+		vp += Math.pow(s3, 2);
+		vp += (Math.min(Math.min(s1, s2), s3) * 7);
 		return vp;
 	}
 
