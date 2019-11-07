@@ -13,6 +13,7 @@ public class Board {
 	
 	public void decodeEffect(Card c, Player p) {
 		String effect=c.getEffect();
+		String[] com=effect.split(" ");
 	}
 	public int totalVP(Player p) 
 	{
