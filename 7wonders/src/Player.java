@@ -8,6 +8,7 @@ public class Player
 	private TreeMap<String, Integer> sciList;
 	private TreeMap<String, ArrayList<Card>> playedCards;
 	private ArrayList<Card> hand;
+	private Wonder wonder;
 
 	public Player(int index) 
 	{
@@ -106,7 +107,12 @@ public class Player
 	public void setHand(ArrayList<Card> hand) {
 		this.hand = hand;
 	}
-
+	public Wonder getWonder() {
+		return wonder;
+	}
+	public void setWonder(Wonder w) {
+		wonder=w;
+	}
 	public void addToPlayedCards(Card c) 
 	{
 		String type = c.getType();
