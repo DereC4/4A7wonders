@@ -2,7 +2,7 @@ public class Wonder
 {
 	private String name;
 	private int currentStage;
-	private Resource product; //resource that the wonder produces
+	private Resources product; //resource that the wonder produces
 	public static final String[] WONDERS = 
 	{"Colossus of Rhodes", "Halicarnassus", "Lighthouse of Alexandria", "Hanging Gardens of Babylon", 
 	 "Great Pyramid of Giza", "Ephesos", "Statue of Zeus at Olympia"};
@@ -54,7 +54,7 @@ public class Wonder
 		this.currentStage = currentStage;
 	}
 	
-	public Resource getProduct() 
+	public Resources getProduct() 
 	{
 		return product;
 	}
@@ -64,7 +64,7 @@ public class Wonder
 		return WONDERS;
 	}
 
-	public void setProduct(Resource product) 
+	public void setProduct(Resources product) 
 	{
 		this.product = product;
 	}
