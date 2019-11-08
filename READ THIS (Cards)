@@ -23,3 +23,20 @@ VPC [direction] wonder [number]
 WP Warpoints
 S [sciresource] (math lit gear)
 S All (for all)
+
+
+[identifier]
+S for science
+R for resource/commoditity
+C is for coin
+VP for cards that give VP
+VPC is coin and VP
+
+[direction]
+L for Left
+R for Right
+LR for Left Right
+D for Down
+LRD is Left, Right, and Down
+
+
