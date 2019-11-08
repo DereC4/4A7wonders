@@ -20,7 +20,7 @@ public class Card implements Comparable
 	{
 		this.age = age;
 		this.name = name;
-		this.type = type;
+		this.type = color;
 		this.chain = chain;
 		this.effect = effect;
 		
