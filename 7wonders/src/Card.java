@@ -13,10 +13,10 @@ public class Card implements Comparable
 	
 	public Card()
 	{
-		this(0, "", "", "", "", "");
+		this("", "", "", 0, "", "");
 	}
 	
-	public Card(int age, String name, String chain, String type, String effect, String cost)
+	public Card(String name, String color, String effect, int age, String chain, String cost)
 	{
 		this.age = age;
 		this.name = name;
