@@ -9,7 +9,7 @@ Arena|Yellow|VPC |3|Dispensary|false|Stone,Stone,Ore
 Arsenal|Red|WP 3|3| |false|Wood,Wood,Ore,Loom
 Barracks|Red|WP 1|1| |false|Ore
 Baths|Blue|VP 3|1| |false|Stone
-Bazar|Yellow|GC all 2|AGE| |true| 
+Bazar|Yellow|C LRD silver 2|AGE| |true| 
 Brickyard|Brown|R Clay,Clay|2| |false|C 1
 Buildersguild|Purple|VP LRD Wonder|3| |false|Stone,Stone,Clay,Clay,Glass
 Caravansery|Yellow|

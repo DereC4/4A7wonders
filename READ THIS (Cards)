@@ -19,6 +19,6 @@ VP [number] for blue
 R [resource] (Separate with commas, options separated by "/")
 VP [color] for guild (minusWar for defeat guild)
 VP LRD for builder's guild
-VPC [direction] wonder [number]:[number]
+VPC [direction] wonder [number] 
 WP Warpoints
 S [sciresource] (math lit gear)
