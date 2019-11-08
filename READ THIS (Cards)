@@ -24,6 +24,19 @@ WP Warpoints
 S [sciresource] (math lit gear)
 S All (for all)
 
+RESOURCES
+Clay
+Ore
+Wood
+Stone
+Glass
+Papyrus
+Loom
+
+SCIENCE
+lit
+math
+gear
 
 [identifier]
 S for science

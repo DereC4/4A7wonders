@@ -19,7 +19,7 @@ Claypit|Brown|
 Claypool|Brown|R Clay|1| |true| 
 Courthouse|Blue|VP 4|2|Scriptorium|false|Clay,Clay,Loom
 Craftsmenguild|Purple|VP LR silver 2|3| |false|Ore,Ore,Stone,Stone
-Dispensary|
+Dispensary|Green|S math|2|Apothecary|false|Ore,Ore,Glass
 Easttradingpost|
 Excavation|
 Forestcave|
