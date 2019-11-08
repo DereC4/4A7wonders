@@ -29,6 +29,7 @@ Haven|Yellow|EFFECT|3|Forum|false|Wood,Ore,Loom
 Laboratory|Green|S gear|2|Workshop|false|Clay,Clay,Papyrus
 
 DIVIDER TO CTRL-V
+
 Library|Green|S lit|2|Scriptorium|false|Stone,Stone,Loom
 Lighthouse|Yellow|VPC D yellow 1 1|3|Caravansery|false|Stone,Glass
 Lodge|Green|S math|3|Dispensary|false|Clay,Clay,Papyrus,Loom
