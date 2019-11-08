@@ -19,7 +19,12 @@ public class Board {
 			p.getHand().remove(c);
 		}
 		if (com[0].contains("C")) {
-			
+			if (com[1].equals("D")) {
+				if (com[2].equals("wonder")) {
+					int y=p.getWonder().getCurrentStage();
+					p.setMoney(p.getMoney()+y*Integer.parseInt(com[3]));
+				}
+			}
 		}
 	}
 	public int totalVP(Player p) 
