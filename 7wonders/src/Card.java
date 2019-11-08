@@ -13,19 +13,19 @@ public class Card implements Comparable
 	
 	public Card()
 	{
-		this(0, "", "", "", "", "");
+		this("", "", "", 0, "", "");
 	}
 	
-	public Card(int age, String name, String chain, String type, String effect, String cost)
+	public Card(String name, String color, String effect, int age, String chain, String cost)
 	{
 		this.age = age;
 		this.name = name;
-		this.type = type;
+		this.type = color;
 		this.chain = chain;
 		this.effect = effect;
 		
 		this.cost = new ArrayList<Resources>();
-		String[] temp = cost.split(";");
+		String[] temp = cost.split(",");
 		for (int i = 0; i < temp.length; i++)
 			this.cost.add(new Resources(temp[i]));
 	}

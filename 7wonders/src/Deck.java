@@ -134,15 +134,9 @@ public class Deck
     	while (sc.hasNextLine())
     	{
     		String input = sc.nextLine();
-    		Scanner sc2 = new Scanner(input);
-    		
-    		int age = Integer.parseInt(sc2.next());
-    		String name = sc2.next();
-    		String chain = sc2.next();
-    		String type = sc2.next();
-    		String effect = sc2.next();
-    		String cost = sc2.next();
-    		Card card = new Card(age, name, chain, type, effect, cost);
+    		String[] temp = input.split("|");
+    		int age = Integer.parseInt(temp[3]);
+    		Card card = new Card(temp[0], temp[1], temp[2], age, temp[5], temp[6]);
     		if (age == 1)
     			getAgeOne().add(card);
     		else if (age == 2)
