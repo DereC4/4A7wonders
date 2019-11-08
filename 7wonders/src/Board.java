@@ -25,7 +25,8 @@ public class Board {
 					p.setMoney(p.getMoney()+y*Integer.parseInt(com[3]));
 				}
 				else {
-					
+					int y=p.getPlayedCards().get(com[2]).size();
+					p.setMoney(p.getMoney()+y*Integer.parseInt(com[3]));
 				}
 			}
 		}
