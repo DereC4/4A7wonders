@@ -21,9 +21,14 @@ Easttradingpost|Yellow|TP R|1| |true|
 Fortifications|Red|WP 3|3|Walls|false|Ore,Ore,Ore,Stone
 Forum|Yellow|R Glass/Loom/Papyrus|2|Tradingpost|false|Clay,Clay
 Foundry|Brown|R Ore,Ore|2| |false|C 1
-Gardens|Blue|VP 5|AGE|
+Gardens|Blue|VP 5|3|Statue|false|Clay,Clay,Wood
+Glassworks|Silver|R Glass|1| |true| 
+Glassworks|Silver|R Glass|2| |true| 
+Guardtower|Red|WP 1|1| |false|Clay
+Haven|Yellow|EFFECT|3|Forum|false|Wood,Ore,Loom
+Laboratory|Green|S gear|2|Workshop|false|Clay,Clay,Papyrus
 
-DIVIDER
+DIVIDER TO CTRL-V
 Library|Green|S lit|2|Scriptorium|false|Stone,Stone,Loom
 Lighthouse|Yellow|VPC D yellow 1 1|3|Caravansery|false|Stone,Glass
 Lodge|Green|S math|3|Dispensary|false|Clay,Clay,Papyrus,Loom
