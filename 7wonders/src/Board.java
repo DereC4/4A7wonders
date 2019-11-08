@@ -14,6 +14,13 @@ public class Board {
 	public void decodeEffect(Card c, Player p) {
 		String effect=c.getEffect();
 		String[] com=effect.split(" ");
+		if (com[0].equals("VP")) {
+			p.addToPlayedCards(c);
+			p.getHand().remove(c);
+		}
+		if (com[0].contains("C")) {
+			
+		}
 	}
 	public int totalVP(Player p) 
 	{
