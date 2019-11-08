@@ -25,7 +25,7 @@ public class Card implements Comparable
 		this.effect = effect;
 		
 		this.cost = new ArrayList<Resources>();
-		String[] temp = cost.split(";");
+		String[] temp = cost.split(",");
 		for (int i = 0; i < temp.length; i++)
 			this.cost.add(new Resources(temp[i]));
 	}
