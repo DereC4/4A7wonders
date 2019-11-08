@@ -20,9 +20,9 @@ Claypool|Brown|R Clay|1| |true|
 Courthouse|Blue|VP 4|2|Scriptorium|false|Clay,Clay,Loom
 Craftsmenguild|Purple|VP LR silver 2|3| |false|Ore,Ore,Stone,Stone
 Dispensary|Green|S math|2|Apothecary|false|Ore,Ore,Glass
-Easttradingpost|Yellow|
-Excavation|
-Forestcave|
-Fortifications|
-Forum|
-Foundry|
+Easttradingpost|Yellow|TP R Clay,Stone,Wood,Ore|1| |true| 
+Excavation|Brown|R Stone,Clay|AGE| |false|C 1
+Forestcave|Brown|R Wood,Ore|AGE| |false|C 1
+Fortifications|Red|WP 3|3|Walls|false|Ore,Ore,Ore,Stone
+Forum|Yellow|R Glass/Loom/Papyrus|2|Tradingpost|false|Clay,Clay
+Foundry|Brown|R Ore,Ore|2| |false|C 1
