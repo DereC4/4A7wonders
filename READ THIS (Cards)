@@ -23,6 +23,7 @@ VPC [direction] wonder [number] [number]
 WP Warpoints
 S [sciresource] (math lit gear)
 S All (for all)
+TP [direction] r or c
 
 RESOURCES
 Clay

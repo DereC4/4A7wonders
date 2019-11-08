@@ -14,15 +14,15 @@ Brickyard|Brown|R Clay,Clay|2| |false|C 1
 Buildersguild|Purple|VP LRD Wonder|3| |false|Stone,Stone,Clay,Clay,Glass
 Caravansery|Yellow|R resourceAll|2|Marketplace|false|Wood,Wood
 Chamberofcommerce|Yellow|VPC D silver 2 2|AGE| |false|Clay,Clay,Papyrus
-Circus|Red|
-Claypit|Brown|
+Circus|Red|WP 3|AGE|Trainingground|false|Stone,Stone,Stone,Ore
+Claypit|Brown|R Clay/Ore|1| |false|C 1
 Claypool|Brown|R Clay|1| |true| 
 Courthouse|Blue|VP 4|2|Scriptorium|false|Clay,Clay,Loom
 Craftsmenguild|Purple|VP LR silver 2|3| |false|Ore,Ore,Stone,Stone
 Dispensary|Green|S math|2|Apothecary|false|Ore,Ore,Glass
-Easttradingpost|
-Excavation|
-Forestcave|
-Fortifications|
-Forum|
-Foundry|
+Easttradingpost|Yellow|TP R|1| |true| 
+Excavation|Brown|R Stone,Clay|AGE| |false|C 1
+Forestcave|Brown|R Wood,Ore|AGE| |false|C 1
+Fortifications|Red|WP 3|3|Walls|false|Ore,Ore,Ore,Stone
+Forum|Yellow|R Glass/Loom/Papyrus|2|Tradingpost|false|Clay,Clay
+Foundry|Brown|R Ore,Ore|2| |false|C 1
