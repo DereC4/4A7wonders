@@ -24,6 +24,9 @@ public class Board {
 					int y=p.getWonder().getCurrentStage();
 					p.setMoney(p.getMoney()+y*Integer.parseInt(com[3]));
 				}
+				else {
+					
+				}
 			}
 		}
 	}
@@ -74,7 +77,7 @@ public class Board {
 		}
 
 		//Vp for guilds
-		temp = playedCards.get("purple"); //Examples: VP LR blue, VP LRD wonder
+		temp = playedCards.get("purple"); //Examples: VP LR blue, VP LRD wonder, VP LR minusWar
 		for (Card c : temp) 
 		{
 			String effect = c.getEffect();
@@ -100,9 +103,9 @@ public class Board {
 					}
 					else if(com[2].equals("silver")) {
 						ArrayList<Card>te=pl.getPlayedCards().get(com[2]);
-						vp+=te.size()*2;
+						vp+=te.size()*Integer.parseInt(com[3]);
 						ArrayList<Card>ta=p2.getPlayedCards().get(com[2]);
-						vp+=ta.size()*2;
+						vp+=ta.size()*Integer.parseInt(com[3]);
 					}
 					else {
 						ArrayList<Card>te=pl.getPlayedCards().get(com[2]);
