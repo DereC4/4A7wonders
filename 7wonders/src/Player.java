@@ -9,6 +9,7 @@ public class Player
 	private TreeMap<String, ArrayList<Card>> playedCards;
 	private ArrayList<Card> hand;
 	private Wonder wonder;
+	private ArrayList<Resources>resources;
 
 	public Player(int index) 
 	{
@@ -26,6 +27,8 @@ public class Player
 		reducedList.put("rightC", false); // right commodities
 
 		sciList = new TreeMap<String, Integer>();
+		
+		resources=new ArrayList<Resources>();
 
 		sciList.put("lit", 0); // tablet
 		sciList.put("math", 0); // weird triangle
@@ -33,6 +36,9 @@ public class Player
 
 		playedCards = new TreeMap<String, ArrayList<Card>>();
 		hand = new ArrayList<Card>();
+	}
+	public void addToResources(Resources r) {
+		resources.add(r);
 	}
 	public void addToHand(Card c) {
 		hand.add(c);

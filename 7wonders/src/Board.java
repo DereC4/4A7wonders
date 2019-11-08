@@ -18,7 +18,7 @@ public class Board {
 			p.addToPlayedCards(c);
 			p.getHand().remove(c);
 		}
-		if (com[0].contains("C")) {
+		else if (com[0].contains("C")) {
 			if (com[1].equals("D")) {
 				if (com[2].equals("wonder")) {
 					int y=p.getWonder().getCurrentStage();
@@ -29,6 +29,16 @@ public class Board {
 					p.setMoney(p.getMoney()+y*Integer.parseInt(com[3]));
 				}
 			}
+			p.addToPlayedCards(c);
+			p.getHand().remove(c);
+		}
+		else if (com[0].contains("R")) {
+			p.addToResources(new Resources(com[1]));
+			p.addToPlayedCards(c);
+			p.getHand().remove(c);
+		}
+		else if (com[0].contains("TP")) {
+			p.getReducedList()
 		}
 	}
 	public int totalVP(Player p) 
@@ -74,6 +84,7 @@ public class Board {
 			if (com[0].equals("VP")) 
 			{
 				// placeholder,will add later
+				// ifs for VP and VPC
 			}
 		}
 
