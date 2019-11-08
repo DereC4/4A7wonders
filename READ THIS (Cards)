@@ -4,20 +4,22 @@ A pipe is a "|"
 If the spot is a " " then it is empty (when we read it in)
 NAME|EFFECT|AGE|Chaining|Free|Color|Cost
 
+Placeholders are put as the default string
+
 Cost Reading
 
 Resource,Resource
 
 **Effect Codes:**
-Directions: left right you all
+Directions: L D R
 Cost has either resource or prefix "C" for coin
 
+
 VP [number] for blue
-R [resource] (Separate with commas)
-VP [direction] [color] for guild (minusWar for defeat guild)
+R [resource] (Separate with commas, options separated by "/")
+VP [color] for guild (minusWar for defeat guild)
 VP LRD for builder's guild
+VPC [direction] wonder [number] 
 WP Warpoints
-GW [direction] [gold] (Gold per wonder stage) 
-VW [direction] [vp] (VP per wonder stage)
-GC [direction] [gold] (Gold per card)
 S [sciresource] (math lit gear)
+S All (for all)

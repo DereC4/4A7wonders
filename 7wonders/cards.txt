@@ -1,18 +1,18 @@
 //NAME|COLOR|EFFECT|AGE|Chaining|Free|Cost//
 
-Academy|Green|S math|AGE|School|false|Stone,Stone,Stone,Glass
-Altar|blue|VP 2|AGE| |true| 
-Apothecary|Green|S math|AGE| |false|Loom
-Aqueduct|Blue|VP 5|AGE|Baths|false|Stone,Stone,Stone
-Archeryrange|Red|WP 2|AGE|Workshop|false|Wood,Wood,Ore
-Arena|Yellow|GW you 3,VW you 1|AGE|Dispensary|false|Stone,Stone,Ore
-Arsenal|Red|WP 3|AGE| |false|Wood,Wood,Ore,Loom
+Academy|Green|S math|3|School|false|Stone,Stone,Stone,Glass
+Altar|blue|VP 2|1| |true| 
+Apothecary|Green|S math|1| |false|Loom
+Aqueduct|Blue|VP 5|2|Baths|false|Stone,Stone,Stone
+Archeryrange|Red|WP 2|2|Workshop|false|Wood,Wood,Ore
+Arena|Yellow|VPC |3|Dispensary|false|Stone,Stone,Ore
+Arsenal|Red|WP 3|3| |false|Wood,Wood,Ore,Loom
 Barracks|Red|WP 1|1| |false|Ore
 Baths|Blue|VP 3|1| |false|Stone
-Bazar|Yellow|GC all 2|AGE| |true| 
-Brickyard|Brown|R Clay,Clay|AGE| |false|C 1
-Buildersguild|Purple|VW all 1|3| |false|Stone,Stone,Clay,Clay,Glass
-Caravansery|
+Bazar|Yellow|C LRD silver 2|AGE| |true| 
+Brickyard|Brown|R Clay,Clay|2| |false|C 1
+Buildersguild|Purple|VP LRD Wonder|3| |false|Stone,Stone,Clay,Clay,Glass
+Caravansery|Yellow|
 Chamberofcommerce|
 Circus|
 Claypit|
