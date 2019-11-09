@@ -12,18 +12,23 @@ public class Card implements Comparable
     //public static final String[] cards; //Will read in text file
     public Card()
     {
-        this("", "", "", 0, "", "");
+        this("", "", "", 0, "", "false", "");
     }
-    public Card(String name, String color, String effect, int age, String chain, String cost)
+    public Card(String name, String color, String effect, int age, String chain, String isFree, String cost)
     {
         this.age = age;
         this.name = name;
         this.type = color;
         this.chain = chain;
         this.effect = effect;
+        
         this.cost = new ArrayList < Resources > ();
         String[] temp = cost.split(",");
         for (int i = 0; i < temp.length; i++) this.cost.add(new Resources(temp[i]));
+        
+        if (isFree.equals("true"))
+        	this.isFree = true;
+        this.isFree = false;
     }
     public int compareTo(Object obj)
     {
