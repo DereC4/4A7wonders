@@ -16,7 +16,7 @@ public class Deck
         ageTwo = a2;
         ageThree = a3;
         discard = d;
-    }
+    } 
     public ArrayList < Card > getAgeOne()
     {
         return ageOne;
