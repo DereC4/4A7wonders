@@ -260,6 +260,7 @@ public class Board {
 	public void setDeck(Deck deck) {
 		this.deck = deck;
 	}
+	
 
 	public int getAge1CardQuantity() {
 		return Age1CardQuantity;
