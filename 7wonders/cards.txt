@@ -17,7 +17,7 @@ Claypool|Brown|R Clay|1| |true|
 Courthouse|Blue|VP 4|2|Scriptorium|false|Clay,Clay,Loom
 Craftsmenguild|Purple|VP LR silver 2|3| |false|Ore,Ore,Stone,Stone
 Dispensary|Green|S math|2|Apothecary|false|Ore,Ore,Glass
-Easttradingpost|Yellow|TP R|1| |true| 
+Easttradingpost|Yellow|TP R R|1| |true| 
 Fortifications|Red|WP 3|3|Walls|false|Ore,Ore,Ore,Stone
 Forum|Yellow|R Glass/Loom/Papyrus|2|Tradingpost|false|Clay,Clay
 Foundry|Brown|R Ore,Ore|2| |false|C 1
@@ -46,4 +46,35 @@ Philosophersguild|purple|VP LR green 1|3| |false|clay,clay,clay,papyrus,loom
 Press|gray|R papyrus|1| |true| 
 Press|gray|R papyrus|2| |true| 
 Quarry|brown|R stone,stone|2| |true|C 1
+
+DIVIDER TO CTRL-V
+
+Sawmill|Brown|R Wood,Wood|2| |false|C 1
+School|Green|S lit|2| |false|Wood,Papyrus
+Scientistsguild|Purple|S All|3| |false|Wood,Wood,Ore,Ore,Papyrus
+Scriptorium|Green|S Lit|1| |false|Papyrus
+Senate|Blue|VP 6|3| |false|Wood,Wood,Stone,Ore
+Shipownersguild|Purple|S Science All|3| |false|Wood,Wood,Ore,Ore,Papyrus
+Siegeworkshop|Red|WP 3|3| |false|Clay,Clay,Clay,Wood
+Spiesguild|Purple|
+Stables|Red|WP 2|2| |false|Clay,Wood,Ore
+Statue|Blue|VP 4|2| |false|Ore,Ore,Wood
+Stockade|Red|WP 1|1| |false|Wood
+Stonepit|Brown|R Stone|1| |true|
+Strategistsguild|Purple|VP LR MinusWar|3| |false|Ore,Ore,Stone,Loom
+Study|Green|S gear|3| |false|Wood,Papyrus,Loom
+Tavern|Yellow|C 5|AGE| |true|
+Temple|Blue|VP 3|2| |false|Wood,Clay,Glass
+Theater|Blue|VP 2|1| |true|
+Timberyard|Brown|R Stone,Wood|1| |false|C 1
+Townhall|Blue|VP 6|3| |false|Stone,Stone,Ore,Glass
+Tradersguild|Purple|VP yellow LR 1|3| |false|Glass,Loom,Papyrus
+Trainingground|Red|WP 2|AGE| |false|Ore,Ore,Wood
+Treefarm|Brown|R Wood,Clay|AGE| |false|C 1
+University|Green|S lit|3| |false|Wood,Wood,Papyrus,Glass
+Vineyard|Yellow|
+Walls|Red|WP 2|2| |false|Stone,Stone,Stone
+Westtradingpost|Yellow|
+Workersguild|Purple|
+Workshop|Green|
 

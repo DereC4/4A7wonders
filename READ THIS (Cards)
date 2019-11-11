@@ -26,6 +26,14 @@ WP Warpoints
 S [sciresource] (math lit gear)
 S All (for all)
 TP [direction] r or c
+C is for coins
+
+PREFIX DIRECTION COLOR AMOUNT (For cards that go left/right/you with rewards based off neighbor or your cards)
+
+Example of direction card with effect
+
+Easttradingpost|Yellow|TP R R|1| |true| 
+Craftsmenguild|Purple|VP LR silver 2|3| |false|Ore,Ore,Stone,Stone
 
 RESOURCES
 Clay
