@@ -39,3 +39,11 @@ Lumberyard|Brown|R Wood|1| |true|
 Magistratesguild|Purple|VP LR blue 1|3| |false|Wood,Wood,Stone,Loom
 Marketplace|Yellow|TP LR Glass,Papyrus,Loom|1| |true| 
 Observatory|Green|S gear|3|Laboratory|false|Ore,Ore,Glass,Loom
+Orevein|Brown|R Ore|1| |true| 
+Palace|Blue|VP 8|3| |false|Stone,Ore,Wood,Clay,Glass,Papyrus,Loom
+Pantheon|Blue|VP 7|3|temple|false|Clay,clay,ore,glass,papyrus,loom
+Philosophersguild|purple|VP LR green 1|3| |false|clay,clay,clay,papyrus,loom
+Press|gray|R papyrus|1| |true| 
+Press|gray|R papyrus|2| |true| 
+Quarry|brown|R stone,stone|2| |true|C 1
+
