@@ -4,7 +4,7 @@ This is the holy text file. We go by this. Final Judgement here.
 
 A pipe is a "|"
 If the spot is a " " then it is empty (when we read it in)
-NAME|EFFECT|AGE|Chaining|Free|Color|Cost
+//NAME|COLOR|EFFECT|AGE|Chaining|Free|Cost//
 
 Placeholders are put as the default string
 

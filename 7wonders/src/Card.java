@@ -9,7 +9,8 @@ public class Card implements Comparable
     private boolean isFree;
     private String type; //also color
     private String effect;
-    //public static final String[] cards; //Will read in text file
+    //public static final String[] cards;
+    //will read in text file
     public Card()
     {
         this("", "", "", 0, "", "false", "");
@@ -24,8 +25,8 @@ public class Card implements Comparable
         
         this.cost = new ArrayList < Resources > ();
         String[] temp = cost.split(",");
-        for (int i = 0; i < temp.length; i++) this.cost.add(new Resources(temp[i]));
-        
+        for (int i = 0; i < temp.length; i++) 
+        	this.cost.add(new Resources(temp[i]));
         if (isFree.equals("true"))
         	this.isFree = true;
         this.isFree = false;
@@ -33,10 +34,14 @@ public class Card implements Comparable
     public int compareTo(Object obj)
     {
         Card card = (Card) obj;
-        if (getType().compareTo(card.getType()) > 0) return 1;
-        else if (getType().compareTo(card.getType()) < 0) return -1;
-        else if (getName().compareTo(card.getName()) > 0) return 1;
-        else if (getName().compareTo(card.getName()) < 0) return -1;
+        if (getType().compareTo(card.getType()) > 0) 
+        	return 1;
+        else if (getType().compareTo(card.getType()) < 0) 
+        	return -1;
+        else if (getName().compareTo(card.getName()) > 0) 
+        	return 1;
+        else if (getName().compareTo(card.getName()) < 0) 
+        	return -1;
         return 0;
     }
     public String toString()
