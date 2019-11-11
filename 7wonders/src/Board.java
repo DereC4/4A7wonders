@@ -29,6 +29,42 @@ public class Board {
 					p.setMoney(p.getMoney()+y*Integer.parseInt(com[3]));
 				}
 			}
+			if (com[1].equals("LRD")) {
+				int y=p.getPlayedCards().get(com[2]).size();
+				p.setMoney(p.getMoney()+y*Integer.parseInt(com[3]));
+				int index=p.getIndex();
+				int lower=index--;
+				if (lower==-1) {
+					lower=playerList.size()-1;
+				}
+				int upper=index++;
+				if (upper==playerList.size()) {
+					upper=0;
+				}
+				Player p1=playerList.get(lower);
+				Player p2=playerList.get(upper);
+				y=p1.getPlayedCards().get(com[2]).size();
+				p.setMoney(p.getMoney()+y*Integer.parseInt(com[3]));
+				y=p2.getPlayedCards().get(com[2]).size();
+				p.setMoney(p.getMoney()+y*Integer.parseInt(com[3]));
+			}
+			if (com[1].equals("LR")) {
+				int index=p.getIndex();
+				int lower=index--;
+				if (lower==-1) {
+					lower=playerList.size()-1;
+				}
+				int upper=index++;
+				if (upper==playerList.size()) {
+					upper=0;
+				}
+				Player p1=playerList.get(lower);
+				Player p2=playerList.get(upper);
+				int y=p1.getPlayedCards().get(com[2]).size();
+				p.setMoney(p.getMoney()+y*Integer.parseInt(com[3]));
+				y=p2.getPlayedCards().get(com[2]).size();
+				p.setMoney(p.getMoney()+y*Integer.parseInt(com[3]));
+			}
 			p.addToPlayedCards(c);
 			p.getHand().remove(c);
 		}
@@ -38,7 +74,7 @@ public class Board {
 			p.getHand().remove(c);
 		}
 		else if (com[0].contains("TP")) {
-			p.getReducedList()
+			TreeMap<String,Boolean>rl=p.getReducedList();
 		}
 	}
 	public int totalVP(Player p) 
@@ -143,7 +179,7 @@ public class Board {
 				vp+=p.getWonder().getCurrentStage();
 				vp+=p2.getWonder().getCurrentStage();
 			}
-			if (com[1].equals("scienceAll")) {
+			if (com[1].equals("S All")) {
 				//placeholders, change later
 			}
 			if (com[1].equals("D")){
