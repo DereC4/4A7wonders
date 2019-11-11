@@ -14,11 +14,9 @@ public class Board {
 	public void decodeEffect(Card c, Player p) {
 		String effect=c.getEffect();
 		String[] com=effect.split(" ");
-		if (com[0].equals("VP")) {
-			p.addToPlayedCards(c);
-			p.getHand().remove(c);
+		if (com[0].equals("VP")) { //Only VP Cards
 		}
-		else if (com[0].contains("C")) {
+		else if (com[0].contains("C")) { //For C and VPC Cards
 			if (com[1].equals("D")) {
 				if (com[2].equals("wonder")) {
 					int y=p.getWonder().getCurrentStage();
@@ -29,7 +27,7 @@ public class Board {
 					p.setMoney(p.getMoney()+y*Integer.parseInt(com[3]));
 				}
 			}
-			if (com[1].equals("LRD")) {
+			if (com[1].equals("LRD")) { //For LRD Cards
 				int y=p.getPlayedCards().get(com[2]).size();
 				p.setMoney(p.getMoney()+y*Integer.parseInt(com[3]));
 				int index=p.getIndex();
@@ -48,7 +46,7 @@ public class Board {
 				y=p2.getPlayedCards().get(com[2]).size();
 				p.setMoney(p.getMoney()+y*Integer.parseInt(com[3]));
 			}
-			if (com[1].equals("LR")) {
+			if (com[1].equals("LR")) { //For LR Cards
 				int index=p.getIndex();
 				int lower=index--;
 				if (lower==-1) {
@@ -65,17 +63,35 @@ public class Board {
 				y=p2.getPlayedCards().get(com[2]).size();
 				p.setMoney(p.getMoney()+y*Integer.parseInt(com[3]));
 			}
-			p.addToPlayedCards(c);
-			p.getHand().remove(c);
 		}
-		else if (com[0].contains("R")) {
+		else if (com[0].contains("R")) { //For Resource/Commodity
 			p.addToResources(new Resources(com[1]));
 			p.addToPlayedCards(c);
 			p.getHand().remove(c);
 		}
-		else if (com[0].contains("TP")) {
+		else if (com[0].contains("TP")) { //For Trading Posts
 			TreeMap<String,Boolean>rl=p.getReducedList();
+			if (com[1].contains("R")) {
+				if (com[2].equals("R")) {
+					rl.put("rightR",true );
+				}
+				if (com[2].equals("C")) {
+					rl.put("rightC",true );
+				}
+			}
+			if (com[1].contains("L")) {
+				if (com[2].equals("R")) {
+					rl.put("leftR",true );
+				}
+				if (com[2].equals("C")) {
+					rl.put("leftC",true );
+				}
+			}
 		}
+		
+		//Removes Card from hand
+		p.addToPlayedCards(c);
+		p.getHand().remove(c);
 	}
 	public int totalVP(Player p) 
 	{
