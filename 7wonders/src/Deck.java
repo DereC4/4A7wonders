@@ -16,7 +16,7 @@ public class Deck
         ageTwo = a2;
         ageThree = a3;
         discard = d;
-    }
+    } 
     public ArrayList < Card > getAgeOne()
     {
         return ageOne;
@@ -122,15 +122,20 @@ public class Deck
     public void readInCards(File file) throws IOException
     {
         Scanner sc = new Scanner(file);
+        sc.nextLine();
+        sc.nextLine();
         while (sc.hasNextLine())
         {
             String input = sc.nextLine();
-            String[] temp = input.split("|");
-            int age = Integer.parseInt(temp[3]);
-            Card card = new Card(temp[0], temp[1], temp[2], age, temp[4], temp[5], temp[6]);
-            if (age == 1) getAgeOne().add(card);
-            else if (age == 2) getAgeTwo().add(card);
-            else if (age == 3) getAgeThree().add(card);
+            if (!input.equals("DIVIDER TO CTRL-V"))
+            {
+	            String[] temp = input.split("|");
+	            int age = Integer.parseInt(temp[3]);
+	            Card card = new Card(temp[0], temp[1], temp[2], age, temp[4], temp[5], temp[6]);
+	            if (age == 1) getAgeOne().add(card);
+	            else if (age == 2) getAgeTwo().add(card);
+	            else if (age == 3) getAgeThree().add(card);
+            }
         }
     }
 }
