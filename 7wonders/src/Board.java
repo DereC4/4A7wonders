@@ -88,6 +88,32 @@ public class Board {
 				}
 			}
 		}
+		else if (com[0].equals("WP")) { //WarCards
+			p.setArmies(p.getArmies()+Integer.parseInt(com[1]));
+		}
+		else if(com[0].equals("S")) {
+			if (com[1].equals("All")) {
+				//placeholder
+			}
+			else if (com[1].equals("Lit")) {
+				TreeMap<String,Integer>temp=p.getSciList();
+				int i=temp.get("lit")+1;
+				temp.put("lit", i);
+				p.setSciList(temp);
+			}
+			else if (com[1].equals("Math")) {
+				TreeMap<String,Integer>temp=p.getSciList();
+				int i=temp.get("math")+1;
+				temp.put("math", i);
+				p.setSciList(temp);
+			}
+			else if (com[1].equals("Gear")) {
+				TreeMap<String,Integer>temp=p.getSciList();
+				int i=temp.get("gear")+1;
+				temp.put("gear", i);
+				p.setSciList(temp);
+			}
+		}
 		
 		//Removes Card from hand
 		p.addToPlayedCards(c);
