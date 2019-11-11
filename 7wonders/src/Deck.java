@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -76,46 +77,29 @@ public class Deck
     {
         if (age == 1)
         {
-            Random random = new Random();
-            // start from end of the list
+            Random rand = new Random();
             for (int i = ageOne.size() - 1; i >= 1; i--)
             {
-                // get a random index j such that 0 <= j <= i
-                int j = random.nextInt(i + 1);
-                // swap element at i'th position in the list with element at
-                // randomly generated index j
-                Card obj = ageOne.get(i);
-                ageOne.set(i, ageOne.get(j));
-                ageOne.set(j, obj);
+                int j = rand.nextInt(ageOne.size());
+                Collections.swap(ageOne, i, j);
             }
         }
         else if (age == 2)
         {
-            Random random = new Random();
-            // start from end of the list ageTwo
+            Random rand = new Random();
             for (int i = ageTwo.size() - 1; i >= 1; i--)
             {
-                // get a random index j such that 0 <= j <= i
-                int j = random.nextInt(i + 1);
-                // swap element at i'th position in the list with element at
-                // randomly generated index j
-                Card obj = ageTwo.get(i);
-                ageTwo.set(i, ageTwo.get(j));
-                ageTwo.set(j, obj);
+                int j = rand.nextInt(ageTwo.size());
+                Collections.swap(ageTwo, i, j);
             }
         }
         else if (age == 3)
         {
-            Random random = new Random();
+        	Random rand = new Random();
             for (int i = ageThree.size() - 1; i >= 1; i--)
             {
-                // get a random index j such that 0 <= j <= i ageThree
-                int j = random.nextInt(i + 1);
-                // swap element at i'th position in the list with element at
-                // randomly generated index j
-                Card obj = ageThree.get(i);
-                ageThree.set(i, ageThree.get(j));
-                ageThree.set(j, obj);
+                int j = rand.nextInt(ageThree.size());
+                Collections.swap(ageThree, i, j);
             }
         }
     }
