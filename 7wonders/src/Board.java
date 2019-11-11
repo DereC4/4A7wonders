@@ -91,7 +91,8 @@ public class Board {
 		else if (com[0].equals("WP")) { //WarCards
 			p.setArmies(p.getArmies()+Integer.parseInt(com[1]));
 		}
-		else if(com[0].equals("S")) {
+		else if(com[0].equals("S")) 
+		{
 			if (com[1].equals("All")) {
 				//placeholder
 			}
