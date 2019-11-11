@@ -122,6 +122,8 @@ public class Deck
     public void readInCards(File file) throws IOException
     {
         Scanner sc = new Scanner(file);
+        sc.nextLine();
+        sc.nextLine();
         while (sc.hasNextLine())
         {
             String input = sc.nextLine();
