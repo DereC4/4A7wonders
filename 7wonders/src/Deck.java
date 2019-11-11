@@ -1,7 +1,7 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
-import static java.lang.System.*;
-import java.io.*;
 import java.util.Scanner;
 
 public class Deck
@@ -62,7 +62,6 @@ public class Deck
         if (age == 1)
         {
             p.addToHand(ageOne.remove(ageOne.size() - 1));
-
         }
         else if (age == 2)
         {
@@ -72,20 +71,17 @@ public class Deck
         {
             p.addToHand(ageThree.remove(ageThree.size() - 1));
         }
-
     }
     public void shuffle(int age)
     {
         if (age == 1)
         {
             Random random = new Random();
-
             // start from end of the list
             for (int i = ageOne.size() - 1; i >= 1; i--)
             {
                 // get a random index j such that 0 <= j <= i
                 int j = random.nextInt(i + 1);
-
                 // swap element at i'th position in the list with element at
                 // randomly generated index j
                 Card obj = ageOne.get(i);
@@ -96,13 +92,11 @@ public class Deck
         else if (age == 2)
         {
             Random random = new Random();
-
             // start from end of the list ageTwo
             for (int i = ageTwo.size() - 1; i >= 1; i--)
             {
                 // get a random index j such that 0 <= j <= i
                 int j = random.nextInt(i + 1);
-
                 // swap element at i'th position in the list with element at
                 // randomly generated index j
                 Card obj = ageTwo.get(i);
@@ -117,7 +111,6 @@ public class Deck
             {
                 // get a random index j such that 0 <= j <= i ageThree
                 int j = random.nextInt(i + 1);
-
                 // swap element at i'th position in the list with element at
                 // randomly generated index j
                 Card obj = ageThree.get(i);
@@ -125,25 +118,19 @@ public class Deck
                 ageThree.set(j, obj);
             }
         }
-    } 
-    
+    }
     public void readInCards(File file) throws IOException
     {
-    	Scanner sc = new Scanner(file);
-    	
-    	while (sc.hasNextLine())
-    	{
-    		String input = sc.nextLine();
-    		String[] temp = input.split("|");
-    		int age = Integer.parseInt(temp[3]);
-    		Card card = new Card(temp[0], temp[1], temp[2], age, temp[5], temp[6]);
-    		if (age == 1)
-    			getAgeOne().add(card);
-    		else if (age == 2)
-    			getAgeTwo().add(card);
-    		else if (age == 3)
-    			getAgeThree().add(card);
-    	}
+        Scanner sc = new Scanner(file);
+        while (sc.hasNextLine())
+        {
+            String input = sc.nextLine();
+            String[] temp = input.split("|");
+            int age = Integer.parseInt(temp[3]);
+            Card card = new Card(temp[0], temp[1], temp[2], age, temp[4], temp[5], temp[6]);
+            if (age == 1) getAgeOne().add(card);
+            else if (age == 2) getAgeTwo().add(card);
+            else if (age == 3) getAgeThree().add(card);
+        }
     }
-
 }

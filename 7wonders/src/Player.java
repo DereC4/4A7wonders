@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-public class Player 
+public class Player
 {
 	private int money, warMinusPoints, warPlusPoints, armies, index,vp;
 	private TreeMap<String, Boolean> reducedList;
@@ -139,7 +139,4 @@ public class Player
 			playedCards.put(type, temp);
 		}
 	}
-
-	
-
 }
