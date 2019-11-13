@@ -12,6 +12,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 	public static final int LENGTH = 1600;
     public static final int HEIGHT = 1000;
 	
+    
 	public PlayerFrame()
 	{
 		super("Seven Wonders");

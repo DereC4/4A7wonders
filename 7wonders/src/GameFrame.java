@@ -10,6 +10,7 @@ public class GameFrame extends PlayerFrame
 {
     private Board board = super.getBoard();
     
+    
 	public void paint(Graphics g)
 	{
 		try
