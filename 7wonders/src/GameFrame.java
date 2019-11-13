@@ -20,7 +20,7 @@ public class GameFrame extends PlayerFrame
 			g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
 			g.drawImage(sampleWonder, 425, 250, 700, 300, null);
 		}
-		catch (IOException e)
+		catch (IOException e) //Print the error
 		{
 			System.out.println(e);
 		}
