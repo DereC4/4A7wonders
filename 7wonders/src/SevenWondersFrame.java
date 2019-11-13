@@ -28,7 +28,9 @@ public class SevenWondersFrame extends JFrame implements MouseListener
 		try
 		{
 			BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
+			BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\olympia.png"));
 			g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
+			g.drawImage(sampleWonder, 425, 250, 700, 300, null);
 		}
 		catch (IOException e)
 		{
@@ -47,6 +49,11 @@ public class SevenWondersFrame extends JFrame implements MouseListener
 		g.drawRect(500, 100, 75, 75); //current rotation
 		g.drawRect(700, 100, 75, 75); //current age
 		g.drawRect(1350, 725, 100, 75); //button to burn cards 
+		g.setColor(Color.red);
+		g.drawRect(475, 475, 175, 75); //Wonder stage 1
+		g.drawRect(685, 475, 175, 75); //Wonder stage 2
+		g.drawRect(895, 475, 175, 75); //Wonder stage 3
+		
 	}
 	
 	public void paintWonder(Graphics g)
