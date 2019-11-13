@@ -5,12 +5,11 @@ public class Card implements Comparable
     private int age;
     private String name;
     private ArrayList < Resources > cost; //Resource cost
-    private String chain;
+    private String chain; //holds NAME of card that card chains from
     private boolean isFree;
     private String type; //also color
     private String effect;
-    //public static final String[] cards;
-    //will read in text file
+    
     public Card()
     {
         this("", "", "", 0, "", "false", "");
@@ -20,16 +19,22 @@ public class Card implements Comparable
         this.age = age;
         this.name = name;
         this.type = color;
-        this.chain = chain;
+        this.chain = chain; //if no chain String is " "
         this.effect = effect;
         
         this.cost = new ArrayList < Resources > ();
         String[] temp = cost.split(",");
+        
         for (int i = 0; i < temp.length; i++) 
         	this.cost.add(new Resources(temp[i]));
+        
         if (isFree.equals("true"))
         	this.isFree = true;
-        this.isFree = false;
+        else {
+        	this.isFree = false;
+        }
+        
+        
     }
     public int compareTo(Object obj)
     {
