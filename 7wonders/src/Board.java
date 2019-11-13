@@ -381,9 +381,9 @@ public class Board
     {
         this.onWards = onWards;
     }
-    public int getCurrentPlayer()
+    public Player getCurrentPlayer()
     {
-        return currentPlayer;
+        return playerList.get(currentPlayer);
     }
     public void setCurrentPlayer(int currentPlayer)
     {

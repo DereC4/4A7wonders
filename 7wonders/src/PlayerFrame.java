@@ -14,7 +14,6 @@ public class PlayerFrame extends JFrame implements MouseListener
 	private Board board = new Board();
 	public static final int LENGTH = 1600;
     public static final int HEIGHT = 1000;
-	
     
 	public PlayerFrame()
 	{
@@ -33,6 +32,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 		{
 			BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
 			BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\babylon.png"));
+			BufferedImage currentstage = ImageIO.read(new File("images\\assets\\"+board.getCurrentPlayer().+".png")); //test
 			int rand = (int)(Math.random()*(7))+1;
 			System.out.println(rand);
 			if(rand==1)
@@ -110,16 +110,6 @@ public class PlayerFrame extends JFrame implements MouseListener
 	{
 		
 	}
-	public Board getBoard() 
-	{
-		return board;
-	}
-
-	public void setBoard(Board board) 
-	{
-		this.board = board;
-	}
-	
 	public static void main(String[] args)
 	{
 		PlayerFrame g = new PlayerFrame();
