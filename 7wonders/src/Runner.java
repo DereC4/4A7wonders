@@ -1,6 +1,7 @@
-import java.io.*;
-public class Runner {
-	public static void main(String args[]) {
-		while ()
+public class Runner
+{
+	public static void main(String args[]) 
+	{
+		SevenWondersFrame sven = new SevenWondersFrame();
 	}
 }
