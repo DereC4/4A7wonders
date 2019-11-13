@@ -38,7 +38,7 @@ public class GameFrame extends PlayerFrame
 		g.drawRect(700, 100, 75, 75); //current age
 		g.drawRect(1350, 725, 100, 75); //button to burn cards 
 		g.setColor(Color.red);
-		g.drawRect(475, 475, 175, 75); //Wonder stage 1
+		g.drawRect(450, 475, 200, 75); //Wonder stage 1
 		g.drawRect(685, 475, 175, 75); //Wonder stage 2
 		g.drawRect(895, 475, 175, 75); //Wonder stage 3
 	}
