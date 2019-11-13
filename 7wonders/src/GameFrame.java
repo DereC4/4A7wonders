@@ -1,22 +1,50 @@
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.*;
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 import javax.imageio.ImageIO;
-import java.io.*;
-import java.util.ArrayList;
 
 public class GameFrame extends PlayerFrame
 {
     private Board board = super.getBoard();
-    
-    
 	public void paint(Graphics g)
 	{
 		try
 		{
 			BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
 			BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\babylon.png"));
+			int rand = (int)(Math.random()*(7))+1;
+			System.out.println(rand);
+			if(rand==1)
+			{
+				sampleWonder = ImageIO.read(new File("images\\wonders\\alexandria.png"));
+			}
+			if(rand==2)
+			{
+				sampleWonder = ImageIO.read(new File("images\\wonders\\babylon.png"));
+			}
+			if(rand==3)
+			{
+				sampleWonder = ImageIO.read(new File("images\\wonders\\ephesos.png"));
+			}
+			if(rand==4)
+			{
+				sampleWonder = ImageIO.read(new File("images\\wonders\\gizah.png"));
+			}
+			if(rand==5)
+			{
+				sampleWonder = ImageIO.read(new File("images\\wonders\\halikarnassus.png"));
+			}
+			if(rand==6)
+			{
+				sampleWonder = ImageIO.read(new File("images\\wonders\\olympia.png"));
+			}
+			if(rand==7)
+			{
+				sampleWonder = ImageIO.read(new File("images\\wonders\\rhodos.png"));
+			}
 			g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
 			g.drawImage(sampleWonder, 425, 250, 700, 300, null);
 		}
