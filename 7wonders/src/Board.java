@@ -15,9 +15,7 @@ public class Board
         String imports = c.getEffect();
         String[] enigma = imports.split(" ");
         if (enigma[0].equals("VP"))
-        { 
-      
-        }
+        {}
         else if (enigma[0].contains("C"))
         {
         	//For C and VPC Cards
@@ -173,6 +171,7 @@ public class Board
                 vp += Integer.parseInt(com[1]);
             }
         }
+        
         //adds VP for sci
         vp += calcSci(p);
         //adds VP for war
@@ -195,11 +194,33 @@ public class Board
         {
             String effect = c.getEffect();
             String[] com = effect.split(" ");
+            int index = p.getIndex();
+            int lower = index--;
+            if (lower == -1)
+            {
+                lower = playerList.size() - 1;
+            }
+            int upper = index++;
+            if (upper == playerList.size())
+            {
+                upper = 0;
+            }
+            Player pl = playerList.get(lower);
+            Player p2 = playerList.get(upper);
             if (com[0].equals("VP"))
             {
-            	
-                // placeholder,will add later
-                // ifs for VP and VPC
+            	//Placeholders
+            	if (com[0].equals("wonder")) {
+            		if (com[1].equals("LR")) {
+            			vp+=pl.getWonder().getCurrentStage();
+            			vp+=p2.getWonder().getCurrentStage();
+            		}
+            		if (com[1].equals("LRD")) {
+            			vp+=pl.getWonder().getCurrentStage();
+            			vp+=p2.getWonder().getCurrentStage();
+            			vp+=p.getWonder().getCurrentStage();
+            		}
+            	}
             }
         }
         //Vp for guilds
@@ -268,7 +289,37 @@ public class Board
             }
             if (com[1].equals("S All"))
             {
-                //placeholders, change later
+                TreeMap<String,Integer>sciListL=new TreeMap<String,Integer>();
+                TreeMap<String,Integer>sciListM=new TreeMap<String,Integer>();
+                TreeMap<String,Integer>sciListG=new TreeMap<String,Integer>();
+                
+                for (String key:p.getSciList().keySet()) {
+                	sciListL.put(key,p.getSciList().get(key));
+                	sciListM.put(key,p.getSciList().get(key));
+                	sciListG.put(key,p.getSciList().get(key));
+                }
+                
+                int l=p.getSciList().get("lit");
+                int m=p.getSciList().get("math");
+                int g=p.getSciList().get("gear");
+                
+                sciListL.put("lit", l+1);
+                sciListM.put("math", m+1);
+                sciListG.put("gear", g+1);
+                
+                int pn1=calcSci(sciListL);
+                int pn2=calcSci(sciListM);
+                int pn3=calcSci(sciListG);
+                
+                if (pn1>=pn2&&pn1>pn3) {
+                	p.getSciList().put("lit", p.getSciList().get("lit")+1);
+                }
+                if (pn2>pn1&&pn2>pn3) {
+                	p.getSciList().put("math", p.getSciList().get("math")+1);
+                }
+                if (pn3>pn1&&pn3>pn2) {
+                	p.getSciList().put("gear", p.getSciList().get("gear")+1);
+                }
             }
             if (com[1].equals("D"))
             {
@@ -282,6 +333,20 @@ public class Board
     public int calcSci(Player p)
     {
         TreeMap < String, Integer > sciList = p.getSciList();
+        int vp = 0;
+        int s1 = sciList.get("lit");
+        int s2 = sciList.get("math");
+        int s3 = sciList.get("gear");
+        vp += Math.pow(s1, 2);
+        vp += Math.pow(s2, 2);
+        vp += Math.pow(s3, 2);
+        vp += (Math.min(Math.min(s1, s2), s3) * 7);
+        return vp;
+    }
+    
+    public int calcSci(TreeMap<String,Integer>tree)
+    {
+        TreeMap < String, Integer > sciList = tree;
         int vp = 0;
         int s1 = sciList.get("lit");
         int s2 = sciList.get("math");
