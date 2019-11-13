@@ -2,6 +2,6 @@ public class Runner
 {
 	public static void main(String args[]) 
 	{
-		SevenWondersFrame sven = new SevenWondersFrame();
+		GameFrame sven = new GameFrame();
 	}
 }
