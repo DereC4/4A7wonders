@@ -3,10 +3,10 @@ import java.util.TreeMap;
 public class Board
 {
     private int currentAge;
-    private boolean onWards; // direction of rotation
+    private boolean onWards; //direction
     private int currentPlayer;
     private ArrayList < Player > playerList;
-    private Deck deck; // Deck class not made yet
+    private Deck deck; 
     private int Age1CardQuantity;
     private int Age2CardQuantity;
     private int Age3CardQuantity;
