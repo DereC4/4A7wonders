@@ -10,6 +10,11 @@ public class Board
     private int Age1CardQuantity;
     private int Age2CardQuantity;
     private int Age3CardQuantity;
+    public Board()
+    {
+//    	for(int i = 0; i < 3; i++)
+//    		playerList.add(new Player); //finish later
+    }
     public void decodeEffect(Card c, Player p)
     {
         String imports = c.getEffect();
