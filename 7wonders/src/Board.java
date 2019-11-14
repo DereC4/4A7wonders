@@ -362,7 +362,7 @@ public class Board
         vp += (Math.min(Math.min(s1, s2), s3) * 7);
         return vp;
     }
-    public boolean checkBoard()
+    public boolean gameFinished()
     {
         if (currentAge == 3 && playerList.get(0).getHand().size() == 0 && playerList.get(1).getHand().size() == 0 && playerList.get(2).getHand().size() == 0)
         {
