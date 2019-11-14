@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -9,6 +10,12 @@ import javax.imageio.ImageIO;
 public class GameFrame extends PlayerFrame
 {
     private Board board = super.getBoard();
+    
+    public GameFrame()
+    {
+    	super();
+    }
+    
 	public void paint(Graphics g)
 	{
 		try
@@ -65,10 +72,18 @@ public class GameFrame extends PlayerFrame
 		g.drawRect(500, 100, 75, 75); //current rotation
 		g.drawRect(700, 100, 75, 75); //current age
 		g.drawRect(1350, 725, 100, 75); //button to burn cards 
-		g.setColor(Color.red);
-		g.drawRect(468, 473, 185, 77); //Wonder stage 1
-		g.drawRect(678, 473, 185, 77); //Wonder stage 2
-		g.drawRect(886, 473, 185, 77); //Wonder stage 3
+	}
+	
+	public void mousePressed(MouseEvent arg0) 
+	{
+		//System.out.println(arg0.getX() + " " + arg0.getY());
+		//1450, 50, 100, 100
+		if (arg0.getX() > 1450 && arg0.getX() < 1550 && arg0.getY() > 50 && arg0.getY() < 150)
+		{
+			PlayerFrame test = new PlayerFrame();
+		}
+			
+		
 	}
 	
 	public static void main(String[] args)

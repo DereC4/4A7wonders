@@ -39,27 +39,27 @@ public class PlayerFrame extends JFrame implements MouseListener
 			{
 				sampleWonder = ImageIO.read(new File("images\\wonders\\alexandria.png"));
 			}
-			if(rand==2)
+			else if(rand==2)
 			{
 				sampleWonder = ImageIO.read(new File("images\\wonders\\babylon.png"));
 			}
-			if(rand==3)
+			else if(rand==3)
 			{
 				sampleWonder = ImageIO.read(new File("images\\wonders\\ephesos.png"));
 			}
-			if(rand==4)
+			else if(rand==4)
 			{
 				sampleWonder = ImageIO.read(new File("images\\wonders\\gizah.png"));
 			}
-			if(rand==5)
+			else if(rand==5)
 			{
 				sampleWonder = ImageIO.read(new File("images\\wonders\\halikarnassus.png"));
 			}
-			if(rand==6)
+			else if(rand==6)
 			{
 				sampleWonder = ImageIO.read(new File("images\\wonders\\olympia.png"));
 			}
-			if(rand==7)
+			else if(rand==7)
 			{
 				sampleWonder = ImageIO.read(new File("images\\wonders\\rhodos.png"));
 			}
@@ -104,7 +104,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 	}
 	public void mousePressed(MouseEvent arg0) 
 	{
-			
+		//System.out.println(arg0.getX() + " " + arg0.getY());
 	}
 	public void mouseReleased(MouseEvent arg0) 
 	{
