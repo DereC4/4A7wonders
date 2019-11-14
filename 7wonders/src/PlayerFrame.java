@@ -110,6 +110,10 @@ public class PlayerFrame extends JFrame implements MouseListener
 	{
 		
 	}
+	public Board getBoard()
+	{
+		return board;
+	}
 	public static void main(String[] args)
 	{
 		PlayerFrame g = new PlayerFrame();
