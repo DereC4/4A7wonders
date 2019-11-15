@@ -32,8 +32,7 @@ public class Card implements Comparable
         	this.isFree = true;
         else {
         	this.isFree = false;
-        }
-        
+        }        
         
     }
     public int compareTo(Object obj)
