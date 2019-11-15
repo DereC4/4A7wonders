@@ -11,6 +11,10 @@ public class Deck
     private ArrayList < Card > ageTwo;
     private ArrayList < Card > ageThree;
     private ArrayList < Card > discard;
+    public Deck() throws IOException
+    {
+    	readInCards(new File("cards.txt"));
+    }
     public Deck(ArrayList < Card > a1, ArrayList < Card > a2, ArrayList < Card > a3, ArrayList < Card > d)
     {
         ageOne = a1;
@@ -105,21 +109,25 @@ public class Deck
     }
     public void readInCards(File file) throws IOException
     {
-        Scanner sc = new Scanner(file);
-        sc.nextLine();
-        sc.nextLine();
-        while (sc.hasNextLine())
+        Scanner scan = new Scanner(file);
+        scan.nextLine();
+        scan.nextLine();
+        while (scan.hasNextLine())
         {
-            String input = sc.nextLine();
+            String input = scan.nextLine();
             if (!input.equals("DIVIDER TO CTRL-V"))
             {
 	            String[] temp = input.split("|");
 	            int age = Integer.parseInt(temp[3]);
 	            Card card = new Card(temp[0], temp[1], temp[2], age, temp[4], temp[5], temp[6]);
-	            if (age == 1) getAgeOne().add(card);
-	            else if (age == 2) getAgeTwo().add(card);
-	            else if (age == 3) getAgeThree().add(card);
+	            if (age == 1) 
+	            	getAgeOne().add(card);
+	            else if (age == 2) 
+	            	getAgeTwo().add(card);
+	            else if (age == 3)
+	            	getAgeThree().add(card);
             }
         }
+        scan.close();
     }
 }
