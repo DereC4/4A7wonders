@@ -12,8 +12,14 @@ public class Board
     private int Age3CardQuantity;
     public Board()
     {
-//    	for(int i = 0; i < 3; i++)
-//    		playerList.add(new Player); //finish later
+    	for(int i = 0; i < 3; i++)
+    		playerList.add(new Player(i));
+    	deal(1);
+    	deck=new Deck();
+    	playerList=new ArrayList<Player>();
+    	currentAge=1;
+    	onWards=true;
+    	currentPlayer=0; //players are 0,1,2
     }
     public void decodeEffect(Card c, Player p)
     {
@@ -369,6 +375,46 @@ public class Board
             return true;
         }
         return false;
+    }
+    public void deal(int age)
+    {
+    	ArrayList <Card> d;
+    	d = new ArrayList<Card>();
+    	if (age==1) 
+    	{
+    		 d = deck.getAgeOne();
+    	}
+    	if (age==2)
+    	{
+    		d = deck.getAgeTwo();
+    	}
+    	if (age==3)
+    	{
+    		d = deck.getAgeThree();
+    	}
+    	for(int i = 0; i < playerList.size(); i++)
+    	{
+    		for (int j=6;j>=0;j--) 
+    		{
+    			playerList.get(i).addToHand(d.remove(j));
+    		}
+    	}
+    }
+    public int incrementLocation() {
+    	int l=currentPlayer;
+    	if (onWards) {
+    		l++;
+    	}
+    	else if (!onWards){
+    		l--;
+    	}
+    	if (l==3) {
+    		l=0;
+    	}
+    	if (l==-1) {
+    		l=2;
+    	}
+    	return l;
     }
     public int getCurrentAge()
     {

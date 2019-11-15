@@ -73,7 +73,6 @@ public class GameFrame extends PlayerFrame
 		g.drawRect(700, 100, 75, 75); //current age
 		g.drawRect(1350, 725, 100, 75); //button to burn cards 
 	}
-	
 	public void mousePressed(MouseEvent arg0) 
 	{
 		//System.out.println(arg0.getX() + " " + arg0.getY());
@@ -82,10 +81,7 @@ public class GameFrame extends PlayerFrame
 		{
 			PlayerFrame test = new PlayerFrame();
 		}
-			
-		
 	}
-	
 	public static void main(String[] args)
 	{
 		GameFrame temp = new GameFrame();
