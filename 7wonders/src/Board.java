@@ -421,6 +421,70 @@ public class Board
         }
         return l;
     }
+    public boolean playable(Card c)
+    {
+        /*
+         * no same card name
+         * check if free
+         * have chain?
+         * proper rss?
+         * can player trade for rss?
+         */
+        if (playerList.get(currentPlayer).getPlayedCards().containsValue(c))
+        {
+            return false;
+        }
+        else if (c.isFree())
+        {
+            return true;
+        }
+        TreeMap < String, ArrayList < Card >> played = playerList.get(currentPlayer).getPlayedCards();
+        for (String s: played.keySet())
+        {
+            for (Card i: played.get(s))
+            {
+                if (i.getName().equals(c.getChain()))
+                {
+                    return true;
+                }
+            }
+        }
+        ArrayList < Resources > test = playerList.get(currentPlayer).getResources();
+        int costleft=0;
+        int costright=0;
+        for (Resources r: c.getCost())
+        {
+            if (!test.contains(r))
+            {
+            	 int lower=currentPlayer--;
+                 if (lower<0)
+                 	lower=2;
+                 int higher = currentPlayer++;
+                 if (higher>2)
+                 	higher = 0;
+                 ArrayList < Resources > test2 = playerList.get(lower).getResources();
+                 ArrayList < Resources > test3 = playerList.get(higher).getResources();
+                 if (!test2.contains(r)||!test3.contains(r)) {
+                	 return false;
+                 }
+                 else if (test2.contains(r)) {
+                	 //use determine cost
+                	 costleft+=2;
+                 }
+                 else if (test2.contains(r)) {
+                	 //use determine cost
+                	 costright+=2;
+                 }
+            }  
+        } 
+        if (playerList.get(currentPlayer).getMoney()<costleft+costright) {
+        	return false;
+        }
+        return true;
+    }
+    public int determineCost(Resource r) {
+    	
+    }
     public int getCurrentAge()
     {
         return currentAge;

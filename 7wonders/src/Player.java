@@ -126,6 +126,10 @@ public class Player
 	public void addVP(int i) {
 		vp+=i;
 	}
+	public ArrayList <Resources> getResources()
+	{
+		return resources;
+	}
 	public void addToPlayedCards(Card c) 
 	{
 		String type = c.getType();
