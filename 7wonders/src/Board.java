@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.TreeMap;
 public class Board
@@ -6,20 +7,19 @@ public class Board
     private boolean onWards; //direction
     private int currentPlayer;
     private ArrayList < Player > playerList;
-    private Deck deck; 
+    private Deck deck;
     private int Age1CardQuantity;
     private int Age2CardQuantity;
     private int Age3CardQuantity;
-    public Board()
+    public Board() throws IOException
     {
-    	for(int i = 0; i < 3; i++)
-    		playerList.add(new Player(i));
-    	deal(1);
-    	deck=new Deck();
-    	playerList=new ArrayList<Player>();
-    	currentAge=1;
-    	onWards=true;
-    	currentPlayer=0; //players are 0,1,2
+        for (int i = 0; i < 3; i++) playerList.add(new Player(i));
+        deal(1);
+        deck = new Deck();
+        playerList = new ArrayList < Player > ();
+        currentAge = 1;
+        onWards = true;
+        currentPlayer = 0; //players are 0,1,2
     }
     public void decodeEffect(Card c, Player p)
     {
@@ -29,7 +29,7 @@ public class Board
         {}
         else if (enigma[0].contains("C"))
         {
-        	//For C and VPC Cards
+            //For C and VPC Cards
             if (enigma[1].equals("D"))
             {
                 if (enigma[2].equals("wonder"))
@@ -44,8 +44,8 @@ public class Board
                 }
             }
             if (enigma[1].equals("LRD"))
-            { 
-            	//For LRD Cards
+            {
+                //For LRD Cards
                 int y = p.getPlayedCards().get(enigma[2]).size();
                 p.setMoney(p.getMoney() + y * Integer.parseInt(enigma[3]));
                 int index = p.getIndex();
@@ -67,8 +67,8 @@ public class Board
                 p.setMoney(p.getMoney() + y * Integer.parseInt(enigma[3]));
             }
             if (enigma[1].equals("LR"))
-            { 
-            	//For LR Cards
+            {
+                //For LR Cards
                 int index = p.getIndex();
                 int lower = index--;
                 if (lower == -1)
@@ -90,14 +90,14 @@ public class Board
         }
         else if (enigma[0].contains("R"))
         {
-        	//For Resource/Commodity
+            //For Resource/Commodity
             p.addToResources(new Resources(enigma[1]));
             p.addToPlayedCards(c);
             p.getHand().remove(c);
         }
         else if (enigma[0].contains("TP"))
-        { 
-        	//For Trading Posts
+        {
+            //For Trading Posts
             TreeMap < String, Boolean > rl = p.getReducedList();
             if (enigma[1].contains("R"))
             {
@@ -124,21 +124,21 @@ public class Board
         }
         else if (enigma[0].equals("WP"))
         {
-        	//WarCards
+            //WarCards
             p.setArmies(p.getArmies() + Integer.parseInt(enigma[1]));
         }
         else if (enigma[0].equals("S"))
         {
             if (enigma[1].equals("All"))
             {
-            	 TreeMap < String, Integer > temp = p.getSciList();
-                 int x = temp.get("lit") + 1;
-                 int y = temp.get("math") + 1;
-                 int z = temp.get("git") + 1;
-                 temp.put("lit", x);
-                 temp.put("math", y);
-                 temp.put("git", z);
-                 p.setSciList(temp);
+                TreeMap < String, Integer > temp = p.getSciList();
+                int x = temp.get("lit") + 1;
+                int y = temp.get("math") + 1;
+                int z = temp.get("git") + 1;
+                temp.put("lit", x);
+                temp.put("math", y);
+                temp.put("git", z);
+                p.setSciList(temp);
             }
             else if (enigma[1].equals("Lit"))
             {
@@ -182,7 +182,6 @@ public class Board
                 vp += Integer.parseInt(com[1]);
             }
         }
-        
         //adds VP for sci
         vp += calcSci(p);
         //adds VP for war
@@ -220,18 +219,21 @@ public class Board
             Player p2 = playerList.get(upper);
             if (com[0].equals("VP"))
             {
-            	//Placeholders
-            	if (com[0].equals("wonder")) {
-            		if (com[1].equals("LR")) {
-            			vp+=pl.getWonder().getCurrentStage();
-            			vp+=p2.getWonder().getCurrentStage();
-            		}
-            		if (com[1].equals("LRD")) {
-            			vp+=pl.getWonder().getCurrentStage();
-            			vp+=p2.getWonder().getCurrentStage();
-            			vp+=p.getWonder().getCurrentStage();
-            		}
-            	}
+                //Placeholders
+                if (com[0].equals("wonder"))
+                {
+                    if (com[1].equals("LR"))
+                    {
+                        vp += pl.getWonder().getCurrentStage();
+                        vp += p2.getWonder().getCurrentStage();
+                    }
+                    if (com[1].equals("LRD"))
+                    {
+                        vp += pl.getWonder().getCurrentStage();
+                        vp += p2.getWonder().getCurrentStage();
+                        vp += p.getWonder().getCurrentStage();
+                    }
+                }
             }
         }
         //Vp for guilds
@@ -300,36 +302,35 @@ public class Board
             }
             if (com[1].equals("S All"))
             {
-                TreeMap<String,Integer>sciListL=new TreeMap<String,Integer>();
-                TreeMap<String,Integer>sciListM=new TreeMap<String,Integer>();
-                TreeMap<String,Integer>sciListG=new TreeMap<String,Integer>();
-                
-                for (String key:p.getSciList().keySet()) {
-                	sciListL.put(key,p.getSciList().get(key));
-                	sciListM.put(key,p.getSciList().get(key));
-                	sciListG.put(key,p.getSciList().get(key));
+                TreeMap < String, Integer > sciListL = new TreeMap < String, Integer > ();
+                TreeMap < String, Integer > sciListM = new TreeMap < String, Integer > ();
+                TreeMap < String, Integer > sciListG = new TreeMap < String, Integer > ();
+                for (String key: p.getSciList().keySet())
+                {
+                    sciListL.put(key, p.getSciList().get(key));
+                    sciListM.put(key, p.getSciList().get(key));
+                    sciListG.put(key, p.getSciList().get(key));
                 }
-                
-                int l=p.getSciList().get("lit");
-                int m=p.getSciList().get("math");
-                int g=p.getSciList().get("gear");
-                
-                sciListL.put("lit", l+1);
-                sciListM.put("math", m+1);
-                sciListG.put("gear", g+1);
-                
-                int pn1=calcSci(sciListL);
-                int pn2=calcSci(sciListM);
-                int pn3=calcSci(sciListG);
-                
-                if (pn1>=pn2&&pn1>pn3) {
-                	p.getSciList().put("lit", p.getSciList().get("lit")+1);
+                int l = p.getSciList().get("lit");
+                int m = p.getSciList().get("math");
+                int g = p.getSciList().get("gear");
+                sciListL.put("lit", l + 1);
+                sciListM.put("math", m + 1);
+                sciListG.put("gear", g + 1);
+                int pn1 = calcSci(sciListL);
+                int pn2 = calcSci(sciListM);
+                int pn3 = calcSci(sciListG);
+                if (pn1 >= pn2 && pn1 > pn3)
+                {
+                    p.getSciList().put("lit", p.getSciList().get("lit") + 1);
                 }
-                if (pn2>pn1&&pn2>pn3) {
-                	p.getSciList().put("math", p.getSciList().get("math")+1);
+                if (pn2 > pn1 && pn2 > pn3)
+                {
+                    p.getSciList().put("math", p.getSciList().get("math") + 1);
                 }
-                if (pn3>pn1&&pn3>pn2) {
-                	p.getSciList().put("gear", p.getSciList().get("gear")+1);
+                if (pn3 > pn1 && pn3 > pn2)
+                {
+                    p.getSciList().put("gear", p.getSciList().get("gear") + 1);
                 }
             }
             if (com[1].equals("D"))
@@ -354,8 +355,7 @@ public class Board
         vp += (Math.min(Math.min(s1, s2), s3) * 7);
         return vp;
     }
-    
-    public int calcSci(TreeMap<String,Integer>tree)
+    public int calcSci(TreeMap < String, Integer > tree)
     {
         TreeMap < String, Integer > sciList = tree;
         int vp = 0;
@@ -378,43 +378,48 @@ public class Board
     }
     public void deal(int age)
     {
-    	ArrayList <Card> d;
-    	d = new ArrayList<Card>();
-    	if (age==1) 
-    	{
-    		 d = deck.getAgeOne();
-    	}
-    	if (age==2)
-    	{
-    		d = deck.getAgeTwo();
-    	}
-    	if (age==3)
-    	{
-    		d = deck.getAgeThree();
-    	}
-    	for(int i = 0; i < playerList.size(); i++)
-    	{
-    		for (int j=6;j>=0;j--) 
-    		{
-    			playerList.get(i).addToHand(d.remove(j));
-    		}
-    	}
+        ArrayList < Card > d;
+        d = new ArrayList < Card > ();
+        if (age == 1)
+        {
+            d = deck.getAgeOne();
+        }
+        if (age == 2)
+        {
+            d = deck.getAgeTwo();
+        }
+        if (age == 3)
+        {
+            d = deck.getAgeThree();
+        }
+        for (int i = 0; i < playerList.size(); i++)
+        {
+            for (int j = 6; j >= 0; j--)
+            {
+                playerList.get(i).addToHand(d.remove(j));
+            }
+        }
     }
-    public int incrementLocation() {
-    	int l=currentPlayer;
-    	if (onWards) {
-    		l++;
-    	}
-    	else if (!onWards){
-    		l--;
-    	}
-    	if (l==3) {
-    		l=0;
-    	}
-    	if (l==-1) {
-    		l=2;
-    	}
-    	return l;
+    public int incrementLocation()
+    {
+        int l = currentPlayer;
+        if (onWards)
+        {
+            l++;
+        }
+        else if (!onWards)
+        {
+            l--;
+        }
+        if (l == 3)
+        {
+            l = 0;
+        }
+        if (l == -1)
+        {
+            l = 2;
+        }
+        return l;
     }
     public int getCurrentAge()
     {
