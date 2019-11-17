@@ -482,8 +482,9 @@ public class Board
         }
         return true;
     }
-    public int determineCost(Resource r) {
-    	
+    public int determineCost(Resources r) 
+    {
+    	return -1;
     }
     public int getCurrentAge()
     {
