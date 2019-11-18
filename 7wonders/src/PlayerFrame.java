@@ -11,13 +11,14 @@ import javax.swing.JFrame;
 
 public class PlayerFrame extends JFrame implements MouseListener
 {
-	private Board board = new Board();
+	private Board board;
 	public static final int LENGTH = 1600;
     public static final int HEIGHT = 1000;
     
-	public PlayerFrame()
+	public PlayerFrame() throws IOException
 	{
 		super("Seven Wonders");
+		board = new Board();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLayout(null);
