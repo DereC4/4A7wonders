@@ -14,4 +14,7 @@ public class Resources
     {
         this.resource = resource;
     }
+    public boolean isR() { //is Resource not loom, glass, or papyrus
+    	return !(resource.equals("Papyrus")||resource.equals("Glass")||resource.equals("Loom"));
+    }
 }
