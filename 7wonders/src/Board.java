@@ -12,7 +12,7 @@ public class Board
     private int Age2CardQuantity;
     private int Age3CardQuantity;
     public Board() throws IOException
-    {
+    { 
         for (int i = 0; i < 3; i++) playerList.add(new Player(i));
         deal(1);
         deck = new Deck();
