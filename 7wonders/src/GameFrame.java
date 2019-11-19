@@ -79,11 +79,25 @@ public class GameFrame extends PlayerFrame
 		//1450, 50, 100, 100
 		if (arg0.getX() > 1450 && arg0.getX() < 1550 && arg0.getY() > 50 && arg0.getY() < 150)
 		{
-			PlayerFrame test = new PlayerFrame();
+			try 
+			{
+				PlayerFrame test = new PlayerFrame();
+			} 
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
 		}
 	}
 	public static void main(String[] args)
 	{
-		GameFrame temp = new GameFrame();
+		try
+		{
+			GameFrame temp = new GameFrame();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 }
