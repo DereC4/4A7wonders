@@ -11,7 +11,7 @@ public class GameFrame extends PlayerFrame
 {
     private Board board = super.getBoard();
     
-    public GameFrame()
+    public GameFrame() throws IOException
     {
     	super();
     }
