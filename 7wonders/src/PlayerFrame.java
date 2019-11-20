@@ -35,7 +35,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 			BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\babylon.png"));
 			//BufferedImage currentstage = ImageIO.read(new File("images\\assets\\age"+board.getCurrentPlayer().getWonderStage()+".png")); //test
 			int rand = (int)(Math.random()*(7))+1;
-			System.out.println(rand);
+//			System.out.println(rand);
 			if(rand==1)
 			{
 				sampleWonder = ImageIO.read(new File("images\\wonders\\alexandria.png"));
@@ -84,7 +84,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 		g.drawRect(475, 475, 175, 75); //Wonder stage 1
 		g.drawRect(685, 475, 175, 75); //Wonder stage 2
 		g.drawRect(895, 475, 175, 75); //Wonder stage 3
-		
+		 
 	}
 	
 	public void paintWonder(Graphics g)
