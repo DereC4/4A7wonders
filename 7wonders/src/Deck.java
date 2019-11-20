@@ -14,6 +14,9 @@ public class Deck
     public Deck() throws IOException
     {
     	readInCards(new File("cards.txt"));
+    	ageOne = new ArrayList<Card>();
+    	ageTwo = new ArrayList<Card>();
+    	ageThree = new ArrayList<Card>();
     }
     public Deck(ArrayList < Card > a1, ArrayList < Card > a2, ArrayList < Card > a3, ArrayList < Card > d)
     {
@@ -128,6 +131,7 @@ public class Deck
 	            	getAgeThree().add(card);
             }
         }
+        System.out.println(ageOne);
         scan.close();
     }
 }

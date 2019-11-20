@@ -115,7 +115,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 	{
 		return board;
 	}
-	public static void main(String[] args)
+	public static void main(String[] args) throws IOException
 	{
 		PlayerFrame g = new PlayerFrame();
 	}
