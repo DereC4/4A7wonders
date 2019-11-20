@@ -3,6 +3,44 @@ public class Wonder
     private String name;
     private int currentStage;
     private Resources product; //resource that the wonder produces
+    
+    public Wonder (String s) {
+    	if (s.equals("Colossus of Rhodes")) {
+    		name=s;
+    		currentStage=0;
+    		product=new Resources("Ore");
+    	}
+    	if (s.equals("Halicarnassus")) {
+    		name=s;
+    		currentStage=0;
+    		product=new Resources("Loom");
+    	}
+    	if (s.equals("Lighthouse of Alexandria")) {
+    		name=s;
+    		currentStage=0;
+    		product=new Resources("Glass");
+    	}
+    	if (s.equals("Hanging Gardens of Babylon")) {
+    		name=s;
+    		currentStage=0;
+    		product=new Resources("Clay");
+    	}
+    	if (s.equals("Ephesos")) {
+    		name=s;
+    		currentStage=0;
+    		product=new Resources("Papyrus");
+    	}
+    	if (s.equals("Great Pyramid of Giza")) {
+    		name=s;
+    		currentStage=0;
+    		product=new Resources("Stone");
+    	}
+    	if (s.equals("Statue of Zeus at Olympia")) {
+    		name=s;
+    		currentStage=0;
+    		product=new Resources("Timber");
+    	}
+    }
     public static final String[] WONDERS = {
         "Colossus of Rhodes",
         "Halicarnassus",
