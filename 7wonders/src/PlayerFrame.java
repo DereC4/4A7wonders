@@ -19,7 +19,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 	{
 		super("Seven Wonders");
 		board = new Board();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
         setLayout(null);
         setVisible(true);
@@ -66,6 +66,9 @@ public class PlayerFrame extends JFrame implements MouseListener
 			}
 			g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
 			g.drawImage(sampleWonder, 425, 250, 700, 300, null);
+			
+			//War minus points
+			
 		}
 		catch (IOException e)
 		{

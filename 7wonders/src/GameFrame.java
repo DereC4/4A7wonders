@@ -23,7 +23,7 @@ public class GameFrame extends PlayerFrame
 			BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
 			BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\babylon.png"));
 			int rand = (int)(Math.random()*(7))+1;
-			System.out.println(rand);
+			//System.out.println(rand);
 			if(rand==1)
 			{
 				sampleWonder = ImageIO.read(new File("images\\wonders\\alexandria.png"));
