@@ -12,11 +12,13 @@ public class Board
     private int Age2CardQuantity;
     private int Age3CardQuantity;
     public Board() throws IOException
-    { 
-        for (int i = 0; i < 3; i++) playerList.add(new Player(i));
+    {
+    	deck = new Deck();
+    	playerList = new ArrayList < Player > ();
+        for (int i = 0; i < 3; i++) 
+        	playerList.add(new Player(i));
         deal(1);
-        deck = new Deck();
-        playerList = new ArrayList < Player > ();
+        
         currentAge = 1;
         onWards = true;
         currentPlayer = 0; // players are 0,1,2
@@ -400,16 +402,17 @@ public class Board
         d = new ArrayList < Card > ();
         if (age == 1)
         {
-            d = deck.getAgeOne();
+        	d = deck.getAgeOne();
         }
-        if (age == 2)
+        else if (age == 2)
         {
             d = deck.getAgeTwo();
         }
-        if (age == 3)
+        else if (age == 3)
         {
             d = deck.getAgeThree();
         }
+        
         for (int i = 0; i < playerList.size(); i++)
         {
             for (int j = 6; j >= 0; j--)
@@ -418,6 +421,7 @@ public class Board
             }
         }
     }
+    
     public int incrementLocation()
     {
         int l = currentPlayer;

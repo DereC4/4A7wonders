@@ -67,6 +67,6 @@ Tradersguild|Purple|VP yellow LR 1|3| |false|Glass,Loom,Papyrus
 University|Green|S lit|3|Library|false|Wood,Wood,Papyrus,Glass
 Vineyard|Yellow|C LRD brown 1|2| |true| 
 Walls|Red|WP 2|2| |false|Stone,Stone,Stone
-Westtradingpost|Yellow|TP L Clay,Stone,Wood,Ore|1| |true|
+Westtradingpost|Yellow|TP L Clay,Stone,Wood,Ore|1| |true| 
 Workersguild|Purple|VP LR brown 1|3| |false|Ore,Ore,Clay,Stone,Wood
 Workshop|Green|S gear|1| |false|Glass

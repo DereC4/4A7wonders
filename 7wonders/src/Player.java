@@ -3,7 +3,7 @@ import java.util.TreeMap;
 
 public class Player
 {
-	private int money, warMinusPoints, warPlusPoints, armies, index,vp;
+	private int money, warMinusPoints, warPlusPoints, armies, index, vp;
 	private TreeMap<String, Boolean> reducedList;
 	private TreeMap<String, Integer> sciList;
 	private TreeMap<String, ArrayList<Card>> playedCards;
