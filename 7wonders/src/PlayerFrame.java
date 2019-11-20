@@ -35,7 +35,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 			BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\babylon.png"));
 			//BufferedImage currentstage = ImageIO.read(new File("images\\assets\\age"+board.getCurrentPlayer().getWonderStage()+".png")); //test
 			int rand = (int)(Math.random()*(7))+1;
-			System.out.println(rand);
+//			System.out.println(rand);
 			if(rand==1)
 			{
 				sampleWonder = ImageIO.read(new File("images\\wonders\\alexandria.png"));
