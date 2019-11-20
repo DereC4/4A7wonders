@@ -16,6 +16,7 @@ public class GameFrame extends PlayerFrame
     	super();
     }
     
+    
 	public void paint(Graphics g)
 	{
 		try
