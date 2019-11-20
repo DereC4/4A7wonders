@@ -19,7 +19,7 @@ public class GameFrame extends PlayerFrame
 	public void paint(Graphics g)
 	{
 		try
-		{
+		{ 
 			BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
 			BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\babylon.png"));
 			int rand = (int)(Math.random()*(7))+1;
@@ -28,27 +28,27 @@ public class GameFrame extends PlayerFrame
 			{
 				sampleWonder = ImageIO.read(new File("images\\wonders\\alexandria.png"));
 			}
-			if(rand==2)
+			else if(rand==2)
 			{
 				sampleWonder = ImageIO.read(new File("images\\wonders\\babylon.png"));
 			}
-			if(rand==3)
+			else if(rand==3)
 			{
 				sampleWonder = ImageIO.read(new File("images\\wonders\\ephesos.png"));
 			}
-			if(rand==4)
+			else if(rand==4)
 			{
 				sampleWonder = ImageIO.read(new File("images\\wonders\\gizah.png"));
 			}
-			if(rand==5)
+			else if(rand==5)
 			{
 				sampleWonder = ImageIO.read(new File("images\\wonders\\halikarnassus.png"));
 			}
-			if(rand==6)
+			else if(rand==6)
 			{
 				sampleWonder = ImageIO.read(new File("images\\wonders\\olympia.png"));
 			}
-			if(rand==7)
+			else if(rand==7)
 			{
 				sampleWonder = ImageIO.read(new File("images\\wonders\\rhodos.png"));
 			}
