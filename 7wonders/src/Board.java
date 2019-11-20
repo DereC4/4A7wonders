@@ -12,12 +12,13 @@ public class Board
     private int Age2CardQuantity;
     private int Age3CardQuantity;
     public Board() throws IOException
-    { 
+    {
+    	deck = new Deck();
     	playerList = new ArrayList < Player > ();
         for (int i = 0; i < 3; i++) 
         	playerList.add(new Player(i));
         deal(1);
-        deck = new Deck();
+        
         currentAge = 1;
         onWards = true;
         currentPlayer = 0; // players are 0,1,2
