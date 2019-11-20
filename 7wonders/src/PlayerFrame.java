@@ -86,7 +86,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 		g.setColor(Color.red);
 		g.drawRect(475, 475, 175, 75); //Wonder stage 1
 		g.drawRect(685, 475, 175, 75); //Wonder stage 2
-		g.drawRect(895, 475, 175, 75); //Wonder stage 3
+		g.drawRect(895, 475, 175, 75); //Wonder stage 3 
 	}
 	
 	public void paintWonder(Graphics g)

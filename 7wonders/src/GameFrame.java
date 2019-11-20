@@ -13,7 +13,7 @@ public class GameFrame extends PlayerFrame
     
     public GameFrame() throws IOException
     {
-    	super();
+    	super(); 
     }
     
     
