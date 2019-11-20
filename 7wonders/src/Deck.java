@@ -13,10 +13,10 @@ public class Deck
     private ArrayList < Card > discard;
     public Deck() throws IOException
     {
-    	readInCards(new File("cards.txt"));
     	ageOne = new ArrayList<Card>();
     	ageTwo = new ArrayList<Card>();
     	ageThree = new ArrayList<Card>();
+    	readInCards(new File("cards.txt"));
     }
     public Deck(ArrayList < Card > a1, ArrayList < Card > a2, ArrayList < Card > a3, ArrayList < Card > d)
     {
