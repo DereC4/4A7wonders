@@ -5,8 +5,8 @@ public class Wonder
     private Resources product; //resource that the wonder produces
     
     public Wonder (String s) {
-    	if (s.equals("Colossus of Rhodes")) {
-    		name="rhodes";
+    	if (s.equals("Colossus of Rhodos")) {
+    		name="rhodos";
     		currentStage=0;
     		product=new Resources("Ore");
     	}
@@ -42,7 +42,7 @@ public class Wonder
     	}
     }
     public static final String[] WONDERS = {
-        "Colossus of Rhodes",
+        "Colossus of Rhodos",
         "Halikarnassus",
         "Lighthouse of Alexandria",
         "Hanging Gardens of Babylon",
@@ -56,7 +56,7 @@ public class Wonder
         else if (stage == 3) return "VP 7";
         else //if Stage == 2
         {
-            if (getName().equals("Colossus of Rhodes")) return "WP 2";
+            if (getName().equals("Colossus of Rhodos")) return "WP 2";
             else if (getName().equals("Halikarnassus")) return "drawDiscard"; //Draw from discard 
             else if (getName().equals("Lighthouse of Alexandria")) return "resourceAll"; //Resource of choice
             else if (getName().equals("Hanging Gardens of Babylon")) return "scienceAll"; //Provides science of choice
