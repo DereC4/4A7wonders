@@ -6,37 +6,37 @@ public class Wonder
     
     public Wonder (String s) {
     	if (s.equals("Colossus of Rhodes")) {
-    		name=s;
+    		name="rhodes";
     		currentStage=0;
     		product=new Resources("Ore");
     	}
     	if (s.equals("Halicarnassus")) {
-    		name=s;
+    		name=s.toLowerCase();
     		currentStage=0;
     		product=new Resources("Loom");
     	}
     	if (s.equals("Lighthouse of Alexandria")) {
-    		name=s;
+    		name="alexandria";
     		currentStage=0;
     		product=new Resources("Glass");
     	}
     	if (s.equals("Hanging Gardens of Babylon")) {
-    		name=s;
+    		name="babylon";
     		currentStage=0;
     		product=new Resources("Clay");
     	}
     	if (s.equals("Ephesos")) {
-    		name=s;
+    		name=s.toLowerCase();
     		currentStage=0;
     		product=new Resources("Papyrus");
     	}
     	if (s.equals("Great Pyramid of Giza")) {
-    		name=s;
+    		name="giza";
     		currentStage=0;
     		product=new Resources("Stone");
     	}
     	if (s.equals("Statue of Zeus at Olympia")) {
-    		name=s;
+    		name="olympia";
     		currentStage=0;
     		product=new Resources("Timber");
     	}
