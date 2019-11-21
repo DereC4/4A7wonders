@@ -10,7 +10,7 @@ public class Wonder
     		currentStage=0;
     		product=new Resources("Ore");
     	}
-    	if (s.equals("Halicarnassus")) {
+    	if (s.equals("Halikarnassus")) {
     		name=s.toLowerCase();
     		currentStage=0;
     		product=new Resources("Loom");
@@ -43,7 +43,7 @@ public class Wonder
     }
     public static final String[] WONDERS = {
         "Colossus of Rhodes",
-        "Halicarnassus",
+        "Halikarnassus",
         "Lighthouse of Alexandria",
         "Hanging Gardens of Babylon",
         "Great Pyramid of Giza",
@@ -57,7 +57,7 @@ public class Wonder
         else //if Stage == 2
         {
             if (getName().equals("Colossus of Rhodes")) return "WP 2";
-            else if (getName().equals("Halicarnassus")) return "drawDiscard"; //Draw from discard 
+            else if (getName().equals("Halikarnassus")) return "drawDiscard"; //Draw from discard 
             else if (getName().equals("Lighthouse of Alexandria")) return "resourceAll"; //Resource of choice
             else if (getName().equals("Hanging Gardens of Babylon")) return "scienceAll"; //Provides science of choice
             else if (getName().equals("Great Pyramid of Giza")) return "VP 5";
