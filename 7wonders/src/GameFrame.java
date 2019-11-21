@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 
 public class GameFrame extends PlayerFrame
 {
-    private Board board; //reference to super
+    private Board board; //reference to super 
     
     public GameFrame() throws IOException
     {
