@@ -30,6 +30,7 @@ public class Wonder
     		currentStage=0;
     		product=new Resources("Papyrus");
     	}
+    	
     	if (s.equals("Great Pyramid of Giza")) {
     		name="giza";
     		currentStage=0;
