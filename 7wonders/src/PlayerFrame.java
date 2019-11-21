@@ -81,8 +81,6 @@ public class PlayerFrame extends JFrame implements MouseListener
 		g.drawRect(625, 575, 100, 75); //war minus points
 		g.drawRect(825, 575, 100, 75); //war plus points
 		g.drawRect(1025, 575, 100, 75); //coins
-		g.drawRect(500, 100, 75, 75); //current rotation
-		g.drawRect(700, 100, 75, 75); //current age
 		g.setColor(Color.red);
 		g.drawRect(475, 475, 175, 75); //Wonder stage 1
 		g.drawRect(685, 475, 175, 75); //Wonder stage 2
