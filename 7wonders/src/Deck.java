@@ -17,6 +17,10 @@ public class Deck
     	ageTwo = new ArrayList<Card>();
     	ageThree = new ArrayList<Card>();
     	readInCards(new File("cards.txt"));
+    	shuffle(1);
+    	shuffle(2);
+    	shuffle(3);
+//    	printall();
     }
     public Deck(ArrayList < Card > a1, ArrayList < Card > a2, ArrayList < Card > a3, ArrayList < Card > d)
     {
@@ -25,6 +29,13 @@ public class Deck
         ageThree = a3;
         discard = d;
     } 
+    /** Debug tool */
+    public void printall()
+    {
+    	System.out.println(ageOne);
+    	System.out.println(ageTwo);
+    	System.out.println(ageThree);
+    }
     public ArrayList < Card > getAgeOne()
     {
 //    	System.out.println(ageOne);
