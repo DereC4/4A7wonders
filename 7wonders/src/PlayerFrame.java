@@ -5,16 +5,17 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 public class PlayerFrame extends JFrame implements MouseListener
 {
-	private Board board;
 	public static final int LENGTH = 1600;
     public static final int HEIGHT = 1000;
-    
+    private static Board board;
+
 	public PlayerFrame() throws IOException
 	{
 		super("Seven Wonders");
@@ -25,6 +26,7 @@ public class PlayerFrame extends JFrame implements MouseListener
         setVisible(true);
         setBounds(150,25,LENGTH,HEIGHT);
         addMouseListener(this);
+        
 	}
 	
 	public void paint(Graphics g)
@@ -32,38 +34,10 @@ public class PlayerFrame extends JFrame implements MouseListener
 		try
 		{
 			BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
-			BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\babylon.png"));
-			//BufferedImage currentstage = ImageIO.read(new File("images\\assets\\age"+board.getCurrentPlayer().getWonderStage()+".png")); //test
-			int rand = (int)(Math.random()*(7))+1;
-//			System.out.println(rand);
-			if(rand==1)
-			{
-				sampleWonder = ImageIO.read(new File("images\\wonders\\alexandria.png"));
-			}
-			else if(rand==2)
-			{
-				sampleWonder = ImageIO.read(new File("images\\wonders\\babylon.png"));
-			}
-			else if(rand==3)
-			{
-				sampleWonder = ImageIO.read(new File("images\\wonders\\ephesos.png"));
-			}
-			else if(rand==4)
-			{
-				sampleWonder = ImageIO.read(new File("images\\wonders\\gizah.png"));
-			}
-			else if(rand==5)
-			{
-				sampleWonder = ImageIO.read(new File("images\\wonders\\halikarnassus.png"));
-			}
-			else if(rand==6)
-			{
-				sampleWonder = ImageIO.read(new File("images\\wonders\\olympia.png"));
-			}
-			else if(rand==7)
-			{
-				sampleWonder = ImageIO.read(new File("images\\wonders\\rhodos.png"));
-			}
+			BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\" + board.getCurrentPlayer().getWonder().getName()+ ".png"));
+			ArrayList<Player> players = board.getPlayerList();
+			
+			
 			g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
 			g.drawImage(sampleWonder, 425, 250, 700, 300, null);
 			
@@ -73,6 +47,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 		catch (IOException e)
 		{
 			System.out.println(e);
+			System.out.println(board.getCurrentPlayer().getWonder().getName());
 		}
 		
 		g.setColor(Color.black);
@@ -114,6 +89,10 @@ public class PlayerFrame extends JFrame implements MouseListener
 	public Board getBoard()
 	{
 		return board;
+	}
+	public static ArrayList<Player> getPlayers() 
+	{
+		return players;
 	}
 	public static void main(String[] args) throws IOException
 	{

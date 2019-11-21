@@ -4,16 +4,18 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
 public class GameFrame extends PlayerFrame
 {
-    private Board board = super.getBoard();
+    private Board board; //reference to super
     
     public GameFrame() throws IOException
     {
     	super(); 
+    	board = super.getBoard();
     }
     
     
