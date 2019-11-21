@@ -50,7 +50,7 @@ public class Card implements Comparable
     }
     public String toString()
     {
-        return getName() + "," + getEffect();
+        return getName() + ", " + getEffect();
     }
     public int getAge()
     {

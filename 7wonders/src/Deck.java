@@ -32,10 +32,12 @@ public class Deck
     }
     public ArrayList < Card > getAgeTwo()
     {
+//    	System.out.println(ageTwo);
         return ageTwo;
     }
     public ArrayList < Card > getAgeThree()
     {
+//    	System.out.println(ageThree);
         return ageThree;
     }
     public ArrayList < Card > getDiscard()
@@ -108,7 +110,7 @@ public class Deck
             {
                 int j = rand.nextInt(ageThree.size());
                 Collections.swap(ageThree, i, j);
-            }
+            }         
         }
     }
     public void readInCards(File file) throws IOException
