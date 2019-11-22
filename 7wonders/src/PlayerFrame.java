@@ -17,10 +17,10 @@ public class PlayerFrame extends JFrame implements MouseListener
     public static final int HEIGHT = 1000;
     private static Board board;
 
-	public PlayerFrame(boolean newBoard) throws IOException
+	public PlayerFrame() throws IOException
 	{
 		super("Seven Wonders");
-		//board = new Board();
+		board = new Board();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
         setLayout(null);
@@ -28,17 +28,15 @@ public class PlayerFrame extends JFrame implements MouseListener
         setBounds(150,25,LENGTH,HEIGHT);
         addMouseListener(this);
         
-        if (newBoard) {
-        	setBoard(new Board());
-        }
+//        if (newBoard)
+//        {
+//        	setBoard(new Board());
+//        }
 	}
-	
 	public void setBoard(Board board2) throws IOException 
 	{
 		board = board2;
-		
 	}
-
 	public void paint(Graphics g)
 	{
 		try
@@ -56,13 +54,6 @@ public class PlayerFrame extends JFrame implements MouseListener
 			g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
 			g.drawImage(sampleWonder, 425, 250, 700, 300, null);
 			g.drawImage(currentage, 700, 100, 75, 75, null);
-			g.setFont(new Font("Arial", Font.PLAIN, 10)); 
-			g.drawString("Current WarMinusPoints", 635, 600);
-			g.drawString(""+board.getCurrentPlayer().getWarMinusPoints(), 670, 615);
-			g.drawString("Current WarPlusPoints", 835, 600);
-			g.drawString(""+board.getCurrentPlayer().getWarPlusPoints(), 870, 615);
-			g.drawString("Coins", 1050, 600);
-			g.drawString(""+board.getCurrentPlayer().getMoney(), 1070, 615);
 //			super.add(warminuspoints);
 //			warminuspoints.setBounds(900, 100, 200, 100);
 
@@ -79,12 +70,20 @@ public class PlayerFrame extends JFrame implements MouseListener
 		g.drawRect(425, 250, 700, 300); //Current player's wonder
 		g.drawRect(425, 575, 100, 75); //button to show cards current player has built
 		g.drawRect(625, 575, 125, 75); //war minus points
+		g.fillRect(625, 575, 125, 75);
 		g.drawRect(825, 575, 125, 75); //war plus points
 		g.drawRect(1025, 575, 100, 75); //coins
 		g.setColor(Color.red); 
 		g.drawRect(475, 475, 175, 75); //Wonder stage 1
 		g.drawRect(685, 475, 175, 75); //Wonder stage 2
 		g.drawRect(895, 475, 175, 75); //Wonder stage 3 
+		g.setFont(new Font("Arial", Font.PLAIN, 10)); 
+		g.drawString("Current WarMinusPoints", 635, 600);
+		g.drawString(""+board.getCurrentPlayer().getWarMinusPoints(), 670, 615);
+		g.drawString("Current WarPlusPoints", 835, 600);
+		g.drawString(""+board.getCurrentPlayer().getWarPlusPoints(), 870, 615);
+		g.drawString("Coins", 1050, 600);
+		g.drawString(""+board.getCurrentPlayer().getMoney(), 1070, 615);
 	}
 	
 	public void paintWonder(Graphics g)
