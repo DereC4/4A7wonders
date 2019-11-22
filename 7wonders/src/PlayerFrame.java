@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -9,7 +10,6 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 public class PlayerFrame extends JFrame implements MouseListener
 {
@@ -47,7 +47,10 @@ public class PlayerFrame extends JFrame implements MouseListener
 			g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
 			g.drawImage(sampleWonder, 425, 250, 700, 300, null);
 			g.drawImage(currentage, 700, 100, 75, 75, null);
+			g.setFont(new Font("Arial", Font.PLAIN, 10)); 
+			g.drawString("Current WarMinusPoints", 635, 600);
 			g.drawString(""+board.getCurrentPlayer().getWarMinusPoints(), 670, 615);
+			
 //			super.add(warminuspoints);
 //			warminuspoints.setBounds(900, 100, 200, 100);
 
@@ -63,7 +66,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 		g.setColor(Color.black);
 		g.drawRect(425, 250, 700, 300); //Current player's wonder
 		g.drawRect(425, 575, 100, 75); //button to show cards current player has built
-		g.drawRect(625, 575, 100, 75); //war minus points
+		g.drawRect(625, 575, 125, 75); //war minus points
 		g.drawRect(825, 575, 100, 75); //war plus points
 		g.drawRect(1025, 575, 100, 75); //coins
 		g.setColor(Color.red); 
