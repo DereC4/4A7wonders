@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class PlayerFrame extends JFrame implements MouseListener
 {
@@ -36,6 +37,12 @@ public class PlayerFrame extends JFrame implements MouseListener
 			BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
 			BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\" + board.getCurrentPlayer().getWonder().getName()+ ".png"));
 			BufferedImage currentage = ImageIO.read(new File("images\\assets\\age"+board.getCurrentAge()+".png"));
+			JLabel warminuspoints = new JLabel();
+			warminuspoints.setSize(175, 75);
+			warminuspoints.setText(""+board.getCurrentPlayer().getWarMinusPoints());
+			warminuspoints.setVisible(true);
+			super.add(warminuspoints);
+			super.repaint();
 			
 			ArrayList<Player> players = board.getPlayerList();
 			
@@ -43,6 +50,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 			g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
 			g.drawImage(sampleWonder, 425, 250, 700, 300, null);
 			g.drawImage(currentage, 700, 100, 75, 75, null);
+			
 			//War minus points
 			
 		}
