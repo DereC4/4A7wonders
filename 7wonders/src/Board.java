@@ -19,15 +19,15 @@ public class Board
         	playerList.add(new Player(i));
         deal(1);
         ArrayList<Wonder>WonderList=new ArrayList<Wonder>();
-        
-        for (String s:Wonder.WONDERS) {
+        for (String s:Wonder.WONDERS)
+        {
         	WonderList.add(new Wonder(s));
         }
-        for (int i=0;i < 3;i++) {
+        for (int i=0;i < 3;i++)
+        {
         	int index=(int) (Math.random()*WonderList.size());
         	playerList.get(i).setWonder(WonderList.remove(index));
-        }
-        
+        } 
         currentAge = 1;
         onWards = true;
         currentPlayer = 0; // players are 0,1,2

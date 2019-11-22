@@ -18,7 +18,6 @@ public class GameFrame extends PlayerFrame
     	board = super.getBoard();
     }
     
-    
 	public void paint(Graphics g)
 	{
 		super.paint(g);
