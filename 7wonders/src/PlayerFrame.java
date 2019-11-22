@@ -37,20 +37,20 @@ public class PlayerFrame extends JFrame implements MouseListener
 			BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
 			BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\" + board.getCurrentPlayer().getWonder().getName()+ ".png"));
 			BufferedImage currentage = ImageIO.read(new File("images\\assets\\age"+board.getCurrentAge()+".png"));
-			JLabel warminuspoints = new JLabel();
-			warminuspoints.setSize(175, 75);
-			warminuspoints.setText(""+board.getCurrentPlayer().getWarMinusPoints());
-			warminuspoints.setVisible(true);
-			super.add(warminuspoints);
-			super.repaint();
-			
+//			JLabel warminuspoints = new JLabel();
+//			warminuspoints.setText(""+board.getCurrentPlayer().getWarMinusPoints());
+//			warminuspoints.setForeground(Color.black);
+
 			ArrayList<Player> players = board.getPlayerList();
 			
 			
 			g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
 			g.drawImage(sampleWonder, 425, 250, 700, 300, null);
 			g.drawImage(currentage, 700, 100, 75, 75, null);
-			
+			g.drawString(""+board.getCurrentPlayer().getWarMinusPoints(), 670, 615);
+//			super.add(warminuspoints);
+//			warminuspoints.setBounds(900, 100, 200, 100);
+
 			//War minus points
 			
 		}
