@@ -114,8 +114,4 @@ public class PlayerFrame extends JFrame implements MouseListener
 	{
 		return board;
 	}
-	public static ArrayList<Player> getPlayers() 
-	{
-		return players;
-	}
 }
