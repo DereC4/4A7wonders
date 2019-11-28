@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 
 public class GameFrame extends PlayerFrame
 {
@@ -15,12 +16,14 @@ public class GameFrame extends PlayerFrame
     public GameFrame() throws IOException
     {
     	super(); 
+    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	board = super.getBoard();
     }
     
 	public void paint(Graphics g)
 	{
 		super.paint(g);
+		/*
 		g.setColor(Color.black);
 		g.drawRect(50, 50, 100, 100); //Show previous player's wonder
 		g.drawRect(1450, 50, 100, 100); //Show next player's wonder
@@ -29,6 +32,7 @@ public class GameFrame extends PlayerFrame
 		g.drawRect(500, 100, 75, 75); //current rotation
 		g.drawRect(700, 100, 75, 75); //current age
 		g.drawRect(1350, 725, 100, 75); //button to burn cards 
+		*/
 		
 	}
 	public void mousePressed(MouseEvent arg0) 

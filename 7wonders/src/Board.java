@@ -177,6 +177,7 @@ public class Board
         p.addToPlayedCards(c);
         p.getHand().remove(c);
     }
+    
     public int totalVP(Player p)
     {
         TreeMap < String, ArrayList < Card >> playedCards = p.getPlayedCards();
@@ -371,6 +372,7 @@ public class Board
         }
         return vp;
     }
+    
     public int calcSci(Player p)
     {
         TreeMap < String, Integer > sciList = p.getSciList();
@@ -384,6 +386,7 @@ public class Board
         vp += (Math.min(Math.min(s1, s2), s3) * 7);
         return vp;
     }
+    
     public int calcSci(TreeMap < String, Integer > tree)
     {
         TreeMap < String, Integer > sciList = tree;
@@ -397,6 +400,7 @@ public class Board
         vp += (Math.min(Math.min(s1, s2), s3) * 7);
         return vp;
     }
+    
     public boolean gameFinished()
     {
         if (currentAge == 3 && playerList.get(0).getHand().size() == 0 && playerList.get(1).getHand().size() == 0 && playerList.get(2).getHand().size() == 0)
@@ -405,6 +409,7 @@ public class Board
         }
         return false;
     }
+    
     public void deal(int age)
     {
         ArrayList < Card > d;
@@ -426,7 +431,8 @@ public class Board
         {
             for (int j = 6; j >= 0; j--)
             {
-                playerList.get(i).addToHand(d.remove(j));
+            	Card temp = d.remove(j);
+                playerList.get(i).addToHand(temp);
             }
         }
     }
