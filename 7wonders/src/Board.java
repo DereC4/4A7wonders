@@ -591,6 +591,10 @@ public class Board
     {
         return playerList.get(currentPlayer);
     }
+    public int getCurrentTurn()
+    {
+    	return currentPlayer;
+    }
     public void setCurrentPlayer(int currentPlayer)
     {
         this.currentPlayer = currentPlayer;
