@@ -161,15 +161,15 @@ public class PlayerFrame extends JFrame implements MouseListener
 //			out.println("test");
 		ArrayList <Card> cards = board.getCurrentPlayer().getHand();
 		
-		int length = 50;
+		int length = 25;
 		int row = 50;
 		
 		for (int i = 0; i < cards.size(); i++)
 		{
 			JLabel card = new JLabel(new ImageIcon(ImageIO.read(new File("images\\cards\\" + cards.get(i).getName().toLowerCase() + ".png"))));
-			if(length>playercards.getWidth())
+			if(length>=playercards.getWidth())
 			{
-				length = 50;
+				length = 25;
 				row += 275;
 				card.setBounds(new Rectangle(new Point(length, row), card.getPreferredSize()));
 			}
