@@ -1,3 +1,5 @@
+import static java.lang.System.out;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -14,7 +16,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
 public class PlayerFrame extends JFrame implements MouseListener
 {
 	public static final int LENGTH = 1600;
@@ -77,8 +78,8 @@ public class PlayerFrame extends JFrame implements MouseListener
 		}
 		catch (IOException e)
 		{
-			System.out.println(e);
-			System.out.println(board.getCurrentPlayer().getWonder().getName());
+			out.println(e);
+			out.println(board.getCurrentPlayer().getWonder().getName());
 		}
 		
 		g.setColor(Color.black);
@@ -133,7 +134,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 	{
 		if(arg0.getX()<1125 && arg0.getY()<200 && arg0.getX()>1025 && arg0.getY()>100)
 		{
-			System.out.println("Pressed!");
+			out.println("Pressed!");
 			try 
 			{
 				derekPaintCards();
@@ -157,7 +158,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 //		background.setBounds(0, 0, LENGTH, HEIGHT);
 //		playercards.add(background);
 		
-//			System.out.println("test");
+//			out.println("test");
 		ArrayList <Card> cards = board.getCurrentPlayer().getHand();
 		
 		int length = 50;
@@ -166,15 +167,17 @@ public class PlayerFrame extends JFrame implements MouseListener
 		for (int i = 0; i < cards.size(); i++)
 		{
 			JLabel card = new JLabel(new ImageIcon(ImageIO.read(new File("images\\cards\\" + cards.get(i).getName().toLowerCase() + ".png"))));
-			if(length+50>playercards.getWidth())
+			if(length>playercards.getWidth())
 			{
 				length = 50;
-				row += card.getHeight();
+				row += 275;
 				card.setBounds(new Rectangle(new Point(length, row), card.getPreferredSize()));
 			}
 			else
 				card.setBounds(new Rectangle(new Point(length, row), card.getPreferredSize()));
 			playercards.add(card);
+//			out.println(card.getWidth() +"\n"+card.getHeight());
+//			180 275
 			length+=card.getWidth();
 		}
 	}
