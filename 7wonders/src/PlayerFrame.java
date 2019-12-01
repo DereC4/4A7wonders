@@ -83,7 +83,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 					for (int i = 0; i < players.size(); i++)
 					{
 						Player p = players.get(i);
-						p.addToPlayedCards(p.getTempPlayedCard());
+						//p.addToPlayedCards(p.getTempPlayedCard());
 						board.decodeEffect(p.getTempPlayedCard(), p);
 						//must also pay card cost
 						p.setTempPlayedCard(null);
@@ -162,19 +162,28 @@ public class PlayerFrame extends JFrame implements MouseListener
 		//g.drawImage(sampleCard, 100 + (i * 195), 675, 185, 281, null);
 		if (e.getY()>675 && e.getY()<956)
 		{
+			Card temp;
 			if (e.getX()>100 && e.getX()<285)
+				temp = player.getHand().get(0);
+			else if (e.getX()>295 && e.getX()<480)
+				temp = player.getHand().get(1);
+			else if (e.getX()>490 && e.getX()<675)
+				temp = player.getHand().get(2);
+			else if (e.getX()>685 && e.getX()<870)
+				temp = player.getHand().get(3);
+			else if (e.getX()>880 && e.getX()<1065)
+				temp = player.getHand().get(4);
+			else if (e.getX()>1075 && e.getX()<1260)
+				temp = player.getHand().get(5);
+			else if (e.getX()>1270 && e.getX()<1455)
+				temp = player.getHand().get(6);
+			else
+				temp = null;
+			
+			if (board.playable(temp))
 			{
-				Card temp = player.getHand().get(0);
-				if (board.playable(temp))
-				{
-					player.play(temp);
-					out.println(player.getTempPlayedCard().getName());
-					out.println(player.getMoney());
-					out.println(player.getResources());
-					board.incrementLocation();
-					out.println(board.getCurrentPlayer().getIndex());
-				}
-				out.println("cost:" + temp.getCost());
+				player.play(temp);
+				board.incrementLocation();
 			}
 		}
 		repaint();

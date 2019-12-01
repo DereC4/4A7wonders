@@ -181,7 +181,6 @@ public class Board
         }
         // Removes Card from hand
         p.addToPlayedCards(c);
-        p.getHand().remove(c);
     }
     
     public int totalVP(Player p)
@@ -467,6 +466,9 @@ public class Board
     }
     public boolean playable(Card c)
     {
+    	if (c == null)
+    		return false;
+    	
     	TreeMap <String, ArrayList<Card>> played = playerList.get(currentPlayer).getPlayedCards();
         if (played.containsValue(c)) //has card been played
         {
