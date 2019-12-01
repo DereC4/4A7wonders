@@ -22,7 +22,7 @@ public class Card implements Comparable
         this.chain = chain; //if no chain String is " "
         this.effect = effect;
         
-        this.cost = new ArrayList < Resources > ();
+        this.cost = new ArrayList<Resources> ();
         String[] temp = cost.split(",");
         
         for (int i = 0; i < temp.length; i++) 

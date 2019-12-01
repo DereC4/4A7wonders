@@ -62,5 +62,6 @@ public class GameFrame extends PlayerFrame
 		{
 			e.printStackTrace();
 		}
+		
 	}
 }

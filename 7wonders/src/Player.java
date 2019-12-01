@@ -9,8 +9,10 @@ public class Player
 	private TreeMap<String, ArrayList<Card>> playedCards;
 	private ArrayList<Card> hand;
 	private Wonder wonder;
-	private ArrayList<Resources>resources;
+	private ArrayList<Resources> resources;
+	private Card tempPlayedCard;
 
+	
 	public Player(int index) 
 	{
 		vp=0;
@@ -36,6 +38,18 @@ public class Player
 
 		playedCards = new TreeMap<String, ArrayList<Card>>();
 		hand = new ArrayList<Card>();
+	}
+	
+	public void play(Card c)
+	{
+		setTempPlayedCard(c);
+		getHand().remove(c);
+	}
+	public Card getTempPlayedCard() {
+		return tempPlayedCard;
+	}
+	public void setTempPlayedCard(Card tempPlayedCard) {
+		this.tempPlayedCard = tempPlayedCard;
 	}
 	public void addToResources(Resources r) {
 		resources.add(r);

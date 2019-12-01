@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.TreeMap;
+import static java.lang.System.out;
+
 public class Board
 {
     private int currentAge;
@@ -15,23 +17,29 @@ public class Board
     {
     	deck = new Deck();
     	playerList = new ArrayList < Player > ();
+    	
         for (int i = 0; i < 3; i++) 
         	playerList.add(new Player(i));
+        
         deal(1);
         ArrayList<Wonder>WonderList=new ArrayList<Wonder>();
+        
         for (String s:Wonder.WONDERS)
         {
         	WonderList.add(new Wonder(s));
         }
-        for (int i=0;i < 3;i++)
+        
+        for (int i=0;i < playerList.size(); i++)
         {
-        	int index=(int) (Math.random()*WonderList.size());
+        	int index = (int) (Math.random()*WonderList.size());
         	playerList.get(i).setWonder(WonderList.remove(index));
+        	playerList.get(i).addToResources(playerList.get(i).getWonder().getProduct());
         } 
         currentAge = 1;
         onWards = true;
         currentPlayer = 0; // players are 0,1,2
     }
+    
     public void decodeEffect(Card c, Player p)
     {
         String imports = c.getEffect();
@@ -41,31 +49,31 @@ public class Board
         else if (enigma[0].contains("C"))
         {
             // For C and VPC Cards
-            if (enigma[1].equals("D"))
+            if (enigma[1].equals("D")) //down
             {
-                if (enigma[2].equals("wonder"))
+                if (enigma[2].equalsIgnoreCase("Wonder"))
                 {
                     int y = p.getWonder().getCurrentStage();
                     p.setMoney(p.getMoney() + y * Integer.parseInt(enigma[3]));
                 }
-                else
+                else //Lighthouse
                 {
                     int y = p.getPlayedCards().get(enigma[2]).size();
                     p.setMoney(p.getMoney() + y * Integer.parseInt(enigma[3]));
                 }
             }
-            if (enigma[1].equals("LRD"))
+            if (enigma[1].equals("LRD")) //vineyard
             {
                 // For LRD Cards
-                int y = p.getPlayedCards().get(enigma[2]).size();
+                int y = p.getPlayedCards().get(enigma[2]).size(); //enigma[2] is a card color
                 p.setMoney(p.getMoney() + y * Integer.parseInt(enigma[3]));
                 int index = p.getIndex();
-                int lower = index--;
+                int lower = index-1;
                 if (lower == -1)
                 {
                     lower = playerList.size() - 1;
                 }
-                int upper = index++;
+                int upper = index+1;
                 if (upper == playerList.size())
                 {
                     upper = 0;
@@ -81,12 +89,12 @@ public class Board
             {
                 // For LR Cards
                 int index = p.getIndex();
-                int lower = index--;
+                int lower = index-1;
                 if (lower == -1)
                 {
                     lower = playerList.size() - 1;
                 }
-                int upper = index++;
+                int upper = index+1;
                 if (upper == playerList.size())
                 {
                     upper = 0;
@@ -103,14 +111,12 @@ public class Board
         {
             // For Resource/Commodity
             p.addToResources(new Resources(enigma[1]));
-            p.addToPlayedCards(c);
-            p.getHand().remove(c);
         }
         else if (enigma[0].contains("TP"))
         {
             // For Trading Posts
             TreeMap < String, Boolean > rl = p.getReducedList();
-            if (enigma[1].contains("R"))
+            if (enigma[1].contains("R")) //right
             {
                 if (enigma[2].equals("R"))
                 {
@@ -142,8 +148,8 @@ public class Board
         {
             if (enigma[1].equals("All"))
             {
-                TreeMap < String, Integer > temp = p.getSciList();
-                int x = temp.get("lit") + 1;
+                TreeMap<String,Integer> temp = p.getSciList();
+                int x = temp.get("lit") + 1; //ISSUE
                 int y = temp.get("math") + 1;
                 int z = temp.get("git") + 1;
                 temp.put("lit", x);
@@ -460,16 +466,17 @@ public class Board
     }
     public boolean playable(Card c)
     {
-        if (playerList.get(currentPlayer).getPlayedCards().containsValue(c))
+    	TreeMap <String, ArrayList<Card>> played = playerList.get(currentPlayer).getPlayedCards();
+        if (played.containsValue(c)) //has card been played
         {
             return false;
         }
-        else if (c.isFree())
+        else if (c.isFree()) //is card free
         {
             return true;
         }
-        TreeMap < String, ArrayList < Card >> played = playerList.get(currentPlayer).getPlayedCards();
-        for (String s: played.keySet())
+        
+        for (String s: played.keySet()) //does card chain off another card
         {
             for (Card i: played.get(s))
             {
@@ -479,19 +486,38 @@ public class Board
                 }
             }
         }
-        ArrayList < Resources > test = playerList.get(currentPlayer).getResources();
+        
+        if (c.getCost().toString().contains("C 1")) //does card have coin cost
+        {
+        	if (getCurrentPlayer().getMoney() >= 1)
+        		return true;
+        }
+        
+        ArrayList<Resources> resources = playerList.get(currentPlayer).getResources();
         int costleft = 0;
         int costright = 0;
-        for (Resources r: c.getCost())
+        for (Resources r : c.getCost())
         {
-            if (!test.contains(r))
+        	if (r.toString().equalsIgnoreCase("C 1"))
+        		continue;
+        	
+            if (!resources.contains(r))
             {
-                int lower = currentPlayer--;
-                if (lower < 0) lower = 2;
-                int higher = currentPlayer++;
-                if (higher > 2) higher = 0;
-                ArrayList < Resources > test2 = playerList.get(lower).getResources();
-                ArrayList < Resources > test3 = playerList.get(higher).getResources();
+                int lower = currentPlayer-1;
+                if (lower < 0) 
+                {
+                	lower = 2;
+                }
+                int higher = currentPlayer+1;
+                if (higher > 2) 
+                {
+                	higher = 0;
+                }
+                out.println(currentPlayer);
+                out.println(lower);
+                out.println(higher);
+                ArrayList<Resources> test2 = playerList.get(lower).getResources();
+                ArrayList<Resources> test3 = playerList.get(higher).getResources();
                 if (!test2.contains(r) || !test3.contains(r))
                 {
                     return false;
@@ -567,6 +593,7 @@ public class Board
             }
         }
     }
+    
     public void trade(Player p1, Resources r)
     {
         p1.addToResources(r);

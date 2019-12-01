@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
 public class PlayerFrame extends JFrame implements MouseListener
 {
 	public static final int LENGTH = 1600;
@@ -33,12 +34,7 @@ public class PlayerFrame extends JFrame implements MouseListener
         setVisible(true);
         setBounds(150,25,LENGTH,HEIGHT);
         addMouseListener(this);
-        
         this.players = board.getPlayerList();
-//       if (newBoard)
-//       {
-//      	 setBoard(new Board());
-//       }
 	}
 	public void setBoard(Board board2) throws IOException 
 	{
@@ -47,41 +43,70 @@ public class PlayerFrame extends JFrame implements MouseListener
 	
 	public void paint(Graphics g)
 	{
-		try
+		if (!board.gameFinished())
 		{
-			BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
-			BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\" + board.getCurrentPlayer().getWonder().getName()+ ".png"));
-			BufferedImage currentage = ImageIO.read(new File("images\\assets\\age"+board.getCurrentAge()+".png"));
-			
-//			JLabel warminuspoints = new JLabel();
-//			warminuspoints.setText(""+board.getCurrentPlayer().getWarMinusPoints());
-//			warminuspoints.setForeground(Color.black);
-
-			ArrayList<Player> players = board.getPlayerList();
-			
-			
-			g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
-			g.drawImage(sampleWonder, 250, 250, 1100, 342, null);
-			g.drawImage(currentage, 750, 100, 100, 100, null);
-//			super.add(warminuspoints);
-//			warminuspoints.setBounds(900, 100, 200, 100);
-
-			//War minus points
-			
-			//Derek's space. Click to open new window
-			BufferedImage clicktoshowcards = ImageIO.read(new File("images\\assets\\card.png"));
-			g.drawImage(clicktoshowcards, 1025, 100, 100, 100, null);
-			g.setColor(new Color(0, 102, 225));
-			g.drawRect(1025, 100, 100, 100); //Area to click; shows cards that player has played
-			
-			paintCards(g);
+			try
+			{
+				BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
+				BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\" + board.getCurrentPlayer().getWonder().getName()+ ".png"));
+				BufferedImage currentage = ImageIO.read(new File("images\\assets\\age"+board.getCurrentAge()+".png"));
+				
+	//			JLabel warminuspoints = new JLabel();
+	//			warminuspoints.setText(""+board.getCurrentPlayer().getWarMinusPoints());
+	//			warminuspoints.setForeground(Color.black);
+	
+				ArrayList<Player> players = board.getPlayerList();
+				
+				
+				g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
+				g.drawImage(sampleWonder, 250, 250, 1100, 342, null);
+				g.drawImage(currentage, 750, 100, 100, 100, null);
+				g.setFont(new Font("Arial", Font.PLAIN, 10)); 
+				g.drawString("WarMinusPoints", 125, 300);
+				g.drawString(""+board.getCurrentPlayer().getWarMinusPoints(), 160, 315);
+				g.drawString("WarPlusPoints", 125, 475);
+				g.drawString(""+board.getCurrentPlayer().getWarPlusPoints(), 160, 490);
+				g.drawString("Coins", 1425, 300);
+				g.drawString(""+board.getCurrentPlayer().getMoney(), 1435, 315);
+				paintCards(g);
+				
+				//check temp card storage 
+				boolean update = true;
+				for (int i = 0; i < players.size(); i++)
+				{
+					if (players.get(i).getTempPlayedCard() == null)
+						update = false;
+				}
+				
+				if (update)
+				{
+					for (int i = 0; i < players.size(); i++)
+					{
+						Player p = players.get(i);
+						p.addToPlayedCards(p.getTempPlayedCard());
+						board.decodeEffect(p.getTempPlayedCard(), p);
+						p.setTempPlayedCard(null);
+					}
+				}
+				
+	//			super.add(warminuspoints);
+	//			warminuspoints.setBounds(900, 100, 200, 100);
+	
+				//War minus points
+				
+				//Derek's space. Click to open new window
+				BufferedImage clicktoshowcards = ImageIO.read(new File("images\\assets\\card.png"));
+				g.drawImage(clicktoshowcards, 1025, 100, 100, 100, null);
+				g.setColor(new Color(0, 102, 225));
+				g.drawRect(1025, 100, 100, 100); //Area to click; shows cards that player has played
+				
+			}
+			catch (IOException e)
+			{
+				out.println(e);
+				out.println(board.getCurrentPlayer().getWonder().getName());
+			}
 		}
-		catch (IOException e)
-		{
-			out.println(e);
-			out.println(board.getCurrentPlayer().getWonder().getName());
-		}
-		
 		g.setColor(Color.black);
 		g.drawRect(50, 50, 100, 100); //Show previous player's wonder
 		g.drawRect(1450, 50, 100, 100); //Show next player's wonder
@@ -101,13 +126,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 		g.drawRect(475, 100, 100, 100); //current rotation
 		g.drawRect(750, 100, 100, 100); //current age
 		
-		g.setFont(new Font("Arial", Font.PLAIN, 10)); 
-		g.drawString("WarMinusPoints", 125, 300);
-		g.drawString(""+board.getCurrentPlayer().getWarMinusPoints(), 160, 315);
-		g.drawString("WarPlusPoints", 125, 475);
-		g.drawString(""+board.getCurrentPlayer().getWarPlusPoints(), 160, 490);
-		g.drawString("Coins", 1425, 300);
-		g.drawString(""+board.getCurrentPlayer().getMoney(), 1435, 315);
+		
 	}
 	
 	public void paintCards(Graphics g) //100, 675, 1400, 300
@@ -130,24 +149,36 @@ public class PlayerFrame extends JFrame implements MouseListener
 		}
 		
 	}
-	public void mouseClicked(MouseEvent arg0) 
+	public void mouseClicked(MouseEvent e) 
 	{
-		if(arg0.getX()<1125 && arg0.getY()<200 && arg0.getX()>1025 && arg0.getY()>100)
+		Player player = board.getCurrentPlayer();
+		if(e.getX()<1125 && e.getY()<200 && e.getX()>1025 && e.getY()>100)
 		{
 			out.println("Pressed!");
-			try 
+			cardWindow cards = new cardWindow(player);
+		}
+		//g.drawImage(sampleCard, 100 + (i * 195), 675, 185, 281, null);
+		if (e.getY()>675 && e.getY()<956)
+		{
+			if (e.getX()>100 && e.getX()<285)
 			{
-				derekPaintCards();
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
+				Card temp = player.getHand().get(0);
+				if (board.playable(temp))
+				{
+					player.play(temp);
+					out.println(player.getTempPlayedCard().getName());
+					out.println(player.getMoney());
+					out.println(player.getResources());
+				}
+				out.println("cost:" + temp.getCost());
 			}
 		}
+		repaint();
 	}
+	/*
 	public void derekPaintCards() throws IOException 
 	{
-		int turn = board.getCurrentTurn()+1;
+		int turn = board.getCurrentTurn();
 		JFrame playercards = new JFrame("Player "+turn+"'s Cards");
 		playercards.setVisible(true);
 		playercards.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -181,6 +212,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 			length+=card.getWidth();
 		}
 	}
+	*/
 	public void mouseEntered(MouseEvent arg0) 
 	{
 		
