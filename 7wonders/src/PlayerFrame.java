@@ -85,7 +85,9 @@ public class PlayerFrame extends JFrame implements MouseListener
 						Player p = players.get(i);
 						p.addToPlayedCards(p.getTempPlayedCard());
 						board.decodeEffect(p.getTempPlayedCard(), p);
+						//must also pay card cost
 						p.setTempPlayedCard(null);
+						
 					}
 				}
 				
@@ -169,6 +171,8 @@ public class PlayerFrame extends JFrame implements MouseListener
 					out.println(player.getTempPlayedCard().getName());
 					out.println(player.getMoney());
 					out.println(player.getResources());
+					board.incrementLocation();
+					out.println(board.getCurrentPlayer().getIndex());
 				}
 				out.println("cost:" + temp.getCost());
 			}

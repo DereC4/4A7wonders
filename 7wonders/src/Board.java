@@ -443,7 +443,7 @@ public class Board
         }
     }
     
-    public int incrementLocation()
+    public void incrementLocation()
     {
         int l = currentPlayer;
         if (onWards)
@@ -454,6 +454,7 @@ public class Board
         {
             l--;
         }
+        
         if (l == 3)
         {
             l = 0;
@@ -462,7 +463,7 @@ public class Board
         {
             l = 2;
         }
-        return l;
+        currentPlayer = l;
     }
     public boolean playable(Card c)
     {
