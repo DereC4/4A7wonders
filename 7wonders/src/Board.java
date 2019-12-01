@@ -8,11 +8,12 @@ public class Board
     private int currentAge;
     private boolean onWards; // direction
     private int currentPlayer;
-    private ArrayList < Player > playerList;
+    private ArrayList <Player> playerList;
     private Deck deck;
-    private int Age1CardQuantity;
+	private int Age1CardQuantity;
     private int Age2CardQuantity;
     private int Age3CardQuantity;
+    
     public Board() throws IOException
     {
     	deck = new Deck();
@@ -661,4 +662,12 @@ public class Board
     {
         Age3CardQuantity = age3CardQuantity;
     }
+    public Deck getDeck() 
+    {
+		return deck;
+	}
+	public void setDeck(Deck deck) 
+	{
+		this.deck = deck;
+	}
 }

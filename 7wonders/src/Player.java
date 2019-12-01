@@ -11,7 +11,7 @@ public class Player
 	private Wonder wonder;
 	private ArrayList<Resources> resources;
 	private Card tempPlayedCard;
-
+	private boolean burnCard;
 	
 	public Player(int index) 
 	{
@@ -44,6 +44,12 @@ public class Player
 	{
 		setTempPlayedCard(c);
 		getHand().remove(c);
+	}
+	public boolean isBurnCard() {
+		return burnCard;
+	}
+	public void setBurnCard(boolean burnCard) {
+		this.burnCard = burnCard;
 	}
 	public Card getTempPlayedCard() {
 		return tempPlayedCard;

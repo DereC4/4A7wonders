@@ -84,7 +84,16 @@ public class PlayerFrame extends JFrame implements MouseListener
 					{
 						Player p = players.get(i);
 						//p.addToPlayedCards(p.getTempPlayedCard());
-						board.decodeEffect(p.getTempPlayedCard(), p);
+						if (p.isBurnCard())
+						{
+							Card temp = p.getTempPlayedCard();
+							board.getDeck().getDiscard().add(temp);
+							p.setMoney(p.getMoney() + 3);
+						}
+						else 
+						{
+							board.decodeEffect(p.getTempPlayedCard(), p);
+						}
 						//must also pay card cost
 						p.setTempPlayedCard(null);
 						
@@ -160,6 +169,15 @@ public class PlayerFrame extends JFrame implements MouseListener
 			cardWindow cards = new cardWindow(player);
 		}
 		//g.drawImage(sampleCard, 100 + (i * 195), 675, 185, 281, null);
+		//g.drawRect(1375, 425, 125, 125); //button to burn cards
+		if (e.getX()>1375 && e.getX()<1500 && e.getY()>425 && e.getY()<550)
+		{
+			if (player.isBurnCard())
+				player.setBurnCard(false);
+			else
+				player.setBurnCard(true);
+		}
+		
 		if (e.getY()>675 && e.getY()<956)
 		{
 			Card temp;
@@ -180,7 +198,12 @@ public class PlayerFrame extends JFrame implements MouseListener
 			else
 				temp = null;
 			
-			if (board.playable(temp))
+			if (player.isBurnCard())
+			{
+				player.play(temp);
+				board.incrementLocation();
+			}
+			else if (board.playable(temp))
 			{
 				player.play(temp);
 				board.incrementLocation();

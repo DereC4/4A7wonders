@@ -16,6 +16,7 @@ public class Deck
     	ageOne = new ArrayList<Card>();
     	ageTwo = new ArrayList<Card>();
     	ageThree = new ArrayList<Card>();
+    	discard = new ArrayList<Card>();
     	readInCards(new File("cards.txt"));
     	shuffle(1);
     	shuffle(2);
