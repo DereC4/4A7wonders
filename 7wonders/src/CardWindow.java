@@ -10,6 +10,7 @@ import java.util.TreeMap;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+@SuppressWarnings("serial")
 public class CardWindow extends JFrame
 {
 	private TreeMap<String, ArrayList<Card>> playedCards;
