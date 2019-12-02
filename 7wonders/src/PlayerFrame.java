@@ -121,11 +121,6 @@ public class PlayerFrame extends JFrame implements MouseListener
 		g.drawRect(50, 50, 100, 100); //Show previous player's wonder
 		g.drawRect(1450, 50, 100, 100); //Show next player's wonder
 		
-		//g.setColor(Color.red); 
-		//g.drawRect(475, 475, 175, 75); //Wonder stage 1
-		//g.drawRect(685, 475, 175, 75); //Wonder stage 2
-		//g.drawRect(895, 475, 175, 75); //Wonder stage 3 
-		
 		g.setColor(Color.black);
 		g.drawRect(100, 675, 1400, 300); //Current player's hand
 		g.drawRect(250, 250, 1100, 342); //Current player's wonder
@@ -135,7 +130,9 @@ public class PlayerFrame extends JFrame implements MouseListener
 		g.drawRect(1375, 425, 125, 125); //button to burn cards
 		g.drawRect(750, 100, 100, 100); //current age
 		g.setColor(Color.red);
-		g.drawRect(325, 500, 200, 100);
+		g.drawRect(325, 510, 280, 85); //Wonder stage 1
+		g.drawRect(655, 510, 280, 85); //Wonder stage 2
+		g.drawRect(980, 510, 280, 85); //Wonder stage 3
 	}
 	
 	public void paintCards(Graphics g) //100, 675, 1400, 300
@@ -174,6 +171,27 @@ public class PlayerFrame extends JFrame implements MouseListener
 				player.setBurnCard(false);
 			else
 				player.setBurnCard(true);
+		}
+		
+		/*
+		g.drawRect(325, 510, 280, 85); //Wonder stage 1
+		g.drawRect(655, 510, 280, 85); //Wonder stage 2
+		g.drawRect(980, 510, 280, 85); //Wonder stage 3
+		*/
+		if (e.getY()>510 && e.getY()<595)
+		{
+			if (e.getX()>325 && e.getX()<605)
+			{
+				
+			}
+			else if (e.getX()>655 && e.getX()<935)
+			{
+				
+			}
+			else if (e.getX()>980 && e.getX()<1260)
+			{
+				
+			}
 		}
 		
 		if (e.getY()>675 && e.getY()<956)
