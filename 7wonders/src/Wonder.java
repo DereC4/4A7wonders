@@ -45,7 +45,7 @@ public class Wonder
         {
             name = "olympia";
             currentStage = 0;
-            product = new Resources("Timber");
+            product = new Resources("Wood");
         }
     }
     public static final String[] WONDERS = {
