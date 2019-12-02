@@ -162,7 +162,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 		if(e.getX()<1125 && e.getY()<200 && e.getX()>1025 && e.getY()>100)
 		{
 //			out.println("Pressed!");
-			cardWindow cards = new cardWindow(player);
+			CardWindow cards = new CardWindow(player);
 		}
 		//g.drawImage(sampleCard, 100 + (i * 195), 675, 185, 281, null);
 		//g.drawRect(1375, 425, 125, 125); //button to burn cards

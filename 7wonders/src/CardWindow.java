@@ -9,13 +9,13 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import static java.lang.System.out;
 
-public class cardWindow extends JFrame
+public class CardWindow extends JFrame
 {
 	private TreeMap<String, ArrayList<Card>> playedCards;
 	public static final int LENGTH = 1600;
     public static final int HEIGHT = 1000;
 	
-	public cardWindow(Player p)
+	public CardWindow(Player p)
 	{
 		super("Player " + incrementIndex(p.getIndex()) + "'s Cards");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
