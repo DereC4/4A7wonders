@@ -182,7 +182,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 		{
 			if (e.getX()>325 && e.getX()<605)
 			{
-				
+				 
 			}
 			else if (e.getX()>655 && e.getX()<935)
 			{
