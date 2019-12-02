@@ -1,3 +1,5 @@
+import static java.lang.System.out;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -7,7 +9,6 @@ import java.util.TreeMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import static java.lang.System.out;
 
 public class CardWindow extends JFrame
 {
