@@ -64,6 +64,9 @@ public class PlayerFrame extends JFrame implements MouseListener
 				g.drawString(""+board.getCurrentPlayer().getWarPlusPoints(), 160, 490);
 				g.drawString("Coins", 1425, 300);
 				g.drawString(""+board.getCurrentPlayer().getMoney(), 1435, 315);
+				//250, 250, 1100, 342
+				g.setFont(new Font("Arial", Font.PLAIN, 50));
+				g.drawString("Player " + board.getCurrentPlayer().getIndex(), 350, 175);
 				paintCards(g);
 				
 				//check temp card storage 
@@ -130,10 +133,9 @@ public class PlayerFrame extends JFrame implements MouseListener
 		g.drawRect(100, 425, 125, 125); //war plus points
 		g.drawRect(1375, 250, 125, 125); //coins
 		g.drawRect(1375, 425, 125, 125); //button to burn cards
-		g.drawRect(475, 100, 100, 100); //current rotation
 		g.drawRect(750, 100, 100, 100); //current age
-		
-		
+		g.setColor(Color.red);
+		g.drawRect(325, 500, 200, 100);
 	}
 	
 	public void paintCards(Graphics g) //100, 675, 1400, 300
@@ -207,44 +209,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 		}
 		repaint();
 	}
-	/*
-	public void derekPaintCards() throws IOException 
-	{
-		int turn = board.getCurrentTurn();
-		JFrame playercards = new JFrame("Player "+turn+"'s Cards");
-		playercards.setVisible(true);
-		playercards.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        playercards.setResizable(false);
-        playercards.setBounds(150,25,LENGTH,HEIGHT);
-        
-//		JLabel background = new JLabel(new ImageIcon(ImageIO.read(new File("images\\background.jpg"))));
-//		background.setBounds(0, 0, LENGTH, HEIGHT);
-//		playercards.add(background);
-		
-//			out.println("test");
-		ArrayList <Card> cards = board.getCurrentPlayer().getHand();
-		
-		int length = 25;
-		int row = 50;
-		
-		for (int i = 0; i < cards.size(); i++)
-		{
-			JLabel card = new JLabel(new ImageIcon(ImageIO.read(new File("images\\cards\\" + cards.get(i).getName().toLowerCase() + ".png"))));
-			if(length>=playercards.getWidth())
-			{
-				length = 25;
-				row += 275;
-				card.setBounds(new Rectangle(new Point(length, row), card.getPreferredSize()));
-			}
-			else
-				card.setBounds(new Rectangle(new Point(length, row), card.getPreferredSize()));
-			playercards.add(card);
-//			out.println(card.getWidth() +"\n"+card.getHeight());
-//			180 275
-			length+=card.getWidth();
-		}
-	}
-	*/
+	
 	public void mouseEntered(MouseEvent arg0) 
 	{
 		
