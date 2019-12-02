@@ -1,31 +1,35 @@
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.TreeMap;
+
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import java.util.TreeMap;
-import java.util.ArrayList;
+import static java.lang.System.out;
 
 public class cardWindow extends JFrame
 {
-	private TreeMap<String, ArrayList<Card>> played;
+	private TreeMap<String, ArrayList<Card>> playedCards;
 	public static final int LENGTH = 1600;
     public static final int HEIGHT = 1000;
 	
 	public cardWindow(Player p)
 	{
-		super("player " + p.getIndex() + "'s cards");
+		super("Player " + incrementIndex(p.getIndex()) + "'s Cards");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
         setLayout(null);
         setVisible(true);
         setBounds(150,25,LENGTH,HEIGHT);
-        played = p.getPlayedCards();
+        playedCards = p.getPlayedCards();
+//        out.println(playedCards);
 	}
-	
+	public static int incrementIndex(int i)
+	{
+		return ++i;
+	}
 	public void paint(Graphics g)
 	{
 		try
@@ -41,9 +45,9 @@ public class cardWindow extends JFrame
 			int numRed = 0;
 			int numPurple = 0;
 			
-			for (String color : played.keySet())
+			for (String color : playedCards.keySet())
 			{
-				for (Card card : played.get(color))
+				for (Card card : playedCards.get(color))
 				{
 					sampleCard = ImageIO.read(new File("images\\cards\\" + card.getName().toLowerCase() + ".png"));
 					if (color.equalsIgnoreCase("Brown"))

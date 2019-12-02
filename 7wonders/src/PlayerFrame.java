@@ -3,8 +3,6 @@ import static java.lang.System.out;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -13,9 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 public class PlayerFrame extends JFrame implements MouseListener
 {
@@ -165,7 +161,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 		Player player = board.getCurrentPlayer();
 		if(e.getX()<1125 && e.getY()<200 && e.getX()>1025 && e.getY()>100)
 		{
-			out.println("Pressed!");
+//			out.println("Pressed!");
 			cardWindow cards = new cardWindow(player);
 		}
 		//g.drawImage(sampleCard, 100 + (i * 195), 675, 185, 281, null);
