@@ -155,6 +155,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 		}
 		
 	}
+	@SuppressWarnings("unused")
 	public void mouseClicked(MouseEvent e) 
 	{
 		Player player = board.getCurrentPlayer();
