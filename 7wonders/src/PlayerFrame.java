@@ -45,27 +45,29 @@ public class PlayerFrame extends JFrame implements MouseListener
 				BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
 				BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\" + board.getCurrentPlayer().getWonder().getName()+ ".png"));
 				BufferedImage currentage = ImageIO.read(new File("images\\assets\\age"+board.getCurrentAge()+".png"));
+				BufferedImage coin = ImageIO.read(new File("images\\assets\\coin.png"));
 				
 	//			JLabel warminuspoints = new JLabel();
 	//			warminuspoints.setText(""+board.getCurrentPlayer().getWarMinusPoints());
 	//			warminuspoints.setForeground(Color.black);
 	
 				ArrayList<Player> players = board.getPlayerList();
-				
-				
+			
 				g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
 				g.drawImage(sampleWonder, 250, 250, 1100, 342, null);
 				g.drawImage(currentage, 750, 100, 100, 100, null);
+				g.drawImage(coin, 1411, 275, 50, 50, null);
+				
 				g.setFont(new Font("Arial", Font.PLAIN, 10)); 
 				g.drawString("WarMinusPoints", 125, 300);
 				g.drawString(""+board.getCurrentPlayer().getWarMinusPoints(), 160, 315);
 				g.drawString("WarPlusPoints", 125, 475);
 				g.drawString(""+board.getCurrentPlayer().getWarPlusPoints(), 160, 490);
-				g.drawString("Coins", 1425, 300);
-				g.drawString(""+board.getCurrentPlayer().getMoney(), 1435, 315);
-				//250, 250, 1100, 342
+				g.drawString("Coins", 1425, 350);
+				g.drawString(""+board.getCurrentPlayer().getMoney(), 1435, 365);
 				g.setFont(new Font("Arial", Font.PLAIN, 50));
 				g.drawString("Player " + board.getCurrentPlayer().getIndex(), 350, 175);
+				
 				paintCards(g);
 				
 				//check temp card storage 
@@ -110,6 +112,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 				//out.println(board.getCurrentPlayer().getWonder().getName());
 			}
 		}
+		
 		g.setColor(Color.black);
 		g.drawRect(50, 50, 100, 100); //Show previous player's wonder
 		g.drawRect(1450, 50, 100, 100); //Show next player's wonder
@@ -118,7 +121,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 		g.drawRect(100, 675, 1400, 300); //Current player's hand
 		g.drawRect(250, 250, 1100, 342); //Current player's wonder
 		g.drawRect(100, 250, 125, 125); //war minus points
-		g.drawRect(100, 425, 125, 125); //war plus points
+		g.drawRect(100, 425, 125, 125); //war plus points	
 		g.drawRect(1375, 250, 125, 125); //coins
 		g.drawRect(1375, 425, 125, 125); //button to burn cards
 		g.drawRect(750, 100, 100, 100); //current age
