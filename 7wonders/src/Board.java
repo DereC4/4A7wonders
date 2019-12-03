@@ -12,6 +12,7 @@ public class Board
     private Deck deck;
 	private int Age1CardQuantity;
     private int Age2CardQuantity;
+    
     private int Age3CardQuantity;
     
     public Board() throws IOException

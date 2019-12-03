@@ -35,6 +35,7 @@ public class Player
 		resources=new ArrayList<Resources>();
 
 		sciList.put("lit", 0); // tablet
+		
 		sciList.put("math", 0); // weird triangle
 		sciList.put("gear", 0); // engineer
 

@@ -24,6 +24,7 @@ public class Resources
     }
     @Override
     public boolean equals(Object obj)
+    
     {
     	Resources r = (Resources) obj;
     	if (getResource().equals(r.getResource()))

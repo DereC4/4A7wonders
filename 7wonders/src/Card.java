@@ -10,6 +10,7 @@ public class Card implements Comparable
     private String type; //also color
     private String effect;
     
+    
     public Card()
     {
         this("", "", "", 0, "", "false", "");
