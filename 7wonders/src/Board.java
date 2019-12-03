@@ -505,6 +505,7 @@ public class Board
         //Resource check
         ArrayList<Resources> tempResources = playerList.get(currentPlayer).getResources(); //Player's resources
         ArrayList<Resources> cost = c.getCost(); //card cost
+        //ArrayList<Resources> costRemove=cost;
         ArrayList<Resources> resources = new ArrayList<Resources>();
         
         for (int i = 0; i < tempResources.size(); i++)
@@ -513,16 +514,22 @@ public class Board
         
         for (int i = cost.size()-1; i >= 0; i--)
         {
-        	if (resources.remove(cost.get(i)))
-        		cost.remove(i);
+        	for (int j = resources.size()-1; j >= 0; j--)
+        		if (resources.get(j).toString().equals(cost.get(i).toString())) {
+        			cost.remove(i);
+        			resources.remove(j);
+        		}
         }
-	
+        //System.out.println(cost);
+        //System.out.println(resources);
+        
         if (cost.size()==0)
         {
         	return true;
         }
         else
         {
+        	TreeMap<Integer, ArrayList<Resources>> trade = getCurrentPlayer().getTrade();
         	int costLeft = 0;
         	int costRight = 0;
         	for (Resources r : cost)
@@ -539,6 +546,8 @@ public class Board
 	            }
 	            ArrayList<Resources> leftResources = playerList.get(lower).getResources();
 	            ArrayList<Resources> rightResources = playerList.get(higher).getResources();
+	            //System.out.println("Left: " + leftResources);
+	            //System.out.println("Right " + rightResources);
 	            
 	           
 	            if (!leftResources.contains(r) && !rightResources.contains(r))
@@ -552,17 +561,69 @@ public class Board
     	            int tempCostRight = determineCost(r, true, currentPlayer);
     	            
                 	if (tempCostLeft <= tempCostRight)
+                	{
                 		costLeft += tempCostLeft;
+                		if (trade.get(lower) == null)
+                		{
+                			ArrayList<Resources> tempList = new ArrayList<>();
+                			tempList.add(r);
+                			trade.put(lower, tempList);
+                		}
+                		else
+                		{
+                			ArrayList<Resources> tempList = trade.get(lower);
+                			tempList.add(r);
+                			trade.put(lower, tempList);
+                		}
+                	}
                 	else
+                	{
                 		costRight += tempCostRight;
+                		if (trade.get(higher) == null)
+                		{
+                			ArrayList<Resources> tempList = new ArrayList<>();
+                			tempList.add(r);
+                			trade.put(higher, tempList);
+                		}
+                		else
+                		{
+                			ArrayList<Resources> tempList = trade.get(higher);
+                			tempList.add(r);
+                			trade.put(higher, tempList);
+                		}
+                	}
                 }
                 else if (leftResources.contains(r))
                 {
                     costLeft += determineCost(r, false, currentPlayer);
+                    if (trade.get(lower) == null)
+            		{
+            			ArrayList<Resources> tempList = new ArrayList<>();
+            			tempList.add(r);
+            			trade.put(lower, tempList);
+            		}
+            		else
+            		{
+            			ArrayList<Resources> tempList = trade.get(lower);
+            			tempList.add(r);
+            			trade.put(lower, tempList);
+            		}
                 }
                 else
                 {
                 	costRight += determineCost(r, true, currentPlayer);
+                	if (trade.get(higher) == null)
+            		{
+            			ArrayList<Resources> tempList = new ArrayList<>();
+            			tempList.add(r);
+            			trade.put(higher, tempList);
+            		}
+            		else
+            		{
+            			ArrayList<Resources> tempList = trade.get(higher);
+            			tempList.add(r);
+            			trade.put(higher, tempList);
+            		}
                 }
         	}
         	
@@ -570,11 +631,10 @@ public class Board
 	        {
 	            return true;
 	        }
-	        out.println("Some other error");
+	        out.println("Don't have enough money");
 	        return false;
         }
     }
-    
     public int determineCost(Resources r, boolean isRight, int index)
     {
         Player p = playerList.get(index);
@@ -633,7 +693,37 @@ public class Board
     
     public void trade(Player p1, Resources r)
     {
+    	int index = currentPlayer;
+    	int temp = p1.getIndex();
+    	boolean isRight;
+    	
+    	if (index == 0) 
+    	{
+    		if (temp == 1)
+    			isRight = true;
+    		else
+    			isRight = false;
+    	}
+    	else if (index == 1)
+    	{
+    		if (temp == 2)
+    			isRight = true;
+    		else
+    			isRight = false;
+    	}
+    	else
+    	{
+    		if (temp == 0)
+    			isRight = true;
+    		else 
+    			isRight = false;
+    	}
+    	int cost = determineCost(r, isRight, currentPlayer);
+    	
+    	getCurrentPlayer().setMoney(getCurrentPlayer().getMoney() - cost);
+    	p1.setMoney(p1.getMoney() + cost);
         p1.addToResources(r);
+        
     }
     
     public int getCurrentAge()

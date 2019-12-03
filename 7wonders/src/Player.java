@@ -12,6 +12,7 @@ public class Player
 	private ArrayList<Resources> resources;
 	private Card tempPlayedCard;
 	private boolean burnCard;
+	private TreeMap<Integer, ArrayList<Resources>> trade; //Player index, resources
 	
 	public Player(int index) 
 	{
@@ -22,6 +23,7 @@ public class Player
 		armies = 0;
 		reducedList = new TreeMap<String, Boolean>();
 		this.index=index;
+		trade = new TreeMap<Integer, ArrayList<Resources>>();
 
 		reducedList.put("leftR", false); // left Resource
 		reducedList.put("leftC", false); // left Commodities
@@ -44,6 +46,13 @@ public class Player
 	{
 		setTempPlayedCard(c);
 		getHand().remove(c);
+	}
+	public TreeMap<Integer, ArrayList<Resources>> getTrade() {
+		return trade;
+	}
+
+	public void setTrade(TreeMap<Integer, ArrayList<Resources>> trade) {
+		this.trade = trade;
 	}
 	public boolean isBurnCard() {
 		return burnCard;

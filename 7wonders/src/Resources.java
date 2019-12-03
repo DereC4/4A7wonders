@@ -22,4 +22,12 @@ public class Resources
     {
     	return getResource();
     }
+    @Override
+    public boolean equals(Object obj)
+    {
+    	Resources r = (Resources) obj;
+    	if (getResource().equals(r.getResource()))
+    		return true;
+    	return false;
+    }
 }
