@@ -18,7 +18,6 @@ public class PlayerFrame extends JFrame implements MouseListener
 	public static final int LENGTH = 1600;
     public static final int HEIGHT = 1000;
     private static Board board;
-    private ArrayList<Player> players;
 
 	public PlayerFrame() throws IOException
 	{
@@ -30,7 +29,6 @@ public class PlayerFrame extends JFrame implements MouseListener
         setVisible(true);
         setBounds(150,25,LENGTH,HEIGHT);
         addMouseListener(this);
-        this.players = board.getPlayerList();
 	}
 	public void setBoard(Board board2) throws IOException 
 	{
