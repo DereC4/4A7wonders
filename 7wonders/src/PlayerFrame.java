@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
 public class PlayerFrame extends JFrame implements MouseListener
@@ -46,7 +47,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 				BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\" + board.getCurrentPlayer().getWonder().getName()+ ".png"));
 				BufferedImage currentage = ImageIO.read(new File("images\\assets\\age"+board.getCurrentAge()+".png"));
 				BufferedImage coin = ImageIO.read(new File("images\\assets\\coin.png"));
-				
+
 	//			JLabel warminuspoints = new JLabel();
 	//			warminuspoints.setText(""+board.getCurrentPlayer().getWarMinusPoints());
 	//			warminuspoints.setForeground(Color.black);
@@ -165,6 +166,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 		//g.drawRect(1375, 425, 125, 125); //button to burn cards
 		if (event.getX()>1375 && event.getX()<1500 && event.getY()>425 && event.getY()<550)
 		{
+			
 			if (player.isBurnCard())
 				player.setBurnCard(false);
 			else
@@ -242,7 +244,6 @@ public class PlayerFrame extends JFrame implements MouseListener
 	public void mousePressed(MouseEvent arg0) 
 	{
 		//out.println(arg0.getX() + " " + arg0.getY());
-		
 	}
 	public void mouseReleased(MouseEvent arg0) 
 	{
