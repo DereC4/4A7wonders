@@ -498,49 +498,54 @@ public class Board
         }
         
         ArrayList<Resources> resources = playerList.get(currentPlayer).getResources();
-        int costleft = 0;
-        int costright = 0;
-        for (Resources r : c.getCost())
-        {
-        	if (r.toString().equalsIgnoreCase("C 1"))
-        		continue;
-        	
-            if (!resources.contains(r))
-            {
-                int lower = currentPlayer-1;
-                if (lower < 0) 
-                {
-                	lower = 2;
-                }
-                int higher = currentPlayer+1;
-                if (higher > 2) 
-                {
-                	higher = 0;
-                }
-                out.println(currentPlayer);
-                out.println(lower);
-                out.println(higher);
-                ArrayList<Resources> test2 = playerList.get(lower).getResources();
-                ArrayList<Resources> test3 = playerList.get(higher).getResources();
-                if (!test2.contains(r) || !test3.contains(r))
-                {
-                    return false;
-                }
-                else if (test2.contains(r))
-                {
-                    costleft += determineCost(r, false, currentPlayer);
-                }
-                else if (test2.contains(r))
-                {
-                    costleft += determineCost(r, true, currentPlayer);
-                }
-            }
+	ArrayList<Resources>cost=c.getCost();
+	boolean b=true;
+	for (int i=0;i<cost.size();i++){
+		b=resources.remove(cost.get(i));
+		if (b){
+			cost.remove(i);
+			i--;
+		}
+	}
+	if (cost.size()==0)
+		return true;
+	else{
+        	int costleft = 0;
+        	int costright = 0;
+        	for (Resources r : cost)
+		{
+			if (!resources.contains(r))
+            		{
+                		int lower = currentPlayer-1;
+                		if (lower < 0) 
+                		{
+                			lower = 2;
+                		}
+                		int higher = currentPlayer+1;
+                		if (higher > 2) 
+                		{
+                			higher = 0;
+                		}
+                	ArrayList<Resources> test2 = playerList.get(lower).getResources();
+                	ArrayList<Resources> test3 = playerList.get(higher).getResources();
+                	if (!test2.contains(r) && !test3.contains(r))
+                	{
+                    		return false;
+                	}
+                	else if (test2.contains(r))
+                	{
+                    		costleft += determineCost(r, false, currentPlayer);
+                	}
+                	else if (test2.contains(r))
+                	{
+                    		costleft += determineCost(r, true, currentPlayer);
+                	}
+            	}
         }
         if (playerList.get(currentPlayer).getMoney() < costleft + costright)
         {
             return false;
         }
-        return true;
     }
     public int determineCost(Resources r, boolean isRight, int ci)
     {
