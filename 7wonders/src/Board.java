@@ -471,11 +471,18 @@ public class Board
     		return false;
     	
     	TreeMap <String, ArrayList<Card>> played = playerList.get(currentPlayer).getPlayedCards();
-        if (played.containsValue(c)) //has card been played
+    	
+        for (String key : played.keySet())
         {
-            return false;
+        	ArrayList<Card> temp = played.get(key);
+        	if (temp.contains(c))
+        	{
+        		out.println("Card of same name has been played");
+        		return false; //has card been played
+        	}
         }
-        else if (c.isFree()) //is card free
+        
+        if (c.isFree()) //is card free
         {
             return true;
         }
@@ -485,9 +492,7 @@ public class Board
             for (Card i: played.get(s))
             {
                 if (i.getName().equals(c.getChain()))
-                {
                     return true;
-                }
             }
         }
         
@@ -497,63 +502,86 @@ public class Board
         		return true;
         }
         
-        ArrayList<Resources> resources = playerList.get(currentPlayer).getResources();
-	ArrayList<Resources>cost=c.getCost();
-	boolean b=true;
-	for (int i=0;i<cost.size();i++){
-		b=resources.remove(cost.get(i));
-		if (b){
-			cost.remove(i);
-			i--;
-		}
-	}
-	if (cost.size()==0)
-		return true;
-	else{
-        	int costleft = 0;
-        	int costright = 0;
-        	for (Resources r : cost)
-		{
-			if (!resources.contains(r))
-            		{
-                		int lower = currentPlayer-1;
-                		if (lower < 0) 
-                		{
-                			lower = 2;
-                		}
-                		int higher = currentPlayer+1;
-                		if (higher > 2) 
-                		{
-                			higher = 0;
-                		}
-                	ArrayList<Resources> test2 = playerList.get(lower).getResources();
-                	ArrayList<Resources> test3 = playerList.get(higher).getResources();
-                	if (!test2.contains(r) && !test3.contains(r))
-                	{
-                    		return false;
-                	}
-                	else if (test2.contains(r))
-                	{
-                    		costleft += determineCost(r, false, currentPlayer);
-                	}
-                	else if (test2.contains(r))
-                	{
-                    		costleft += determineCost(r, true, currentPlayer);
-                	}
-            	}
-        }
-        if (playerList.get(currentPlayer).getMoney() < costleft + costright)
+        //Resource check
+        ArrayList<Resources> tempResources = playerList.get(currentPlayer).getResources(); //Player's resources
+        ArrayList<Resources> cost = c.getCost(); //card cost
+        ArrayList<Resources> resources = new ArrayList<Resources>();
+        
+        for (int i = 0; i < tempResources.size(); i++)
+        	resources.add(tempResources.get(i));
+        tempResources = null;
+        
+        for (int i = cost.size()-1; i >= 0; i--)
         {
-            return false;
+        	if (resources.remove(cost.get(i)))
+        		cost.remove(i);
+        }
+	
+        if (cost.size()==0)
+        {
+        	return true;
+        }
+        else
+        {
+        	int costLeft = 0;
+        	int costRight = 0;
+        	for (Resources r : cost)
+        	{
+				int lower = currentPlayer-1;
+	            if (lower < 0) 
+	            {
+	                lower = 2;
+	            }
+	            int higher = currentPlayer+1;
+	            if (higher > 2) 
+	            {
+	                higher = 0;
+	            }
+	            ArrayList<Resources> leftResources = playerList.get(lower).getResources();
+	            ArrayList<Resources> rightResources = playerList.get(higher).getResources();
+	            
+	           
+	            if (!leftResources.contains(r) && !rightResources.contains(r))
+                {
+	            	out.println("Don't have resources");
+                    return false;
+                }
+                else if (leftResources.contains(r) && rightResources.contains(r))
+                {
+                	int tempCostLeft = determineCost(r, false, currentPlayer);
+    	            int tempCostRight = determineCost(r, true, currentPlayer);
+    	            
+                	if (tempCostLeft <= tempCostRight)
+                		costLeft += tempCostLeft;
+                	else
+                		costRight += tempCostRight;
+                }
+                else if (leftResources.contains(r))
+                {
+                    costLeft += determineCost(r, false, currentPlayer);
+                }
+                else
+                {
+                	costRight += determineCost(r, true, currentPlayer);
+                }
+        	}
+        	
+	        if (playerList.get(currentPlayer).getMoney() > costLeft + costRight)
+	        {
+	            return true;
+	        }
+	        out.println("Some other error");
+	        return false;
         }
     }
-    public int determineCost(Resources r, boolean isRight, int ci)
+    
+    public int determineCost(Resources r, boolean isRight, int index)
     {
-        Player p = playerList.get(ci);
+        Player p = playerList.get(index);
         // returns coin cost for a resource
         if (isRight)
         {
-            if (r.isR())
+            if (r.isR()) //if is resource
             {
                 if (p.getReducedList().get("rightR"))
                 {
@@ -607,6 +635,7 @@ public class Board
     {
         p1.addToResources(r);
     }
+    
     public int getCurrentAge()
     {
         return currentAge;

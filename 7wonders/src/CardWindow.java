@@ -93,7 +93,7 @@ public class CardWindow extends JFrame
 		}
 		catch (IOException e)
 		{
-			out.println(e);
+			//out.println(e);
 		}
 	}
 	

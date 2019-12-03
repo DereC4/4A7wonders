@@ -113,8 +113,8 @@ public class PlayerFrame extends JFrame implements MouseListener
 			}
 			catch (IOException e)
 			{
-				out.println(e);
-				out.println(board.getCurrentPlayer().getWonder().getName());
+				//out.println(e);
+				//out.println(board.getCurrentPlayer().getWonder().getName());
 			}
 		}
 		g.setColor(Color.black);
@@ -155,6 +155,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 		}
 		
 	}
+	
 	@SuppressWarnings("unused")
 	public void mouseClicked(MouseEvent e) 
 	{
@@ -197,33 +198,35 @@ public class PlayerFrame extends JFrame implements MouseListener
 		
 		if (e.getY()>675 && e.getY()<956)
 		{
-			Card temp;
-			if (e.getX()>100 && e.getX()<285)
-				temp = player.getHand().get(0);
-			else if (e.getX()>295 && e.getX()<480)
-				temp = player.getHand().get(1);
-			else if (e.getX()>490 && e.getX()<675)
-				temp = player.getHand().get(2);
-			else if (e.getX()>685 && e.getX()<870)
-				temp = player.getHand().get(3);
-			else if (e.getX()>880 && e.getX()<1065)
-				temp = player.getHand().get(4);
-			else if (e.getX()>1075 && e.getX()<1260)
-				temp = player.getHand().get(5);
-			else if (e.getX()>1270 && e.getX()<1455)
-				temp = player.getHand().get(6);
-			else
-				temp = null;
-			
-			if (player.isBurnCard())
+			try 
 			{
-				player.play(temp);
-				board.incrementLocation();
+				Card temp;
+				if (e.getX()>100 && e.getX()<285)
+					temp = player.getHand().get(0);
+				else if (e.getX()>295 && e.getX()<480)
+					temp = player.getHand().get(1);
+				else if (e.getX()>490 && e.getX()<675)
+					temp = player.getHand().get(2);
+				else if (e.getX()>685 && e.getX()<870)
+					temp = player.getHand().get(3);
+				else if (e.getX()>880 && e.getX()<1065)
+					temp = player.getHand().get(4);
+				else if (e.getX()>1075 && e.getX()<1260)
+					temp = player.getHand().get(5);
+				else if (e.getX()>1270 && e.getX()<1455)
+					temp = player.getHand().get(6);
+				else
+					temp = null;
+				
+				System.out.println("Resources: " + board.getCurrentPlayer().getResources());
+				if (player.isBurnCard() || board.playable(temp))
+				{
+					player.play(temp);
+					board.incrementLocation();
+				}
 			}
-			else if (board.playable(temp))
+			catch (IndexOutOfBoundsException ex)
 			{
-				player.play(temp);
-				board.incrementLocation();
 			}
 		}
 		repaint();
