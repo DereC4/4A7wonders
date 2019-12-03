@@ -1,6 +1,6 @@
 import java.io.IOException;
 
-public class Runner
+public class SevenWondersRunner
 {
 	public static void main(String args[]) throws IOException 
 	{
