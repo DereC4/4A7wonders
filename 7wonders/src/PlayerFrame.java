@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+@SuppressWarnings("serial")
 public class PlayerFrame extends JFrame implements MouseListener
 {
 	public static final int LENGTH = 1600;
