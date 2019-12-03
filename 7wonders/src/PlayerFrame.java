@@ -95,19 +95,13 @@ public class PlayerFrame extends JFrame implements MouseListener
 						p.setTempPlayedCard(null);
 						
 					}
-				}
-				
-	//			super.add(warminuspoints);
-	//			warminuspoints.setBounds(900, 100, 200, 100);
-	
-				//War minus points
-				
+				}	
 				//Derek's space. Click to open new window
 				BufferedImage clicktoshowcards = ImageIO.read(new File("images\\assets\\card.png"));
 				g.drawImage(clicktoshowcards, 1025, 100, 100, 100, null);
 				g.setColor(new Color(0, 102, 225));
-				g.drawRect(1025, 100, 100, 100); //Area to click; shows cards that player has played
-				
+				//Area to click; shows cards that player has played
+				g.drawRect(1025, 100, 100, 100); 
 			}
 			catch (IOException e)
 			{
@@ -138,8 +132,8 @@ public class PlayerFrame extends JFrame implements MouseListener
 		ArrayList<Card> cards = board.getCurrentPlayer().getHand();
 		try
 		{
-			//System.out.println(cards);
-			//System.out.println(cards.get(0).getName().toLowerCase());
+			//out.println(cards);
+			//out.println(cards.get(0).getName().toLowerCase());
 			BufferedImage sampleCard;
 			for (int i = 0; i < cards.size(); i++)
 			{
@@ -149,23 +143,23 @@ public class PlayerFrame extends JFrame implements MouseListener
 		}
 		catch (IOException e)
 		{
-			//System.out.println(e);
+			//out.println(e);
 		}
 		
 	}
 	
 	@SuppressWarnings("unused")
-	public void mouseClicked(MouseEvent e) 
+	public void mouseClicked(MouseEvent event) 
 	{
 		Player player = board.getCurrentPlayer();
-		if(e.getX()<1125 && e.getY()<200 && e.getX()>1025 && e.getY()>100)
+		if(event.getX()<1125 && event.getY()<200 && event.getX()>1025 && event.getY()>100)
 		{
 //			out.println("Pressed!");
 			CardWindow cards = new CardWindow(player);
 		}
 		//g.drawImage(sampleCard, 100 + (i * 195), 675, 185, 281, null);
 		//g.drawRect(1375, 425, 125, 125); //button to burn cards
-		if (e.getX()>1375 && e.getX()<1500 && e.getY()>425 && e.getY()<550)
+		if (event.getX()>1375 && event.getX()<1500 && event.getY()>425 && event.getY()<550)
 		{
 			if (player.isBurnCard())
 				player.setBurnCard(false);
@@ -178,53 +172,56 @@ public class PlayerFrame extends JFrame implements MouseListener
 		g.drawRect(655, 510, 280, 85); //Wonder stage 2
 		g.drawRect(980, 510, 280, 85); //Wonder stage 3
 		*/
-		if (e.getY()>510 && e.getY()<595)
+		if (event.getY()>510 && event.getY()<595)
 		{
-			if (e.getX()>325 && e.getX()<605)
+			if (event.getX()>325 && event.getX()<605)
 			{
 				 
 			}
-			else if (e.getX()>655 && e.getX()<935)
+			else if (event.getX()>655 && event.getX()<935)
 			{
 				
 			}
-			else if (e.getX()>980 && e.getX()<1260)
+			else if (event.getX()>980 && event.getX()<1260)
 			{
 				
 			}
 		}
 		
-		if (e.getY()>675 && e.getY()<956)
+		if (event.getY()>675 && event.getY()<956)
 		{
 			try 
 			{
 				Card temp;
-				if (e.getX()>100 && e.getX()<285)
+				if (event.getX()>100 && event.getX()<285)
 					temp = player.getHand().get(0);
-				else if (e.getX()>295 && e.getX()<480)
+				else if (event.getX()>295 && event.getX()<480)
 					temp = player.getHand().get(1);
-				else if (e.getX()>490 && e.getX()<675)
+				else if (event.getX()>490 && event.getX()<675)
 					temp = player.getHand().get(2);
-				else if (e.getX()>685 && e.getX()<870)
+				else if (event.getX()>685 && event.getX()<870)
 					temp = player.getHand().get(3);
-				else if (e.getX()>880 && e.getX()<1065)
+				else if (event.getX()>880 && event.getX()<1065)
 					temp = player.getHand().get(4);
-				else if (e.getX()>1075 && e.getX()<1260)
+				else if (event.getX()>1075 && event.getX()<1260)
 					temp = player.getHand().get(5);
-				else if (e.getX()>1270 && e.getX()<1455)
+				else if (event.getX()>1270 && event.getX()<1455)
 					temp = player.getHand().get(6);
 				else
 					temp = null;
-				
-				System.out.println("Resources: " + board.getCurrentPlayer().getResources());
+				out.println("Resources: " + board.getCurrentPlayer().getResources());
 				if (player.isBurnCard() || board.playable(temp))
 				{
+					out.println("Cost:" + temp.getCost());
+					if (temp.getCost().get(0).toString().equals("C 1"))
+						board.getCurrentPlayer().setMoney(board.getCurrentPlayer().getMoney()-1);
 					player.play(temp);
 					board.incrementLocation();
 				}
 			}
-			catch (IndexOutOfBoundsException ex)
+			catch (IndexOutOfBoundsException e)
 			{
+				out.println(e);
 			}
 		}
 		repaint();
@@ -240,7 +237,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 	}
 	public void mousePressed(MouseEvent arg0) 
 	{
-		//System.out.println(arg0.getX() + " " + arg0.getY());
+		//out.println(arg0.getX() + " " + arg0.getY());
 		
 	}
 	public void mouseReleased(MouseEvent arg0) 
