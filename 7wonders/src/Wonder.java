@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Wonder
 {
     private String name;
@@ -149,7 +151,45 @@ public class Wonder
         		return "Ore,Ore";
         }
     }
-    
+    public void buildWonder(int stage)
+	{
+		int currentStage = wonder.getCurrentStage();
+		if (currentStage == 3)
+			return;
+		else if (stage <= currentStage)
+			return;
+		
+		ArrayList<Resources> cost = new ArrayList<Resources>();
+		ArrayList<Resources> resources = new ArrayList<Resources>(); //local copy of resources
+		for (Resources r : this.resources)
+			resources.add(r);
+		
+		String temp = wonder.getCost(stage);
+		String[] tempCost = temp.split(",");
+		for (int i = 0; i < tempCost.length; i++)
+			cost.add(new Resources(tempCost[i]));
+			
+		for (int j = resources.size()-1; j >= 0; j--)
+		{
+			for (int i = cost.size()-1; i >= 0; i--)
+			{
+				if (resources.get(j).toString().equals(cost.get(i)))
+				{
+					resources.remove(j);
+					cost.remove(i);
+					break;
+				}
+			}
+		}
+		if (cost.size() == 0)
+		{
+			wonder.setCurrentStage(stage);
+		}
+		else
+		{
+			
+		}
+	}
     public String getName()
     {
         return name;

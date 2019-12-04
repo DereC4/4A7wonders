@@ -651,8 +651,9 @@ public class Board
     	if (p.getTrade().size() == 0)
     	{
     		if (p.getTempPlayedCard().getCost().contains("C 1"))
+    		{
     			p.setMoney(p.getMoney() - 1);
-    		
+    		}
     	}
     	else
     	{
@@ -667,6 +668,7 @@ public class Board
     				trade(p, toTrade, resources.get(i));
     				out.println("Done!");
     			}
+    			resources.clear();
     		}
     	}
     }
