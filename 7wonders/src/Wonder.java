@@ -152,7 +152,7 @@ public class Wonder
         }
     }
     public void buildWonder(int stage)
-	{
+	{ 
 		int currentStage = wonder.getCurrentStage();
 		if (currentStage == 3)
 			return;
