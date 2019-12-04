@@ -634,8 +634,9 @@ public class Board
                 }
         	}
         	
-	        if (playerList.get(currentPlayer).getMoney() > costLeft + costRight)
+	        if (playerList.get(currentPlayer).getMoney() >= costLeft + costRight)
 	        {
+	        	System.out.println("Has Enough Money");
 	            return true;
 	        }
 	        //out.println("Don't have enough money");
@@ -651,6 +652,7 @@ public class Board
     	{
     		if (p.getTempPlayedCard().getCost().contains("C 1"))
     			p.setMoney(p.getMoney() - 1);
+    		
     	}
     	else
     	{
