@@ -54,14 +54,14 @@ public class GameFrame extends PlayerFrame
 	}
 	public static void main(String[] args)
 	{
-		try
-		{
-			GameFrame temp = new GameFrame();
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
+//		try
+//		{
+//			GameFrame temp = new GameFrame();
+//		} 
+//		catch (IOException e) 
+//		{
+//			e.printStackTrace();
+//		}
 		
 	}
 }
