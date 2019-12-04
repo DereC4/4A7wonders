@@ -26,7 +26,7 @@ public class CardWindow extends JFrame
         setVisible(true);
         setBounds(150,25,LENGTH,HEIGHT);
         playedCards = p.getPlayedCards();
-        out.println(playedCards);
+        //out.println(playedCards);
 	}
 	public static int incrementIndex(int i)
 	{

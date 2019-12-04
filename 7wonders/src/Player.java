@@ -10,6 +10,7 @@ public class Player
 	private ArrayList<Card> hand;
 	private Wonder wonder;
 	private ArrayList<Resources> resources;
+	//private ArrayList<Resources> tempResources;
 	private Card tempPlayedCard;
 	private boolean burnCard;
 	private TreeMap<Integer, ArrayList<Resources>> trade; //Player index, resources
@@ -33,6 +34,7 @@ public class Player
 		sciList = new TreeMap<String, Integer>();
 		
 		resources=new ArrayList<Resources>();
+		//tempResources = new ArrayList<Resources>();
 
 		sciList.put("lit", 0); // tablet
 		
@@ -48,6 +50,16 @@ public class Player
 		setTempPlayedCard(c);
 		getHand().remove(c);
 	}
+	/*
+	public ArrayList<Resources> getTempResources() {
+		return tempResources;
+	}
+	*/
+	/*
+	public void setTempResources(ArrayList<Resources> tempResources) {
+		this.tempResources = tempResources;
+	}
+	*/
 	public TreeMap<Integer, ArrayList<Resources>> getTrade() {
 		return trade;
 	}
@@ -160,6 +172,12 @@ public class Player
 	{
 		return resources;
 	}
+	/*
+	public void addTempResource(Resources r)
+	{
+		getTempResources().add(r);
+	}
+	*/
 	public void addToPlayedCards(Card c) 
 	{
 		String type = c.getType();

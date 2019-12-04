@@ -504,27 +504,33 @@ public class Board
         }
         
         //Resource check
-        ArrayList<Resources> tempResources = playerList.get(currentPlayer).getResources(); //Player's resources
+        ArrayList<Resources> tempR = playerList.get(currentPlayer).getResources(); //Player's resources
         ArrayList<Resources> cost = c.getCost(); //card cost
         //ArrayList<Resources> costRemove=cost;
         ArrayList<Resources> resources = new ArrayList<Resources>();
         
-        for (int i = 0; i < tempResources.size(); i++)
-        	resources.add(tempResources.get(i));
-        tempResources = null;
+        for (int i = 0; i < tempR.size(); i++)
+        	resources.add(tempR.get(i));
+        tempR = null;
         
         for (int i = cost.size()-1; i >= 0; i--)
         {
         	for (int j = resources.size()-1; j >= 0; j--)
-        		if (resources.get(j).toString().equals(cost.get(i).toString())) {
+        	{
+        		if (resources.get(j).toString().equals(cost.get(i).toString())) 
+        		{
+        			out.println(cost.get(i).toString());
+        			out.println(resources.get(j).toString());
         			cost.remove(i);
         			resources.remove(j);
+        			break;
         		}
+        	}
         }
         //System.out.println(cost);
         //System.out.println(resources);
         
-        if (cost.size()==0)
+        if (cost.size()==0) //if player already has resources
         {
         	return true;
         }
@@ -632,10 +638,37 @@ public class Board
 	        {
 	            return true;
 	        }
-	        out.println("Don't have enough money");
+	        //out.println("Don't have enough money");
 	        return false;
         }
     }
+    
+    public void payCosts(int id) //Pays coins costs
+    {
+    	Player p = getPlayerList().get(id);
+    	
+    	if (p.getTrade().size() == 0)
+    	{
+    		if (p.getTempPlayedCard().getCost().contains("C 1"))
+    			p.setMoney(p.getMoney() - 1);
+    	}
+    	else
+    	{
+    		out.println(p.getTrade());
+    		for (int index : p.getTrade().keySet())
+    		{
+    			Player toTrade = getPlayerList().get(index);
+    			ArrayList<Resources> resources = p.getTrade().get(index);
+    			out.println(resources);
+    			for (int i = 0; i < resources.size(); i++)
+    			{
+    				trade(p, toTrade, resources.get(i));
+    				out.println("Done!");
+    			}
+    		}
+    	}
+    }
+    
     public int determineCost(Resources r, boolean isRight, int index)
     {
         Player p = playerList.get(index);
@@ -692,10 +725,10 @@ public class Board
         }
     }
     
-    public void trade(Player p1, Resources r)
+    public void trade(Player p1, Player p2, Resources r)
     {
-    	int index = currentPlayer;
-    	int temp = p1.getIndex();
+    	int index = p1.getIndex();
+    	int temp = p2.getIndex();
     	boolean isRight;
     	
     	if (index == 0) 
@@ -719,12 +752,9 @@ public class Board
     		else 
     			isRight = false;
     	}
-    	int cost = determineCost(r, isRight, currentPlayer);
-    	
-    	getCurrentPlayer().setMoney(getCurrentPlayer().getMoney() - cost);
-    	p1.setMoney(p1.getMoney() + cost);
-        p1.addToResources(r);
-        
+    	int cost = determineCost(r, isRight, p1.getIndex());
+    	p1.setMoney(p1.getMoney() - cost);
+    	p2.setMoney(p2.getMoney() + cost);
     }
     
     public int getCurrentAge()

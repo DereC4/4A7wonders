@@ -153,4 +153,13 @@ public class Deck
 //      System.out.println(ageOne);
         scan.close();
     }
+    
+    public static void main(String[] args) throws IOException
+    {
+    	Deck deck = new Deck();
+    	for (int i = 0; i < deck.ageOne.size(); i++)
+    	{
+    		System.out.println(deck.ageOne.get(i).getCost());
+    	}
+    }
 }

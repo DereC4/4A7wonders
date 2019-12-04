@@ -10,7 +10,6 @@ public class Card implements Comparable
     private String type; //also color
     private String effect;
     
-    
     public Card()
     {
         this("", "", "", 0, "", "false", "");
@@ -108,5 +107,9 @@ public class Card implements Comparable
     public void setEffect(String effect)
     {
         this.effect = effect;
+    }
+    public String getStats()
+    {
+    	return "Name: " + getName() + " Cost: " + getCost() + " Chain: " + getChain() + " isFree: " + isFree() + " type: " + getType() + " effect: " + getEffect();
     }
 }
