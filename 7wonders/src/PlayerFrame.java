@@ -80,6 +80,42 @@ public class PlayerFrame extends JFrame implements MouseListener
 				boolean update = true;
 				for (int i = 0; i < players.size(); i++)
 				{
+					ArrayList<Card> cards = board.getCurrentPlayer().getHand();
+					int index = board.getCurrentTurn();
+	                int lower = index-1;
+	                if (lower == -1)
+	                {
+	                    lower = board.getPlayerList().size() - 1;
+	                }
+	                int upper = index+1;
+	                if (upper == board.getPlayerList().size())
+	                {
+	                    upper = 0;
+	                }
+					ArrayList<Card> cards1 = board.getPlayerList().get(lower).getHand();
+					ArrayList<Card> cards2 = board.getPlayerList().get(upper).getHand();
+					
+					if(cards.size()==1&&cards1.size()==1&&cards2.size()==1)
+					{
+						System.out.print("New Age is "+board.getCurrentAge()+1);
+						for(Player x:board.getPlayerList())
+						{
+							out.println(x.getHand());
+							board.getDeck().addDiscard(x.getHand().get(0));
+							/*x.getHand().remove(0);
+							if (x.getHand().size()==1) {
+								x.getHand().clear();
+							}*/
+							board.deal(board.getCurrentAge()+1);
+							repaint();
+//							if(!(board.getCurrentAge()==3)) {
+//								board.deal(board.getCurrentAge()+1);
+//							}
+//							else {
+//								//placeholder
+//							}
+						}
+					}
 					if (players.get(i).getTempPlayedCard() == null)
 						update = false;
 				}
