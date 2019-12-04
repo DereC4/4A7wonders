@@ -67,7 +67,8 @@ public class PlayerFrame extends JFrame implements MouseListener
 				g.drawString("Coins", 1425, 350);
 				g.drawString(""+board.getCurrentPlayer().getMoney(), 1435, 365);
 				g.setFont(new Font("Arial", Font.PLAIN, 50));
-				g.drawString("Player " + board.getCurrentPlayer().getIndex(), 350, 175);
+				int currentplayer = board.getCurrentPlayer().getIndex()+1;
+				g.drawString("Player " + currentplayer, 350, 175);
 				
 				paintCards(g);
 				
