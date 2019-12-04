@@ -39,10 +39,10 @@ Marketplace|Yellow|TP LR C|1| |true|
 Observatory|Green|S gear|3|Laboratory|false|Ore,Ore,Glass,Loom
 Orevein|Brown|R Ore|1| |true| 
 Palace|Blue|VP 8|3| |false|Stone,Ore,Wood,Clay,Glass,Papyrus,Loom
-Pantheon|Blue|VP 7|3|temple|false|Clay,clay,ore,glass,papyrus,loom
-Philosophersguild|purple|VP LR green 1|3| |false|clay,clay,clay,papyrus,loom
-Press|gray|R papyrus|1| |true| 
-Press|gray|R papyrus|2| |true| 
+Pantheon|Blue|VP 7|3|temple|false|Clay,Clay,Ore,Glass,Papyrus,Loom
+Philosophersguild|purple|VP LR green 1|3| |false|Clay,Clay,Clay,Papyrus,Loom
+Press|gray|R Papyrus|1| |true| 
+Press|gray|R Papyrus|2| |true| 
 Quarry|brown|R stone,stone|2| |true|C 1
 DIVIDER TO CTRL-V
 Sawmill|Brown|R Wood,Wood|2| |false|C 1
@@ -50,7 +50,7 @@ School|Green|S lit|2| |false|Wood,Papyrus
 Scientistsguild|Purple|S All|3| |false|Wood,Wood,Ore,Ore,Papyrus
 Scriptorium|Green|S Lit|1| |false|Papyrus
 Senate|Blue|VP 6|3| |false|Wood,Wood,Stone,Ore
-Shipownersguild|Purple|VP D brown,gray,purple 1|3| |false|Wood,Wood,Ore,Ore,Papyrus    [ISSUE]
+Shipownersguild|Purple|VP D brown,gray,purple 1|3| |false|Wood,Wood,Ore,Ore,Papyrus
 Siegeworkshop|Red|WP 3|3|Laboratory|false|Clay,Clay,Clay,Wood
 Spiesguild|Purple|VP LR red 1|3| |false|Clay,Clay,Clay,Glass
 Stables|Red|WP 2|2|Apothecary|false|Clay,Wood,Ore

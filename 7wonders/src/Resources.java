@@ -22,7 +22,6 @@ public class Resources
     {
     	return getResource();
     }
-    @Override
     public boolean equals(Object obj)
     
     {
