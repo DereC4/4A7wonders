@@ -241,8 +241,8 @@ public class PlayerFrame extends JFrame implements MouseListener
 				//out.println("Name: " + temp.getName() + " Cost:" + temp.getCost());
 				if (player.isBurnCard() || board.playable(temp))
 				{
-					if (temp.getCost().get(0).toString().equals("C 1"))
-						board.getCurrentPlayer().setMoney(board.getCurrentPlayer().getMoney()-1);
+					//if (temp.getCost().get(0).toString().equals("C 1"))
+						//board.getCurrentPlayer().setMoney(board.getCurrentPlayer().getMoney()-1);
 					player.play(temp);
 					board.incrementLocation();
 				}
