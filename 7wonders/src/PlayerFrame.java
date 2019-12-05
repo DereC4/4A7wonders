@@ -101,6 +101,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 				BufferedImage currentage = ImageIO.read(new File("images\\assets\\age"+board.getCurrentAge()+".png"));
 				BufferedImage coin = ImageIO.read(new File("images\\assets\\coin.png"));
 				BufferedImage burn = ImageIO.read(new File("images\\assets\\trash.png"));
+				BufferedImage burnactivated = ImageIO.read(new File("images\\assets\\trashactivated.png"));
 				
 	//			JLabel warminuspoints = new JLabel();
 	//			warminuspoints.setText(""+board.getCurrentPlayer().getWarMinusPoints());
@@ -110,13 +111,23 @@ public class PlayerFrame extends JFrame implements MouseListener
 				g.drawImage(sampleWonder, 250, 250, 1100, 342, null);
 				g.drawImage(currentage, 750, 100, 100, 100, null);
 				g.drawImage(coin, 1411, 275, 50, 50, null);
+				g.setColor(Color.gray);
+				g.fillRect(1375, 425, 125, 125); //button to burn cards
 				
 				if (board.getCurrentPlayer().isBurnCard())
-					g.setColor(Color.red);
+				{
+//					g.setColor(Color.red);
+//					g.fillRect(1375, 425, 125, 125); //button to burn cards
+					out.println("Burn mode: "+ board.getCurrentPlayer().isBurnCard());
+					g.drawImage(burnactivated, 1405, 450, 56, 70, null);
+				}
 				else
-					g.setColor(Color.gray);
-				g.fillRect(1375, 425, 125, 125); //button to burn cards
-				g.drawImage(burn, 1405, 450, 56, 70, null);
+				{
+//					out.println("Burn mode: "+ board.getCurrentPlayer().isBurnCard());
+					g.drawImage(burn, 1405, 450, 56, 70, null);
+				}
+//				g.fillRect(1375, 425, 125, 125); //button to burn cards
+//				g.drawImage(burn, 1405, 450, 56, 70, null);
 				
 				g.setColor(Color.black);
 				g.setFont(new Font("Arial", Font.PLAIN, 10)); 
