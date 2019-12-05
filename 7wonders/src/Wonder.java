@@ -151,6 +151,7 @@ public class Wonder
         		return "Ore,Ore";
         }
     }
+    /*
     public void buildWonder(int stage)
 	{ 
 		int currentStage = wonder.getCurrentStage();
@@ -190,6 +191,7 @@ public class Wonder
 			
 		}
 	}
+	*/
     public String getName()
     {
         return name;

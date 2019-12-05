@@ -43,79 +43,32 @@ public class PlayerFrame extends JFrame implements MouseListener
 		{
 			try
 			{
-				BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
-				BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\" + board.getCurrentPlayer().getWonder().getName()+ ".png"));
-				BufferedImage currentage = ImageIO.read(new File("images\\assets\\age"+board.getCurrentAge()+".png"));
-				BufferedImage coin = ImageIO.read(new File("images\\assets\\coin.png"));
-				BufferedImage burn = ImageIO.read(new File("images\\assets\\trash.png"));
-				
-	//			JLabel warminuspoints = new JLabel();
-	//			warminuspoints.setText(""+board.getCurrentPlayer().getWarMinusPoints());
-	//			warminuspoints.setForeground(Color.black);
-	
-				ArrayList<Player> players = board.getPlayerList();
-			
-				g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
-				g.drawImage(sampleWonder, 250, 250, 1100, 342, null);
-				g.drawImage(currentage, 750, 100, 100, 100, null);
-				g.drawImage(coin, 1411, 275, 50, 50, null);
-				g.drawImage(burn, 1405, 450, 56, 70, null);
-				
-				g.setFont(new Font("Arial", Font.PLAIN, 10)); 
-				g.drawString("WarMinusPoints", 125, 300);
-				g.drawString(""+board.getCurrentPlayer().getWarMinusPoints(), 160, 315);
-				g.drawString("WarPlusPoints", 125, 475);
-				g.drawString(""+board.getCurrentPlayer().getWarPlusPoints(), 160, 490);
-				g.drawString("Coins", 1425, 350);
-				g.drawString(""+board.getCurrentPlayer().getMoney(), 1435, 365);
-				g.setFont(new Font("Arial", Font.PLAIN, 50));
-				int currentplayer = board.getCurrentPlayer().getIndex()+1;
-				g.drawString("Player " + currentplayer, 350, 175);
-				
-				paintCards(g);
+				if(board.ageOver())
+				{
+					if (board.isOnWards())
+						board.setOnWards(false);
+					else
+						board.setOnWards(true);
+					
+					board.calcWarPoints(); //for previous age
+					board.setCurrentAge(board.getCurrentAge()+1);
+					out.println(board.getCurrentAge());
+					//System.out.print("New Age is " + board.getCurrentAge());
+					board.deal(board.getCurrentAge());
+					for (Player p : board.getPlayerList())
+					{
+						p.getHand().remove(0); //Discard remaining card from previous age
+						//out.println(p.getHand());
+					}
+				}
 				
 				//check temp card storage 
 				
 				//update round 
+				ArrayList<Player> players = board.getPlayerList();
 				boolean update = true;
 				for (int i = 0; i < players.size(); i++)
 				{
-					ArrayList<Card> cards = board.getCurrentPlayer().getHand();
-					int index = board.getCurrentTurn();
-	                int lower = index-1;
-	                if (lower == -1)
-	                {
-	                    lower = board.getPlayerList().size() - 1;
-	                }
-	                int upper = index+1;
-	                if (upper == board.getPlayerList().size())
-	                {
-	                    upper = 0;
-	                }
-					ArrayList<Card> cards1 = board.getPlayerList().get(lower).getHand();
-					ArrayList<Card> cards2 = board.getPlayerList().get(upper).getHand();
-					
-					if(cards.size()==1&&cards1.size()==1&&cards2.size()==1)
-					{
-						System.out.print("New Age is "+board.getCurrentAge()+1);
-						for(Player x:board.getPlayerList())
-						{
-							out.println(x.getHand());
-							board.getDeck().addDiscard(x.getHand().get(0));
-							/*x.getHand().remove(0);
-							if (x.getHand().size()==1) {
-								x.getHand().clear();
-							}*/
-							board.deal(board.getCurrentAge()+1);
-							repaint();
-//							if(!(board.getCurrentAge()==3)) {
-//								board.deal(board.getCurrentAge()+1);
-//							}
-//							else {
-//								//placeholder
-//							}
-						}
-					}
 					if (players.get(i).getTempPlayedCard() == null)
 						update = false;
 				}
@@ -139,9 +92,45 @@ public class PlayerFrame extends JFrame implements MouseListener
 						}
 						//must also pay card cost
 						p.setTempPlayedCard(null);
-						
 					}
-				}	
+					board.incrementHandLocations();
+				}
+				
+				BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
+				BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\" + board.getCurrentPlayer().getWonder().getName()+ ".png"));
+				BufferedImage currentage = ImageIO.read(new File("images\\assets\\age"+board.getCurrentAge()+".png"));
+				BufferedImage coin = ImageIO.read(new File("images\\assets\\coin.png"));
+				BufferedImage burn = ImageIO.read(new File("images\\assets\\trash.png"));
+				
+	//			JLabel warminuspoints = new JLabel();
+	//			warminuspoints.setText(""+board.getCurrentPlayer().getWarMinusPoints());
+	//			warminuspoints.setForeground(Color.black);
+			
+				g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
+				g.drawImage(sampleWonder, 250, 250, 1100, 342, null);
+				g.drawImage(currentage, 750, 100, 100, 100, null);
+				g.drawImage(coin, 1411, 275, 50, 50, null);
+				
+				if (board.getCurrentPlayer().isBurnCard())
+					g.setColor(Color.red);
+				else
+					g.setColor(Color.gray);
+				g.fillRect(1375, 425, 125, 125); //button to burn cards
+				g.drawImage(burn, 1405, 450, 56, 70, null);
+				
+				g.setColor(Color.black);
+				g.setFont(new Font("Arial", Font.PLAIN, 10)); 
+				g.drawString("WarMinusPoints", 125, 300);
+				g.drawString(""+board.getCurrentPlayer().getWarMinusPoints(), 160, 315);
+				g.drawString("WarPlusPoints", 125, 475);
+				g.drawString(""+board.getCurrentPlayer().getWarPlusPoints(), 160, 490);
+				g.drawString("Coins", 1425, 350);
+				g.drawString(""+board.getCurrentPlayer().getMoney(), 1435, 365);
+				g.setFont(new Font("Arial", Font.PLAIN, 50));
+				int currentplayer = board.getCurrentPlayer().getIndex()+1;
+				g.drawString("Player " + currentplayer, 350, 175);
+				
+				paintCards(g);
 				//Derek's space. Click to open new window
 				BufferedImage clicktoshowcards = ImageIO.read(new File("images\\assets\\card.png"));
 				g.drawImage(clicktoshowcards, 1025, 100, 100, 100, null);
@@ -151,7 +140,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 			}
 			catch (IOException e)
 			{
-				//out.println(e);
+				out.println(e);
 				//out.println(board.getCurrentPlayer().getWonder().getName());
 			}
 		}
@@ -166,7 +155,6 @@ public class PlayerFrame extends JFrame implements MouseListener
 		g.drawRect(100, 250, 125, 125); //war minus points
 		g.drawRect(100, 425, 125, 125); //war plus points	
 		g.drawRect(1375, 250, 125, 125); //coins
-		g.drawRect(1375, 425, 125, 125); //button to burn cards
 		g.drawRect(750, 100, 100, 100); //current age
 		g.setColor(Color.red);
 		g.drawRect(325, 510, 280, 85); //Wonder stage 1
@@ -283,7 +271,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 					//if (temp.getCost().get(0).toString().equals("C 1"))
 						//board.getCurrentPlayer().setMoney(board.getCurrentPlayer().getMoney()-1);
 					player.play(temp);
-					board.incrementLocation();
+					board.incrementPlayerLocation(); //Changed to increment player location
 				}
 			}
 			catch (IndexOutOfBoundsException e)

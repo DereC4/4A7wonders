@@ -25,7 +25,7 @@ Gardens|Blue|VP 5|3|Statue|false|Clay,Clay,Wood
 Glassworks|Silver|R Glass|1| |true| 
 Glassworks|Silver|R Glass|2| |true| 
 Guardtower|Red|WP 1|1| |false|Clay
-Haven|Yellow|EFFECT|3|Forum|false|Wood,Ore,Loom
+Haven|Yellow|EFFECT|3|Forum|false|Wood,Ore,Loom 
 Laboratory|Green|S gear|2|Workshop|false|Clay,Clay,Papyrus
 DIVIDER TO CTRL-V
 Library|Green|S lit|2|Scriptorium|false|Stone,Stone,Loom

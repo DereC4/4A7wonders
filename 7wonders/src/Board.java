@@ -419,7 +419,7 @@ public class Board
     
     public void deal(int age)
     {
-        ArrayList < Card > d;
+        ArrayList<Card> d;
         d = new ArrayList < Card > ();
         if (age == 1)
         {
@@ -444,28 +444,43 @@ public class Board
         }
     }
     
-    public void incrementLocation()
+    public void incrementPlayerLocation()
     {
         int l = currentPlayer;
-        if (onWards)
-        {
-            l++;
-        }
-        else if (!onWards)
-        {
-            l--;
-        }
-        
+        l++;
         if (l == 3)
         {
             l = 0;
         }
-        if (l == -1)
-        {
-            l = 2;
-        }
         currentPlayer = l;
     }
+    
+    public void incrementHandLocations()
+    {
+    	int lower = currentPlayer-1;
+    	int higher = currentPlayer+1;
+    	if (lower - 1 < 0)
+    		lower = 2;
+    	if (higher + 1 > 2)
+    		higher = 0;
+    	ArrayList<Card> currentPlayerHand = getCurrentPlayer().getHand();
+    	ArrayList<Card> lowerPlayerHand = getPlayerList().get(lower).getHand();
+    	ArrayList<Card> higherPlayerHand = getPlayerList().get(higher).getHand();
+    	
+    	if (onWards)
+    	{
+    		getPlayerList().get(lower).setHand(higherPlayerHand);
+    		getPlayerList().get(currentPlayer).setHand(lowerPlayerHand);
+    		getPlayerList().get(higher).setHand(currentPlayerHand);
+    	}
+    	else
+    	{
+    		getPlayerList().get(lower).setHand(currentPlayerHand);
+    		getPlayerList().get(currentPlayer).setHand(higherPlayerHand);
+    		getPlayerList().get(higher).setHand(lowerPlayerHand);
+    	}
+    }
+    
     public boolean playable(Card c)
     {
     	if (c == null)
@@ -759,6 +774,47 @@ public class Board
     	int cost = determineCost(r, isRight, p1.getIndex());
     	p1.setMoney(p1.getMoney() - cost);
     	p2.setMoney(p2.getMoney() + cost);
+    }
+    
+    public boolean ageOver()
+    {
+    	ArrayList<Player> players = getPlayerList();
+    	for (int i = 0; i < players.size(); i++)
+    		if (players.get(i).getHand().size() > 1)
+    			return false;
+    	return true;
+    }
+    
+    public void calcWarPoints()
+    {
+    	ArrayList<Player> players = getPlayerList();
+    	for (int i = 0; i < players.size(); i++)
+    	{
+    		int lower = i-1;
+    		int current = i;
+        	int higher = i+1;
+        	if (lower - 1 < 0)
+        		lower = 2;
+        	if (higher + 1 > 2)
+        		higher = 0;
+        	Player currentP = players.get(current);
+        	Player lowerP = players.get(lower);
+        	Player higherP = players.get(higher);
+        	
+        	if (lowerP.getArmies() > currentP.getArmies() || higherP.getArmies() > currentP.getArmies())
+        	{
+        		currentP.setWarMinusPoints(currentP.getWarMinusPoints()+1);
+        	}
+        	else
+        	{
+        		if (getCurrentAge() == 1)
+        			currentP.setWarPlusPoints(currentP.getWarMinusPoints()+1);
+        		else if (getCurrentAge() == 2)
+        			currentP.setWarPlusPoints(currentP.getWarMinusPoints()+3);
+        		else
+        			currentP.setWarPlusPoints(currentP.getWarMinusPoints()+5);
+        	}
+    	}
     }
     
     public int getCurrentAge()
