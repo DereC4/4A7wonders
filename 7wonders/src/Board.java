@@ -42,6 +42,54 @@ public class Board
         currentPlayer = 0; // players are 0,1,2
     }
     
+    public void decodeWonderEffect(String effect)
+    {
+    	if (effect.equals("VP 5"))
+    	{
+    		return;
+    	}
+    	else
+    	{
+    		Player p = getCurrentPlayer();
+    		if (effect.equals("WP 2"))
+    			p.setArmies(getCurrentPlayer().getArmies() + 2);
+    		else if (effect.equals("resourceAll"))
+    			p.addToResources(new Resources("Clay/Ore/Wood/Stone"));
+    		else if (effect.equals("scienceAll")) //call at end of game right before VP calc
+    		{
+    			TreeMap<String, Integer> sciList = p.getSciList();
+    			int max = -1;
+    			int min = Integer.MAX_VALUE;
+    			int totalSci = 0; 
+    			
+    			String highestScience = new String();
+    			String lowestScience = new String();
+    			
+    			for (String sci : sciList.keySet())
+    			{
+    				if (sciList.get(sci) > max)
+    				{
+    					max = sciList.get(sci);
+    					highestScience = sci;
+    				}
+    				if (sciList.get(sci) < min)
+    				{
+    					min = sciList.get(sci);
+    					lowestScience = sci;
+    				}
+    				totalSci += sciList.get(sci);
+    			}
+    			
+    			if (totalSci % 3 == 1)
+    				sciList.put(lowestScience, sciList.get(min)+1);
+    			else
+    				sciList.put(highestScience, sciList.get(max)+1);
+    		}
+    		//else if ()
+    			
+    	}
+    }
+    
     public void decodeEffect(Card c, Player p)
     {
         String imports = c.getEffect();
@@ -532,7 +580,7 @@ public class Board
         {
         	for (int j = resources.size()-1; j >= 0; j--)
         	{
-        		if (resources.get(j).toString().equals(cost.get(i).toString())) 
+        		if (resources.get(j).toString().contains(cost.get(i).toString())) 
         		{
         			out.println(cost.get(i).toString());
         			out.println(resources.get(j).toString());
@@ -655,6 +703,7 @@ public class Board
 	            return true;
 	        }
 	        //out.println("Don't have enough money");
+	        playerList.get(currentPlayer).getTrade().clear(); 
 	        return false;
         }
     }
@@ -816,6 +865,50 @@ public class Board
         	}
     	}
     }
+    
+    public void buildWonder(int stage)
+	{ 
+    	Wonder wonder = getCurrentPlayer().getWonder();
+		int currentStage = wonder.getCurrentStage();
+		if (currentStage == 3)
+			return;
+		else if (stage <= currentStage)
+			return;
+		
+		ArrayList<Resources> cost = new ArrayList<Resources>();
+		ArrayList<Resources> resources = new ArrayList<Resources>(); //local copy of resources
+		for (Resources r : getCurrentPlayer().getResources())
+			resources.add(r);
+		
+		String temp = wonder.getCost(stage);
+		String[] stageCost = temp.split(",");
+		for (int i = 0; i < stageCost.length; i++)
+			cost.add(new Resources(stageCost[i]));
+			
+		for (int j = resources.size()-1; j >= 0; j--)
+		{
+			for (int i = cost.size()-1; i >= 0; i--)
+			{
+				if (resources.get(j).toString().contains(cost.get(i).toString()))
+				{
+					resources.remove(j);
+					cost.remove(i);
+					break;
+				}
+			}
+		}
+		
+		if (cost.size() == 0)
+		{
+			decodeEffect()
+			wonder.setCurrentStage(stage);
+		}
+		else
+		{
+			
+		}
+	}
+    
     
     public int getCurrentAge()
     {
