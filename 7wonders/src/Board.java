@@ -242,7 +242,7 @@ public class Board
         // adds VP for wonders
         for (int i = 1; i <= p.getWonder().getCurrentStage(); i++)
         {
-            String effect = p.getWonder().wonderEffect(i);
+            String effect = p.getWonder().getEffect(i);
             String[] com = effect.split(" ");
             if (effect.contains("VP"))
             {
@@ -385,6 +385,7 @@ public class Board
                 vp += p.getWonder().getCurrentStage();
                 vp += p2.getWonder().getCurrentStage();
             }
+            /*
             if (com[1].equals("S All"))
             {
                 TreeMap < String, Integer > sciListL = new TreeMap < String, Integer > ();
@@ -418,6 +419,7 @@ public class Board
                     p.getSciList().put("gear", p.getSciList().get("gear") + 1);
                 }
             }
+            */
             if (com[1].equals("D"))
             {
                 vp += p.getPlayedCards().get("blue").size();
@@ -699,7 +701,7 @@ public class Board
         	
 	        if (playerList.get(currentPlayer).getMoney() >= costLeft + costRight)
 	        {
-	        	System.out.println("Has Enough Money");
+	        	//System.out.println("Has Enough Money");
 	            return true;
 	        }
 	        //out.println("Don't have enough money");
@@ -898,9 +900,9 @@ public class Board
 			}
 		}
 		
-		if (cost.size() == 0)
+		if (cost.size() == 0) //Player has all necessary resources
 		{
-			decodeEffect()
+			decodeWonderEffect(wonder.getEffect(stage));
 			wonder.setCurrentStage(stage);
 		}
 		else

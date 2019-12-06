@@ -62,7 +62,7 @@ public class Wonder
         "Statue of Zeus at Olympia"
     };
     
-    public String wonderEffect(int stage)
+    public String getEffect(int stage)
     {
         if (stage == 1) return "VP 3";
         else if (stage == 3) return "VP 7";
