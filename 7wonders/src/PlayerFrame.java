@@ -1,6 +1,7 @@
 import static java.lang.System.out;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -64,8 +65,10 @@ public class PlayerFrame extends JFrame implements MouseListener
 				g.drawImage(sampleWonder, 250, 250, 1100, 342, null);
 				g.drawImage(currentage, 750, 100, 100, 100, null);
 				
-				int currentplayer = player.getIndex()+1;
-				g.drawString("Player " + player, 350, 175);
+				g.setFont(new Font("Arial", Font.PLAIN, 50));
+				int currentPlayer = player.getIndex()+1;
+				g.drawString("Player " + currentPlayer, 350, 175);
+				
 				//Derek's space. Click to open new window
 				BufferedImage clicktoshowcards = ImageIO.read(new File("images\\assets\\card.png"));
 				g.drawImage(clicktoshowcards, 1025, 100, 100, 100, null);
@@ -73,15 +76,10 @@ public class PlayerFrame extends JFrame implements MouseListener
 				//Area to click; shows cards that player has played
 				g.drawRect(1025, 100, 100, 100); 
 				
+				
+				
 				g.setColor(Color.black);
-				g.drawRect(50, 50, 100, 100); //Show previous player's wonder
-				g.drawRect(1450, 50, 100, 100); //Show next player's wonder
-				g.setColor(Color.black);
-				g.drawRect(100, 675, 1400, 300); //Current player's hand
 				g.drawRect(250, 250, 1100, 342); //Current player's wonder
-				g.drawRect(100, 250, 125, 125); //war minus points
-				g.drawRect(100, 425, 125, 125); //war plus points	
-				g.drawRect(1375, 250, 125, 125); //coins
 				g.drawRect(750, 100, 100, 100); //current age
 				g.setColor(Color.red);
 				g.drawRect(325, 510, 280, 85); //Wonder stage 1

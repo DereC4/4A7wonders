@@ -113,9 +113,9 @@ public class GameFrame extends PlayerFrame
 				}
 				
 				super.paint(g);
-				BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
-				BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\" + board.getCurrentPlayer().getWonder().getName()+ ".png"));
-				BufferedImage currentage = ImageIO.read(new File("images\\assets\\age"+board.getCurrentAge()+".png"));
+				//BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
+				//BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\" + board.getCurrentPlayer().getWonder().getName()+ ".png"));
+				//BufferedImage currentage = ImageIO.read(new File("images\\assets\\age"+board.getCurrentAge()+".png"));
 				BufferedImage coin = ImageIO.read(new File("images\\assets\\coin.png"));
 				BufferedImage burn = ImageIO.read(new File("images\\assets\\trash.png"));
 				BufferedImage burnactivated = ImageIO.read(new File("images\\assets\\trashactivated.png"));
@@ -124,9 +124,9 @@ public class GameFrame extends PlayerFrame
 	//			warminuspoints.setText(""+board.getCurrentPlayer().getWarMinusPoints());
 	//			warminuspoints.setForeground(Color.black);
 			
-				g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
-				g.drawImage(sampleWonder, 250, 250, 1100, 342, null);
-				g.drawImage(currentage, 750, 100, 100, 100, null);
+				//g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
+				//g.drawImage(sampleWonder, 250, 250, 1100, 342, null);
+				//g.drawImage(currentage, 750, 100, 100, 100, null);
 				g.drawImage(coin, 1411, 275, 50, 50, null);
 				g.setColor(Color.gray);
 				g.fillRect(1375, 425, 125, 125); //button to burn cards
@@ -154,18 +154,27 @@ public class GameFrame extends PlayerFrame
 				g.drawString(""+board.getCurrentPlayer().getWarPlusPoints(), 160, 490);
 				g.drawString("Coins", 1425, 350);
 				g.drawString(""+board.getCurrentPlayer().getMoney(), 1435, 365);
-				g.setFont(new Font("Arial", Font.PLAIN, 50));
-				int currentplayer = board.getCurrentPlayer().getIndex()+1;
-				g.drawString("Player " + currentplayer, 350, 175);
+				
+				//g.setFont(new Font("Arial", Font.PLAIN, 50));
+				//int currentplayer = board.getCurrentPlayer().getIndex()+1;
+				//g.drawString("Player " + currentplayer, 350, 175);
 				paintCards(g);
+				showDiscardWindow(); //only runs when applicable
 				
 				//Derek's space. Click to open new window
-				BufferedImage clicktoshowcards = ImageIO.read(new File("images\\assets\\card.png"));
-				g.drawImage(clicktoshowcards, 1025, 100, 100, 100, null);
-				g.setColor(new Color(0, 102, 225));
+				//BufferedImage clicktoshowcards = ImageIO.read(new File("images\\assets\\card.png"));
+				//g.drawImage(clicktoshowcards, 1025, 100, 100, 100, null);
+				//g.setColor(new Color(0, 102, 225));
 				//Area to click; shows cards that player has played
-				g.drawRect(1025, 100, 100, 100); 
-				showDiscardWindow(); //only runs when applicable
+				//g.drawRect(1025, 100, 100, 100); 
+				
+				g.setColor(Color.black);
+				g.drawRect(50, 50, 100, 100); //Show previous player's wonder
+				g.drawRect(1450, 50, 100, 100); //Show next player's wonder
+				g.drawRect(100, 250, 125, 125); //war minus points
+				g.drawRect(100, 425, 125, 125); //war plus points	
+				g.drawRect(1375, 250, 125, 125); //coins
+				
 			}
 			catch (IOException e)
 			{
@@ -209,6 +218,7 @@ public class GameFrame extends PlayerFrame
 		Player player = board.getCurrentPlayer();
 		//g.drawRect(50, 50, 100, 100); //Show previous player's wonder
 		//g.drawRect(1450, 50, 100, 100); //Show next player's wonder
+		super.mouseReleased(event);
 		
 		try 
 		{
@@ -216,16 +226,19 @@ public class GameFrame extends PlayerFrame
 			{
 				if (event.getX() > 50 && event.getX() < 150)
 				{
+					out.println("Works");
 					int previous = player.getIndex()-1;
 					if (previous < 0)
 						previous = 2;
 					PlayerFrame frame = new PlayerFrame(board.getPlayerList().get(previous));
 				}
 			}
-			else if (event.getY() > 50 && event.getY() < 150)
+			
+			if (event.getY() > 50 && event.getY() < 150)
 			{
 				if (event.getX() > 1450 && event.getX() < 1550)
 				{
+					out.println("Works");
 					int next = player.getIndex()+1;
 					if (next > 2)
 						next = 0;
@@ -245,6 +258,7 @@ public class GameFrame extends PlayerFrame
 				player.setBurnCard(false);
 			else
 				player.setBurnCard(true);
+			repaint();
 		}
 		/*
 		g.drawRect(325, 510, 280, 85); //Wonder stage 1
@@ -254,11 +268,20 @@ public class GameFrame extends PlayerFrame
 		if (event.getY()>510 && event.getY()<595) //Build wonders
 		{
 			if (event.getX()>325 && event.getX()<605)
+			{
 				player.setBuildWonder(true);
+				repaint();
+			}
 			else if (event.getX()>655 && event.getX()<935)
+			{
 				player.setBuildWonder(true);
+				repaint();
+			}
 			else if (event.getX()>980 && event.getX()<1260)
+			{
 				player.setBuildWonder(true);
+				repaint();
+			}
 		}
 				
 		if (event.getY()>675 && event.getY()<956)
@@ -301,19 +324,7 @@ public class GameFrame extends PlayerFrame
 			catch (NullPointerException e)
 			{
 			}
+			repaint();
 		}
-		repaint();
-	}
-	public static void main(String[] args)
-	{
-//		try
-//		{
-//			GameFrame temp = new GameFrame();
-//		} 
-//		catch (IOException e) 
-//		{
-//			e.printStackTrace();
-//		}
-		
 	}
 }
