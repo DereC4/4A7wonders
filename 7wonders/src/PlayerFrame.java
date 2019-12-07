@@ -59,6 +59,11 @@ public class PlayerFrame extends JFrame implements MouseListener
 						board.getDeck().getDiscard().add(p.getHand().get(0)); //adds remaining card to discard pile
 						p.getHand().remove(0); //Discard remaining card from previous age
 						//out.println(p.getHand());
+						
+						Wonder wonder = p.getWonder();
+						int stage = p.getWonderStage();
+						if (wonder.getName().equals("Halikarnassus") && stage >= 2)
+							p.setIgnoreCost(true);
 					}
 				}
 				
@@ -69,7 +74,8 @@ public class PlayerFrame extends JFrame implements MouseListener
 				boolean update = true;
 				for (int i = 0; i < players.size(); i++)
 				{
-					if (players.get(i).getTempPlayedCard() == null)
+					Player p = players.get(i);
+					if (p.getTempPlayedCards().size() == 0)
 						update = false;
 				}
 				
@@ -78,34 +84,43 @@ public class PlayerFrame extends JFrame implements MouseListener
 					for (int i = 0; i < players.size(); i++)
 					{
 						Player p = players.get(i);
-						Card temp = p.getTempPlayedCard();
-						//p.addToPlayedCards(p.getTempPlayedCard());
-						if (p.isBuildWonder())
+						for (int j = 0; j < p.getTempPlayedCards().size(); j++)
 						{
-							Wonder wonder = p.getWonder();
-							int stage = wonder.getCurrentStage();
-							ArrayList<String> uniqueCases = new ArrayList<>();
-							uniqueCases.add("scienceAll");
-							uniqueCases.add("VP 5");
-							uniqueCases.add("ignoreCost");
-							
-							board.buildWonder(p, stage+1, temp);
-							if (!uniqueCases.contains(wonder.getEffect(stage))) //if unique case, do not change player.buildWonder()
-								board.decodeWonderEffect(wonder.getEffect(stage));
+							Card temp = p.getTempPlayedCards().get(j);
+							//p.addToPlayedCards(p.getTempPlayedCard());
+							if (p.isBuildWonder()) //buildWonder1 is for unique cases (ie effects that don't involve VP)
+							{
+								Wonder wonder = p.getWonder();
+								int stage = wonder.getCurrentStage();
+								board.buildWonder(p, stage+1, temp);
+								
+								ArrayList<String> vpCases = new ArrayList<>();
+								vpCases.add("scienceAll");
+								vpCases.add("VP 5");
+								vpCases.add("VP 5");
+								vpCases.add("VP 5");
+								if (!vpCases.contains(wonder.getEffect(stage)))
+									p.setHas_VP_Effect(true);
+								
+								if (!p.has_VP_Effect())
+								{
+									board.decodeWonderEffect(wonder.getEffect(stage));
+								}
+							}
+							else if (p.isBurnCard())
+							{
+								board.getDeck().getDiscard().add(temp);
+								p.setMoney(p.getMoney() + 3);
+								p.setBurnCard(false);
+							}
+							else 
+							{
+								board.payCosts(p.getIndex());
+								board.decodeEffect(temp, p);
+							}
+							//must also pay card cost
+							p.getTempPlayedCards().clear();
 						}
-						else if (p.isBurnCard())
-						{
-							board.getDeck().getDiscard().add(temp);
-							p.setMoney(p.getMoney() + 3);
-							p.setBurnCard(false);
-						}
-						else 
-						{
-							board.payCosts(p.getIndex());
-							board.decodeEffect(temp, p);
-						}
-						//must also pay card cost
-						p.setTempPlayedCard(null);
 					}
 					board.incrementHandLocations();
 				}
@@ -205,7 +220,15 @@ public class PlayerFrame extends JFrame implements MouseListener
 		{
 			//out.println(e);
 		}
-		
+	}
+	
+	public void paintDiscardWindow(Graphics g)
+	{
+		Player p = board.getCurrentPlayer();
+		if (board.isDrawDiscard())
+		{
+			DiscardWindow discardWindow = new DiscardWindow(board);
+		}
 	}
 	
 	@SuppressWarnings("unused")

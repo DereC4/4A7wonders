@@ -64,8 +64,14 @@ public class Wonder
     
     public String getEffect(int stage)
     {
-        if (stage == 1) return "VP 3";
-        else if (stage == 3) return "VP 7";
+        if (stage == 1) 
+        {
+        	return "VP 3";
+        }
+        else if (stage == 3) 
+        {
+        	return "VP 7";
+        }
         else //if Stage == 2
         {
             if (getName().equals("Colossus of Rhodos")) 

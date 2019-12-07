@@ -46,10 +46,18 @@ public class Board
     
     public void decodeWonderEffect(String effect)
     {
-    	if (effect.equals("VP 5"))
+    	if (effect.equals("VP 3"))
     	{
-    		return;
+    		getCurrentPlayer().addVP(3);
     	}
+    	else if (effect.equals("VP 7"))
+    	{
+    		getCurrentPlayer().addVP(7);
+    	}
+    	else if (effect.equals("VP 5")) //Call right before calc VP
+		{
+			getCurrentPlayer().addVP(5);
+		}
     	else
     	{
     		Player p = getCurrentPlayer();
@@ -93,10 +101,6 @@ public class Board
                 {
                     p.getSciList().put("gear", p.getSciList().get("gear") + 1);
                 }
-    		}
-    		else if (effect.equals("VP 5")) //Call right before calc VP
-    		{
-    			getCurrentPlayer().addVP(5);
     		}
     		else if (effect.equals("C 9"))
     		{
@@ -747,7 +751,8 @@ public class Board
     	}
     	else if (p.getTrade().size() == 0)
     	{
-    		if (p.getTempPlayedCard().getCost().contains("C 1"))
+    		Card temp = p.getTempPlayedCards().get(0);
+    		if (temp.getCost().toString().contains("C 1"))
     		{
     			p.setMoney(p.getMoney() - 1);
     		}

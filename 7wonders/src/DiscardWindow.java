@@ -104,8 +104,9 @@ public class DiscardWindow extends JFrame implements MouseListener
 					//bypass playable
 					//out.println(discard.get(coords.get(coord)));
 					Card card = discard.get(coords.get(coord));
-					player.setTempPlayedCard(card);
+					player.addTempPlayedCard(card);
 					discard.remove(card);
+					board.setDrawDiscard(false);
 					dispose();
 				}
 		}
