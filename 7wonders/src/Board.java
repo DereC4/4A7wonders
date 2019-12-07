@@ -38,6 +38,8 @@ public class Board
         	playerList.get(i).setWonder(WonderList.remove(index));
         	playerList.get(i).addToResources(playerList.get(i).getWonder().getProduct());
         } 
+        playerList.get(0).setWonder(new Wonder("Halikarnassus")); //temp
+        
         currentAge = 1;
         onWards = true;
         currentPlayer = 0; // players are 0,1,2
@@ -655,7 +657,7 @@ public class Board
 	           
 	            if (!leftResources.contains(r) && !rightResources.contains(r))
                 {
-	            	out.println("Don't have resources");
+	            	//out.println("Don't have resources");
                     return false;
                 }
                 else if (leftResources.contains(r) && rightResources.contains(r))
@@ -736,7 +738,7 @@ public class Board
 	            return true;
 	        }
 	        //out.println("Don't have enough money");
-	        playerList.get(currentPlayer).getTrade().clear(); 
+	        trade.clear(); 
 	        return false;
         }
     }
@@ -904,17 +906,17 @@ public class Board
     	}
     }
     
-    public void buildWonder(Player p, int stage, Card card)
-	{ 
+    public boolean canBuildWonder(Player p, int stage)
+    {
     	Player player = p;
     	Wonder wonder = player.getWonder();
 		int currentStage = wonder.getCurrentStage();
 		if (currentStage == 3)
-			return;
+			return false;
 		else if (stage <= currentStage)
-			return;
+			return false;
 		else if (stage > currentStage + 1)
-			return;
+			return false;
 		
 		ArrayList<Resources> cost = new ArrayList<Resources>();
 		ArrayList<Resources> resources = new ArrayList<Resources>(); //local copy of resources
@@ -939,11 +941,12 @@ public class Board
 			}
 		}
 		
+		//out.println("Cost of stage: " + cost);
+		//out.println("Resources: " + resources);
 		if (cost.size() == 0) //Player has all necessary resources
 		{
-			wonder.setCurrentStage(stage);
-			player.getHand().remove(card);
-			player.setBuildWonder(false);
+			out.println("Has resources to build wonder");
+			return true;
 		}
 		else
 		{
@@ -952,12 +955,12 @@ public class Board
         	int costRight = 0;
         	for (Resources r : cost)
         	{
-				int lower = currentPlayer-1;
+				int lower = p.getIndex()-1;
 	            if (lower < 0) 
 	            {
 	                lower = 2;
 	            }
-	            int higher = currentPlayer+1;
+	            int higher = p.getIndex()+1;
 	            if (higher > 2) 
 	            {
 	                higher = 0;
@@ -970,8 +973,14 @@ public class Board
 	           
 	            if (!leftResources.contains(r) && !rightResources.contains(r))
                 {
-	            	out.println("Don't have resources");
-                    return;
+	            	out.println("Doesn't have resources after trading");
+	            	out.println(leftResources);
+		            out.println("left has resource: " + leftResources.contains(r));
+		            out.println(rightResources);
+		            out.println("right has resource: " + rightResources.contains(r));
+		            out.println();
+	            	
+                    return false;
                 }
                 else if (leftResources.contains(r) && rightResources.contains(r))
                 {
@@ -1043,16 +1052,32 @@ public class Board
             			trade.put(higher, tempList);
             		}
                 }
+	            //out.println(leftResources);
+	            //out.println("left has resource: " + leftResources.contains(r));
+	            //out.println(rightResources);
+	            //out.println("right has resource: " + rightResources.contains(r));
+	            //out.println();
         	}
         	
 	        if (playerList.get(currentPlayer).getMoney() >= costLeft + costRight)
 	        {
 	        	//System.out.println("Has Enough Money");
-				wonder.setCurrentStage(stage);
-				player.getHand().remove(card);
-				player.setBuildWonder(false);
+	        	out.println("Has enough money to build wonder after trading");
+	        	return true;
 	        }
+	        
+	        out.println("Does not have resources/coins to build wonder");
+	        trade.clear();
+	        return false;
 		}
+    }
+    
+    public void buildWonder(Player p, int stage, Card card)
+	{ 
+    	Wonder wonder = p.getWonder();
+    	wonder.setCurrentStage(stage);
+		p.getHand().remove(card);
+		p.setBuildWonder(false);
 	}
     
     

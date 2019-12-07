@@ -22,7 +22,7 @@ public class DiscardWindow extends JFrame implements MouseListener
     
     public DiscardWindow(Board b)
     {
-    	super("Discard Pile");
+    	super("Graveyard");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
         setLayout(null);
@@ -31,8 +31,8 @@ public class DiscardWindow extends JFrame implements MouseListener
         addMouseListener(this);
         board = b;
         player = board.getCurrentPlayer();
-        //discard = board.getDeck().getDiscard();
-        discard = board.getDeck().getAgeTwo(); //temp
+        discard = board.getDeck().getDiscard();
+        //discard = board.getDeck().getAgeTwo(); //temp
         coords = new HashMap<String, Integer>();
     }
     

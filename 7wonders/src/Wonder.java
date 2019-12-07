@@ -7,43 +7,43 @@ public class Wonder
     private Resources product; //resource that the wonder produces
     public Wonder(String s)
     {
-        if (s.equals("Colossus of Rhodos"))
+        if (s.equals(getWonders()[0]))
         {
             name = "rhodos";
             currentStage = 0;
             product = new Resources("Ore");
         }
-        if (s.equals("Halikarnassus"))
+        if (s.equals(getWonders()[1]))
         {
             name = s.toLowerCase();
             currentStage = 0;
             product = new Resources("Loom");
         }
-        if (s.equals("Lighthouse of Alexandria"))
+        if (s.equals(getWonders()[2]))
         {
             name = "alexandria";
             currentStage = 0;
             product = new Resources("Glass");
         }
-        if (s.equals("Hanging Gardens of Babylon"))
+        if (s.equals(getWonders()[3]))
         {
             name = "babylon";
             currentStage = 0;
             product = new Resources("Clay");
         }
-        if (s.equals("Ephesos"))
+        if (s.equals(getWonders()[4]))
         {
             name = s.toLowerCase();
             currentStage = 0;
             product = new Resources("Papyrus");
         }
-        if (s.equals("Great Pyramid of Giza"))
+        if (s.equals(getWonders()[5]))
         {
             name = "gizah";
             currentStage = 0;
             product = new Resources("Stone");
         }
-        if (s.equals("Statue of Zeus at Olympia"))
+        if (s.equals(getWonders()[6]))
         {
             name = "olympia";
             currentStage = 0;
@@ -57,14 +57,18 @@ public class Wonder
         "Halikarnassus",
         "Lighthouse of Alexandria",
         "Hanging Gardens of Babylon",
-        "Great Pyramid of Giza",
         "Ephesos",
+        "Great Pyramid of Giza",
         "Statue of Zeus at Olympia"
     };
     
     public String getEffect(int stage)
     {
-        if (stage == 1) 
+    	if (stage == 0)
+    	{
+    		return "";
+    	}
+    	else if (stage == 1) 
         {
         	return "VP 3";
         }
@@ -72,19 +76,19 @@ public class Wonder
         {
         	return "VP 7";
         }
-        else //if Stage == 2
+        else
         {
-            if (getName().equals("Colossus of Rhodos")) 
+            if (getName().equalsIgnoreCase("rhodos")) 
             	return "WP 2";
-            else if (getName().equals("Halikarnassus")) 
+            else if (getName().equalsIgnoreCase("halikarnassus")) 
             	return "drawDiscard"; //Draw from discard 
-            else if (getName().equals("Lighthouse of Alexandria")) 
+            else if (getName().equalsIgnoreCase("alexandria")) 
             	return "resourceAll"; //Resource of choice
-            else if (getName().equals("Hanging Gardens of Babylon")) 
+            else if (getName().equalsIgnoreCase("babylon")) 
             	return "scienceAll"; //Provides science of choice
-            else if (getName().equals("Great Pyramid of Giza")) 
+            else if (getName().equalsIgnoreCase("gizah")) 
             	return "VP 5";
-            else if (getName().equals("Ephesos")) 
+            else if (getName().equalsIgnoreCase("ephesos")) 
             	return "C 9";
             else //Olympia
                 return "ignoreCost";
@@ -93,7 +97,7 @@ public class Wonder
     
     public String getCost(int stage)
     {
-    	if (getName().equals("Colossus of Rhodos")) 
+    	if (getName().equalsIgnoreCase("rhodos")) 
     	{
         	if (stage == 1)
         		return "Wood,Wood";
@@ -102,7 +106,7 @@ public class Wonder
         	else 
         		return "Ore,Ore,Ore,Ore";
     	}
-        else if (getName().equals("Halikarnassus")) 
+        else if (getName().equalsIgnoreCase("Halikarnassus")) 
         {
         	if (stage == 1)
         		return "Clay,Clay";
@@ -111,7 +115,7 @@ public class Wonder
         	else
         		return "Loom,Loom";
         }
-        else if (getName().equals("Lighthouse of Alexandria")) 
+        else if (getName().equalsIgnoreCase("alexandria")) 
         {
         	if (stage == 1)
         		return "Stone,Stone";
@@ -120,7 +124,7 @@ public class Wonder
         	else
         		return "Glass,Glass";
         }
-        else if (getName().equals("Hanging Gardens of Babylon")) 
+        else if (getName().equalsIgnoreCase("babylon")) 
         {
         	if (stage == 1)
         		return "Clay,Clay";
@@ -129,7 +133,7 @@ public class Wonder
         	else 
         		return "Clay,Clay,Clay,Clay";
         }
-        else if (getName().equals("Great Pyramid of Giza")) 
+        else if (getName().equalsIgnoreCase("gizah")) 
         {
         	if (stage == 1)
         		return "Stone,Stone";
@@ -138,7 +142,7 @@ public class Wonder
         	else 
         		return "Stone,Stone,Stone,Stone";
         }
-        else if (getName().equals("Ephesos")) 
+        else if (getName().equalsIgnoreCase("ephesos")) 
         {
         	if (stage == 1)
         		return "Stone,Stone";
