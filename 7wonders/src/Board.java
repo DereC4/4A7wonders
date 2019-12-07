@@ -12,6 +12,7 @@ public class Board
     private Deck deck;
 	private int Age1CardQuantity;
     private int Age2CardQuantity;
+    private boolean drawDiscard;
     
     private int Age3CardQuantity;
     
@@ -40,6 +41,7 @@ public class Board
         currentAge = 1;
         onWards = true;
         currentPlayer = 0; // players are 0,1,2
+        drawDiscard = false;
     }
     
     public void decodeWonderEffect(String effect)
@@ -52,41 +54,62 @@ public class Board
     	{
     		Player p = getCurrentPlayer();
     		if (effect.equals("WP 2"))
+    		{
     			p.setArmies(getCurrentPlayer().getArmies() + 2);
+    		}
     		else if (effect.equals("resourceAll"))
+    		{
     			p.addToResources(new Resources("Clay/Ore/Wood/Stone"));
+    		}
     		else if (effect.equals("scienceAll")) //call at end of game right before VP calc
     		{
-    			TreeMap<String, Integer> sciList = p.getSciList();
-    			int max = -1;
-    			int min = Integer.MAX_VALUE;
-    			int totalSci = 0; 
-    			
-    			String highestScience = new String();
-    			String lowestScience = new String();
-    			
-    			for (String sci : sciList.keySet())
-    			{
-    				if (sciList.get(sci) > max)
-    				{
-    					max = sciList.get(sci);
-    					highestScience = sci;
-    				}
-    				if (sciList.get(sci) < min)
-    				{
-    					min = sciList.get(sci);
-    					lowestScience = sci;
-    				}
-    				totalSci += sciList.get(sci);
-    			}
-    			
-    			if (totalSci % 3 == 1)
-    				sciList.put(lowestScience, sciList.get(min)+1);
-    			else
-    				sciList.put(highestScience, sciList.get(max)+1);
+    			TreeMap<String,Integer> sciListL = new TreeMap<String,Integer>();
+    			TreeMap<String,Integer> sciListM = new TreeMap<String,Integer>();
+    			TreeMap<String,Integer> sciListG = new TreeMap<String,Integer>();
+                for (String key: p.getSciList().keySet())
+                {
+                    sciListL.put(key, p.getSciList().get(key));
+                    sciListM.put(key, p.getSciList().get(key));
+                    sciListG.put(key, p.getSciList().get(key));
+                }
+                int l = p.getSciList().get("lit");
+                int m = p.getSciList().get("math");
+                int g = p.getSciList().get("gear");
+                sciListL.put("lit", l + 1);
+                sciListM.put("math", m + 1);
+                sciListG.put("gear", g + 1);
+                int lit = calcSci(sciListL);
+                int math = calcSci(sciListM);
+                int gear = calcSci(sciListG);
+                if (lit >= math && lit > gear)
+                {
+                    p.getSciList().put("lit", p.getSciList().get("lit") + 1);
+                }
+                else if (math > lit && math > gear)
+                {
+                    p.getSciList().put("math", p.getSciList().get("math") + 1);
+                }
+                else if (gear > lit && gear > math)
+                {
+                    p.getSciList().put("gear", p.getSciList().get("gear") + 1);
+                }
     		}
-    		//else if ()
-    			
+    		else if (effect.equals("VP 5")) //Call right before calc VP
+    		{
+    			getCurrentPlayer().addVP(5);
+    		}
+    		else if (effect.equals("C 9"))
+    		{
+    			getCurrentPlayer().setMoney(getCurrentPlayer().getMoney() + 9);
+    		}
+    		else if (effect.equals("ignoreCost")) //call be used once per age
+    		{
+    			getCurrentPlayer().setIgnoreCost(true);
+    		}
+    		else if (effect.equals("drawDiscard")) //call once at the end of turn (not age)
+    		{
+    			setDrawDiscard(true);
+    		}
     	}
     }
     
@@ -385,7 +408,6 @@ public class Board
                 vp += p.getWonder().getCurrentStage();
                 vp += p2.getWonder().getCurrentStage();
             }
-            /*
             if (com[1].equals("S All"))
             {
                 TreeMap < String, Integer > sciListL = new TreeMap < String, Integer > ();
@@ -403,23 +425,22 @@ public class Board
                 sciListL.put("lit", l + 1);
                 sciListM.put("math", m + 1);
                 sciListG.put("gear", g + 1);
-                int pn1 = calcSci(sciListL);
-                int pn2 = calcSci(sciListM);
-                int pn3 = calcSci(sciListG);
-                if (pn1 >= pn2 && pn1 > pn3)
+                int lit = calcSci(sciListL);
+                int math = calcSci(sciListM);
+                int gear = calcSci(sciListG);
+                if (lit >= math && lit > gear)
                 {
                     p.getSciList().put("lit", p.getSciList().get("lit") + 1);
                 }
-                if (pn2 > pn1 && pn2 > pn3)
+                else if (math > lit && math > gear)
                 {
                     p.getSciList().put("math", p.getSciList().get("math") + 1);
                 }
-                if (pn3 > pn1 && pn3 > pn2)
+                else if (gear > lit && gear > math)
                 {
                     p.getSciList().put("gear", p.getSciList().get("gear") + 1);
                 }
             }
-            */
             if (com[1].equals("D"))
             {
                 vp += p.getPlayedCards().get("blue").size();
@@ -536,6 +557,7 @@ public class Board
     	if (c == null)
     		return false;
     	
+    	Player p = getCurrentPlayer();
     	TreeMap <String, ArrayList<Card>> played = playerList.get(currentPlayer).getPlayedCards();
     	
         for (String key : played.keySet())
@@ -546,6 +568,11 @@ public class Board
         		out.println("Card of same name has been played");
         		return false; //has card been played
         	}
+        }
+        
+        if (p.isIgnoreCost())
+        {
+        	return true;
         }
         
         if (c.isFree()) //is card free
@@ -714,7 +741,11 @@ public class Board
     {
     	Player p = getPlayerList().get(id);
     	
-    	if (p.getTrade().size() == 0)
+    	if (p.isIgnoreCost())
+    	{
+    		p.setIgnoreCost(false);
+    	}
+    	else if (p.getTrade().size() == 0)
     	{
     		if (p.getTempPlayedCard().getCost().contains("C 1"))
     		{
@@ -723,16 +754,16 @@ public class Board
     	}
     	else
     	{
-    		out.println(p.getTrade());
+    		//out.println(p.getTrade());
     		for (int index : p.getTrade().keySet())
     		{
     			Player toTrade = getPlayerList().get(index);
     			ArrayList<Resources> resources = p.getTrade().get(index);
-    			out.println(resources);
+    			//out.println(resources);
     			for (int i = 0; i < resources.size(); i++)
     			{
     				trade(p, toTrade, resources.get(i));
-    				out.println("Done!");
+    				//out.println("Done!");
     			}
     			resources.clear();
     		}
@@ -868,18 +899,21 @@ public class Board
     	}
     }
     
-    public void buildWonder(int stage)
+    public void buildWonder(Player p, int stage, Card card)
 	{ 
-    	Wonder wonder = getCurrentPlayer().getWonder();
+    	Player player = p;
+    	Wonder wonder = player.getWonder();
 		int currentStage = wonder.getCurrentStage();
 		if (currentStage == 3)
 			return;
 		else if (stage <= currentStage)
 			return;
+		else if (stage > currentStage + 1)
+			return;
 		
 		ArrayList<Resources> cost = new ArrayList<Resources>();
 		ArrayList<Resources> resources = new ArrayList<Resources>(); //local copy of resources
-		for (Resources r : getCurrentPlayer().getResources())
+		for (Resources r : player.getResources())
 			resources.add(r);
 		
 		String temp = wonder.getCost(stage);
@@ -902,12 +936,117 @@ public class Board
 		
 		if (cost.size() == 0) //Player has all necessary resources
 		{
-			decodeWonderEffect(wonder.getEffect(stage));
 			wonder.setCurrentStage(stage);
+			player.getHand().remove(card);
+			player.setBuildWonder(false);
 		}
 		else
 		{
-			
+			TreeMap<Integer, ArrayList<Resources>> trade = player.getTrade();
+        	int costLeft = 0;
+        	int costRight = 0;
+        	for (Resources r : cost)
+        	{
+				int lower = currentPlayer-1;
+	            if (lower < 0) 
+	            {
+	                lower = 2;
+	            }
+	            int higher = currentPlayer+1;
+	            if (higher > 2) 
+	            {
+	                higher = 0;
+	            }
+	            ArrayList<Resources> leftResources = playerList.get(lower).getResources();
+	            ArrayList<Resources> rightResources = playerList.get(higher).getResources();
+	            //System.out.println("Left: " + leftResources);
+	            //System.out.println("Right " + rightResources);
+	            
+	           
+	            if (!leftResources.contains(r) && !rightResources.contains(r))
+                {
+	            	out.println("Don't have resources");
+                    return;
+                }
+                else if (leftResources.contains(r) && rightResources.contains(r))
+                {
+                	int tempCostLeft = determineCost(r, false, currentPlayer);
+    	            int tempCostRight = determineCost(r, true, currentPlayer);
+    	            
+                	if (tempCostLeft <= tempCostRight)
+                	{
+                		costLeft += tempCostLeft;
+                		if (trade.get(lower) == null)
+                		{
+                			ArrayList<Resources> tempList = new ArrayList<>();
+                			tempList.add(r);
+                			trade.put(lower, tempList);
+                		}
+                		else
+                		{
+                			ArrayList<Resources> tempList = trade.get(lower);
+                			tempList.add(r);
+                			trade.put(lower, tempList);
+                		}
+                	}
+                	else
+                	{
+                		costRight += tempCostRight;
+                		if (trade.get(higher) == null)
+                		{
+                			ArrayList<Resources> tempList = new ArrayList<>();
+                			tempList.add(r);
+                			trade.put(higher, tempList);
+                		}
+                		else
+                		{
+                			ArrayList<Resources> tempList = trade.get(higher);
+                			tempList.add(r);
+                			trade.put(higher, tempList);
+                		}
+                	}
+                }
+                else if (leftResources.contains(r))
+                {
+                    costLeft += determineCost(r, false, currentPlayer);
+                    if (trade.get(lower) == null)
+            		{
+            			ArrayList<Resources> tempList = new ArrayList<>();
+            			tempList.add(r);
+            			trade.put(lower, tempList);
+            		}
+            		else
+            		{
+            			ArrayList<Resources> tempList = trade.get(lower);
+            			tempList.add(r);
+            			trade.put(lower, tempList);
+            		}
+                }
+                else
+                {
+                	costRight += determineCost(r, true, currentPlayer);
+                	if (trade.get(higher) == null)
+            		{
+            			ArrayList<Resources> tempList = new ArrayList<>();
+            			tempList.add(r);
+            			trade.put(higher, tempList);
+            		}
+            		else
+            		{
+            			ArrayList<Resources> tempList = trade.get(higher);
+            			tempList.add(r);
+            			trade.put(higher, tempList);
+            		}
+                }
+        	}
+        	
+	        if (playerList.get(currentPlayer).getMoney() >= costLeft + costRight)
+	        {
+	        	//System.out.println("Has Enough Money");
+				wonder.setCurrentStage(stage);
+				player.getHand().remove(card);
+				player.setBuildWonder(false);
+	        }
 		}
 	}
     
@@ -968,7 +1107,17 @@ public class Board
     {
         return Age3CardQuantity;
     }
-    public void setAge3CardQuantity(int age3CardQuantity)
+    public boolean isDrawDiscard() 
+    {
+		return drawDiscard;
+	}
+
+	public void setDrawDiscard(boolean drawDiscard) 
+	{
+		this.drawDiscard = drawDiscard;
+	}
+
+	public void setAge3CardQuantity(int age3CardQuantity)
     {
         Age3CardQuantity = age3CardQuantity;
     }

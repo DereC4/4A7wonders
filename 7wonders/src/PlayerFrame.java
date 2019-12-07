@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
 public class PlayerFrame extends JFrame implements MouseListener
@@ -57,6 +56,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 					board.deal(board.getCurrentAge());
 					for (Player p : board.getPlayerList())
 					{
+						board.getDeck().getDiscard().add(p.getHand().get(0)); //adds remaining card to discard pile
 						p.getHand().remove(0); //Discard remaining card from previous age
 						//out.println(p.getHand());
 					}
@@ -80,10 +80,24 @@ public class PlayerFrame extends JFrame implements MouseListener
 						Player p = players.get(i);
 						Card temp = p.getTempPlayedCard();
 						//p.addToPlayedCards(p.getTempPlayedCard());
-						if (p.isBurnCard())
+						if (p.isBuildWonder())
+						{
+							Wonder wonder = p.getWonder();
+							int stage = wonder.getCurrentStage();
+							ArrayList<String> uniqueCases = new ArrayList<>();
+							uniqueCases.add("scienceAll");
+							uniqueCases.add("VP 5");
+							uniqueCases.add("ignoreCost");
+							
+							board.buildWonder(p, stage+1, temp);
+							if (!uniqueCases.contains(wonder.getEffect(stage))) //if unique case, do not change player.buildWonder()
+								board.decodeWonderEffect(wonder.getEffect(stage));
+						}
+						else if (p.isBurnCard())
 						{
 							board.getDeck().getDiscard().add(temp);
 							p.setMoney(p.getMoney() + 3);
+							p.setBurnCard(false);
 						}
 						else 
 						{
@@ -118,7 +132,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 				{
 //					g.setColor(Color.red);
 //					g.fillRect(1375, 425, 125, 125); //button to burn cards
-					out.println("Burn mode: "+ board.getCurrentPlayer().isBurnCard());
+					//out.println("Burn mode: "+ board.getCurrentPlayer().isBurnCard());
 					g.drawImage(burnactivated, 1405, 450, 56, 70, null);
 				}
 				else
@@ -236,20 +250,14 @@ public class PlayerFrame extends JFrame implements MouseListener
 		g.drawRect(655, 510, 280, 85); //Wonder stage 2
 		g.drawRect(980, 510, 280, 85); //Wonder stage 3
 		*/
-		if (event.getY()>510 && event.getY()<595)
+		if (event.getY()>510 && event.getY()<595) //Build wonders
 		{
 			if (event.getX()>325 && event.getX()<605)
-			{
-				 
-			}
+				player.setBuildWonder(true);
 			else if (event.getX()>655 && event.getX()<935)
-			{
-				
-			}
+				player.setBuildWonder(true);
 			else if (event.getX()>980 && event.getX()<1260)
-			{
-				
-			}
+				player.setBuildWonder(true);
 		}
 		
 		if (event.getY()>675 && event.getY()<956)
@@ -277,7 +285,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 				//out.println(player.getHand().size());
 				//out.println("Player: " + board.getCurrentPlayer().getIndex());
 				//out.println("Name: " + temp.getName() + " Cost:" + temp.getCost());
-				if (player.isBurnCard() || board.playable(temp))
+				if (player.isBurnCard() || board.playable(temp) || player.isBuildWonder())
 				{
 					//if (temp.getCost().get(0).toString().equals("C 1"))
 						//board.getCurrentPlayer().setMoney(board.getCurrentPlayer().getMoney()-1);
