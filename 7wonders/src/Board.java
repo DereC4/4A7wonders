@@ -1071,6 +1071,27 @@ public class Board
 	        return false;
 		}
     }
+    public void printEverything() {
+    	System.out.println("Player "+getCurrentPlayer().getIndex()+1+" is currently playing");
+    	
+    	for (int i=0;i<3;i++) {
+    		System.out.println("Player "+(i+1)+"'s hand is "+playerList.get(i).getHand().toString());
+    	}
+    	
+    	for (int i=0;i<3;i++) {
+    		System.out.println("Player "+(i+1)+"'s played cards are "+playerList.get(i).getPlayedCards().toString());
+    	}
+    	
+    	for (int i=0;i<3;i++) {
+    		System.out.println("Player "+(i+1)+"'s played cards are "+playerList.get(i).getResources().toString());
+    	}
+    	
+    	for (int i=0;i<3;i++) {
+    		System.out.println("Player "+(i+1)+" has built "+playerList.get(i).getWonder().getCurrentStage()+" stages of their wonder");
+    	}
+    	
+    	
+    }
     
     public void buildWonder(Player p, int stage, Card card)
 	{ 

@@ -55,6 +55,7 @@ public class PlayerFrame extends JFrame implements MouseListener
 	
 	public void paint(Graphics g)
 	{
+		board.printEverything();
 		if (!board.gameFinished())
 		{
 			try
