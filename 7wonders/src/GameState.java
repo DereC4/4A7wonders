@@ -8,4 +8,7 @@ public class GameState {
 	public GameState(Board b) throws IOException{
 		boardCopy=b;
 	}
+	public void setGameState(Board ib) {
+		boardCopy=ib;
+	}
 }
