@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.TreeMap;
-
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
@@ -28,10 +27,12 @@ public class CardWindow extends JFrame
         playedCards = p.getPlayedCards();
         //out.println(playedCards);
 	}
+	
 	public static int incrementIndex(int i)
 	{
 		return ++i;
 	}
+	
 	public void paint(Graphics g)
 	{
 		try

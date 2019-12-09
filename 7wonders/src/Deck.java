@@ -131,6 +131,7 @@ public class Deck
         Scanner scan = new Scanner(file);
         scan.nextLine();
         scan.nextLine();
+        ArrayList<Card>guilds=new ArrayList<>();
         while (scan.hasNextLine())
         {
             String input = scan.nextLine();
@@ -146,10 +147,16 @@ public class Deck
 	            	getAgeOne().add(card);
 	            else if (age == 2) 
 	            	getAgeTwo().add(card);
+	            //else if (card.getName().contains("guild"))
+	            //	guilds.add(card);
 	            else if (age == 3)
 	            	getAgeThree().add(card);
             }
         }
+        Collections.shuffle(guilds);
+        /*for (int i=0;i<5;i++) {
+        	getAgeThree().add(guilds.get(i));
+        }*/
 //      System.out.println(ageOne);
         scan.close();
     }

@@ -11,8 +11,11 @@ public class Player
 	private Wonder wonder;
 	private ArrayList<Resources> resources;
 	//private ArrayList<Resources> tempResources;
-	private Card tempPlayedCard;
+	private ArrayList<Card> tempPlayedCards;
 	private boolean burnCard;
+	private boolean ignoreCost;
+	private boolean buildWonder;
+	private boolean Has_VP_Effect;
 	private TreeMap<Integer, ArrayList<Resources>> trade; //Player index, resources
 	
 	public Player(int index) 
@@ -43,11 +46,16 @@ public class Player
 
 		playedCards = new TreeMap<String, ArrayList<Card>>();
 		hand = new ArrayList<Card>();
+		setBurnCard(false);
+		setIgnoreCost(false);
+		setBuildWonder(false);
+		setHas_VP_Effect(false);
+		tempPlayedCards = new ArrayList<Card>();
 	}
 	
 	public void play(Card c)
 	{
-		setTempPlayedCard(c);
+		addTempPlayedCard(c);
 		getHand().remove(c);
 	}
 	/*
@@ -73,11 +81,11 @@ public class Player
 	public void setBurnCard(boolean burnCard) {
 		this.burnCard = burnCard;
 	}
-	public Card getTempPlayedCard() {
-		return tempPlayedCard;
+	public ArrayList<Card> getTempPlayedCards() {
+		return tempPlayedCards;
 	}
-	public void setTempPlayedCard(Card tempPlayedCard) {
-		this.tempPlayedCard = tempPlayedCard;
+	public void addTempPlayedCard(Card tempPlayedCard) {
+		this.tempPlayedCards.add(tempPlayedCard);
 	}
 	public void addToResources(Resources r) {
 		resources.add(r);
@@ -166,12 +174,44 @@ public class Player
 		wonder=w;
 	}
 	public void addVP(int i) {
-		vp+=i;
+		vp += i;
+	}
+	public int getVP()
+	{
+		return vp;
 	}
 	public ArrayList <Resources> getResources()
 	{
 		return resources;
 	}
+	public boolean isIgnoreCost() 
+	{
+		return ignoreCost;
+	}
+	public void setIgnoreCost(boolean ignoreCost) 
+	{
+		this.ignoreCost = ignoreCost;
+	}
+	
+	public boolean isBuildWonder() 
+	{
+		return buildWonder;
+	}
+
+	public void setBuildWonder(boolean buildWonder) 
+	{
+		this.buildWonder = buildWonder;
+	}
+	public boolean has_VP_Effect() 
+	{
+		return Has_VP_Effect;
+	}
+
+	public void setHas_VP_Effect(boolean buildWonder) 
+	{
+		this.Has_VP_Effect = buildWonder;
+	}
+
 	/*
 	public void addTempResource(Resources r)
 	{
