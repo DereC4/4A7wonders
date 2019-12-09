@@ -147,23 +147,23 @@ public class Deck
 	            	getAgeOne().add(card);
 	            else if (age == 2) 
 	            	getAgeTwo().add(card);
-	            //else if (card.getName().contains("guild"))
-	            //	guilds.add(card);
+	            else if (card.getName().contains("guild"))
+	            	guilds.add(card);
 	            else if (age == 3)
 	            	getAgeThree().add(card);
             }
         }
         Collections.shuffle(guilds);
-        /*for (int i=0;i<5;i++) {
+        for (int i=0;i<5;i++) 
         	getAgeThree().add(guilds.get(i));
-        }*/
-//      System.out.println(ageOne);
+//      System.out.println(ageOne); 
         scan.close();
     }
     
     public static void main(String[] args) throws IOException
     {
     	Deck deck = new Deck();
-    	System.out.println(deck.getAgeTwo().size());
+    	for (Card card : deck.getAgeThree())
+    		System.out.println(card.getName());
     }
 }
