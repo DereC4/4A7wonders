@@ -38,7 +38,7 @@ public class Board
         	playerList.get(i).setWonder(WonderList.remove(index));
         	playerList.get(i).addToResources(playerList.get(i).getWonder().getProduct());
         } 
-        playerList.get(0).setWonder(new Wonder("Halikarnassus")); //temp
+        //playerList.get(0).setWonder(new Wonder("Halikarnassus")); //temp
         
         currentAge = 1;
         onWards = true;
@@ -658,6 +658,7 @@ public class Board
 	            if (!leftResources.contains(r) && !rightResources.contains(r))
                 {
 	            	//out.println("Don't have resources");
+	            	trade.clear();
                     return false;
                 }
                 else if (leftResources.contains(r) && rightResources.contains(r))
@@ -774,6 +775,7 @@ public class Board
     			}
     			resources.clear();
     		}
+    		p.getTrade().clear();
     	}
     }
     
