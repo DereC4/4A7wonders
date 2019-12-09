@@ -58,6 +58,7 @@ public class GameFrame extends PlayerFrame
 						if (board.getCurrentAge()==3) {
 							if (board.ageOver()) {
 								VictoryWindow x=new VictoryWindow();
+								
 							}
 						}
 					}
