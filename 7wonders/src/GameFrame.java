@@ -54,6 +54,13 @@ public class GameFrame extends PlayerFrame
 						if (wonder.getName().equals("Olympia") && stage >= 2)
 							p.setIgnoreCost(true);
 					}
+					if (board.getCurrentPlayer().getIndex()==2) {
+						if (board.getCurrentAge()==3) {
+							if (board.ageOver()) {
+								VictoryWindow x=new VictoryWindow();
+							}
+						}
+					}
 				}
 				
 				//check temp card storage 
