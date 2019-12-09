@@ -40,6 +40,9 @@ public class GameFrame extends PlayerFrame
 					
 					board.calcWarPoints(); //for previous age
 					board.setCurrentAge(board.getCurrentAge()+1);
+					if (board.getCurrentAge()>3) {
+						return;
+					}
 					out.println(board.getCurrentAge());
 					//System.out.print("New Age is " + board.getCurrentAge());
 					board.deal(board.getCurrentAge());
