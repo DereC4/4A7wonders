@@ -48,30 +48,30 @@ public class Board
     
     public void decodeWonderEffect(String effect)
     {
-    	if (effect.equals("VP 3"))
+    	if (effect.equalsIgnoreCase("VP 3"))
     	{
     		getCurrentPlayer().addVP(3);
     	}
-    	else if (effect.equals("VP 7"))
+    	else if (effect.equalsIgnoreCase("VP 7"))
     	{
     		getCurrentPlayer().addVP(7);
     	}
-    	else if (effect.equals("VP 5")) //Call right before calc VP
+    	else if (effect.equalsIgnoreCase("VP 5")) //Call right before calc VP
 		{
 			getCurrentPlayer().addVP(5);
 		}
     	else
     	{
     		Player p = getCurrentPlayer();
-    		if (effect.equals("WP 2"))
+    		if (effect.equalsIgnoreCase("WP 2"))
     		{
     			p.setArmies(getCurrentPlayer().getArmies() + 2);
     		}
-    		else if (effect.equals("resourceAll"))
+    		else if (effect.equalsIgnoreCase("resourceAll"))
     		{
     			p.addToResources(new Resources("Clay/Ore/Wood/Stone"));
     		}
-    		else if (effect.equals("scienceAll")) //call at end of game right before VP calc
+    		else if (effect.equalsIgnoreCase("scienceAll")) //call at end of game right before VP calc
     		{
     			TreeMap<String,Integer> sciListL = new TreeMap<String,Integer>();
     			TreeMap<String,Integer> sciListM = new TreeMap<String,Integer>();
@@ -104,15 +104,15 @@ public class Board
                     p.getSciList().put("gear", p.getSciList().get("gear") + 1);
                 }
     		}
-    		else if (effect.equals("C 9"))
+    		else if (effect.equalsIgnoreCase("C 9"))
     		{
     			getCurrentPlayer().setMoney(getCurrentPlayer().getMoney() + 9);
     		}
-    		else if (effect.equals("ignoreCost")) //call be used once per age
+    		else if (effect.equalsIgnoreCase("ignoreCost")) //call be used once per age
     		{
     			getCurrentPlayer().setIgnoreCost(true);
     		}
-    		else if (effect.equals("drawDiscard")) //call once at the end of turn (not age)
+    		else if (effect.equalsIgnoreCase("drawDiscard")) //call once at the end of turn (not age)
     		{
     			setDrawDiscard(true);
     		}
@@ -123,7 +123,7 @@ public class Board
     {
         String imports = c.getEffect();
         String[] enigma = imports.split(" ");
-        if (enigma[0].equals("VP"))
+        if (enigma[0].equalsIgnoreCase("VP"))
         {}
         else if (enigma[0].contains("C"))
         {
@@ -141,7 +141,7 @@ public class Board
                     p.setMoney(p.getMoney() + y * Integer.parseInt(enigma[3]));
                 }
             }
-            if (enigma[1].equals("LRD")) //vineyard
+            if (enigma[1].equalsIgnoreCase("LRD")) //vineyard
             {
                 // For LRD Cards
                 int y = p.getPlayedCards().get(enigma[2]).size(); //enigma[2] is a card color
@@ -164,7 +164,7 @@ public class Board
                 y = p2.getPlayedCards().get(enigma[2]).size();
                 p.setMoney(p.getMoney() + y * Integer.parseInt(enigma[3]));
             }
-            if (enigma[1].equals("LR"))
+            if (enigma[1].equalsIgnoreCase("LR"))
             {
                 // For LR Cards
                 int index = p.getIndex();
@@ -225,7 +225,7 @@ public class Board
         }
         else if (enigma[0].equals("S"))
         {
-            if (enigma[1].equals("All"))
+            if (enigma[1].equalsIgnoreCase("All"))
             {
                 TreeMap<String,Integer> temp = p.getSciList();
                 int x = temp.get("lit") + 1; //ISSUE
@@ -236,21 +236,21 @@ public class Board
                 temp.put("git", z);
                 p.setSciList(temp);
             }
-            else if (enigma[1].equals("Lit"))
+            else if (enigma[1].equalsIgnoreCase("Lit"))
             {
                 TreeMap < String, Integer > temp = p.getSciList();
                 int i = temp.get("lit") + 1;
                 temp.put("lit", i);
                 p.setSciList(temp);
             }
-            else if (enigma[1].equals("Math"))
+            else if (enigma[1].equalsIgnoreCase("Math"))
             {
                 TreeMap < String, Integer > temp = p.getSciList();
                 int i = temp.get("math") + 1;
                 temp.put("math", i);
                 p.setSciList(temp);
             }
-            else if (enigma[1].equals("Gear"))
+            else if (enigma[1].equalsIgnoreCase("Gear"))
             {
                 TreeMap < String, Integer > temp = p.getSciList();
                 int i = temp.get("gear") + 1;
@@ -315,7 +315,7 @@ public class Board
             Player p2 = playerList.get(upper);
             if (com[0].equals("VP"))
             {
-                if (com[0].equals("wonder"))
+                if (com[0].equalsIgnoreCase("wonder"))
                 {
                     //incomplete, fix later
                     if (com[1].equals("LR"))
@@ -374,12 +374,12 @@ public class Board
                     }
                     Player pl = playerList.get(lower);
                     Player p2 = playerList.get(upper);
-                    if (com[2].equals("minusWar"))
+                    if (com[2].equalsIgnoreCase("minusWar"))
                     {
                         vp += pl.getWarMinusPoints();
                         vp += p2.getWarMinusPoints();
                     }
-                    else if (com[2].equals("silver"))
+                    else if (com[2].equalsIgnoreCase("silver"))
                     {
                         ArrayList < Card > te = pl.getPlayedCards().get(com[2]);
                         vp += te.size() * Integer.parseInt(com[3]);
@@ -590,7 +590,7 @@ public class Board
         {
             for (Card i: played.get(s))
             {
-                if (i.getName().equals(c.getChain()))
+                if (i.getName().equalsIgnoreCase(c.getChain()))
                     return true;
             }
         }
