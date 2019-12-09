@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -55,7 +56,9 @@ public class PlayerFrame extends JFrame implements MouseListener
 	
 	public void paint(Graphics g)
 	{
-		board.printEverything();
+		//board.printEverything();
+		ArrayList<Card>hand=board.getCurrentPlayer().getHand();
+		System.out.println(hand.toString());
 		if (!board.gameFinished())
 		{
 			try
