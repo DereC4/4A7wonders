@@ -130,14 +130,21 @@ public class Board
             // For C and VPC Cards
             if (enigma[1].equals("D")) //down
             {
-                if (enigma[2].equalsIgnoreCase("Wonder"))
+                if (enigma[2].equalsIgnoreCase("Wonder")) //dispen
                 {
                     int y = p.getWonder().getCurrentStage();
                     p.setMoney(p.getMoney() + y * Integer.parseInt(enigma[3]));
                 }
                 else //Lighthouse
                 {
-                    int y = p.getPlayedCards().get(enigma[2]).size();
+                	ArrayList<Card>list=p.getPlayedCards().get(enigma[2]);
+                	int y=0;
+                	if (list!=null) {
+                		y=list.size();
+                	}
+                	else {
+                		y=0;
+                	}
                     p.setMoney(p.getMoney() + y * Integer.parseInt(enigma[3]));
                 }
             }
