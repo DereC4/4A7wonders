@@ -1072,7 +1072,7 @@ public class Board
 		}
     }
     public void printEverything() {
-    	System.out.println("Player "+getCurrentPlayer().getIndex()+1+" is currently playing");
+    	System.out.println("Player "+(getCurrentPlayer().getIndex())+1+" is currently playing");
     	
     	for (int i=0;i<3;i++) {
     		System.out.println("Player "+(i+1)+"'s hand is "+playerList.get(i).getHand().toString());
