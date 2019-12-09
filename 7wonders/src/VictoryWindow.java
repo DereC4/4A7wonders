@@ -65,9 +65,9 @@ public class VictoryWindow extends JFrame
 			score.add(player3vp);
 			Collections.sort(score);
 			System.out.println(score);
-			g.drawString("Player "+player1vp+"'s VP", 300, 250);
-			g.drawString("Player "+player2vp+"'s VP", 300, 250);
-			g.drawString("Player "+player1vp+"'s VP", 300, 250);
+			g.drawString("Player 1's VP", 300, 250);
+			g.drawString("Player 2's VP", 600, 100);
+			g.drawString("Player 3's VP", 900, 300);
 		}
 		catch (IOException e)
 		{
@@ -76,6 +76,6 @@ public class VictoryWindow extends JFrame
 	}
 	public static void main (String args[])
 	{
-		VictoryWindow x = new VictoryWindow(1, 2, 3);
+		VictoryWindow x = new VictoryWindow(3, 2, 1);
 	}
 }
