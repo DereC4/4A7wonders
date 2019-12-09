@@ -760,7 +760,7 @@ public class Board
     			p.setMoney(p.getMoney() - 1);
     		}
     	}
-    	else
+    	else 
     	{
     		//out.println(p.getTrade());
     		for (int index : p.getTrade().keySet())

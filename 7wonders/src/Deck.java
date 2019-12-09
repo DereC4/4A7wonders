@@ -156,7 +156,7 @@ public class Deck
         Collections.shuffle(guilds);
         for (int i=0;i<5;i++) 
         	getAgeThree().add(guilds.get(i));
-//      System.out.println(ageOne);
+//      System.out.println(ageOne); 
         scan.close();
     }
     
