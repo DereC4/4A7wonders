@@ -16,7 +16,7 @@ public class VictoryWindow extends JFrame
 	public static final int LENGTH = 650;
     public static final int HEIGHT = 396;
 	
-	public VictoryWindow(Player p)
+	public VictoryWindow()
 	{
 		super("Congrats on Finishing!");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -24,7 +24,6 @@ public class VictoryWindow extends JFrame
         setLayout(null);
         setVisible(true);
         setBounds(150,25,LENGTH,HEIGHT);
-        playedCards = p.getPlayedCards();
         //out.println(playedCards);
 	}
 	public void paint(Graphics g)
@@ -40,5 +39,4 @@ public class VictoryWindow extends JFrame
 			//out.println(e);
 		}
 	}
-	
 }
