@@ -100,7 +100,7 @@ public class Deck
     {
         if (age == 1)
         {
-            Random rand = new Random();
+            Random rand = new Random(111111);
             for (int i = ageOne.size() - 1; i >= 1; i--)
             {
                 int j = rand.nextInt(ageOne.size());

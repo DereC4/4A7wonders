@@ -130,21 +130,35 @@ public class Board
             // For C and VPC Cards
             if (enigma[1].equals("D")) //down
             {
-                if (enigma[2].equalsIgnoreCase("Wonder"))
+                if (enigma[2].equalsIgnoreCase("Wonder")) //dispen
                 {
                     int y = p.getWonder().getCurrentStage();
                     p.setMoney(p.getMoney() + y * Integer.parseInt(enigma[3]));
                 }
                 else //Lighthouse
                 {
-                    int y = p.getPlayedCards().get(enigma[2]).size();
+                	ArrayList<Card>list=p.getPlayedCards().get(enigma[2]);
+                	int y=0;
+                	if (list!=null) {
+                		y=list.size();
+                	}
+                	else {
+                		y=0;
+                	}
                     p.setMoney(p.getMoney() + y * Integer.parseInt(enigma[3]));
                 }
             }
             if (enigma[1].equalsIgnoreCase("LRD")) //vineyard
             {
-                // For LRD Cards
-                int y = p.getPlayedCards().get(enigma[2]).size(); //enigma[2] is a card color
+                // For LRD Cards\
+            	ArrayList<Card>test=p.getPlayedCards().get(enigma[2]);
+            	int y=0;
+            	if (test==null) {
+            		y=0;
+            	}
+            	else {
+            		y=test.size();
+            	}
                 p.setMoney(p.getMoney() + y * Integer.parseInt(enigma[3]));
                 int index = p.getIndex();
                 int lower = index-1;
@@ -487,7 +501,7 @@ public class Board
     
     public boolean gameFinished()
     {
-        if (currentAge == 3 && playerList.get(0).getHand().size() == 0 && playerList.get(1).getHand().size() == 0 && playerList.get(2).getHand().size() == 0)
+        if (currentAge == 3 && playerList.get(0).getHand().size() == 1 && playerList.get(1).getHand().size() == 1 && playerList.get(2).getHand().size() == 1)
         {
             return true;
         }
@@ -837,6 +851,8 @@ public class Board
     
     public void trade(Player p1, Player p2, Resources r)
     {
+    	if(p1.getMoney()>=0)
+    	{
     	int index = p1.getIndex();
     	int temp = p2.getIndex();
     	boolean isRight;
@@ -863,8 +879,11 @@ public class Board
     			isRight = false;
     	}
     	int cost = determineCost(r, isRight, p1.getIndex());
-    	p1.setMoney(p1.getMoney() - cost);
-    	p2.setMoney(p2.getMoney() + cost);
+    	if(p1.getMoney()>=cost) {
+    		p1.setMoney(p1.getMoney() - cost);
+        	p2.setMoney(p2.getMoney() + cost);
+    	}
+    	}
     }
     
     public boolean ageOver()
