@@ -48,7 +48,9 @@ public class RulesWindow extends JFrame
 			
 			g.drawImage(resources, 0, 25, resources.getWidth(), resources.getHeight(), null);
 			g.drawImage(boards, 0, 510, resources.getWidth(), boards.getHeight(), null);
+			
 			g.drawImage(moreresource, 350, 25, moreresource.getWidth(), moreresource.getHeight(), null);
+			g.drawImage(finalfunctions, 350, 25+moreresource.getHeight(), moreresource.getWidth(), finalfunctions.getHeight(), null);
 			
 			g.drawImage(cardinfo, 689, 25, cardinfo.getWidth(), cardinfo.getHeight(), null);
 			g.drawImage(endofage, 689, 25+cardinfo.getHeight(), endofage.getWidth(), endofage.getHeight(), null);
@@ -63,8 +65,8 @@ public class RulesWindow extends JFrame
 			out.println(e);
 		}
 	}
-	public static void main (String args[])
-	{
-		RulesWindow x = new RulesWindow();
-	}
+//	public static void main (String args[])
+//	{
+//		RulesWindow x = new RulesWindow();
+//	}
 }
