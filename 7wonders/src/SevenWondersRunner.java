@@ -6,6 +6,5 @@ public class SevenWondersRunner
 	{
 		//never change this :D
 		GameFrame sven = new GameFrame();
-//		RulesWindow rulesoftheduel = new RulesWindow();
 	}
 }
