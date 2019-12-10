@@ -174,10 +174,20 @@ public class Board
                 }
                 Player p1 = playerList.get(lower);
                 Player p2 = playerList.get(upper);
-                y = p1.getPlayedCards().get(enigma[2]).size();
+                ArrayList<Card>t=p1.getPlayedCards().get(enigma[2]);
+                y=0;
+                if (t!=null) {
+                	y=t.size();
+                }
                 p.setMoney(p.getMoney() + y * Integer.parseInt(enigma[3]));
-                y = p2.getPlayedCards().get(enigma[2]).size();
+                
+                t=p2.getPlayedCards().get(enigma[2]);
+                y=0;
+                if (t!=null) {
+                	y=t.size();
+                }
                 p.setMoney(p.getMoney() + y * Integer.parseInt(enigma[3]));
+                
             }
             if (enigma[1].equalsIgnoreCase("LR"))
             {
@@ -323,6 +333,8 @@ public class Board
         }
         // VP for yellow
         temp = playedCards.get("yellow");
+        if (temp==null) {}
+        else {
         for (Card c: temp)
         {
             String effect = c.getEffect();
@@ -412,8 +424,11 @@ public class Board
                 }
             }
         }
+        }
         // Vp for guilds
         temp = playedCards.get("purple"); // Examples: VP LR blue, VP LRD wonder, VP LR minusWar
+        if (temp==null) {}
+        else {
         for (Card c: temp)
         {
             String effect = c.getEffect();
@@ -515,6 +530,7 @@ public class Board
                 vp += p.getPlayedCards().get("silver").size();
                 vp += p.getPlayedCards().get("brown").size();
             }
+        }
         }
         return vp;
     }
