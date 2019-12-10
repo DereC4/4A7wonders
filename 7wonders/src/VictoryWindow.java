@@ -17,7 +17,6 @@ import javax.swing.JFrame;
 @SuppressWarnings("serial")
 public class VictoryWindow extends JFrame
 {
-	private TreeMap<String, ArrayList<Card>> playedCards;
 	public static final int LENGTH = 1300;
     public static final int HEIGHT = 792;
     private int player1vp, player2vp, player3vp;
