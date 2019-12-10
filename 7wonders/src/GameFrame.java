@@ -171,6 +171,9 @@ public class GameFrame extends PlayerFrame
                 g.drawString("" + board.getCurrentPlayer().getWarPlusPoints(), 160, 540);
                 g.drawString("Coins", 1425, 350);
                 g.drawString("" + board.getCurrentPlayer().getMoney(), 1435, 365);
+                g.setFont(new Font("Arial", Font.PLAIN, 20));
+                g.drawString("Previous Player", 10, 50);
+                g.drawString("Next Player", 1410, 50);
                 g.setFont(new Font("Arial", Font.PLAIN, 50));
                 int currentplayer = board.getCurrentPlayer().getIndex() + 1;
                 g.drawString("Player " + currentplayer, 350, 175);
@@ -183,8 +186,8 @@ public class GameFrame extends PlayerFrame
                 //Area to click; shows cards that player has played
                 //g.drawRect(1025, 100, 100, 100); 
                 g.setColor(Color.black);
-                g.drawRect(50, 50, 100, 100); //Show previous player's wonder
-                g.drawRect(1450, 50, 100, 100); //Show next player's wonder
+                g.drawRect(0, 0, 200, 150); //Show previous player's wonder
+                g.drawRect(1400, 0, 200, 150); //Show next player's wonder
                 g.drawRect(100, 250, 125, 125); //war minus points
                 g.drawRect(100, 425, 125, 125); //war plus points	
                 g.drawRect(1375, 250, 125, 125); //coins
@@ -237,14 +240,13 @@ public class GameFrame extends PlayerFrame
     public void mouseReleased(MouseEvent event)
     {
         Player player = board.getCurrentPlayer();
-        //g.drawRect(50, 50, 100, 100); //Show previous player's wonder
-        //g.drawRect(1450, 50, 100, 100); //Show next player's wonder
+        //g.drawRect(1400, 0, 200, 150); //Show next player's wonder
         super.mouseReleased(event);
         try
         {
-            if (event.getY() > 50 && event.getY() < 150)
+            if (event.getY() > 0 && event.getY() < 150)
             {
-                if (event.getX() > 50 && event.getX() < 150)
+                if (event.getX() > 0 && event.getX() < 200)
                 {
                     //out.println("Works");
                     int previous = player.getIndex() - 1;
@@ -252,9 +254,9 @@ public class GameFrame extends PlayerFrame
                     PlayerFrame frame = new PlayerFrame(board.getPlayerList().get(previous), board);
                 }
             }
-            if (event.getY() > 50 && event.getY() < 150)
+            if (event.getY() > 0 && event.getY() < 150)
             {
-                if (event.getX() > 1450 && event.getX() < 1550)
+                if (event.getX() > 1400 && event.getX() < 1600)
                 {
                     //out.println("Works");
                     int next = player.getIndex() + 1;
