@@ -1,4 +1,4 @@
-//NAME|COLOR|EFFECT|AGE|Chaining|Free|Cost//
+//NAME|COLOR|EFFECT|AGE|Chaining|Free|Cost //
 
 Academy|Green|S math|3|School|false|Stone,Stone,Stone,Glass
 Altar|Blue|VP 2|1| |true| 
@@ -15,7 +15,7 @@ Caravansery|Yellow|R resourceAll|2|Marketplace|false|Wood,Wood
 Claypit|Brown|R Clay/Ore|1| |false|C 1
 Claypool|Brown|R Clay|1| |true| 
 Courthouse|Blue|VP 4|2|Scriptorium|false|Clay,Clay,Loom
-Craftsmenguild|Purple|VP LR silver 2|3| |false|Ore,Ore,Stone,Stone
+Craftsmensguild|Purple|VP LR silver 2|3| |false|Ore,Ore,Stone,Stone
 Dispensary|Green|S math|2|Apothecary|false|Ore,Ore,Glass
 Easttradingpost|Yellow|TP R R|1| |true| 
 Fortifications|Red|WP 3|3|Walls|false|Ore,Ore,Ore,Stone
