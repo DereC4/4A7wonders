@@ -20,6 +20,7 @@ public class VictoryWindow extends JFrame
 	public static final int LENGTH = 1300;
     public static final int HEIGHT = 792;
     private int player1vp, player2vp, player3vp;
+    private TreeMap<String,Integer>player1tm, player2tm, player3tm;
     private Board board;
 	
 	public VictoryWindow(int player1vp, int player2vp, int player3vp,Board b)
@@ -33,6 +34,19 @@ public class VictoryWindow extends JFrame
         this.player1vp = player1vp;
         this.player2vp = player2vp;
         this.player3vp = player3vp;
+        board=b;
+	}
+	public VictoryWindow(TreeMap<String, Integer>player1vp, TreeMap<String, Integer>player2vp, TreeMap<String, Integer>player3vp,Board b)
+	{
+		super("Congrats on Finishing!");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        setLayout(null);
+        setVisible(true);
+        setBounds(150,25,LENGTH,HEIGHT);
+        player1tm = player1vp;
+        player2tm = player2vp;
+        player3tm = player3vp;
         board=b;
 	}
 	public void paint(Graphics g)
