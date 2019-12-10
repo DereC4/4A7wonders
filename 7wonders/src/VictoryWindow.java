@@ -34,7 +34,6 @@ public class VictoryWindow extends JFrame
         this.player2vp = player2vp;
         this.player3vp = player3vp;
         board=b;
-        //out.println(playedCards);
 	}
 	public void paint(Graphics g)
 	{
@@ -75,6 +74,7 @@ public class VictoryWindow extends JFrame
 			
 			
 			g.drawString("Player "+(list.get(score.get(1)).getIndex()+1)+"'s VP: "+score.get(1), 300, 250);
+//			g.drawString(""+score.get(1), 300, 250);
 			g.drawString("Player "+(list.get(score.get(2)).getIndex()+1)+"'s VP: "+score.get(2), 600, 100);
 			g.drawString("Player "+(list.get(score.get(0)).getIndex()+1)+"'s VP: "+score.get(0), 900, 300);
 		}
