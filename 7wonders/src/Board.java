@@ -150,11 +150,7 @@ public class Board
             }
             if (enigma[1].equalsIgnoreCase("LRD")) //vineyard
             {
-<<<<<<< HEAD
-                // For LRD Cards
-                int y = 0; //enigma[2] is a card color
-                ArrayList<Card>test=p.getPlayedCards().get(enigma[2]);
-=======
+
                 // For LRD Cards\
             	ArrayList<Card>test=p.getPlayedCards().get(enigma[2]);
             	int y=0;
@@ -164,7 +160,6 @@ public class Board
             	else {
             		y=test.size();
             	}
->>>>>>> branch 'master' of https://github.com/DereC4/4asians-7wonders
                 p.setMoney(p.getMoney() + y * Integer.parseInt(enigma[3]));
                 int index = p.getIndex();
                 int lower = index-1;
