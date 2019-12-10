@@ -25,11 +25,15 @@ public class GameFrame extends PlayerFrame
         if (!board.gameFinished())
         {
             //out.println(board.getCurrentPlayer().getIndex());
+        	if (board.ageOver()&&board.getCurrentAge()==3) {
+        		VictoryWindow x = new VictoryWindow(board.totalVP(board.getPlayerList().get(0)), board.totalVP(board.getPlayerList().get(1)), board.totalVP(board.getPlayerList().get(2)));
+        	}
         	for (int i=0;i<board.getPlayerList().size();i++) {
 				System.out.println("Player "+(i+1)+" Coins: "+board.getPlayerList().get(i).getMoney());
 				if (board.getPlayerList().get(i).getMoney()<0) {
 					System.out.println();
-					System.out.println("Player "+(i+1)+" has negatice coins");
+					System.out.println("Player "+(i+1)+" has negative coins");
+					board.getPlayerList().get(i).setMoney(0);
 					for (Player p:board.getPlayerList()) {
 						System.out.println("Player "+(i+1)+": Card to Play: "+p.getTempPlayedCards().toString());
 						System.out.println("Player "+(i+1)+": Last Type of Card Played: "+p.getPlayedCards().lastEntry().toString());
@@ -45,16 +49,9 @@ public class GameFrame extends PlayerFrame
                     if (board.isOnWards()) board.setOnWards(false);
                     else board.setOnWards(true);
                     board.calcWarPoints(); //for previous age
-                    if (board.getCurrentPlayer().getIndex() == 2)
-                    {
-                        if (board.getCurrentAge() == 3)
-                        {
-                            if (board.ageOver())
-                            {
-                                VictoryWindow x = new VictoryWindow(board.totalVP(board.getPlayerList().get(0)), board.totalVP(board.getPlayerList().get(1)), board.totalVP(board.getPlayerList().get(2)));
-                            }
-                        }
-                    }
+                    if (board.getCurrentAge()==3) {
+                    	VictoryWindow x = new VictoryWindow(board.totalVP(board.getPlayerList().get(0)), board.totalVP(board.getPlayerList().get(1)), board.totalVP(board.getPlayerList().get(2)));
+                    } 
                     board.setCurrentAge(board.getCurrentAge() + 1);
                     //System.out.print("New Age is " + board.getCurrentAge());
                     board.deal(board.getCurrentAge());
