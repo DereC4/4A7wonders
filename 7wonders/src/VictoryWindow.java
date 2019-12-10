@@ -21,8 +21,9 @@ public class VictoryWindow extends JFrame
 	public static final int LENGTH = 1300;
     public static final int HEIGHT = 792;
     private int player1vp, player2vp, player3vp;
+    private Board board;
 	
-	public VictoryWindow(int player1vp, int player2vp, int player3vp)
+	public VictoryWindow(int player1vp, int player2vp, int player3vp,Board b)
 	{
 		super("Congrats on Finishing!");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -33,6 +34,7 @@ public class VictoryWindow extends JFrame
         this.player1vp = player1vp;
         this.player2vp = player2vp;
         this.player3vp = player3vp;
+        board=b;
         //out.println(playedCards);
 	}
 	public void paint(Graphics g)
@@ -59,23 +61,31 @@ public class VictoryWindow extends JFrame
 			    e.printStackTrace();
 			}
 			//maybe add more game stats later
+			TreeMap<Integer,Player>list=new TreeMap<Integer, Player>();
+			list.put(player1vp,board.getPlayerList().get(0));
+			list.put(player2vp,board.getPlayerList().get(1));
+			list.put(player3vp,board.getPlayerList().get(2));
+			
 			ArrayList <Integer> score = new ArrayList<Integer>();
 			score.add(player1vp);
 			score.add(player2vp);
 			score.add(player3vp);
 			Collections.sort(score);
-			System.out.println(score);
-			g.drawString("Player 1's VP: "+player1vp, 300, 250);
-			g.drawString("Player 2's VP: "+player2vp, 600, 100);
-			g.drawString("Player 3's VP: "+player3vp, 900, 300);
+			
+			//System.out.println(score);
+			
+			
+			g.drawString("Player "+(list.get(score.get(1)).getIndex()+1)+"'s VP: "+score.get(1), 300, 250);
+			g.drawString("Player "+(list.get(score.get(2)).getIndex()+1)+"'s VP: "+score.get(2), 600, 100);
+			g.drawString("Player "+(list.get(score.get(0)).getIndex()+1)+"'s VP: "+score.get(0), 900, 300);
 		}
 		catch (IOException e)
 		{
 			out.println(e);
 		}
 	}
-	public static void main (String args[])
+	/*public static void main (String args[])
 	{
-		VictoryWindow x = new VictoryWindow(3, 2, 1);
-	}
+		VictoryWindow x = new VictoryWindow(3, 2, 1, board );
+	}*/
 }

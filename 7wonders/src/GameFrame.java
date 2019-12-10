@@ -26,7 +26,7 @@ public class GameFrame extends PlayerFrame
         {
             //out.println(board.getCurrentPlayer().getIndex());
         	if (board.ageOver()&&board.getCurrentAge()==3) {
-        		VictoryWindow x = new VictoryWindow(board.totalVP(board.getPlayerList().get(0)), board.totalVP(board.getPlayerList().get(1)), board.totalVP(board.getPlayerList().get(2)));
+        		VictoryWindow x = new VictoryWindow(board.totalVP(board.getPlayerList().get(0)), board.totalVP(board.getPlayerList().get(1)), board.totalVP(board.getPlayerList().get(2)),board);
         	}
         	for (int i=0;i<board.getPlayerList().size();i++) {
 				System.out.println("Player "+(i+1)+" Coins: "+board.getPlayerList().get(i).getMoney());
@@ -50,7 +50,7 @@ public class GameFrame extends PlayerFrame
                     else board.setOnWards(true);
                     board.calcWarPoints(); //for previous age
                     if (board.getCurrentAge()==3) {
-                    	VictoryWindow x = new VictoryWindow(board.totalVP(board.getPlayerList().get(0)), board.totalVP(board.getPlayerList().get(1)), board.totalVP(board.getPlayerList().get(2)));
+                    	VictoryWindow x = new VictoryWindow(board.totalVP(board.getPlayerList().get(0)), board.totalVP(board.getPlayerList().get(1)), board.totalVP(board.getPlayerList().get(2)),board);
                     } 
                     board.setCurrentAge(board.getCurrentAge() + 1);
                     //System.out.print("New Age is " + board.getCurrentAge());
