@@ -195,9 +195,21 @@ public class Board
                 }
                 Player p1 = playerList.get(lower);
                 Player p2 = playerList.get(upper);
-                int y = p1.getPlayedCards().get(enigma[2]).size();
+                ArrayList<Card>test=p1.getPlayedCards().get(enigma[2]);
+                int y=0;
+                if (test==null) {
+                	y=0;
+                }
+                else
+                	y=test.size();
                 p.setMoney(p.getMoney() + y * Integer.parseInt(enigma[3]));
-                y = p2.getPlayedCards().get(enigma[2]).size();
+                test=p2.getPlayedCards().get(enigma[2]);
+                y=0;
+                if (test==null) {
+                	y=0;
+                }
+                else
+                	y=test.size();
                 p.setMoney(p.getMoney() + y * Integer.parseInt(enigma[3]));
             }
         }
@@ -332,7 +344,6 @@ public class Board
             {
                 if (com[0].equalsIgnoreCase("wonder"))
                 {
-                    //incomplete, fix later
                     if (com[1].equals("LR"))
                     {
                         vp += pl.getWonder().getCurrentStage();
@@ -349,18 +360,54 @@ public class Board
                 {
                     if (com[1].equals("D"))
                     {
-                        vp += p.getPlayedCards().get(com[2]).size() * Integer.parseInt(com[3]);
+                    	ArrayList<Card>one=p.getPlayedCards().get(com[2]);
+                    	int y=0;
+                    	if (one==null) {
+                    		y=0;
+                    	}
+                    	else {
+                    		y=one.size();
+                    	}
+                        vp +=  y*Integer.parseInt(com[3]);
                     }
                     if (com[1].equals("LR"))
                     {
-                        vp += pl.getPlayedCards().get(com[2]).size() * Integer.parseInt(com[3]);
-                        vp += p2.getPlayedCards().get(com[2]).size() * Integer.parseInt(com[3]);
+                    	int y=0;
+                    	ArrayList<Card>one=pl.getPlayedCards().get(com[2]);
+                    	if (one!=null) {
+                    		y=one.size();
+                    	}
+                        vp += y * Integer.parseInt(com[3]);
+                        y=0;
+                    	one=p2.getPlayedCards().get(com[2]);
+                    	if (one!=null) {
+                    		y=one.size();
+                    	}
+                        vp += y * Integer.parseInt(com[3]);
                     }
-                    if (com[1].equals("D"))
+                    if (com[1].equals("LRD"))
                     {
-                        vp += p.getPlayedCards().get(com[2]).size() * Integer.parseInt(com[3]);
-                        vp += pl.getPlayedCards().get(com[2]).size() * Integer.parseInt(com[3]);
-                        vp += p2.getPlayedCards().get(com[2]).size() * Integer.parseInt(com[3]);
+                    	ArrayList<Card>one=p.getPlayedCards().get(com[2]);
+                    	int y=0;
+                    	if (one==null) {
+                    		y=0;
+                    	}
+                    	else {
+                    		y=one.size();
+                    	}
+                        vp +=  y*Integer.parseInt(com[3]);
+                        y=0;
+                    	one=pl.getPlayedCards().get(com[2]);
+                    	if (one!=null) {
+                    		y=one.size();
+                    	}
+                        vp += y * Integer.parseInt(com[3]);
+                        y=0;
+                    	one=p2.getPlayedCards().get(com[2]);
+                    	if (one!=null) {
+                    		y=one.size();
+                    	}
+                        vp += y * Integer.parseInt(com[3]);
                     }
                 }
             }
