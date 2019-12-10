@@ -18,6 +18,7 @@ public class GameFrame extends PlayerFrame
         //super.setMain(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         board = super.getBoard();
+        RulesWindow rulesoftheduel = new RulesWindow();
     } 
     public void paint(Graphics g)
     {
