@@ -27,7 +27,8 @@ public class GameFrame extends PlayerFrame
             //out.println(board.getCurrentPlayer().getIndex());
             if (board.ageOver() && board.getCurrentAge() == 3)
             {
-                VictoryWindow x = new VictoryWindow(board.totalVP(board.getPlayerList().get(0)), board.totalVP(board.getPlayerList().get(1)), board.totalVP(board.getPlayerList().get(2)), board);
+                VictoryWindow x = new VictoryWindow(board.totalVP(board.getPlayerList().get(0)), board.totalVP(board.getPlayerList().get(1)), 
+                		board.totalVP(board.getPlayerList().get(2)), board);
             }
             for (int i = 0; i < board.getPlayerList().size(); i++)
             {
@@ -57,17 +58,19 @@ public class GameFrame extends PlayerFrame
                     {
                         VictoryWindow x = new VictoryWindow(board.totalVP(board.getPlayerList().get(0)), board.totalVP(board.getPlayerList().get(1)), board.totalVP(board.getPlayerList().get(2)), board);
                     }
-                    board.setCurrentAge(board.getCurrentAge() + 1);
-                    //System.out.print("New Age is " + board.getCurrentAge());
-                    board.deal(board.getCurrentAge());
-                    for (Player p: board.getPlayerList())
-                    {
-                        board.getDeck().getDiscard().add(p.getHand().get(0)); //adds remaining card to discard pile
-                        p.getHand().remove(0); //Discard remaining card from previous age
-                        //out.println(p.getHand());
-                        Wonder wonder = p.getWonder();
-                        int stage = p.getWonderStage();
-                        if (wonder.getName().equals("Olympia") && stage >= 2) p.setIgnoreCost(true);
+                    else {
+                    	board.setCurrentAge(board.getCurrentAge() + 1);
+                        //System.out.print("New Age is " + board.getCurrentAge());
+                        board.deal(board.getCurrentAge());
+                        for (Player p: board.getPlayerList())
+                        {
+                            board.getDeck().getDiscard().add(p.getHand().get(0)); //adds remaining card to discard pile
+                            p.getHand().remove(0); //Discard remaining card from previous age
+                            //out.println(p.getHand());
+                            Wonder wonder = p.getWonder();
+                            int stage = p.getWonderStage();
+                            if (wonder.getName().equals("Olympia") && stage >= 2) p.setIgnoreCost(true);
+                        }
                     }
                 }
                 //check temp card storage 
@@ -198,6 +201,10 @@ public class GameFrame extends PlayerFrame
                 out.println(e);
                 //out.println(board.getCurrentPlayer().getWonder().getName());
             }
+        }
+        else {
+        	VictoryWindow x = new VictoryWindow(board.totalVP(board.getPlayerList().get(0)), board.totalVP(board.getPlayerList().get(1)), 
+            		board.totalVP(board.getPlayerList().get(2)), board);
         }
     }
     public void paintCards(Graphics g) //100, 675, 1400, 300
