@@ -14,9 +14,11 @@ import javax.swing.JFrame;
 public class GameFrame extends PlayerFrame
 {
     private Board board; //reference to super 
+    private boolean gameend;
     public GameFrame() throws IOException
     {
         super();
+        gameend = false;
         //super.setMain(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         board = super.getBoard();
@@ -208,6 +210,7 @@ public class GameFrame extends PlayerFrame
             }
         }
         else {
+        	
         	VictoryWindow x = new VictoryWindow(board.totalVP(board.getPlayerList().get(0)), board.totalVP(board.getPlayerList().get(1)), 
             		board.totalVP(board.getPlayerList().get(2)), board);
         }
