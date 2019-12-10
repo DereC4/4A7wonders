@@ -19,29 +19,33 @@ public class GameFrame extends PlayerFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         board = super.getBoard();
         RulesWindow rulesoftheduel = new RulesWindow();
-    } 
+    }
     public void paint(Graphics g)
     {
         if (!board.gameFinished())
         {
             //out.println(board.getCurrentPlayer().getIndex());
-        	if (board.ageOver()&&board.getCurrentAge()==3) {
-        		VictoryWindow x = new VictoryWindow(board.totalVP(board.getPlayerList().get(0)), board.totalVP(board.getPlayerList().get(1)), board.totalVP(board.getPlayerList().get(2)),board);
-        	}
-        	for (int i=0;i<board.getPlayerList().size();i++) {
-				System.out.println("Player "+(i+1)+" Coins: "+board.getPlayerList().get(i).getMoney());
-				if (board.getPlayerList().get(i).getMoney()<0) {
-					System.out.println();
-					System.out.println("Player "+(i+1)+" has negative coins");
-					board.getPlayerList().get(i).setMoney(0);
-					for (Player p:board.getPlayerList()) {
-						System.out.println("Player "+(i+1)+": Card to Play: "+p.getTempPlayedCards().toString());
-						System.out.println("Player "+(i+1)+": Last Type of Card Played: "+p.getPlayedCards().lastEntry().toString());
-						System.out.println("Player "+(i+1)+": Trading resources: "+p.getTrade().toString());
-					}
-					System.out.println();
-				}
-			}
+            if (board.ageOver() && board.getCurrentAge() == 3)
+            {
+                VictoryWindow x = new VictoryWindow(board.totalVP(board.getPlayerList().get(0)), board.totalVP(board.getPlayerList().get(1)), board.totalVP(board.getPlayerList().get(2)), board);
+            }
+            for (int i = 0; i < board.getPlayerList().size(); i++)
+            {
+                System.out.println("Player " + (i + 1) + " Coins: " + board.getPlayerList().get(i).getMoney());
+                if (board.getPlayerList().get(i).getMoney() < 0)
+                {
+                    System.out.println();
+                    System.out.println("Player " + (i + 1) + " has negative coins");
+                    board.getPlayerList().get(i).setMoney(0);
+                    for (Player p: board.getPlayerList())
+                    {
+                        System.out.println("Player " + (i + 1) + ": Card to Play: " + p.getTempPlayedCards().toString());
+                        System.out.println("Player " + (i + 1) + ": Last Type of Card Played: " + p.getPlayedCards().lastEntry().toString());
+                        System.out.println("Player " + (i + 1) + ": Trading resources: " + p.getTrade().toString());
+                    }
+                    System.out.println();
+                }
+            }
             try
             {
                 if (board.ageOver())
@@ -49,9 +53,10 @@ public class GameFrame extends PlayerFrame
                     if (board.isOnWards()) board.setOnWards(false);
                     else board.setOnWards(true);
                     board.calcWarPoints(); //for previous age
-                    if (board.getCurrentAge()==3) {
-                    	VictoryWindow x = new VictoryWindow(board.totalVP(board.getPlayerList().get(0)), board.totalVP(board.getPlayerList().get(1)), board.totalVP(board.getPlayerList().get(2)),board);
-                    } 
+                    if (board.getCurrentAge() == 3)
+                    {
+                        VictoryWindow x = new VictoryWindow(board.totalVP(board.getPlayerList().get(0)), board.totalVP(board.getPlayerList().get(1)), board.totalVP(board.getPlayerList().get(2)), board);
+                    }
                     board.setCurrentAge(board.getCurrentAge() + 1);
                     //System.out.print("New Age is " + board.getCurrentAge());
                     board.deal(board.getCurrentAge());
@@ -64,7 +69,6 @@ public class GameFrame extends PlayerFrame
                         int stage = p.getWonderStage();
                         if (wonder.getName().equals("Olympia") && stage >= 2) p.setIgnoreCost(true);
                     }
-                    
                 }
                 //check temp card storage 
                 //update round 
