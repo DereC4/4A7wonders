@@ -144,7 +144,8 @@ public class Board
             if (enigma[1].equals("LRD")) //vineyard
             {
                 // For LRD Cards
-                int y = p.getPlayedCards().get(enigma[2]).size(); //enigma[2] is a card color
+                int y = 0; //enigma[2] is a card color
+                ArrayList<Card>test=p.getPlayedCards().get(enigma[2]);
                 p.setMoney(p.getMoney() + y * Integer.parseInt(enigma[3]));
                 int index = p.getIndex();
                 int lower = index-1;
@@ -571,7 +572,7 @@ public class Board
         	ArrayList<Card> temp = played.get(key);
         	if (temp.contains(c))
         	{
-        		out.println("Card of same name has been played");
+        		//out.println("Card of same name has been played");
         		return false; //has card been played
         	}
         }
@@ -617,8 +618,8 @@ public class Board
         	{
         		if (resources.get(j).toString().contains(cost.get(i).toString())) 
         		{
-        			out.println(cost.get(i).toString());
-        			out.println(resources.get(j).toString());
+        			/*out.println(cost.get(i).toString());
+        			out.println(resources.get(j).toString());*/
         			cost.remove(i);
         			resources.remove(j);
         			break;
@@ -945,7 +946,7 @@ public class Board
 		//out.println("Resources: " + resources);
 		if (cost.size() == 0) //Player has all necessary resources
 		{
-			out.println("Has resources to build wonder");
+			//out.println("Has resources to build wonder");
 			return true;
 		}
 		else
@@ -973,12 +974,12 @@ public class Board
 	           
 	            if (!leftResources.contains(r) && !rightResources.contains(r))
                 {
-	            	out.println("Doesn't have resources after trading");
+	            	/*out.println("Doesn't have resources after trading");
 	            	out.println(leftResources);
 		            out.println("left has resource: " + leftResources.contains(r));
 		            out.println(rightResources);
 		            out.println("right has resource: " + rightResources.contains(r));
-		            out.println();
+		            out.println();*/
 	            	
                     return false;
                 }
@@ -1062,11 +1063,11 @@ public class Board
 	        if (playerList.get(currentPlayer).getMoney() >= costLeft + costRight)
 	        {
 	        	//System.out.println("Has Enough Money");
-	        	out.println("Has enough money to build wonder after trading");
+	        	//out.println("Has enough money to build wonder after trading");
 	        	return true;
 	        }
 	        
-	        out.println("Does not have resources/coins to build wonder");
+	        //out.println("Does not have resources/coins to build wonder");
 	        trade.clear();
 	        return false;
 		}

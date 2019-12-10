@@ -29,6 +29,19 @@ public class GameFrame extends PlayerFrame
 		if (!board.gameFinished())
 		{
 			//out.println(board.getCurrentPlayer().getIndex());
+			for (int i=0;i<board.getPlayerList().size();i++) {
+				System.out.println("Player "+(i+1)+" Coins: "+board.getPlayerList().get(i).getMoney());
+				if (board.getPlayerList().get(i).getMoney()<0) {
+					System.out.println();
+					System.out.println("Player "+(i+1)+" has negatice coins");
+					for (Player p:board.getPlayerList()) {
+						System.out.println("Player "+(i+1)+": Card to Play: "+p.getTempPlayedCards().toString());
+						System.out.println("Player "+(i+1)+": Last Type of Card Played: "+p.getPlayedCards().lastEntry().toString());
+						System.out.println("Player "+(i+1)+": Trading resources: "+p.getTrade().toString());
+					}
+					System.out.println();
+				}
+			}
 			try
 			{
 				if(board.ageOver())
