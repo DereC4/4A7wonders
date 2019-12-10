@@ -129,6 +129,8 @@ public class GameFrame extends PlayerFrame
                 //BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\" + board.getCurrentPlayer().getWonder().getName()+ ".png"));
                 //BufferedImage currentage = ImageIO.read(new File("images\\assets\\age"+board.getCurrentAge()+".png"));
                 BufferedImage coin = ImageIO.read(new File("images\\assets\\coin.png"));
+                BufferedImage warpluspoints = ImageIO.read(new File("images\\assets\\victory1.png"));
+                BufferedImage warminuspoints = ImageIO.read(new File("images\\assets\\victoryminus1.png"));
                 BufferedImage burn = ImageIO.read(new File("images\\assets\\trash.png"));
                 BufferedImage burnactivated = ImageIO.read(new File("images\\assets\\trashactivated.png"));
                 //			JLabel warminuspoints = new JLabel();
@@ -137,9 +139,14 @@ public class GameFrame extends PlayerFrame
                 //g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
                 //g.drawImage(sampleWonder, 250, 250, 1100, 342, null);
                 //g.drawImage(currentage, 750, 100, 100, 100, null);
+                
                 g.drawImage(coin, 1411, 275, 50, 50, null);
+                g.drawImage(warminuspoints, 135, 275, warminuspoints.getWidth(), warminuspoints.getHeight(), null);
+                g.drawImage(warpluspoints, 145, 450, warpluspoints.getWidth(), warpluspoints.getHeight(), null);
+                
                 g.setColor(Color.gray);
                 g.fillRect(1375, 425, 125, 125); //button to burn cards
+                
                 if (board.getCurrentPlayer().isBurnCard())
                 {
                     //					g.setColor(Color.red);
@@ -155,10 +162,10 @@ public class GameFrame extends PlayerFrame
                 //				g.drawImage(burn, 1405, 450, 56, 70, null);
                 g.setColor(Color.black);
                 g.setFont(new Font("Arial", Font.PLAIN, 10));
-                g.drawString("WarMinusPoints", 125, 300);
-                g.drawString("" + board.getCurrentPlayer().getWarMinusPoints(), 160, 315);
-                g.drawString("WarPlusPoints", 125, 475);
-                g.drawString("" + board.getCurrentPlayer().getWarPlusPoints(), 160, 490);
+                g.drawString("WarMinusPoints", 125, 350);
+                g.drawString("" + board.getCurrentPlayer().getWarMinusPoints(), 160, 365);
+                g.drawString("WarPlusPoints", 125, 525);
+                g.drawString("" + board.getCurrentPlayer().getWarPlusPoints(), 160, 540);
                 g.drawString("Coins", 1425, 350);
                 g.drawString("" + board.getCurrentPlayer().getMoney(), 1435, 365);
                 g.setFont(new Font("Arial", Font.PLAIN, 50));
