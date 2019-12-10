@@ -190,7 +190,7 @@ public class GameFrame extends PlayerFrame
                 g.setColor(Color.black);
                 g.drawRect(0, 0, 200, 150); //Show previous player's wonder
                 g.drawRect(1400, 0, 200, 150); //Show next player's wonder
-                g.drawRect(100, 250, 125, 125); //war minus points
+                g.drawRect(100, 250, 125, 125); //war minus points 
                 g.drawRect(100, 425, 125, 125); //war plus points	
                 g.drawRect(1375, 250, 125, 125); //coins
                 //g.drawRect(1025, 100, 100, 100); 
