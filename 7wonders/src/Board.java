@@ -19,7 +19,7 @@ public class Board {
 		playerList = new ArrayList<Player>();
 		currentAge = 1;
 		onWards = true;
-		currentPlayer = 0; // players are 0,1,2
+		currentPlayer = 0; // players are 0, 1, 2
 		drawDiscard = false;
 
 		for (int i = 0; i < 3; i++)
