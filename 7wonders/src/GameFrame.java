@@ -148,6 +148,11 @@ public class GameFrame extends PlayerFrame
                 //g.drawImage(sampleWonder, 250, 250, 1100, 342, null);
                 //g.drawImage(currentage, 750, 100, 100, 100, null);
                 
+                g.setColor(new Color(26, 109, 176));
+                g.fillRect(100, 250, 125, 125); //war minus points 
+                g.fillRect(100, 425, 125, 125); //war plus points	
+                g.fillRect(1375, 250, 125, 125); //coins
+                g.fillRect(1250, 100, 100, 100);
                 g.drawImage(coin, 1411, 275, 50, 50, null);
                 g.drawImage(warminuspoints, 135, 275, warminuspoints.getWidth(), warminuspoints.getHeight(), null);
                 g.drawImage(warpluspoints, 145, 450, warpluspoints.getWidth(), warpluspoints.getHeight(), null);
@@ -168,6 +173,31 @@ public class GameFrame extends PlayerFrame
                 }
                 //				g.fillRect(1375, 425, 125, 125); //button to burn cards
                 //				g.drawImage(burn, 1405, 450, 56, 70, null);
+                paintCards(g);
+                showDiscardWindow(); //only runs when applicable
+                //Derek's space. Click to open new window
+                //BufferedImage clicktoshowcards = ImageIO.read(new File("images\\assets\\card.png"));
+                //g.drawImage(clicktoshowcards, 1025, 100, 100, 100, null);
+                //g.setColor(new Color(0, 102, 225));
+                //Area to click; shows cards that player has played
+                //g.drawRect(1025, 100, 100, 100); 
+                g.setColor(Color.black);
+                g.drawRect(0, 0, 200, 150); //Show previous player's wonder
+                g.drawRect(1400, 0, 200, 150); //Show next player's wonder
+                g.setColor(Color.gray);
+                g.fillRect(0, 0, 200, 150);
+                g.fillRect(1400, 0, 200, 150);
+                g.setColor(Color.black);
+                g.drawRect(100, 250, 125, 125); //war minus points 
+                g.drawRect(100, 425, 125, 125); //war plus points	
+                g.drawRect(1375, 250, 125, 125); //coins
+                //g.drawRect(1025, 100, 100, 100); 
+                if (board.getCurrentPlayer().isBuildWonder()) g.setColor(Color.green);
+                else g.setColor(Color.gray);
+                g.drawRect(1250, 100, 100, 100); //build wonders
+                g.setColor(Color.black);
+                g.setFont(new Font("Arial", Font.PLAIN, 10));
+                g.drawString("Build Wonder", 1275, 150);
                 g.setColor(Color.black);
                 g.setFont(new Font("Arial", Font.PLAIN, 10));
                 g.drawString("WarMinusPoints", 125, 350);
@@ -182,27 +212,6 @@ public class GameFrame extends PlayerFrame
                 g.setFont(new Font("Arial", Font.PLAIN, 50));
                 int currentplayer = board.getCurrentPlayer().getIndex() + 1;
                 g.drawString("Player " + currentplayer, 350, 175);
-                paintCards(g);
-                showDiscardWindow(); //only runs when applicable
-                //Derek's space. Click to open new window
-                //BufferedImage clicktoshowcards = ImageIO.read(new File("images\\assets\\card.png"));
-                //g.drawImage(clicktoshowcards, 1025, 100, 100, 100, null);
-                //g.setColor(new Color(0, 102, 225));
-                //Area to click; shows cards that player has played
-                //g.drawRect(1025, 100, 100, 100); 
-                g.setColor(Color.black);
-                g.drawRect(0, 0, 200, 150); //Show previous player's wonder
-                g.drawRect(1400, 0, 200, 150); //Show next player's wonder
-                g.drawRect(100, 250, 125, 125); //war minus points 
-                g.drawRect(100, 425, 125, 125); //war plus points	
-                g.drawRect(1375, 250, 125, 125); //coins
-                //g.drawRect(1025, 100, 100, 100); 
-                if (board.getCurrentPlayer().isBuildWonder()) g.setColor(Color.green);
-                else g.setColor(Color.gray);
-                g.drawRect(1250, 100, 100, 100); //build wonders
-                g.setColor(Color.black);
-                g.setFont(new Font("Arial", Font.PLAIN, 10));
-                g.drawString("Build Wonder", 1275, 150);
             }
             catch (IOException e)
             {

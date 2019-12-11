@@ -50,18 +50,20 @@ public class PlayerFrame extends JFrame implements MouseListener
     }
     public void paint(Graphics g)
     {
-        //board.printEverything();
         ArrayList < Card > hand = board.getCurrentPlayer().getHand();
         //System.out.println(hand.toString());
         if (!board.gameFinished())
         {
             try
             {
-                if (isMain()) setPlayer(board.getCurrentPlayer());
-                BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
+                if (isMain()) 
+                	setPlayer(board.getCurrentPlayer());
+//              BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
+                out.println(player.getWonder().getName());
+                BufferedImage wonderbackground = ImageIO.read(new File("images\\wonderbackgrounds\\"+player.getWonder().getName()+"bk.jpg"));
                 BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\" + player.getWonder().getName() + ".png"));
                 BufferedImage currentage = ImageIO.read(new File("images\\assets\\age" + board.getCurrentAge() + ".png"));
-                g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
+                g.drawImage(wonderbackground, 0, 0, LENGTH, HEIGHT, null);
                 g.drawImage(sampleWonder, 250, 250, 1100, 342, null);
                 g.drawImage(currentage, 750, 100, 100, 100, null);
                 g.setFont(new Font("Arial", Font.PLAIN, 50));
