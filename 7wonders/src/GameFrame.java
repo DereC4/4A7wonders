@@ -33,13 +33,6 @@ public class GameFrame extends PlayerFrame
                     if (board.isOnWards()) board.setOnWards(false);
                     else board.setOnWards(true);
                     board.calcWarPoints(); //for previous age
-                    /*
-                    if (board.getCurrentAge() == 3)
-                    {
-                        VictoryWindow x = new VictoryWindow(board.totalVP(board.getPlayerList().get(0)), board.totalVP(board.getPlayerList().get(1)), board.totalVP(board.getPlayerList().get(2)), board);
-                    }
-                    */
-                    
                     board.setCurrentAge(board.getCurrentAge() + 1);
                     board.deal(board.getCurrentAge());
                     for (Player p: board.getPlayerList())
@@ -105,21 +98,11 @@ public class GameFrame extends PlayerFrame
                     board.incrementHandLocations();
                 }
                 super.paint(g);
-                //BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
-                //BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\" + board.getCurrentPlayer().getWonder().getName()+ ".png"));
-                //BufferedImage currentage = ImageIO.read(new File("images\\assets\\age"+board.getCurrentAge()+".png"));
                 BufferedImage coin = ImageIO.read(new File("images\\assets\\coin.png"));
                 BufferedImage warpluspoints = ImageIO.read(new File("images\\assets\\victory1.png"));
                 BufferedImage warminuspoints = ImageIO.read(new File("images\\assets\\victoryminus1.png"));
                 BufferedImage burn = ImageIO.read(new File("images\\assets\\trash.png"));
                 BufferedImage burnactivated = ImageIO.read(new File("images\\assets\\trashactivated.png"));
-                //			JLabel warminuspoints = new JLabel();
-                //			warminuspoints.setText(""+board.getCurrentPlayer().getWarMinusPoints());
-                //			warminuspoints.setForeground(Color.black);
-                //g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
-                //g.drawImage(sampleWonder, 250, 250, 1100, 342, null);
-                //g.drawImage(currentage, 750, 100, 100, 100, null);
-                
                 g.setColor(new Color(26, 109, 176));
                 g.fillRect(100, 250, 125, 125); //war minus points 
                 g.fillRect(100, 425, 125, 125); //war plus points	
@@ -128,10 +111,8 @@ public class GameFrame extends PlayerFrame
                 g.drawImage(coin, 1411, 275, 50, 50, null);
                 g.drawImage(warminuspoints, 135, 275, warminuspoints.getWidth(), warminuspoints.getHeight(), null);
                 g.drawImage(warpluspoints, 125, 445, 75, 65, null);
-                
                 g.setColor(Color.gray);
                 g.fillRect(1375, 425, 125, 125); //button to burn cards
-                
                 if (board.getCurrentPlayer().isBurnCard())
                 {
                     g.drawImage(burnactivated, 1405, 450, 56, 70, null);
@@ -152,7 +133,6 @@ public class GameFrame extends PlayerFrame
                 g.drawRect(100, 250, 125, 125); //war minus points 
                 g.drawRect(100, 425, 125, 125); //war plus points	
                 g.drawRect(1375, 250, 125, 125); //coins
-                //g.drawRect(1025, 100, 100, 100); 
                 if (board.getCurrentPlayer().isBuildWonder()) g.setColor(Color.green);
                 else g.setColor(Color.gray);
                 g.drawRect(1250, 100, 100, 100); //build wonders
@@ -173,17 +153,14 @@ public class GameFrame extends PlayerFrame
                 g.setFont(new Font("Arial", Font.PLAIN, 50));
                 int currentplayer = board.getCurrentPlayer().getIndex() + 1;
                 g.drawString("Player " + currentplayer, 350, 175);
-                //paintGameOver(g);
             }
             catch (IOException e)
-            {
-            }
+            {}
         }
         else {
         	for (Player p : board.getPlayerList())
         		board.calcVP(p);
         	paintGameOver(g);
-        	//VictoryWindow window = new VictoryWindow(board);
         }
     }
     public void paintCards(Graphics g) //100, 675, 1400, 300
@@ -199,8 +176,7 @@ public class GameFrame extends PlayerFrame
             }
         }
         catch (IOException e)
-        {
-        }
+        {}
     }
     public void paintGameOver(Graphics g)
     {
@@ -222,8 +198,6 @@ public class GameFrame extends PlayerFrame
     public void mouseReleased(MouseEvent event)
     {
         Player player = board.getCurrentPlayer();
-        
-        //g.fillRect(650, 700, 250, 100); //Victory Screen
         if (event.getY()>700 && event.getY()<800)
         {
         	if (event.getX()>650 && event.getX()<900)
@@ -234,8 +208,6 @@ public class GameFrame extends PlayerFrame
         		}
         	}
         }
-        
-        //g.drawRect(1400, 0, 200, 150); //Show next player's wonder
         super.mouseReleased(event);
         try
         {
@@ -260,21 +232,12 @@ public class GameFrame extends PlayerFrame
         }
         catch (IOException e)
         {}
-        //g.drawImage(sampleCard, 100 + (i * 195), 675, 185, 281, null);
-        //g.drawRect(1375, 425, 125, 125); //button to burn cards
         if (event.getX() > 1375 && event.getX() < 1500 && event.getY() > 425 && event.getY() < 550) //burn cards
         {
             if (player.isBurnCard()) player.setBurnCard(false);
             else player.setBurnCard(true);
             repaint();
         }
-        /*
-        g.drawRect(325, 510, 280, 85); //Wonder stage 1
-        g.drawRect(655, 510, 280, 85); //Wonder stage 2
-        g.drawRect(980, 510, 280, 85); //Wonder stage 3
-        */
-        //buildWonders 
-        //g.drawRect(1250, 100, 100, 100); //build wonders
         if (event.getY() > 100 && event.getY() < 200)
         {
             if (event.getX() > 1250 && event.getX() < 1350)
@@ -298,8 +261,6 @@ public class GameFrame extends PlayerFrame
                 else temp = null;
                 if (!player.isBuildWonder() && (player.isBurnCard() || board.playable(temp)))
                 {
-                    //if (temp.getCost().get(0).toString().equals("C 1"))
-                    //board.getCurrentPlayer().setMoney(board.getCurrentPlayer().getMoney()-1);
                     player.play(temp);
                     board.incrementPlayerLocation(); //Changed to increment player location
                 }
