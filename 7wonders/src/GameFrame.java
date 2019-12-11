@@ -76,7 +76,7 @@ public class GameFrame extends PlayerFrame
                                 if (vpCases.contains(wonder.getEffect(stage))) p.setHas_VP_Effect(true);
                                 if (!p.has_VP_Effect())
                                 {
-                                    board.decodeWonderEffect(wonder.getEffect(stage));
+                                    board.decodeWonderEffect(wonder.getEffect(stage), p);
                                 }
                             }
                             else if (p.isBurnCard())
@@ -99,21 +99,23 @@ public class GameFrame extends PlayerFrame
                     board.incrementHandLocations();
                 }
                 super.paint(g);
-                BufferedImage coin = ImageIO.read(new File("images\\assets\\coin.png"));
-                BufferedImage warpluspoints = ImageIO.read(new File("images\\assets\\victory1.png"));
-                BufferedImage warminuspoints = ImageIO.read(new File("images\\assets\\victoryminus1.png"));
+                //BufferedImage coin = ImageIO.read(new File("images\\assets\\coin.png"));
+                //BufferedImage warpluspoints = ImageIO.read(new File("images\\assets\\victory1.png"));
+                //BufferedImage warminuspoints = ImageIO.read(new File("images\\assets\\victoryminus1.png"));
                 BufferedImage burn = ImageIO.read(new File("images\\assets\\trash.png"));
                 BufferedImage burnactivated = ImageIO.read(new File("images\\assets\\trashactivated.png"));
                 g.setColor(new Color(26, 109, 176));
-                g.fillRect(100, 250, 125, 125); //war minus points 
-                g.fillRect(100, 425, 125, 125); //war plus points	
-                g.fillRect(1375, 250, 125, 125); //coins
+                //g.fillRect(100, 250, 125, 125); //war minus points 
+                //g.fillRect(100, 425, 125, 125); //war plus points	
+                //g.fillRect(1375, 250, 125, 125); //coins
                 g.fillRect(1250, 100, 100, 100);
-                g.drawImage(coin, 1411, 275, 50, 50, null);
-                g.drawImage(warminuspoints, 135, 275, warminuspoints.getWidth(), warminuspoints.getHeight(), null);
-                g.drawImage(warpluspoints, 125, 445, 75, 65, null);
+                //g.drawImage(coin, 1411, 275, 50, 50, null);
+                //g.drawImage(warminuspoints, 135, 275, warminuspoints.getWidth(), warminuspoints.getHeight(), null);
+                //g.drawImage(warpluspoints, 125, 445, 75, 65, null);
                 g.setColor(Color.gray);
                 g.fillRect(1375, 425, 125, 125); //button to burn cards
+                g.setColor(Color.black);
+                g.drawRect(1375, 425, 125, 125);
                 if (board.getCurrentPlayer().isBurnCard())
                 {
                     g.drawImage(burnactivated, 1405, 450, 56, 70, null);
@@ -131,9 +133,7 @@ public class GameFrame extends PlayerFrame
                 g.fillRect(0, 0, 200, 150);
                 g.fillRect(1400, 0, 200, 150);
                 g.setColor(Color.black);
-                g.drawRect(100, 250, 125, 125); //war minus points 
-                g.drawRect(100, 425, 125, 125); //war plus points	
-                g.drawRect(1375, 250, 125, 125); //coins
+                
                 if (board.getCurrentPlayer().isBuildWonder()) g.setColor(Color.green);
                 else g.setColor(Color.gray);
                 g.drawRect(1250, 100, 100, 100); //build wonders
@@ -191,10 +191,14 @@ public class GameFrame extends PlayerFrame
     }
     public void showDiscardWindow()
     {
-        Player p = board.getCurrentPlayer();
-        if (board.isDrawDiscard())
+    	Player player;
+        for (Player p : board.getPlayerList())
         {
-            DiscardWindow discardWindow = new DiscardWindow(board);
+        	if (p.isDrawDiscard())
+        	{
+        		DiscardWindow discardWindow = new DiscardWindow(board, p);
+        		break;
+        	}
         }
     }
     public void mouseReleased(MouseEvent event)

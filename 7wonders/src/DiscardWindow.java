@@ -2,6 +2,8 @@ import static java.lang.System.out;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.awt.Color;
+import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ public class DiscardWindow extends JFrame implements MouseListener
 	public static final int LENGTH = 1600;
     public static final int HEIGHT = 1000;
     
-    public DiscardWindow(Board b)
+    public DiscardWindow(Board b, Player p)
     {
     	super("Graveyard");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -30,16 +32,11 @@ public class DiscardWindow extends JFrame implements MouseListener
         setBounds(150,25,LENGTH,HEIGHT);
         addMouseListener(this);
         board = b;
-        player = board.getCurrentPlayer();
+        player = p;
         discard = board.getDeck().getDiscard();
-        //discard = board.getDeck().getAgeTwo(); //temp
+        discard = board.getDeck().getAgeTwo(); //temp
         coords = new HashMap<String, Integer>();
     }
-    
-    public static int incrementIndex(int i)
-	{
-		return ++i;
-	}
     
     public void paint(Graphics g)
     {
@@ -64,6 +61,13 @@ public class DiscardWindow extends JFrame implements MouseListener
 				g.drawImage(sampleCard, 50 + (num++ * 160), y, 150, 229, null);
 				coords.put(posX + "," + endX + "," + y + "," + endY, i);
 			}
+			g.setColor(new Color(26, 109, 176));
+			g.fillRect(925, 750, 350, 125);
+			g.setColor(Color.black);
+			g.drawRect(925, 750, 350, 125);
+			g.setFont(new Font("Arial", Font.BOLD, 45));
+			g.drawString("Player " + (player.getIndex()+1) + "'s", 975, 800);
+			g.drawString("Graveyard", 975, 850);
     	}
     	catch (IOException e)
     	{
@@ -106,7 +110,7 @@ public class DiscardWindow extends JFrame implements MouseListener
 					Card card = discard.get(coords.get(coord));
 					player.addTempPlayedCard(card);
 					discard.remove(card);
-					board.setDrawDiscard(false);
+					player.setDrawDiscard(false);
 					dispose();
 				}
 		}
@@ -115,6 +119,6 @@ public class DiscardWindow extends JFrame implements MouseListener
 	public static void main(String[] args) throws IOException
 	{
 		Board b= new Board();
-		DiscardWindow hi = new DiscardWindow(b);
+		DiscardWindow hi = new DiscardWindow(b, b.getCurrentPlayer());
 	}
 }
