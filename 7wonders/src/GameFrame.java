@@ -14,11 +14,11 @@ import javax.swing.JFrame;
 public class GameFrame extends PlayerFrame
 {
     private Board board; //reference to super 
-    private boolean gameend;
+    private boolean gameEnd;
     public GameFrame() throws IOException
     {
         super();
-        gameend = false;
+        gameEnd = false;
         //super.setMain(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         board = super.getBoard();
