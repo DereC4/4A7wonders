@@ -243,7 +243,6 @@ public class Board {
 
 	public void calcVP(Player p) {
 		TreeMap<String, ArrayList<Card>> playedCards = p.getPlayedCards();
-		System.out.println(playedCards);
 		TreeMap<String, Integer> vpSources = p.getVpSources();
 		int vp = 0;
 		// adds VP for coins
@@ -270,13 +269,11 @@ public class Board {
 		int blueCards = 0;
 		// adds VP for blue
 		ArrayList<Card> temp = playedCards.get("blue"); // Example: VP 5, VP 7
-		System.out.println(temp == null);
 		if (temp != null) {
 			for (Card c : temp) {
 				String effect = c.getEffect();
 				effect.trim();
 				String[] com = effect.split(" ");
-				System.out.println(com);
 				blueCards += Integer.parseInt(com[1]);
 				vp += Integer.parseInt(com[1]);
 			}
@@ -495,7 +492,6 @@ public class Board {
 			}
 		}
 		vpSources.put("GuildCards", guildCards);
-		// System.out.println("Player "+getCurrentTurn()+1+"'s Guild VP "+tq);
 		int sci = 0;
 		// adds VP for sci
 		vp += calcSci(p);
@@ -598,7 +594,6 @@ public class Board {
 		for (String key : played.keySet()) {
 			ArrayList<Card> temp = played.get(key);
 			if (temp.contains(c)) {
-				// out.println("Card of same name has been played");
 				return false; // has card been played
 			}
 		}
@@ -639,19 +634,12 @@ public class Board {
 		for (int i = cost.size() - 1; i >= 0; i--) {
 			for (int j = resources.size() - 1; j >= 0; j--) {
 				if (resources.get(j).toString().contains(cost.get(i).toString())) {
-					/*
-					 * out.println(cost.get(i).toString());
-					 * out.println(resources.get(j).toString());
-					 */
 					cost.remove(i);
 					resources.remove(j);
 					break;
 				}
 			}
 		}
-		// System.out.println(cost);
-		// System.out.println(resources);
-
 		if (cost.size() == 0) // if player already has resources
 		{
 			return true;
@@ -670,11 +658,8 @@ public class Board {
 				}
 				ArrayList<Resources> leftResources = playerList.get(lower).getResources();
 				ArrayList<Resources> rightResources = playerList.get(higher).getResources();
-				// System.out.println("Left: " + leftResources);
-				// System.out.println("Right " + rightResources);
 
 				if (!leftResources.contains(r) && !rightResources.contains(r)) {
-					// out.println("Don't have resources");
 					trade.clear();
 					return false;
 				} else if (leftResources.contains(r) && rightResources.contains(r)) {
@@ -730,10 +715,8 @@ public class Board {
 			}
 
 			if (playerList.get(currentPlayer).getMoney() >= costLeft + costRight) {
-				// System.out.println("Has Enough Money");
 				return true;
 			}
-			// out.println("Don't have enough money");
 			trade.clear();
 			return false;
 		}
@@ -753,14 +736,11 @@ public class Board {
 				p.setMoney(p.getMoney() - 1);
 			}
 		} else {
-			// out.println(p.getTrade());
 			for (int index : p.getTrade().keySet()) {
 				Player toTrade = getPlayerList().get(index);
 				ArrayList<Resources> resources = p.getTrade().get(index);
-				// out.println(resources);
 				for (int i = 0; i < resources.size(); i++) {
 					trade(p, toTrade, resources.get(i));
-					// out.println("Done!");
 				}
 				resources.clear();
 			}
@@ -898,12 +878,8 @@ public class Board {
 				}
 			}
 		}
-
-		// out.println("Cost of stage: " + cost);
-		// out.println("Resources: " + resources);
 		if (cost.size() == 0) // Player has all necessary resources
 		{
-			// out.println("Has resources to build wonder");
 			return true;
 		} else {
 			TreeMap<Integer, ArrayList<Resources>> trade = player.getTrade();
@@ -920,18 +896,7 @@ public class Board {
 				}
 				ArrayList<Resources> leftResources = playerList.get(lower).getResources();
 				ArrayList<Resources> rightResources = playerList.get(higher).getResources();
-				// System.out.println("Left: " + leftResources);
-				// System.out.println("Right " + rightResources);
-
 				if (!leftResources.contains(r) && !rightResources.contains(r)) {
-					/*
-					 * out.println("Doesn't have resources after trading");
-					 * out.println(leftResources); out.println("left has resource: " +
-					 * leftResources.contains(r)); out.println(rightResources);
-					 * out.println("right has resource: " + rightResources.contains(r));
-					 * out.println();
-					 */
-
 					return false;
 				} else if (leftResources.contains(r) && rightResources.contains(r)) {
 					int tempCostLeft = determineCost(r, false, currentPlayer);
@@ -983,20 +948,11 @@ public class Board {
 						trade.put(higher, tempList);
 					}
 				}
-				// out.println(leftResources);
-				// out.println("left has resource: " + leftResources.contains(r));
-				// out.println(rightResources);
-				// out.println("right has resource: " + rightResources.contains(r));
-				// out.println();
 			}
 
 			if (playerList.get(currentPlayer).getMoney() >= costLeft + costRight) {
-				// System.out.println("Has Enough Money");
-				// out.println("Has enough money to build wonder after trading");
 				return true;
 			}
-
-			// out.println("Does not have resources/coins to build wonder");
 			trade.clear();
 			return false;
 		}

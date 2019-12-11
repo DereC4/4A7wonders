@@ -28,16 +28,6 @@ public class GameFrame extends PlayerFrame
     {
         if (!board.gameFinished())
         {
-            //out.println(board.getCurrentPlayer().getIndex());
-        	/*
-            if (board.ageOver() && board.getCurrentAge() == 3)
-            {
-            	int p1VP = board.totalVP(board.getPlayerList().get(0));
-            	int p2VP = board.totalVP(board.getPlayerList().get(1));
-            	int p3VP = board.totalVP(board.getPlayerList().get(2));
-                VictoryWindow x = new VictoryWindow(p1VP, p2VP, p3VP, board);
-            }
-            */
             try
             {
                 if (board.ageOver())
@@ -53,13 +43,11 @@ public class GameFrame extends PlayerFrame
                     */
                     
                     board.setCurrentAge(board.getCurrentAge() + 1);
-                    //System.out.print("New Age is " + board.getCurrentAge());
                     board.deal(board.getCurrentAge());
                     for (Player p: board.getPlayerList())
                     {
                         board.getDeck().getDiscard().add(p.getHand().get(0)); //adds remaining card to discard pile
                         p.getHand().remove(0); //Discard remaining card from previous age
-                        //out.println(p.getHand());
                         Wonder wonder = p.getWonder();
                         int stage = p.getWonderStage();
                         if (wonder.getName().equals("Olympia") && stage >= 2) p.setIgnoreCost(true);
@@ -84,8 +72,6 @@ public class GameFrame extends PlayerFrame
                             Card temp = p.getTempPlayedCards().get(j);
                             Wonder wonder = p.getWonder();
                             int stage = wonder.getCurrentStage();
-                            //p.addToPlayedCards(p.getTempPlayedCard());
-                            //out.println("stage before building: " + stage);
                             if (board.canBuildWonder(p, stage + 1) && p.isBuildWonder())
                             {
                                 board.buildWonder(p, stage + 1, temp);
@@ -98,7 +84,6 @@ public class GameFrame extends PlayerFrame
                                 if (vpCases.contains(wonder.getEffect(stage))) p.setHas_VP_Effect(true);
                                 if (!p.has_VP_Effect())
                                 {
-                                    //out.println(wonder.getEffect(stage));
                                     board.decodeWonderEffect(wonder.getEffect(stage));
                                 }
                             }
@@ -114,19 +99,7 @@ public class GameFrame extends PlayerFrame
                             }
                             //must also pay card cost
                             board.payCosts(p.getIndex()); 
-                            p.setBurnCard(false);
-                            
-                            /*
-                            System.out.println("Player " + (i + 1) + " Coins: " + board.getPlayerList().get(i).getMoney());
-                            if (board.getPlayerList().get(i).getMoney() <= 2)
-                            {
-                                System.out.println();
-                                System.out.println("Player " + (i + 1) + " lost coins");
-                                System.out.println("Player " + (i + 1) + ": Card to Play: " + temp.toString());
-                                System.out.println();
-                            }
-                            */
-                            
+                            p.setBurnCard(false);                          
                             p.getTempPlayedCards().clear();
                         }
                     }
@@ -163,25 +136,14 @@ public class GameFrame extends PlayerFrame
                 
                 if (board.getCurrentPlayer().isBurnCard())
                 {
-                    //					g.setColor(Color.red);
-                    //out.println("Burn mode: "+ board.getCurrentPlayer().isBurnCard());
                     g.drawImage(burnactivated, 1405, 450, 56, 70, null);
                 }
                 else
                 {
-                    //					out.println("Burn mode: "+ board.getCurrentPlayer().isBurnCard());
                     g.drawImage(burn, 1405, 450, 56, 70, null);
                 }
-                //				g.fillRect(1375, 425, 125, 125); //button to burn cards
-                //				g.drawImage(burn, 1405, 450, 56, 70, null);
                 paintCards(g);
                 showDiscardWindow(); //only runs when applicable
-                //Derek's space. Click to open new window
-                //BufferedImage clicktoshowcards = ImageIO.read(new File("images\\assets\\card.png"));
-                //g.drawImage(clicktoshowcards, 1025, 100, 100, 100, null);
-                //g.setColor(new Color(0, 102, 225));
-                //Area to click; shows cards that player has played
-                //g.drawRect(1025, 100, 100, 100); 
                 g.setColor(Color.black);
                 g.drawRect(0, 0, 200, 150); //Show previous player's wonder
                 g.drawRect(1400, 0, 200, 150); //Show next player's wonder
@@ -216,8 +178,6 @@ public class GameFrame extends PlayerFrame
             }
             catch (IOException e)
             {
-                out.println(e);
-                //out.println(board.getCurrentPlayer().getWonder().getName());
             }
         }
         else {
@@ -232,8 +192,6 @@ public class GameFrame extends PlayerFrame
         ArrayList < Card > cards = board.getCurrentPlayer().getHand();
         try
         {
-            //out.println(cards);
-            //out.println(cards.get(0).getName().toLowerCase());
             BufferedImage sampleCard;
             for (int i = 0; i < cards.size(); i++)
             {
@@ -243,7 +201,6 @@ public class GameFrame extends PlayerFrame
         }
         catch (IOException e)
         {
-            //out.println(e);
         }
     }
     public void showDiscardWindow()
@@ -265,7 +222,6 @@ public class GameFrame extends PlayerFrame
             {
                 if (event.getX() > 0 && event.getX() < 200)
                 {
-                    //out.println("Works");
                     int previous = player.getIndex() - 1;
                     if (previous < 0) previous = 2;
                     PlayerFrame frame = new PlayerFrame(board.getPlayerList().get(previous), board);
@@ -275,7 +231,6 @@ public class GameFrame extends PlayerFrame
             {
                 if (event.getX() > 1400 && event.getX() < 1600)
                 {
-                    //out.println("Works");
                     int next = player.getIndex() + 1;
                     if (next > 2) next = 0;
                     PlayerFrame frame = new PlayerFrame(board.getPlayerList().get(next), board);
@@ -320,10 +275,6 @@ public class GameFrame extends PlayerFrame
                 else if (event.getX() > 1075 && event.getX() < 1260) temp = player.getHand().get(5);
                 else if (event.getX() > 1270 && event.getX() < 1455) temp = player.getHand().get(6);
                 else temp = null;
-                //out.println("Resources: " + board.getCurrentPlayer().getResources());
-                //out.println(player.getHand().size());
-                //out.println("Player: " + board.getCurrentPlayer().getIndex());
-                //out.println("Name: " + temp.getName() + " Cost:" + temp.getCost());
                 if (!player.isBuildWonder() && (player.isBurnCard() || board.playable(temp)))
                 {
                     //if (temp.getCost().get(0).toString().equals("C 1"))
@@ -339,7 +290,6 @@ public class GameFrame extends PlayerFrame
             }
             catch (IndexOutOfBoundsException e)
             {
-                //out.println(e);
             }
             catch (NullPointerException e)
             {}
