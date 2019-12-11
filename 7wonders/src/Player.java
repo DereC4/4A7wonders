@@ -211,6 +211,10 @@ public class Player
 	{
 		this.Has_VP_Effect = buildWonder;
 	}
+	public String toString()
+	{
+		return getIndex() + "";
+	}
 
 	/*
 	public void addTempResource(Resources r)

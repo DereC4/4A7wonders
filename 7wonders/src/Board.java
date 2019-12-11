@@ -17,11 +17,15 @@ public class Board {
 	public Board() throws IOException {
 		deck = new Deck();
 		playerList = new ArrayList<Player>();
+		currentAge = 3; //temp
+		onWards = true;
+		currentPlayer = 0; // players are 0,1,2
+		drawDiscard = false;
 
 		for (int i = 0; i < 3; i++)
 			playerList.add(new Player(i));
 
-		deal(1);
+		deal(currentAge);
 		ArrayList<Wonder> WonderList = new ArrayList<Wonder>();
 
 		for (String s : Wonder.WONDERS) {
@@ -35,10 +39,7 @@ public class Board {
 		}
 		// playerList.get(0).setWonder(new Wonder("Halikarnassus")); //temp
 
-		currentAge = 1;
-		onWards = true;
-		currentPlayer = 0; // players are 0,1,2
-		drawDiscard = false;
+		
 	}
 
 	public void decodeWonderEffect(String effect) {

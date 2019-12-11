@@ -22,18 +22,22 @@ public class GameFrame extends PlayerFrame
         //super.setMain(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         board = super.getBoard();
-        RulesWindow rulesoftheduel = new RulesWindow();
+        //RulesWindow rulesoftheduel = new RulesWindow();
     }
     public void paint(Graphics g)
     {
         if (!board.gameFinished())
         {
             //out.println(board.getCurrentPlayer().getIndex());
+        	/*
             if (board.ageOver() && board.getCurrentAge() == 3)
             {
-                VictoryWindow x = new VictoryWindow(board.totalVP(board.getPlayerList().get(0)), board.totalVP(board.getPlayerList().get(1)), 
-                		board.totalVP(board.getPlayerList().get(2)), board);
+            	int p1VP = board.totalVP(board.getPlayerList().get(0));
+            	int p2VP = board.totalVP(board.getPlayerList().get(1));
+            	int p3VP = board.totalVP(board.getPlayerList().get(2));
+                VictoryWindow x = new VictoryWindow(p1VP, p2VP, p3VP, board);
             }
+            */
             for (int i = 0; i < board.getPlayerList().size(); i++)
             {
                 System.out.println("Player " + (i + 1) + " Coins: " + board.getPlayerList().get(i).getMoney());

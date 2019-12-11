@@ -73,24 +73,41 @@ public class VictoryWindow extends JFrame
 			    e.printStackTrace();
 			}
 			//maybe add more game stats later
-			TreeMap<Integer,Player>list=new TreeMap<Integer, Player>();
-			list.put(player1vp,board.getPlayerList().get(0));
-			list.put(player2vp,board.getPlayerList().get(1));
-			list.put(player3vp,board.getPlayerList().get(2));
+			out.println(board.getPlayerList());
+			TreeMap<Integer,Integer> players =new TreeMap<Integer, Integer>();
+			int p1 = board.getPlayerList().get(0).getIndex();
+			int p2 = board.getPlayerList().get(1).getIndex();
+			int p3 = board.getPlayerList().get(2).getIndex();
+			players.put(p1,player1vp);
+			players.put(p2,player2vp);
+			players.put(p3,player3vp);
 			
 			ArrayList <Integer> score = new ArrayList<Integer>();
-			score.add(player1vp);
-			score.add(player2vp);
-			score.add(player3vp);
+			score.add(players.get(p1));
+			score.add(players.get(p2));
+			score.add(players.get(p3));
 			Collections.sort(score);
 			
 			//System.out.println(score);
+			//out.println(players);
+			int first = 0;
+			int second = 0;
+			int third = 0;
 			
+			for (int index : players.keySet())
+			{
+				if (players.get(index).equals(score.get(2)))
+					first = index;
+				else if (players.get(index).equals(score.get(1)))
+					second = index;
+				else
+					third = index;
+			}
 			
-			g.drawString("Player "+(list.get(score.get(1)).getIndex()+1)+"'s VP: "+score.get(1), 300, 250);
+			g.drawString("Player " + first +"'s VP: "+ score.get(2), 300, 250);
 //			g.drawString(""+score.get(1), 300, 250);
-			g.drawString("Player "+(list.get(score.get(2)).getIndex()+1)+"'s VP: "+score.get(2), 600, 100);
-			g.drawString("Player "+(list.get(score.get(0)).getIndex()+1)+"'s VP: "+score.get(0), 900, 300);
+			g.drawString("Player " + second +"'s VP: "+ score.get(1), 600, 100);
+			g.drawString("Player " + third +"'s VP: "+ score.get(0), 900, 300);
 		}
 		catch (IOException e)
 		{
