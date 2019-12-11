@@ -45,9 +45,10 @@ public class Board
                 p.setArmies(getCurrentPlayer().getArmies() + 2);
             } else if (effect.equalsIgnoreCase("resourceAll")) {
                 p.addToResources(new Resources("Clay/Ore/Wood/Stone"));
-            } else if (effect.equalsIgnoreCase("scienceAll")) // call at end of game right before VP calc
+            } else if (effect.equalsIgnoreCase("scienceAll")) // call at end of game right before VP calc //broken
             {
-                TreeMap < String, Integer > sciListL = new TreeMap < String, Integer > ();
+            	p.getSciList().put("lit", p.getSciList().get("lit") + 1);
+                /*TreeMap < String, Integer > sciListL = new TreeMap < String, Integer > ();
                 TreeMap < String, Integer > sciListM = new TreeMap < String, Integer > ();
                 TreeMap < String, Integer > sciListG = new TreeMap < String, Integer > ();
                 for (String key: p.getSciList().keySet()) {
@@ -76,6 +77,7 @@ public class Board
             } else if (effect.equalsIgnoreCase("ignoreCost")) // call be used once per age
             {
                 getCurrentPlayer().setIgnoreCost(true);
+            */
             } else if (effect.equalsIgnoreCase("drawDiscard")) // call once at the end of turn (not age)
             {
                 setDrawDiscard(true);
@@ -434,7 +436,8 @@ public class Board
                     guildCards += p2.getWonder().getCurrentStage();
                 }
                 if (com[1].equals("S All")) { //broken
-                    TreeMap < String, Integer > sciListL = new TreeMap < String, Integer > ();
+                	p.getSciList().put("lit", p.getSciList().get("lit") + 1);
+                    /*TreeMap < String, Integer > sciListL = new TreeMap < String, Integer > ();
                     TreeMap < String, Integer > sciListM = new TreeMap < String, Integer > ();
                     TreeMap < String, Integer > sciListG = new TreeMap < String, Integer > ();
                     for (String key: p.getSciList().keySet()) {
@@ -457,7 +460,7 @@ public class Board
                         p.getSciList().put("math", p.getSciList().get("math") + 1);
                     } else if (gear > lit && gear > math) {
                         p.getSciList().put("gear", p.getSciList().get("gear") + 1);
-                    }
+                    }*/
                 }
                 if (com[1].equals("D")) {
                     if (p.getPlayedCards().get("blue") != null) {
