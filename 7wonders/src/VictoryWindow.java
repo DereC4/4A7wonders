@@ -105,7 +105,7 @@ public class VictoryWindow extends JFrame
 			g.drawString("VP from Yellow Cards: " + vpSources.get("YellowCards"), 25, 800);
 			g.setColor(new Color(76, 5, 96));
 			g.drawString("VP from Guilds: " + vpSources.get("GuildCards"), 25, 850);
-			
+			 
 			//2nd place
 			vpSources = p2.getVpSources();
 			g.setColor(Color.black);
