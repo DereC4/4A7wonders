@@ -37,9 +37,6 @@ public class Board {
 			playerList.get(i).setWonder(WonderList.remove(index));
 			playerList.get(i).addToResources(playerList.get(i).getWonder().getProduct());
 		}
-		// playerList.get(0).setWonder(new Wonder("Halikarnassus")); //temp
-
-		
 	}
 
 	public void decodeWonderEffect(String effect) {
@@ -246,16 +243,16 @@ public class Board {
 
 	public void calcVP(Player p) {
 		TreeMap<String, ArrayList<Card>> playedCards = p.getPlayedCards();
+		System.out.println(playedCards);
 		TreeMap<String, Integer> vpSources = p.getVpSources();
 		int vp = 0;
 		// adds VP for coins
 		int vpFromCoins = p.getMoney() / 3;
 		vpSources.put("Coins", vpFromCoins);
 		vp += vpFromCoins;
-		
-		//System.out.println("Player "+getCurrentTurn()+1+"'s coin VP "+vp);
+
 		// adds VP for wonders
-		int vpFromWonders=0;
+		int vpFromWonders = 0;
 		for (int i = 1; i <= p.getWonder().getCurrentStage(); i++) {
 			String effect = p.getWonder().getEffect(i);
 			String[] com = effect.split(" ");
@@ -265,45 +262,42 @@ public class Board {
 			}
 		}
 		vpSources.put("Wonder", vpFromWonders);
-		//System.out.println("Player "+getCurrentTurn()+1+"'s Wonder VP "+tq);
-		
-		//System.out.println("Player "+getCurrentTurn()+1+"'s Science VP "+tq);
-		// adds VP for war
+
 		int war = p.getWarPlusPoints() - p.getWarMinusPoints();
 		vpSources.put("War", war);
 		vp += war;
-		
-		//System.out.println("Player "+getCurrentTurn()+1+"'s War VP "+tq);
-		
+
 		int blueCards = 0;
 		// adds VP for blue
 		ArrayList<Card> temp = playedCards.get("blue"); // Example: VP 5, VP 7
+		System.out.println(temp == null);
 		if (temp != null) {
 			for (Card c : temp) {
 				String effect = c.getEffect();
+				effect.trim();
 				String[] com = effect.split(" ");
-				if (com[0].equals("VP")) {
-					blueCards += Integer.parseInt(com[1]);
-					vp += Integer.parseInt(com[1]);
-				}
+				System.out.println(com);
+				blueCards += Integer.parseInt(com[1]);
+				vp += Integer.parseInt(com[1]);
 			}
 		}
 		vpSources.put("BlueCards", blueCards);
-		//System.out.println("Player "+getCurrentTurn()+1+"'s Blue VP "+tq);
+
 		int yellowCards = 0;
 		// VP for yellow
 		temp = playedCards.get("yellow");
 		if (temp != null) {
 			for (Card c : temp) {
 				String effect = c.getEffect();
+				effect.trim();
 				String[] com = effect.split(" ");
 				int index = p.getIndex();
-				int lower = index--;
+				int lower = index - 1;
 				if (lower == -1) {
-					lower = playerList.size() - 1;
+					lower = 2;
 				}
-				int upper = index++;
-				if (upper == playerList.size()) {
+				int upper = index + 1;
+				if (upper == 3) {
 					upper = 0;
 				}
 				Player pl = playerList.get(lower);
@@ -381,25 +375,25 @@ public class Board {
 			}
 		}
 		vpSources.put("YellowCards", yellowCards);
-		//System.out.println("Player "+getCurrentTurn()+1+"'s Yellow VP "+tq);
-		
+
 		int guildCards = 0;
 		// Vp for guilds
 		temp = playedCards.get("purple"); // Examples: VP LR blue, VP LRD wonder, VP LR minusWar
 		if (temp != null) {
 			for (Card c : temp) {
 				String effect = c.getEffect();
+				effect.trim();
 				String[] com = effect.split(" ");
 				if (com[0].equals("VP")) {
 					if (com[1].equals("LR")) {
 						// com 2 is the type of card searching for
 						int index = p.getIndex();
-						int lower = index--;
+						int lower = index - 1;
 						if (lower == -1) {
-							lower = playerList.size() - 1;
+							lower = 2;
 						}
-						int upper = index++;
-						if (upper == playerList.size()) {
+						int upper = index + 1;
+						if (upper == 3) {
 							upper = 0;
 						}
 						Player pl = playerList.get(lower);
@@ -435,14 +429,19 @@ public class Board {
 					}
 				}
 				int index = p.getIndex();
-				int lower = index--;
+				int lower = index - 1;
 				if (lower == -1) {
-					lower = playerList.size() - 1;
+					lower = 2;
 				}
-				int upper = index++;
-				if (upper == playerList.size()) {
+				int upper = index + 1;
+				if (upper == 3) {
 					upper = 0;
 				}
+
+				if (upper == -1) {
+					upper = 0;
+				}
+
 				Player pl = playerList.get(lower);
 				Player p2 = playerList.get(upper);
 				if (com[1].equals("LRD")) {
@@ -480,15 +479,15 @@ public class Board {
 					}
 				}
 				if (com[1].equals("D")) {
-					if (p.getPlayedCards().get("blue")!=null) {
+					if (p.getPlayedCards().get("blue") != null) {
 						vp += p.getPlayedCards().get("blue").size();
 						guildCards += p.getPlayedCards().get("blue").size();
 					}
-					if (p.getPlayedCards().get("silver")!=null){
+					if (p.getPlayedCards().get("silver") != null) {
 						vp += p.getPlayedCards().get("silver").size();
 						guildCards += p.getPlayedCards().get("silver").size();
 					}
-					if (p.getPlayedCards().get("brown")!=null) {
+					if (p.getPlayedCards().get("brown") != null) {
 						vp += p.getPlayedCards().get("brown").size();
 						guildCards += p.getPlayedCards().get("brown").size();
 					}
@@ -496,7 +495,7 @@ public class Board {
 			}
 		}
 		vpSources.put("GuildCards", guildCards);
-		//System.out.println("Player "+getCurrentTurn()+1+"'s Guild VP "+tq);
+		// System.out.println("Player "+getCurrentTurn()+1+"'s Guild VP "+tq);
 		int sci = 0;
 		// adds VP for sci
 		vp += calcSci(p);
@@ -504,7 +503,7 @@ public class Board {
 		vpSources.put("Science", sci);
 		p.setVp(p.getVp() + vp);
 	}
-	
+
 	public int calcSci(Player p) {
 		TreeMap<String, Integer> sciList = p.getSciList();
 		int vp = 0;
@@ -744,22 +743,16 @@ public class Board {
 	{
 		Player p = getPlayerList().get(id);
 
-		if (p.isIgnoreCost()) 
-		{
+		if (p.isIgnoreCost()) {
 			p.setIgnoreCost(false);
-		} 
-		else if (p.isBurnCard())
-		{
+		} else if (p.isBurnCard()) {
 			return;
-		}
-		else if (p.getTrade().size() == 0) 
-		{
+		} else if (p.getTrade().size() == 0) {
 			Card temp = p.getTempPlayedCards().get(0);
 			if (temp.getCost().toString().contains("C 1")) {
 				p.setMoney(p.getMoney() - 1);
 			}
-		}
-		else {
+		} else {
 			// out.println(p.getTrade());
 			for (int index : p.getTrade().keySet()) {
 				Player toTrade = getPlayerList().get(index);

@@ -251,7 +251,7 @@ public class Player implements Comparable<Player>
 	
 	public void addToPlayedCards(Card c) 
 	{
-		String type = c.getType();
+		String type = c.getType().toLowerCase();
 		if (playedCards.containsKey(type)) 
 		{
 			ArrayList<Card> temp = playedCards.get(type);

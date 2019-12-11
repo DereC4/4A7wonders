@@ -18,7 +18,7 @@ public class Card implements Comparable
     {
         this.age = age;
         this.name = name;
-        this.type = color;
+        this.type = color.toLowerCase();
         this.chain = chain; //if no chain String is " "
         this.effect = effect;
         
