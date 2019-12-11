@@ -62,8 +62,6 @@ public class PlayerFrame extends JFrame implements MouseListener
                 BufferedImage coin = ImageIO.read(new File("images\\assets\\coin.png"));
                 BufferedImage warpluspoints = ImageIO.read(new File("images\\assets\\victory1.png"));
                 BufferedImage warminuspoints = ImageIO.read(new File("images\\assets\\victoryminus1.png"));
-                BufferedImage burn = ImageIO.read(new File("images\\assets\\trash.png"));
-                BufferedImage burnactivated = ImageIO.read(new File("images\\assets\\trashactivated.png"));
                 BufferedImage wonderbackground = ImageIO.read(new File("images\\wonderbackgrounds\\"+player.getWonder().getName()+"bk.jpg"));
                 BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\" + player.getWonder().getName() + ".png"));
                 BufferedImage currentage = ImageIO.read(new File("images\\assets\\age" + board.getCurrentAge() + ".png"));
@@ -75,6 +73,10 @@ public class PlayerFrame extends JFrame implements MouseListener
                 g.fillRect(100, 425, 125, 125); //war plus points	
                 g.fillRect(1375, 250, 125, 125); //coins
                 g.setColor(Color.BLACK);
+                g.drawRect(100, 250, 125, 125); //war minus points 
+                g.drawRect(100, 425, 125, 125); //war plus points	
+                g.drawRect(1375, 250, 125, 125); //coins
+                g.setFont(new Font("Arial", Font.BOLD, 15));
                 g.drawString("WarMinusPoints", 108, 350);
                 g.drawString("" + player.getWarMinusPoints(), 155, 365);
                 g.drawString("WarPlusPoints", 110, 525);
@@ -100,13 +102,13 @@ public class PlayerFrame extends JFrame implements MouseListener
                 //g.drawRect(250, 250, 1100, 342); //Current player's wonder
                 //g.drawRect(750, 100, 100, 100); //current age
                 if (p.getWonderStage() >= 1) g.setColor(Color.green);
-                else g.setColor(Color.red);
+                else g.setColor(new Color(0, 0, 0, 0));
                 g.drawRect(325, 510, 280, 85); //Wonder stage 1
                 if (p.getWonderStage() >= 2) g.setColor(Color.green);
-                else g.setColor(Color.red);
+                else g.setColor(new Color(0, 0, 0, 0));
                 g.drawRect(655, 510, 280, 85); //Wonder stage 2
                 if (p.getWonderStage() >= 3) g.setColor(Color.green);
-                else g.setColor(Color.red);
+                else g.setColor(new Color(0, 0, 0, 0));
                 g.drawRect(980, 510, 280, 85); //Wonder stage 3
             }
             catch (IOException e)

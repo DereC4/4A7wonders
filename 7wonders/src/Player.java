@@ -6,7 +6,7 @@ public class Player implements Comparable<Player>
 	private int money, warMinusPoints, warPlusPoints, armies, index, vp;
 	private TreeMap<String, Integer> vpSources;
 	private TreeMap<String, Boolean> reducedList;
-	private TreeMap<String, Integer> sciList;
+	private TreeMap<String, Integer> sciList; 
 	private TreeMap<String, ArrayList<Card>> playedCards;
 	private ArrayList<Card> hand;
 	private Wonder wonder;
@@ -18,6 +18,7 @@ public class Player implements Comparable<Player>
 	private boolean buildWonder;
 	private boolean Has_VP_Effect;
 	private TreeMap<Integer, ArrayList<Resources>> trade; //Player index, resources
+	private boolean isDrawDiscard;
 	
 	public Player(int index) 
 	{
@@ -53,6 +54,7 @@ public class Player implements Comparable<Player>
 		setHas_VP_Effect(false);
 		tempPlayedCards = new ArrayList<Card>();
 		vpSources = new TreeMap<String, Integer>();
+		setDrawDiscard(false);
 	}
 	
 	public void play(Card c)
@@ -231,6 +233,13 @@ public class Player implements Comparable<Player>
 
 	public void setVpSources(TreeMap<String, Integer> vpSources) {
 		this.vpSources = vpSources;
+	}
+	public boolean isDrawDiscard() {
+		return isDrawDiscard;
+	}
+
+	public void setDrawDiscard(boolean isDrawDiscard) {
+		this.isDrawDiscard = isDrawDiscard;
 	}
 
 	/*

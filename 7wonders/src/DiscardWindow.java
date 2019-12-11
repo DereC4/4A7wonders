@@ -45,7 +45,7 @@ public class DiscardWindow extends JFrame implements MouseListener
     {
     	try 
     	{
-    		BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
+    		BufferedImage background = ImageIO.read(new File("images\\assets\\graveyard.jpg"));
 			BufferedImage sampleCard;
 			g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
 			int y = 100;
@@ -110,5 +110,11 @@ public class DiscardWindow extends JFrame implements MouseListener
 					dispose();
 				}
 		}
+	}
+	
+	public static void main(String[] args) throws IOException
+	{
+		Board b= new Board();
+		DiscardWindow hi = new DiscardWindow(b);
 	}
 }
