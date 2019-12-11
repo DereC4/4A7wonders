@@ -261,7 +261,7 @@ public class Board
         vpSources.put("BlueCards", blueCards);
         int yellowCards = 0;
         // VP for yellow
-        temp = playedCards.get("yellow");
+        temp = playedCards.get("yellow"); //broken
         if (temp != null) {
             for (Card c: temp) {
                 String effect = c.getEffect();
@@ -433,7 +433,7 @@ public class Board
                     guildCards += p.getWonder().getCurrentStage();
                     guildCards += p2.getWonder().getCurrentStage();
                 }
-                if (com[1].equals("S All")) {
+                if (com[1].equals("S All")) { //broken
                     TreeMap < String, Integer > sciListL = new TreeMap < String, Integer > ();
                     TreeMap < String, Integer > sciListM = new TreeMap < String, Integer > ();
                     TreeMap < String, Integer > sciListG = new TreeMap < String, Integer > ();
@@ -686,7 +686,7 @@ public class Board
             return;
         } else if (p.getTrade().size() == 0) {
             Card temp = p.getTempPlayedCards().get(0);
-            if (temp.getCost().toString().contains("C 1")) {
+            if (temp.getCost().toString().contains("C 1")&&temp!=null) {
                 p.setMoney(p.getMoney() - 1);
             }
         } else {
