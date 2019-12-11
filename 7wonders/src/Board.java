@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.TreeMap;
+import static java.lang.System.out;
 
 public class Board {
 	private int currentAge;
