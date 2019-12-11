@@ -159,6 +159,7 @@ public class GameFrame extends PlayerFrame
             {}
         }
         else {
+        	board.calcWarPoints();
         	for (Player p : board.getPlayerList())
         		board.calcVP(p);
         	paintGameOver(g);
