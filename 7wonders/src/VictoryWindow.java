@@ -158,9 +158,4 @@ public class VictoryWindow extends JFrame
 			out.println(e);
 		}
 	}
-	public static void main (String args[]) throws IOException
-	{
-		Board board = new Board();
-		VictoryWindow x = new VictoryWindow(board);
-	}
 }
