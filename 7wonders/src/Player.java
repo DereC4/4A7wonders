@@ -1,9 +1,10 @@
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-public class Player implements Comparable
+public class Player implements Comparable<Player>
 {
 	private int money, warMinusPoints, warPlusPoints, armies, index, vp;
+	private TreeMap<String, Integer> vpSources;
 	private TreeMap<String, Boolean> reducedList;
 	private TreeMap<String, Integer> sciList;
 	private TreeMap<String, ArrayList<Card>> playedCards;
@@ -51,6 +52,7 @@ public class Player implements Comparable
 		setBuildWonder(false);
 		setHas_VP_Effect(false);
 		tempPlayedCards = new ArrayList<Card>();
+		vpSources = new TreeMap<String, Integer>();
 	}
 	
 	public void play(Card c)
@@ -223,6 +225,13 @@ public class Player implements Comparable
 	public void setVp(int vp) {
 		this.vp = vp;
 	}
+	public TreeMap<String, Integer> getVpSources() {
+		return vpSources;
+	}
+
+	public void setVpSources(TreeMap<String, Integer> vpSources) {
+		this.vpSources = vpSources;
+	}
 
 	/*
 	public void addTempResource(Resources r)
@@ -230,9 +239,8 @@ public class Player implements Comparable
 		getTempResources().add(r);
 	}
 	*/
-	public int compareTo(Object obj)
+	public int compareTo(Player p)
 	{
-		Player p = (Player) obj;
 		if (p.getVp() > getVp())
 			return -1;
 		else if (p.getVp() < getVp())

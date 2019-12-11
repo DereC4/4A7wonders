@@ -246,32 +246,36 @@ public class Board {
 
 	public void calcVP(Player p) {
 		TreeMap<String, ArrayList<Card>> playedCards = p.getPlayedCards();
+		TreeMap<String, Integer> vpSources = p.getVpSources();
 		int vp = 0;
 		// adds VP for coins
-		vp += p.getMoney() / 3;
+		int vpFromCoins = p.getMoney() / 3;
+		vpSources.put("Coins", vpFromCoins);
+		vp += vpFromCoins;
+		
 		//System.out.println("Player "+getCurrentTurn()+1+"'s coin VP "+vp);
 		// adds VP for wonders
-		int tq=0;
+		int vpFromWonders=0;
 		for (int i = 1; i <= p.getWonder().getCurrentStage(); i++) {
 			String effect = p.getWonder().getEffect(i);
 			String[] com = effect.split(" ");
 			if (effect.contains("VP")) {
 				vp += Integer.parseInt(com[1]);
-				tq += Integer.parseInt(com[1]);
+				vpFromWonders += Integer.parseInt(com[1]);
 			}
 		}
+		vpSources.put("Wonder", vpFromWonders);
 		//System.out.println("Player "+getCurrentTurn()+1+"'s Wonder VP "+tq);
 		
 		//System.out.println("Player "+getCurrentTurn()+1+"'s Science VP "+tq);
 		// adds VP for war
-		vp -= p.getWarMinusPoints();
-		vp += p.getWarPlusPoints();
+		int war = p.getWarPlusPoints() - p.getWarMinusPoints();
+		vpSources.put("War", war);
+		vp += war;
 		
-		tq = p.getWarMinusPoints()*-1;
-		tq += p.getWarPlusPoints();
 		//System.out.println("Player "+getCurrentTurn()+1+"'s War VP "+tq);
 		
-		tq=0;
+		int blueCards = 0;
 		// adds VP for blue
 		ArrayList<Card> temp = playedCards.get("blue"); // Example: VP 5, VP 7
 		if (temp != null) {
@@ -279,13 +283,14 @@ public class Board {
 				String effect = c.getEffect();
 				String[] com = effect.split(" ");
 				if (com[0].equals("VP")) {
-					tq += Integer.parseInt(com[1]);
+					blueCards += Integer.parseInt(com[1]);
 					vp += Integer.parseInt(com[1]);
 				}
 			}
 		}
+		vpSources.put("BlueCards", blueCards);
 		//System.out.println("Player "+getCurrentTurn()+1+"'s Blue VP "+tq);
-		tq=0;
+		int yellowCards = 0;
 		// VP for yellow
 		temp = playedCards.get("yellow");
 		if (temp != null) {
@@ -308,16 +313,16 @@ public class Board {
 						if (com[1].equals("LR")) {
 							vp += pl.getWonder().getCurrentStage();
 							vp += p2.getWonder().getCurrentStage();
-							tq += pl.getWonder().getCurrentStage();
-							tq += p2.getWonder().getCurrentStage();
+							yellowCards += pl.getWonder().getCurrentStage();
+							yellowCards += p2.getWonder().getCurrentStage();
 						}
 						if (com[1].equals("LRD")) {
 							vp += pl.getWonder().getCurrentStage();
 							vp += p2.getWonder().getCurrentStage();
 							vp += p.getWonder().getCurrentStage();
-							tq += pl.getWonder().getCurrentStage();
-							tq += p2.getWonder().getCurrentStage();
-							tq += p.getWonder().getCurrentStage();
+							yellowCards += pl.getWonder().getCurrentStage();
+							yellowCards += p2.getWonder().getCurrentStage();
+							yellowCards += p.getWonder().getCurrentStage();
 						}
 					} else {
 						if (com[1].equals("D")) {
@@ -329,7 +334,7 @@ public class Board {
 								y = one.size();
 							}
 							vp += y * Integer.parseInt(com[3]);
-							tq += y * Integer.parseInt(com[3]);
+							yellowCards += y * Integer.parseInt(com[3]);
 						}
 						if (com[1].equals("LR")) {
 							int y = 0;
@@ -344,7 +349,7 @@ public class Board {
 								y = one.size();
 							}
 							vp += y * Integer.parseInt(com[3]);
-							tq += y * Integer.parseInt(com[3]);
+							yellowCards += y * Integer.parseInt(com[3]);
 						}
 						if (com[1].equals("LRD")) {
 							ArrayList<Card> one = p.getPlayedCards().get(com[2]);
@@ -355,28 +360,30 @@ public class Board {
 								y = one.size();
 							}
 							vp += y * Integer.parseInt(com[3]);
-							tq += y * Integer.parseInt(com[3]);
+							yellowCards += y * Integer.parseInt(com[3]);
 							y = 0;
 							one = pl.getPlayedCards().get(com[2]);
 							if (one != null) {
 								y = one.size();
 							}
 							vp += y * Integer.parseInt(com[3]);
-							tq += y * Integer.parseInt(com[3]);
+							yellowCards += y * Integer.parseInt(com[3]);
 							y = 0;
 							one = p2.getPlayedCards().get(com[2]);
 							if (one != null) {
 								y = one.size();
 							}
 							vp += y * Integer.parseInt(com[3]);
-							tq += y * Integer.parseInt(com[3]);
+							yellowCards += y * Integer.parseInt(com[3]);
 						}
 					}
 				}
 			}
 		}
+		vpSources.put("YellowCards", yellowCards);
 		//System.out.println("Player "+getCurrentTurn()+1+"'s Yellow VP "+tq);
-		tq=0;
+		
+		int guildCards = 0;
 		// Vp for guilds
 		temp = playedCards.get("purple"); // Examples: VP LR blue, VP LRD wonder, VP LR minusWar
 		if (temp != null) {
@@ -400,15 +407,15 @@ public class Board {
 						if (com[2].equalsIgnoreCase("minusWar")) {
 							vp += pl.getWarMinusPoints();
 							vp += p2.getWarMinusPoints();
-							tq += pl.getWarMinusPoints();
-							tq += p2.getWarMinusPoints();
+							guildCards += pl.getWarMinusPoints();
+							guildCards += p2.getWarMinusPoints();
 						} else if (com[2].equalsIgnoreCase("silver")) {
 							ArrayList<Card> te = pl.getPlayedCards().get(com[2]);
 							vp += te.size() * Integer.parseInt(com[3]);
-							tq += te.size() * Integer.parseInt(com[3]);
+							guildCards += te.size() * Integer.parseInt(com[3]);
 							ArrayList<Card> ta = p2.getPlayedCards().get(com[2]);
 							vp += ta.size() * Integer.parseInt(com[3]);
-							tq += ta.size() * Integer.parseInt(com[3]);
+							guildCards += ta.size() * Integer.parseInt(com[3]);
 						} else {
 							ArrayList<Card> te = pl.getPlayedCards().get(com[2]);
 							int y = 0;
@@ -416,14 +423,14 @@ public class Board {
 								y = te.size();
 							}
 							vp += y;
-							tq += y;
+							guildCards += y;
 							ArrayList<Card> ta = p2.getPlayedCards().get(com[2]);
 							int z = 0;
 							if (ta != null) {
 								z = ta.size();
 							}
 							vp += z;
-							tq += z;
+							guildCards += z;
 						}
 					}
 				}
@@ -442,9 +449,9 @@ public class Board {
 					vp += pl.getWonder().getCurrentStage();
 					vp += p.getWonder().getCurrentStage();
 					vp += p2.getWonder().getCurrentStage();
-					tq += pl.getWonder().getCurrentStage();
-					tq += p.getWonder().getCurrentStage();
-					tq += p2.getWonder().getCurrentStage();
+					guildCards += pl.getWonder().getCurrentStage();
+					guildCards += p.getWonder().getCurrentStage();
+					guildCards += p2.getWonder().getCurrentStage();
 				}
 				if (com[1].equals("S All")) {
 					TreeMap<String, Integer> sciListL = new TreeMap<String, Integer>();
@@ -475,26 +482,29 @@ public class Board {
 				if (com[1].equals("D")) {
 					if (p.getPlayedCards().get("blue")!=null) {
 						vp += p.getPlayedCards().get("blue").size();
-						tq += p.getPlayedCards().get("blue").size();
+						guildCards += p.getPlayedCards().get("blue").size();
 					}
 					if (p.getPlayedCards().get("silver")!=null){
 						vp += p.getPlayedCards().get("silver").size();
-						tq += p.getPlayedCards().get("silver").size();
+						guildCards += p.getPlayedCards().get("silver").size();
 					}
 					if (p.getPlayedCards().get("brown")!=null) {
 						vp += p.getPlayedCards().get("brown").size();
-						tq += p.getPlayedCards().get("brown").size();
+						guildCards += p.getPlayedCards().get("brown").size();
 					}
 				}
 			}
 		}
+		vpSources.put("GuildCards", guildCards);
 		//System.out.println("Player "+getCurrentTurn()+1+"'s Guild VP "+tq);
-		tq=0;
+		int sci = 0;
 		// adds VP for sci
 		vp += calcSci(p);
-		tq = calcSci(p);
+		sci = calcSci(p);
+		vpSources.put("Science", sci);
 		p.setVp(p.getVp() + vp);
 	}
+	
 	public int calcSci(Player p) {
 		TreeMap<String, Integer> sciList = p.getSciList();
 		int vp = 0;
