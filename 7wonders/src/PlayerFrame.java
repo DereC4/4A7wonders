@@ -59,12 +59,31 @@ public class PlayerFrame extends JFrame implements MouseListener
             {
                 if (isMain()) 
                 	setPlayer(board.getCurrentPlayer());
+                BufferedImage coin = ImageIO.read(new File("images\\assets\\coin.png"));
+                BufferedImage warpluspoints = ImageIO.read(new File("images\\assets\\victory1.png"));
+                BufferedImage warminuspoints = ImageIO.read(new File("images\\assets\\victoryminus1.png"));
+                BufferedImage burn = ImageIO.read(new File("images\\assets\\trash.png"));
+                BufferedImage burnactivated = ImageIO.read(new File("images\\assets\\trashactivated.png"));
                 BufferedImage wonderbackground = ImageIO.read(new File("images\\wonderbackgrounds\\"+player.getWonder().getName()+"bk.jpg"));
                 BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\" + player.getWonder().getName() + ".png"));
                 BufferedImage currentage = ImageIO.read(new File("images\\assets\\age" + board.getCurrentAge() + ".png"));
                 g.drawImage(wonderbackground, 0, 0, LENGTH, HEIGHT, null);
                 g.drawImage(sampleWonder, 250, 250, 1100, 342, null);
                 g.drawImage(currentage, 750, 100, 100, 100, null);
+                g.setColor(new Color(26, 109, 176));
+                g.fillRect(100, 250, 125, 125); //war minus points 
+                g.fillRect(100, 425, 125, 125); //war plus points	
+                g.fillRect(1375, 250, 125, 125); //coins
+                g.setColor(Color.BLACK);
+                g.drawString("WarMinusPoints", 108, 350);
+                g.drawString("" + player.getWarMinusPoints(), 155, 365);
+                g.drawString("WarPlusPoints", 110, 525);
+                g.drawString("" + player.getWarPlusPoints(), 155, 540);
+                g.drawString("Coins", 1420, 350);
+                g.drawString("" + player.getMoney(), 1435, 365);
+                g.drawImage(coin, 1411, 275, 50, 50, null);
+                g.drawImage(warminuspoints, 135, 275, warminuspoints.getWidth(), warminuspoints.getHeight(), null);
+                g.drawImage(warpluspoints, 125, 445, 75, 65, null);
                 g.setFont(new Font("Arial", Font.PLAIN, 50));
                 int currentPlayer = player.getIndex() + 1;
                 g.drawString("Player " + currentPlayer, 350, 175);
