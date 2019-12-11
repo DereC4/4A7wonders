@@ -62,7 +62,7 @@ public class PlayerFrame extends JFrame implements MouseListener
                 	setPlayer(board.getCurrentPlayer());
 //              BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
                 out.println(player.getWonder().getName());
-                //good quality: alexandria babylon gizah? halikarnassus
+                //good quality: alexandria babylon gizah halikarnassus rhodos esphesos
                 BufferedImage wonderbackground = ImageIO.read(new File("images\\wonderbackgrounds\\"+player.getWonder().getName()+"bk.jpg"));
                 BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\" + player.getWonder().getName() + ".png"));
                 BufferedImage currentage = ImageIO.read(new File("images\\assets\\age" + board.getCurrentAge() + ".png"));
