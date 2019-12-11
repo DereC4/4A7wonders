@@ -14,11 +14,11 @@ import javax.swing.JFrame;
 public class GameFrame extends PlayerFrame
 {
     private Board board; //reference to super 
-    private boolean gameEnd;
+    private boolean gameend;
     public GameFrame() throws IOException
     {
         super();
-        gameEnd = false;
+        gameend = false;
         //super.setMain(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         board = super.getBoard();
@@ -107,6 +107,7 @@ public class GameFrame extends PlayerFrame
                                 board.getDeck().getDiscard().add(temp);
                                 p.setMoney(p.getMoney() + 3);
                             }
+                            
                             else
                             {
                                 board.decodeEffect(temp, p);
@@ -155,7 +156,7 @@ public class GameFrame extends PlayerFrame
                 g.fillRect(1250, 100, 100, 100);
                 g.drawImage(coin, 1411, 275, 50, 50, null);
                 g.drawImage(warminuspoints, 135, 275, warminuspoints.getWidth(), warminuspoints.getHeight(), null);
-                g.drawImage(warpluspoints, 145, 450, warpluspoints.getWidth(), warpluspoints.getHeight(), null);
+                g.drawImage(warpluspoints, 125, 445, 75, 65, null);
                 
                 g.setColor(Color.gray);
                 g.fillRect(1375, 425, 125, 125); //button to burn cards
@@ -196,15 +197,15 @@ public class GameFrame extends PlayerFrame
                 else g.setColor(Color.gray);
                 g.drawRect(1250, 100, 100, 100); //build wonders
                 g.setColor(Color.black);
-                g.setFont(new Font("Arial", Font.PLAIN, 10));
-                g.drawString("Build Wonder", 1275, 150);
+                g.setFont(new Font("Arial", Font.BOLD, 15));
+                g.drawString("Build Wonder", 1253, 150);
                 g.setColor(Color.black);
-                g.setFont(new Font("Arial", Font.PLAIN, 10));
-                g.drawString("WarMinusPoints", 125, 350);
-                g.drawString("" + board.getCurrentPlayer().getWarMinusPoints(), 160, 365);
-                g.drawString("WarPlusPoints", 125, 525);
-                g.drawString("" + board.getCurrentPlayer().getWarPlusPoints(), 160, 540);
-                g.drawString("Coins", 1425, 350);
+                g.setFont(new Font("Arial", Font.BOLD, 15));
+                g.drawString("WarMinusPoints", 108, 350);
+                g.drawString("" + board.getCurrentPlayer().getWarMinusPoints(), 155, 365);
+                g.drawString("WarPlusPoints", 110, 525);
+                g.drawString("" + board.getCurrentPlayer().getWarPlusPoints(), 155, 540);
+                g.drawString("Coins", 1420, 350);
                 g.drawString("" + board.getCurrentPlayer().getMoney(), 1435, 365);
                 g.setFont(new Font("Arial", Font.PLAIN, 20));
                 g.drawString("Previous Player", 10, 50);

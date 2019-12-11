@@ -1,4 +1,5 @@
 import static java.lang.System.out;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -8,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 @SuppressWarnings("serial")
@@ -60,6 +62,7 @@ public class PlayerFrame extends JFrame implements MouseListener
                 	setPlayer(board.getCurrentPlayer());
 //              BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
                 out.println(player.getWonder().getName());
+                //good quality: alexandria babylon gizah? halikarnassus
                 BufferedImage wonderbackground = ImageIO.read(new File("images\\wonderbackgrounds\\"+player.getWonder().getName()+"bk.jpg"));
                 BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\" + player.getWonder().getName() + ".png"));
                 BufferedImage currentage = ImageIO.read(new File("images\\assets\\age" + board.getCurrentAge() + ".png"));
