@@ -48,36 +48,6 @@ public class Board
             } else if (effect.equalsIgnoreCase("scienceAll")) // call at end of game right before VP calc //broken
             {
             	p.getSciList().put("lit", p.getSciList().get("lit") + 1);
-                /*TreeMap < String, Integer > sciListL = new TreeMap < String, Integer > ();
-                TreeMap < String, Integer > sciListM = new TreeMap < String, Integer > ();
-                TreeMap < String, Integer > sciListG = new TreeMap < String, Integer > ();
-                for (String key: p.getSciList().keySet()) {
-                    sciListL.put(key, p.getSciList().get(key));
-                    sciListM.put(key, p.getSciList().get(key));
-                    sciListG.put(key, p.getSciList().get(key));
-                }
-                int l = p.getSciList().get("lit");
-                int m = p.getSciList().get("math");
-                int g = p.getSciList().get("gear");
-                sciListL.put("lit", l + 1);
-                sciListM.put("math", m + 1);
-                sciListG.put("gear", g + 1);
-                int lit = calcSci(sciListL);
-                int math = calcSci(sciListM);
-                int gear = calcSci(sciListG);
-                if (lit >= math && lit > gear) {
-                    p.getSciList().put("lit", p.getSciList().get("lit") + 1);
-                } else if (math > lit && math > gear) {
-                    p.getSciList().put("math", p.getSciList().get("math") + 1);
-                } else if (gear > lit && gear > math) {
-                    p.getSciList().put("gear", p.getSciList().get("gear") + 1);
-                }
-            } else if (effect.equalsIgnoreCase("C 9")) {
-                getCurrentPlayer().setMoney(getCurrentPlayer().getMoney() + 9);
-            } else if (effect.equalsIgnoreCase("ignoreCost")) // call be used once per age
-            {
-                getCurrentPlayer().setIgnoreCost(true);
-            */
             } else if (effect.equalsIgnoreCase("drawDiscard")) // call once at the end of turn (not age)
             {
                 setDrawDiscard(true);
