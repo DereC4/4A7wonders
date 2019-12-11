@@ -17,7 +17,7 @@ public class Board {
 	public Board() throws IOException {
 		deck = new Deck();
 		playerList = new ArrayList<Player>();
-		currentAge = 3;
+		currentAge = 1;
 		onWards = true;
 		currentPlayer = 0; // players are 0,1,2
 		drawDiscard = false;
