@@ -89,10 +89,12 @@ public class PlayerFrame extends JFrame implements MouseListener
                 g.drawString("Player " + currentPlayer, 350, 175);
                 //Derek's space. Click to open new window
                 BufferedImage clicktoshowcards = ImageIO.read(new File("images\\assets\\card.png"));
-                g.drawImage(clicktoshowcards, 1000, 100, 100, 100, null);
-                g.setColor(new Color(0, 102, 225));
+//                g.setColor(new Color(0, 102, 225));
                 //Area to click; shows cards that player has played
-                g.drawRect(1000, 100, 100, 100);
+//                g.drawRect(1000, 100, 100, 100);
+//                g.setColor(new Color(26, 109, 176));
+//                g.fillRect(1000, 100, 100, 100);
+                g.drawImage(clicktoshowcards, 1000, 100, 100, 100, null);
                 Player p = player;
                 g.setColor(Color.black);
                 //g.drawRect(250, 250, 1100, 342); //Current player's wonder
