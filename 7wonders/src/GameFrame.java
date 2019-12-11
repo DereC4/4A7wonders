@@ -30,6 +30,7 @@ public class GameFrame extends PlayerFrame
             {
                 if (board.ageOver())
                 {
+                	WarWindow mongoltage = new WarWindow();
                     if (board.isOnWards()) board.setOnWards(false);
                     else board.setOnWards(true);
                     board.calcWarPoints(); //for previous age
