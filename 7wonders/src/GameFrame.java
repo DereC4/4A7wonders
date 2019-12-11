@@ -14,11 +14,9 @@ import javax.swing.JFrame;
 public class GameFrame extends PlayerFrame
 {
     private Board board; //reference to super 
-    private boolean gameend;
     public GameFrame() throws IOException
     {
         super();
-        gameend = false;
         //super.setMain(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         board = super.getBoard();
@@ -213,6 +211,7 @@ public class GameFrame extends PlayerFrame
                 g.setFont(new Font("Arial", Font.PLAIN, 50));
                 int currentplayer = board.getCurrentPlayer().getIndex() + 1;
                 g.drawString("Player " + currentplayer, 350, 175);
+                //paintGameOver(g);
             }
             catch (IOException e)
             {
@@ -222,6 +221,7 @@ public class GameFrame extends PlayerFrame
         }
         else {
         	
+        	paintGameOver(g);
         	for (Player p : board.getPlayerList())
         		board.calcVP(p);
         	VictoryWindow window = new VictoryWindow(board);
@@ -246,6 +246,15 @@ public class GameFrame extends PlayerFrame
             //out.println(e);
         }
     }
+    public void paintGameOver(Graphics g)
+    {
+    	g.setColor(new Color(10, 200, 20));
+    	g.fillRect(650, 700, 250, 100);
+    	g.setColor(Color.black);
+    	g.drawRect(650, 700, 250, 100);
+    	g.setFont(new Font("Arial", Font.BOLD, 45));
+    	g.drawString("Continue", 675, 760);
+    }
     public void showDiscardWindow()
     {
         Player p = board.getCurrentPlayer();
@@ -257,6 +266,19 @@ public class GameFrame extends PlayerFrame
     public void mouseReleased(MouseEvent event)
     {
         Player player = board.getCurrentPlayer();
+        
+        //g.fillRect(650, 700, 250, 100); //Victory Screen
+        if (event.getY()>700 && event.getY()<800)
+        {
+        	if (event.getX()>650 && event.getX()<900)
+        	{
+        		if (board.gameFinished())
+        		{
+        			VictoryWindow window = new VictoryWindow(board);
+        		}
+        	}
+        }
+        
         //g.drawRect(1400, 0, 200, 150); //Show next player's wonder
         super.mouseReleased(event);
         try
