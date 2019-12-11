@@ -53,16 +53,12 @@ public class PlayerFrame extends JFrame implements MouseListener
     public void paint(Graphics g)
     {
         ArrayList < Card > hand = board.getCurrentPlayer().getHand();
-        //System.out.println(hand.toString());
         if (!board.gameFinished())
         {
             try
             {
                 if (isMain()) 
                 	setPlayer(board.getCurrentPlayer());
-//              BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
-                out.println(player.getWonder().getName());
-                //good quality: alexandria babylon gizah halikarnassus rhodos esphesos
                 BufferedImage wonderbackground = ImageIO.read(new File("images\\wonderbackgrounds\\"+player.getWonder().getName()+"bk.jpg"));
                 BufferedImage sampleWonder = ImageIO.read(new File("images\\wonders\\" + player.getWonder().getName() + ".png"));
                 BufferedImage currentage = ImageIO.read(new File("images\\assets\\age" + board.getCurrentAge() + ".png"));
@@ -94,8 +90,6 @@ public class PlayerFrame extends JFrame implements MouseListener
             }
             catch (IOException e)
             {
-                out.println(e);
-                //out.println(board.getCurrentPlayer().getWonder().getName());
             }
         }
     }
