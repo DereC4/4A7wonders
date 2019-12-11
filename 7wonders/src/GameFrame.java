@@ -107,6 +107,7 @@ public class GameFrame extends PlayerFrame
                                 board.getDeck().getDiscard().add(temp);
                                 p.setMoney(p.getMoney() + 3);
                             }
+                            
                             else
                             {
                                 board.decodeEffect(temp, p);
