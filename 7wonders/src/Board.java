@@ -498,7 +498,7 @@ public class Board {
 		vp += calcSci(p);
 		sci = calcSci(p);
 		vpSources.put("Science", sci);
-		p.setVp(p.getVp() + vp);
+		p.setVp(vp);
 	}
 
 	public int calcSci(Player p) {
