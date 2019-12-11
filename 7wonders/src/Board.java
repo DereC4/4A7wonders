@@ -334,7 +334,6 @@ public class Board {
 								y = one.size();
 							}
 							vp += y * Integer.parseInt(com[3]);
-							yellowCards += y * Integer.parseInt(com[3]);
 							y = 0;
 							one = p2.getPlayedCards().get(com[2]);
 							if (one != null) {
@@ -403,11 +402,20 @@ public class Board {
 							guildCards += p2.getWarMinusPoints();
 						} else if (com[2].equalsIgnoreCase("silver")) {
 							ArrayList<Card> te = pl.getPlayedCards().get(com[2]);
-							vp += te.size() * Integer.parseInt(com[3]);
-							guildCards += te.size() * Integer.parseInt(com[3]);
+							int y = 0;
+							if (te != null) {
+								y = te.size()* Integer.parseInt(com[3]);
+							}
+							vp += y;
+							guildCards += y;
+							
 							ArrayList<Card> ta = p2.getPlayedCards().get(com[2]);
-							vp += ta.size() * Integer.parseInt(com[3]);
-							guildCards += ta.size() * Integer.parseInt(com[3]);
+							int z = 0;
+							if (ta != null) {
+								z = ta.size()* Integer.parseInt(com[3]);;
+							}
+							vp += z;
+							guildCards += z;
 						} else {
 							ArrayList<Card> te = pl.getPlayedCards().get(com[2]);
 							int y = 0;
