@@ -14,6 +14,7 @@ public class WarWindow
 	public WarWindow()
 	{
 		frame = new JFrame("WAR TIME");
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Mongol();
 	}
 	public void Mongol()
