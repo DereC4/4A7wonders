@@ -24,7 +24,7 @@ public class GameFrame extends PlayerFrame
     }
     public void paint(Graphics g)
     {
-        if (!board.gameFinished())
+        if (!board.gameFinished()) 
         {
             try
             {
