@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-public class Player
+public class Player implements Comparable
 {
 	private int money, warMinusPoints, warPlusPoints, armies, index, vp;
 	private TreeMap<String, Boolean> reducedList;
@@ -216,12 +216,31 @@ public class Player
 		return getIndex() + "";
 	}
 
+	public int getVp() {
+		return vp;
+	}
+
+	public void setVp(int vp) {
+		this.vp = vp;
+	}
+
 	/*
 	public void addTempResource(Resources r)
 	{
 		getTempResources().add(r);
 	}
 	*/
+	public int compareTo(Object obj)
+	{
+		Player p = (Player) obj;
+		if (p.getVp() > getVp())
+			return -1;
+		else if (p.getVp() < getVp())
+			return 1;
+		else
+			return 0;
+	}
+	
 	public void addToPlayedCards(Card c) 
 	{
 		String type = c.getType();

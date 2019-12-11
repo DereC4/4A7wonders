@@ -52,7 +52,7 @@ public class PlayerFrame extends JFrame implements MouseListener
     {
         //board.printEverything();
         ArrayList < Card > hand = board.getCurrentPlayer().getHand();
-        System.out.println(hand.toString());
+        //System.out.println(hand.toString());
         if (!board.gameFinished())
         {
             try

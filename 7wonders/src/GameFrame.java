@@ -38,23 +38,6 @@ public class GameFrame extends PlayerFrame
                 VictoryWindow x = new VictoryWindow(p1VP, p2VP, p3VP, board);
             }
             */
-            for (int i = 0; i < board.getPlayerList().size(); i++)
-            {
-                System.out.println("Player " + (i + 1) + " Coins: " + board.getPlayerList().get(i).getMoney());
-                if (board.getPlayerList().get(i).getMoney() < 0)
-                {
-                    System.out.println();
-                    System.out.println("Player " + (i + 1) + " has negative coins");
-                    board.getPlayerList().get(i).setMoney(0);
-                    for (Player p: board.getPlayerList())
-                    {
-                        System.out.println("Player " + (i + 1) + ": Card to Play: " + p.getTempPlayedCards().toString());
-                        System.out.println("Player " + (i + 1) + ": Last Type of Card Played: " + p.getPlayedCards().lastEntry().toString());
-                        System.out.println("Player " + (i + 1) + ": Trading resources: " + p.getTrade().toString());
-                    }
-                    System.out.println();
-                }
-            }
             try
             {
                 if (board.ageOver())
@@ -62,23 +45,24 @@ public class GameFrame extends PlayerFrame
                     if (board.isOnWards()) board.setOnWards(false);
                     else board.setOnWards(true);
                     board.calcWarPoints(); //for previous age
+                    /*
                     if (board.getCurrentAge() == 3)
                     {
                         VictoryWindow x = new VictoryWindow(board.totalVP(board.getPlayerList().get(0)), board.totalVP(board.getPlayerList().get(1)), board.totalVP(board.getPlayerList().get(2)), board);
                     }
-                    else {
-                    	board.setCurrentAge(board.getCurrentAge() + 1);
-                        //System.out.print("New Age is " + board.getCurrentAge());
-                        board.deal(board.getCurrentAge());
-                        for (Player p: board.getPlayerList())
-                        {
-                            board.getDeck().getDiscard().add(p.getHand().get(0)); //adds remaining card to discard pile
-                            p.getHand().remove(0); //Discard remaining card from previous age
-                            //out.println(p.getHand());
-                            Wonder wonder = p.getWonder();
-                            int stage = p.getWonderStage();
-                            if (wonder.getName().equals("Olympia") && stage >= 2) p.setIgnoreCost(true);
-                        }
+                    */
+                    
+                    board.setCurrentAge(board.getCurrentAge() + 1);
+                    //System.out.print("New Age is " + board.getCurrentAge());
+                    board.deal(board.getCurrentAge());
+                    for (Player p: board.getPlayerList())
+                    {
+                        board.getDeck().getDiscard().add(p.getHand().get(0)); //adds remaining card to discard pile
+                        p.getHand().remove(0); //Discard remaining card from previous age
+                        //out.println(p.getHand());
+                        Wonder wonder = p.getWonder();
+                        int stage = p.getWonderStage();
+                        if (wonder.getName().equals("Olympia") && stage >= 2) p.setIgnoreCost(true);
                     }
                 }
                 //check temp card storage 
@@ -114,7 +98,7 @@ public class GameFrame extends PlayerFrame
                                 if (vpCases.contains(wonder.getEffect(stage))) p.setHas_VP_Effect(true);
                                 if (!p.has_VP_Effect())
                                 {
-                                    out.println(wonder.getEffect(stage));
+                                    //out.println(wonder.getEffect(stage));
                                     board.decodeWonderEffect(wonder.getEffect(stage));
                                 }
                             }
@@ -122,17 +106,30 @@ public class GameFrame extends PlayerFrame
                             {
                                 board.getDeck().getDiscard().add(temp);
                                 p.setMoney(p.getMoney() + 3);
-                                p.setBurnCard(false);
                             }
                             else
                             {
                                 board.decodeEffect(temp, p);
                             }
                             //must also pay card cost
-                            board.payCosts(p.getIndex());
+                            board.payCosts(p.getIndex()); 
+                            p.setBurnCard(false);
+                            
+                            /*
+                            System.out.println("Player " + (i + 1) + " Coins: " + board.getPlayerList().get(i).getMoney());
+                            if (board.getPlayerList().get(i).getMoney() <= 2)
+                            {
+                                System.out.println();
+                                System.out.println("Player " + (i + 1) + " lost coins");
+                                System.out.println("Player " + (i + 1) + ": Card to Play: " + temp.toString());
+                                System.out.println();
+                            }
+                            */
+                            
                             p.getTempPlayedCards().clear();
                         }
                     }
+                    
                     board.incrementHandLocations();
                 }
                 super.paint(g);
@@ -215,8 +212,9 @@ public class GameFrame extends PlayerFrame
         }
         else {
         	
-        	VictoryWindow x = new VictoryWindow(board.totalVP(board.getPlayerList().get(0)), board.totalVP(board.getPlayerList().get(1)), 
-            		board.totalVP(board.getPlayerList().get(2)), board);
+        	for (Player p : board.getPlayerList())
+        		board.calcVP(p);
+        	VictoryWindow window = new VictoryWindow(board);
         }
     }
     public void paintCards(Graphics g) //100, 675, 1400, 300

@@ -244,12 +244,12 @@ public class Board {
 		}
 	}
 
-	public int totalVP(Player p) {
+	public void calcVP(Player p) {
 		TreeMap<String, ArrayList<Card>> playedCards = p.getPlayedCards();
 		int vp = 0;
 		// adds VP for coins
 		vp += p.getMoney() / 3;
-		System.out.println("Player "+getCurrentTurn()+1+"'s coin VP "+vp);
+		//System.out.println("Player "+getCurrentTurn()+1+"'s coin VP "+vp);
 		// adds VP for wonders
 		int tq=0;
 		for (int i = 1; i <= p.getWonder().getCurrentStage(); i++) {
@@ -260,16 +260,16 @@ public class Board {
 				tq += Integer.parseInt(com[1]);
 			}
 		}
-		System.out.println("Player "+getCurrentTurn()+1+"'s Wonder VP "+tq);
+		//System.out.println("Player "+getCurrentTurn()+1+"'s Wonder VP "+tq);
 		
-		System.out.println("Player "+getCurrentTurn()+1+"'s Science VP "+tq);
+		//System.out.println("Player "+getCurrentTurn()+1+"'s Science VP "+tq);
 		// adds VP for war
 		vp -= p.getWarMinusPoints();
 		vp += p.getWarPlusPoints();
 		
 		tq = p.getWarMinusPoints()*-1;
 		tq += p.getWarPlusPoints();
-		System.out.println("Player "+getCurrentTurn()+1+"'s War VP "+tq);
+		//System.out.println("Player "+getCurrentTurn()+1+"'s War VP "+tq);
 		
 		tq=0;
 		// adds VP for blue
@@ -284,7 +284,7 @@ public class Board {
 				}
 			}
 		}
-		System.out.println("Player "+getCurrentTurn()+1+"'s Blue VP "+tq);
+		//System.out.println("Player "+getCurrentTurn()+1+"'s Blue VP "+tq);
 		tq=0;
 		// VP for yellow
 		temp = playedCards.get("yellow");
@@ -375,7 +375,7 @@ public class Board {
 				}
 			}
 		}
-		System.out.println("Player "+getCurrentTurn()+1+"'s Yellow VP "+tq);
+		//System.out.println("Player "+getCurrentTurn()+1+"'s Yellow VP "+tq);
 		tq=0;
 		// Vp for guilds
 		temp = playedCards.get("purple"); // Examples: VP LR blue, VP LRD wonder, VP LR minusWar
@@ -488,12 +488,12 @@ public class Board {
 				}
 			}
 		}
-		System.out.println("Player "+getCurrentTurn()+1+"'s Guild VP "+tq);
+		//System.out.println("Player "+getCurrentTurn()+1+"'s Guild VP "+tq);
 		tq=0;
 		// adds VP for sci
 		vp += calcSci(p);
 		tq = calcSci(p);
-		return vp;
+		p.setVp(p.getVp() + vp);
 	}
 	public int calcSci(Player p) {
 		TreeMap<String, Integer> sciList = p.getSciList();
@@ -734,14 +734,22 @@ public class Board {
 	{
 		Player p = getPlayerList().get(id);
 
-		if (p.isIgnoreCost()) {
+		if (p.isIgnoreCost()) 
+		{
 			p.setIgnoreCost(false);
-		} else if (p.getTrade().size() == 0) {
+		} 
+		else if (p.isBurnCard())
+		{
+			return;
+		}
+		else if (p.getTrade().size() == 0) 
+		{
 			Card temp = p.getTempPlayedCards().get(0);
 			if (temp.getCost().toString().contains("C 1")) {
 				p.setMoney(p.getMoney() - 1);
 			}
-		} else {
+		}
+		else {
 			// out.println(p.getTrade());
 			for (int index : p.getTrade().keySet()) {
 				Player toTrade = getPlayerList().get(index);
