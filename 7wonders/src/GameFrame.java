@@ -180,11 +180,10 @@ public class GameFrame extends PlayerFrame
             }
         }
         else {
-        	
-        	paintGameOver(g);
         	for (Player p : board.getPlayerList())
         		board.calcVP(p);
-        	VictoryWindow window = new VictoryWindow(board);
+        	paintGameOver(g);
+        	//VictoryWindow window = new VictoryWindow(board);
         }
     }
     public void paintCards(Graphics g) //100, 675, 1400, 300
