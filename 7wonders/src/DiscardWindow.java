@@ -90,7 +90,7 @@ public class DiscardWindow extends JFrame implements MouseListener
 	public void mouseReleased(MouseEvent e) 
 	{
 		//out.println("hey");
-		for (String coord : coords.keySet())
+		for (String coord : coords.keySet()) 
 		{
 			String[] temp = coord.split(",");
 			int startX = Integer.parseInt(temp[0]);

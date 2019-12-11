@@ -17,7 +17,7 @@ public class Board {
 	public Board() throws IOException {
 		deck = new Deck();
 		playerList = new ArrayList<Player>();
-		currentAge = 1;
+		currentAge = 3;
 		onWards = true;
 		currentPlayer = 0; // players are 0,1,2
 		drawDiscard = false;
@@ -334,6 +334,7 @@ public class Board {
 								y = one.size();
 							}
 							vp += y * Integer.parseInt(com[3]);
+							yellowCards += y * Integer.parseInt(com[3]);
 							y = 0;
 							one = p2.getPlayedCards().get(com[2]);
 							if (one != null) {

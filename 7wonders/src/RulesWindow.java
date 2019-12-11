@@ -1,6 +1,9 @@
 import static java.lang.System.out;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -27,46 +30,47 @@ public class RulesWindow extends JFrame
         setLayout(null);
         setVisible(true);
         setBounds(150,25,LENGTH,HEIGHT);
-        //out.println(playedCards);
 	}
 	public void paint(Graphics g)
 	{
 		try
 		{
-			BufferedImage cardinfo = ImageIO.read(new File("images\\rules\\cardinfo.png"));
-			BufferedImage resources = ImageIO.read(new File("images\\rules\\resources.png"));
-			BufferedImage moreresource = ImageIO.read(new File("images\\rules\\morefunctions.png"));
-			BufferedImage guilds1 = ImageIO.read(new File("images\\rules\\guilds1.png"));
-			BufferedImage guilds2 = ImageIO.read(new File("images\\rules\\guilds2.png"));
-			BufferedImage endofage = ImageIO.read(new File("images\\rules\\endofage.png"));
-			BufferedImage boards = ImageIO.read(new File("images\\rules\\boards.png"));
-			BufferedImage finalfunctions = ImageIO.read(new File("images\\rules\\finalfunctions.png"));
 			BufferedImage background = ImageIO.read(new File("images\\background.jpg"));
-			
-			
 			g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
-			
-			g.drawImage(resources, 0, 25, resources.getWidth(), resources.getHeight(), null);
-			g.drawImage(boards, 0, 510, resources.getWidth(), boards.getHeight(), null);
-			
-			g.drawImage(moreresource, 350, 25, moreresource.getWidth(), moreresource.getHeight(), null);
-			g.drawImage(finalfunctions, 350, 25+moreresource.getHeight(), moreresource.getWidth(), finalfunctions.getHeight(), null);
-			
-			g.drawImage(cardinfo, 689, 25, cardinfo.getWidth(), cardinfo.getHeight(), null);
-			g.drawImage(endofage, 689, 25+cardinfo.getHeight(), endofage.getWidth(), endofage.getHeight(), null);
-			
-			g.drawImage(guilds1, LENGTH-guilds1.getWidth(), 25, guilds1.getWidth(), guilds1.getHeight(), null);
-//			g.drawImage(guilds2, 689+guilds1.getWidth(), 25, guilds2.getWidth(), guilds2.getHeight(), null);
-			g.drawImage(guilds2, LENGTH-guilds1.getWidth(), 25+guilds1.getHeight(), guilds1.getWidth(), guilds2.getHeight(), null);
-
+			try
+			{
+			    Font introfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts\\Minecraftia.ttf")).deriveFont(12f);
+			    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			    ge.registerFont(introfont);
+			    g.setFont(introfont);
+			    Font currentFont = g.getFont();
+			    Font newFont = currentFont.deriveFont(currentFont.getSize() * 3F);
+			    g.setFont(newFont);
+			}
+			catch (IOException e) 
+			{
+			    e.printStackTrace();
+			} 
+			catch(FontFormatException e)
+			{
+			    e.printStackTrace();
+			}
+		    g.drawString("Rules of the Duel", 25, 75);
+		    Font currentFont = g.getFont();
+		    Font newFont = currentFont.deriveFont(currentFont.getSize() * .7F);
+		    g.setFont(newFont);
+		    g.drawString("Click ", 25, 110);
+		    BufferedImage clicktoshowcards = ImageIO.read(new File("images\\assets\\card.png"));
+            g.drawImage(clicktoshowcards, 100, 85, 50, 50, null);
+            g.drawString("to display your cards", 150, 110);
 		}
 		catch (IOException e)
 		{
 			out.println(e);
 		}
 	}
-//	public static void main (String args[])
-//	{
-//		RulesWindow x = new RulesWindow();
-//	}
+	public static void main (String args[])
+	{
+		RulesWindow rules = new RulesWindow();
+	}
 }
