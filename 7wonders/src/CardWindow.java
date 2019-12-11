@@ -25,7 +25,6 @@ public class CardWindow extends JFrame
         setVisible(true);
         setBounds(150,25,LENGTH,HEIGHT);
         playedCards = p.getPlayedCards();
-        //out.println(playedCards);
 	}
 	
 	public static int incrementIndex(int i)
@@ -89,13 +88,9 @@ public class CardWindow extends JFrame
 						numPurple++;
 					}
 				}
-				//g.drawImage(sampleCard, 50 + (i * 1), 50, 125, 190, null);
 			}
 		}
 		catch (IOException e)
-		{
-			//out.println(e);
-		}
+		{}
 	}
-	
 }
