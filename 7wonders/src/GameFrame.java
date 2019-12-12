@@ -107,8 +107,8 @@ public class GameFrame extends PlayerFrame
                 g.setColor(Color.gray);
                 g.fillRect(1375, 425, 125, 125); //button to burn cards
                 g.setColor(Color.black);
-                g.drawRect(1375, 425, 125, 125);
-                if (board.getCurrentPlayer().isBurnCard())
+				g.drawRect(1375, 425, 125, 125);
+				if (board.getCurrentPlayer().isBurnCard())
                 {
                     g.drawImage(burnactivated, 1405, 450, 56, 70, null);
                 }
