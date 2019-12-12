@@ -78,11 +78,8 @@ public class GameFrame extends PlayerFrame
                                 	p.setHas_VP_Effect(true);
                                 else
                                 	p.setHas_VP_Effect(false);
-                                //out.println(wonder.getEffect(stage));
-                                //out.println(vpCases);
                                 if (!p.has_VP_Effect())
                                 {
-                                	//out.println(wonder.getEffect(stage));
                                     board.decodeWonderEffect(wonder.getEffect(stage), p);
                                 }
                             }
@@ -99,7 +96,6 @@ public class GameFrame extends PlayerFrame
                             p.setBurnCard(false);
                             p.setBuildWonder(false);
                             p.getTempPlayedCards().remove(j);
-                            out.println("Player " + (p.getIndex()+1) + " " + p.getTempPlayedCards());
                         }
                     }
                     

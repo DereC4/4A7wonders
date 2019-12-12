@@ -834,15 +834,18 @@ public class Board {
 			else
 				currentAgeWP = 5;
 
-			if (lowerP.getArmies() > currentP.getArmies() && higherP.getArmies() > currentP.getArmies()) 
+			if (lowerP.getArmies() > currentP.getArmies() && higherP.getArmies() > currentP.getArmies()) {
 				currentP.setWarMinusPoints(currentP.getWarMinusPoints() + 2);
-			else if (lowerP.getArmies() > currentP.getArmies() || higherP.getArmies() > currentP.getArmies())
+			}
+			else if (lowerP.getArmies() > currentP.getArmies() || higherP.getArmies() > currentP.getArmies()) {
 				currentP.setWarMinusPoints(currentP.getWarMinusPoints() + 1);
-			
-			if (lowerP.getArmies() < currentP.getArmies() && higherP.getArmies() < currentP.getArmies())
+			}
+			if (lowerP.getArmies() < currentP.getArmies() && higherP.getArmies() < currentP.getArmies()) {
 				currentP.setWarPlusPoints(currentP.getWarPlusPoints() + currentAgeWP * 2);
-			else if (lowerP.getArmies() < currentP.getArmies() || higherP.getArmies() < currentP.getArmies())
+			}
+			else if (lowerP.getArmies() < currentP.getArmies() || higherP.getArmies() < currentP.getArmies()) {
 				currentP.setWarPlusPoints(currentP.getWarPlusPoints() + currentAgeWP);
+			}
 		}
 	}
 
@@ -958,7 +961,6 @@ public class Board {
 				return true;
 			}
 			trade.clear();
-			out.println("Not enough coins");
 			return false;
 		}
 	}
