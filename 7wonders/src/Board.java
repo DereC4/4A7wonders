@@ -725,13 +725,11 @@ public class Board {
 				p.setMoney(p.getMoney() - 1);
 			}
 		} else {
-			//out.print("Cost: ");
 			for (int index : p.getTrade().keySet()) {
 				Player toTrade = getPlayerList().get(index);
 				ArrayList<Resources> resources = p.getTrade().get(index);
 				for (int i = 0; i < resources.size(); i++) {
 					trade(p, toTrade, resources.get(i));
-					//out.print(resources.get(i) + " ");
 				}
 				resources.clear();
 			}

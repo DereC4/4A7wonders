@@ -17,10 +17,8 @@ public class GameFrame extends PlayerFrame
     public GameFrame() throws IOException
     {
         super();
-        //super.setMain(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         board = super.getBoard();
-        //RulesWindow rulesoftheduel = new RulesWindow();
     }
     public void paint(Graphics g)
     {
@@ -157,7 +155,6 @@ public class GameFrame extends PlayerFrame
         	for (Player p : board.getPlayerList())
         	{
         		board.calcVP(p);
-        		//if (p.getWonder().getEffect(2).equals(anObject))
         	}
         	paintGameOver(g);
         	
@@ -193,7 +190,6 @@ public class GameFrame extends PlayerFrame
         {
         	if (p.isDrawDiscard())
         	{
-        		//DiscardWindow discardWindow = new DiscardWindow(board, p);
         		board.setToDrawDiscard(p);
                 g.setColor(new Color(10, 200, 20));
                 g.fillRect(650, 350, 300, 100);

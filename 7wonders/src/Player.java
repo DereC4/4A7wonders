@@ -11,7 +11,6 @@ public class Player implements Comparable<Player>
 	private ArrayList<Card> hand;
 	private Wonder wonder;
 	private ArrayList<Resources> resources;
-	//private ArrayList<Resources> tempResources;
 	private ArrayList<Card> tempPlayedCards;
 	private boolean burnCard;
 	private boolean ignoreCost;
@@ -39,7 +38,6 @@ public class Player implements Comparable<Player>
 		sciList = new TreeMap<String, Integer>();
 		
 		resources=new ArrayList<Resources>();
-		//tempResources = new ArrayList<Resources>();
 
 		sciList.put("lit", 0); // tablet
 		
@@ -61,16 +59,6 @@ public class Player implements Comparable<Player>
 		addTempPlayedCard(c);
 		getHand().remove(c);
 	}
-	/*
-	public ArrayList<Resources> getTempResources() {
-		return tempResources;
-	}
-	*/
-	/*
-	public void setTempResources(ArrayList<Resources> tempResources) {
-		this.tempResources = tempResources;
-	}
-	*/
 	public TreeMap<Integer, ArrayList<Resources>> getTrade() {
 		return trade;
 	}
@@ -240,13 +228,6 @@ public class Player implements Comparable<Player>
 	public void setDrawDiscard(boolean isDrawDiscard) {
 		this.isDrawDiscard = isDrawDiscard;
 	}
-
-	/*
-	public void addTempResource(Resources r)
-	{
-		getTempResources().add(r);
-	}
-	*/
 	public int compareTo(Player p)
 	{
 		if (p.getVp() > getVp())
