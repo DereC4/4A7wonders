@@ -28,12 +28,7 @@ public class Card implements Comparable
         for (int i = 0; i < temp.length; i++) 
         	this.cost.add(new Resources(temp[i]));
         
-        if (isFree.equals("true"))
-        	this.isFree = true;
-        else {
-        	this.isFree = false;
-        }        
-        
+        this.isFree = isFree.equals("true");
     }
     public int compareTo(Object obj)
     {

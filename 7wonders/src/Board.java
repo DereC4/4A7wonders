@@ -52,30 +52,7 @@ public class Board {
 				p.addToResources(new Resources("Clay/Ore/Wood/Stone"));
 			} else if (effect.equalsIgnoreCase("scienceAll")) // call at end of game right before VP calc
 			{
-				TreeMap<String, Integer> sciListL = new TreeMap<String, Integer>();
-				TreeMap<String, Integer> sciListM = new TreeMap<String, Integer>();
-				TreeMap<String, Integer> sciListG = new TreeMap<String, Integer>();
-				for (String key : p.getSciList().keySet()) {
-					sciListL.put(key, p.getSciList().get(key));
-					sciListM.put(key, p.getSciList().get(key));
-					sciListG.put(key, p.getSciList().get(key));
-				}
-				int l = p.getSciList().get("lit");
-				int m = p.getSciList().get("math");
-				int g = p.getSciList().get("gear");
-				sciListL.put("lit", l + 1);
-				sciListM.put("math", m + 1);
-				sciListG.put("gear", g + 1);
-				int lit = calcSci(sciListL);
-				int math = calcSci(sciListM);
-				int gear = calcSci(sciListG);
-				if (lit >= math && lit > gear) {
-					p.getSciList().put("lit", p.getSciList().get("lit") + 1);
-				} else if (math > lit && math > gear) {
-					p.getSciList().put("math", p.getSciList().get("math") + 1);
-				} else if (gear > lit && gear > math) {
-					p.getSciList().put("gear", p.getSciList().get("gear") + 1);
-				}
+				p.addToPlayedCards(new Card ("Scientistsguild","Purple","S All",3," ","false","Wood,Wood,Ore,Ore,Papyrus")); //adds guild to the played card the player has b/c they have the same effect
 			} else if (effect.equalsIgnoreCase("C 9")) {
 				p.setMoney(getCurrentPlayer().getMoney() + 9);
 			} else if (effect.equalsIgnoreCase("ignoreCost")) // call be used once per age
@@ -181,7 +158,14 @@ public class Board {
 				}
 			} else if (enigma[0].contains("R")) {
 				// For Resource/Commodity
-				p.addToResources(new Resources(enigma[1]));
+				if (enigma[1].contains(",")) {
+					String x=enigma[1];
+					p.addToResources(new Resources(x.substring(0,x.indexOf(","))));
+					p.addToResources(new Resources(x.substring(x.indexOf(","))+1));
+				}
+				else {
+					p.addToResources(new Resources(enigma[1]));
+				}
 			} else if (enigma[0].contains("TP")) {
 				// For Trading Posts
 				TreeMap<String, Boolean> rl = p.getReducedList();
@@ -207,15 +191,6 @@ public class Board {
 				p.setArmies(p.getArmies() + Integer.parseInt(enigma[1]));
 			} else if (enigma[0].equals("S")) {
 				if (enigma[1].equalsIgnoreCase("All")) {
-					TreeMap<String, Integer> temp = p.getSciList();
-
-					int x = temp.get("lit"); // ISSUE
-					int y = temp.get("math");
-					int z = temp.get("gear");
-					temp.put("lit", x);
-					temp.put("math", y);
-					temp.put("gear", z);
-					p.setSciList(temp);
 				} else if (enigma[1].equalsIgnoreCase("Lit")) {
 					TreeMap<String, Integer> temp = p.getSciList();
 					int i = temp.get("lit") + 1;
@@ -430,7 +405,6 @@ public class Board {
 							guildCards += z;
 						}
 					}
-				}
 				int index = p.getIndex();
 				int lower = index - 1;
 				if (lower == -1) {
@@ -455,7 +429,8 @@ public class Board {
 					guildCards += p.getWonder().getCurrentStage();
 					guildCards += p2.getWonder().getCurrentStage();
 				}
-				if (com[1].equals("S All")) {
+				}
+				if (com[1].equals("S")) {
 					TreeMap<String, Integer> sciListL = new TreeMap<String, Integer>();
 					TreeMap<String, Integer> sciListM = new TreeMap<String, Integer>();
 					TreeMap<String, Integer> sciListG = new TreeMap<String, Integer>();
@@ -604,9 +579,6 @@ public class Board {
 			}
 		}
 
-		if (p.isIgnoreCost()) {
-			return true;
-		}
 
 		if (c.isFree()) // is card free
 		{
@@ -724,6 +696,9 @@ public class Board {
 				return true;
 			}
 			trade.clear();
+			if (p.isIgnoreCost()) {
+				return true; //using olympia ignore cost is last resort
+			}
 			return false;
 		}
 	}
