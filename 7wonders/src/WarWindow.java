@@ -5,40 +5,46 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import java.awt.FlowLayout;
+import java.io.IOException;
 
-public class WarWindow
+public class WarWindow extends JFrame
 {
-	private JFrame frame;
 	private JLabel mongoltage;
 	private URL mon;
-	public WarWindow()
+	public static final int LENGTH = 1600;
+    public static final int HEIGHT = 1000;
+    Board board;
+	
+	public WarWindow(Board b)
 	{
-		frame = new JFrame("WAR TIME");
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		super("WAR TIME");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setVisible(true);
+        setResizable(false);
+        setBounds(150,25,LENGTH,HEIGHT);
         Mongol();
+        board = b;
 	}
 	public void Mongol()
 	{
 		try 
 		{
-			//whap flashbacks
 			mon = new URL("https://thumbs.gfycat.com/AllBothBlackfish-size_restricted.gif");
 			Icon mongol = new ImageIcon(mon);
 	        mongoltage = new JLabel(mongol);
+	        setLayout(new FlowLayout());
 	        
-	        frame.getContentPane().add(mongoltage);
-	        frame.pack();
-	        frame.setLocationRelativeTo(null);
-	        frame.setVisible(true);
-	        frame.setResizable(false);
+	        add(mongoltage);
 		} 
 		catch (MalformedURLException e)
 		{
 			e.printStackTrace();
 		}
 	}
-//	public static void main (String args[])
-//	{
-//		WarWindow mongoltage = new WarWindow();
-//	}
+	public static void main (String args[]) throws IOException
+	{
+		Board b = new Board();
+		WarWindow mongoltage = new WarWindow(b);
+	}
 }
