@@ -279,7 +279,7 @@ public class Board {
 				Player pl = playerList.get(lower);
 				Player p2 = playerList.get(upper);
 				if (com[0].equals("VP")) {
-					if (com[0].equalsIgnoreCase("wonder")) {
+					if (com[2].equalsIgnoreCase("wonder")) {
 						if (com[1].equals("LR")) {
 							vp += pl.getWonder().getCurrentStage();
 							vp += p2.getWonder().getCurrentStage();
