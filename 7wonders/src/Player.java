@@ -56,7 +56,6 @@ public class Player implements Comparable<Player>
 		vpSources = new TreeMap<String, Integer>();
 		setDrawDiscard(false);
 	}
-	
 	public void play(Card c)
 	{
 		addTempPlayedCard(c);

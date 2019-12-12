@@ -23,11 +23,16 @@ public class Resources
     	return getResource();
     }
     public boolean equals(Object obj)
-    
     {
     	Resources r = (Resources) obj;
-    	if (getResource().equals(r.getResource()))
+    	if (getResource().contains(r.getResource()))
+    		return true;
+    	else if (r.getResource().contains(getResource()))
     		return true;
     	return false;
+    }
+    @Override
+    public int hashCode() {
+        return resource.hashCode();
     }
 }

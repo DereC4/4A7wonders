@@ -37,10 +37,10 @@ public class VictoryWindow extends JFrame
 	{
 		try
 		{
-			BufferedImage stand = ImageIO.read(new File("images\\assets\\clipart.png"));
+			BufferedImage stand = ImageIO.read(new File("images\\assets\\victoryStand.png"));
 			BufferedImage background = ImageIO.read(new File("images\\assets\\confetti.jpeg"));
 			g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
-			g.drawImage(stand, 550, 50, 533, 325, null);
+			g.drawImage(stand, 550, 110, 533, 214, null);
 //			String fName = "fonts\\Minecraftia.ttf";
 //			InputStream x = VictoryWindow.class.getResourceAsStream(fName);
 			try

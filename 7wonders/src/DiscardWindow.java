@@ -42,7 +42,7 @@ public class DiscardWindow extends JFrame implements MouseListener
     {
     	try 
     	{
-    		BufferedImage background = ImageIO.read(new File("images\\assets\\graveyard.jpg"));
+    		BufferedImage background = ImageIO.read(new File("images\\assets\\yourgrave.jpg"));
 			BufferedImage sampleCard;
 			g.drawImage(background, 0, 0, LENGTH, HEIGHT, null);
 			int y = 100;
@@ -109,8 +109,10 @@ public class DiscardWindow extends JFrame implements MouseListener
 					//out.println(discard.get(coords.get(coord)));
 					Card card = discard.get(coords.get(coord));
 					player.addTempPlayedCard(card);
+					player.setIgnoreCost(true);
 					discard.remove(card);
 					player.setDrawDiscard(false);
+					board.setToDrawDiscard(null);
 					dispose();
 				}
 		}

@@ -12,6 +12,7 @@ public class Board {
 	private int Age1CardQuantity;
 	private int Age2CardQuantity;
 	private int Age3CardQuantity;
+	private Player toDrawDiscard;
 
 	public Board() throws IOException {
 		deck = new Deck();
@@ -35,6 +36,12 @@ public class Board {
 			playerList.get(i).setWonder(WonderList.remove(index));
 			playerList.get(i).addToResources(playerList.get(i).getWonder().getProduct());
 		}
+		getCurrentPlayer().setWonder(new Wonder("Halikarnassus"));
+		getCurrentPlayer().addToResources(new Resources("Ore"));
+		getCurrentPlayer().addToResources(new Resources("Ore"));
+		getCurrentPlayer().addToResources(new Resources("Ore"));
+		getCurrentPlayer().addToResources(new Resources("Clay"));
+		getCurrentPlayer().addToResources(new Resources("Clay"));
 	}
 
 	public void decodeWonderEffect(String effect, Player p) {
@@ -584,6 +591,10 @@ public class Board {
 		{
 			return true;
 		}
+		
+		if (p.isIgnoreCost()) {
+			return true;
+		}
 
 		for (String s : played.keySet()) // does card chain off another card
 		{
@@ -696,9 +707,6 @@ public class Board {
 				return true;
 			}
 			trade.clear();
-			if (p.isIgnoreCost()) {
-				return true; //using olympia ignore cost is last resort
-			}
 			return false;
 		}
 	}
@@ -717,11 +725,13 @@ public class Board {
 				p.setMoney(p.getMoney() - 1);
 			}
 		} else {
+			//out.print("Cost: ");
 			for (int index : p.getTrade().keySet()) {
 				Player toTrade = getPlayerList().get(index);
 				ArrayList<Resources> resources = p.getTrade().get(index);
 				for (int i = 0; i < resources.size(); i++) {
 					trade(p, toTrade, resources.get(i));
+					//out.print(resources.get(i) + " ");
 				}
 				resources.clear();
 			}
@@ -815,17 +825,24 @@ public class Board {
 			Player currentP = players.get(current);
 			Player lowerP = players.get(lower);
 			Player higherP = players.get(higher);
+			
+			int currentAgeWP;
+			if (getCurrentAge() == 1)
+				currentAgeWP = 1;
+			else if (getCurrentAge() == 2)
+				currentAgeWP = 3;
+			else
+				currentAgeWP = 5;
 
-			if (lowerP.getArmies() > currentP.getArmies() || higherP.getArmies() > currentP.getArmies()) {
+			if (lowerP.getArmies() > currentP.getArmies() && higherP.getArmies() > currentP.getArmies()) 
+				currentP.setWarMinusPoints(currentP.getWarMinusPoints() + 2);
+			else if (lowerP.getArmies() > currentP.getArmies() || higherP.getArmies() > currentP.getArmies())
 				currentP.setWarMinusPoints(currentP.getWarMinusPoints() + 1);
-			} else {
-				if (getCurrentAge() == 1)
-					currentP.setWarPlusPoints(currentP.getWarMinusPoints() + 1);
-				else if (getCurrentAge() == 2)
-					currentP.setWarPlusPoints(currentP.getWarMinusPoints() + 3);
-				else
-					currentP.setWarPlusPoints(currentP.getWarMinusPoints() + 5);
-			}
+			
+			if (lowerP.getArmies() < currentP.getArmies() && higherP.getArmies() < currentP.getArmies())
+				currentP.setWarPlusPoints(currentP.getWarPlusPoints() + currentAgeWP * 2);
+			else if (lowerP.getArmies() < currentP.getArmies() || higherP.getArmies() < currentP.getArmies())
+				currentP.setWarPlusPoints(currentP.getWarPlusPoints() + currentAgeWP);
 		}
 	}
 
@@ -850,9 +867,12 @@ public class Board {
 		for (int i = 0; i < stageCost.length; i++)
 			cost.add(new Resources(stageCost[i]));
 
-		for (int j = resources.size() - 1; j >= 0; j--) {
-			for (int i = cost.size() - 1; i >= 0; i--) {
-				if (resources.get(j).toString().contains(cost.get(i).toString())) {
+		for (int j = resources.size() - 1; j >= 0; j--) 
+		{
+			for (int i = cost.size() - 1; i >= 0; i--) 
+			{
+				if (resources.get(j).toString().contains(cost.get(i).toString())) 
+				{
 					resources.remove(j);
 					cost.remove(i);
 					break;
@@ -862,7 +882,8 @@ public class Board {
 		if (cost.size() == 0) // Player has all necessary resources
 		{
 			return true;
-		} else {
+		} else 
+		{
 			TreeMap<Integer, ArrayList<Resources>> trade = player.getTrade();
 			int costLeft = 0;
 			int costRight = 0;
@@ -877,9 +898,12 @@ public class Board {
 				}
 				ArrayList<Resources> leftResources = playerList.get(lower).getResources();
 				ArrayList<Resources> rightResources = playerList.get(higher).getResources();
-				if (!leftResources.contains(r) && !rightResources.contains(r)) {
+				if (!leftResources.contains(r) && !rightResources.contains(r)) 
+				{
+					trade.clear();
 					return false;
-				} else if (leftResources.contains(r) && rightResources.contains(r)) {
+				} else if (leftResources.contains(r) && rightResources.contains(r)) 
+				{
 					int tempCostLeft = determineCost(r, false, currentPlayer);
 					int tempCostRight = determineCost(r, true, currentPlayer);
 
@@ -930,11 +954,11 @@ public class Board {
 					}
 				}
 			}
-
 			if (playerList.get(currentPlayer).getMoney() >= costLeft + costRight) {
 				return true;
 			}
 			trade.clear();
+			out.println("Not enough coins");
 			return false;
 		}
 	}
@@ -1004,6 +1028,14 @@ public class Board {
 
 	public void setPlayerList(ArrayList<Player> playerList) {
 		this.playerList = playerList;
+	}
+	
+	public Player getToDrawDiscard() {
+		return toDrawDiscard;
+	}
+
+	public void setToDrawDiscard(Player toDrawDiscard) {
+		this.toDrawDiscard = toDrawDiscard;
 	}
 
 	public int getAge1CardQuantity() {
