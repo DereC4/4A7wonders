@@ -34,7 +34,7 @@ public class DiscardWindow extends JFrame implements MouseListener
         board = b;
         player = p;
         discard = board.getDeck().getDiscard();
-        discard = board.getDeck().getAgeTwo(); //temp
+        //discard = board.getDeck().getAgeTwo(); //temp
         coords = new HashMap<String, Integer>();
     }
     
@@ -116,9 +116,11 @@ public class DiscardWindow extends JFrame implements MouseListener
 		}
 	}
 	
+	/*
 	public static void main(String[] args) throws IOException
 	{
 		Board b= new Board();
 		DiscardWindow hi = new DiscardWindow(b, b.getCurrentPlayer());
 	}
+	*/
 }

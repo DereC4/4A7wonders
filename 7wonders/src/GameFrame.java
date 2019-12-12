@@ -125,7 +125,6 @@ public class GameFrame extends PlayerFrame
                     g.drawImage(burn, 1405, 450, 56, 70, null);
                 }
                 paintCards(g);
-                showDiscardWindow(); //only runs when applicable
                 g.setColor(Color.black);
                 g.drawRect(0, 0, 200, 150); //Show previous player's wonder
                 g.drawRect(1400, 0, 200, 150); //Show next player's wonder
@@ -154,6 +153,8 @@ public class GameFrame extends PlayerFrame
                 g.setFont(new Font("Arial", Font.PLAIN, 50));
                 int currentplayer = board.getCurrentPlayer().getIndex() + 1;
                 g.drawString("Player " + currentplayer, 350, 175);
+                
+                showDiscardWindow(); //only runs when applicable
             }
             catch (IOException e)
             {}
@@ -191,11 +192,11 @@ public class GameFrame extends PlayerFrame
     }
     public void showDiscardWindow()
     {
-    	Player player;
         for (Player p : board.getPlayerList())
         {
         	if (p.isDrawDiscard())
         	{
+        		out.println("Works!");
         		DiscardWindow discardWindow = new DiscardWindow(board, p);
         		break;
         	}
