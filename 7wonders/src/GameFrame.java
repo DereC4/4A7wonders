@@ -43,6 +43,7 @@ public class GameFrame extends PlayerFrame
                         if (wonder.getName().equals("Olympia") && stage >= 2) p.setIgnoreCost(true);
                     }
                 }
+                
                 //check temp card storage 
                 //update round 
                 ArrayList < Player > players = board.getPlayerList();
