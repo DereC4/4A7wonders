@@ -12,14 +12,16 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
-public class PlayerFrame extends JFrame implements MouseListener {
+public class PlayerFrame extends JFrame implements MouseListener
+{
 	public static final int LENGTH = 1600;
 	public static final int HEIGHT = 1000;
 	private static Board board;
 	Player player;
 	private boolean isMain;
 
-	public PlayerFrame(Player player, Board b) throws IOException {
+	public PlayerFrame(Player player, Board b) throws IOException
+	{
 		super("Seven Wonders");
 		board = b;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -32,7 +34,8 @@ public class PlayerFrame extends JFrame implements MouseListener {
 		setMain(false);
 	}
 
-	public PlayerFrame() throws IOException {
+	public PlayerFrame() throws IOException
+	{
 		super("Seven Wonders");
 		board = new Board();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -45,25 +48,29 @@ public class PlayerFrame extends JFrame implements MouseListener {
 		setMain(true);
 	}
 
-	public void setBoard(Board board2) {
+	public void setBoard(Board board2)
+	{
 		board = board2;
 	}
 
-	public void paint(Graphics g) {
-		ArrayList<Card> hand = board.getCurrentPlayer().getHand();
-		if (!board.gameFinished()) {
-			try {
+	public void paint(Graphics g)
+	{
+		ArrayList < Card > hand = board.getCurrentPlayer().getHand();
+		if (!board.gameFinished())
+		{
+			try
+			{
 				if (isMain())
 					setPlayer(board.getCurrentPlayer());
 				BufferedImage coin = ImageIO.read(new File("images\\assets\\coin.png"));
 				BufferedImage warpluspoints = ImageIO.read(new File("images\\assets\\victory1.png"));
 				BufferedImage warminuspoints = ImageIO.read(new File("images\\assets\\victoryminus1.png"));
 				BufferedImage wonderbackground = ImageIO
-						.read(new File("images\\wonderbackgrounds\\" + player.getWonder().getName() + "bk.jpg"));
+					.read(new File("images\\wonderbackgrounds\\" + player.getWonder().getName() + "bk.jpg"));
 				BufferedImage sampleWonder = ImageIO
-						.read(new File("images\\wonders\\" + player.getWonder().getName() + ".png"));
+					.read(new File("images\\wonders\\" + player.getWonder().getName() + ".png"));
 				BufferedImage currentage = ImageIO
-						.read(new File("images\\assets\\age" + board.getCurrentAge() + ".png"));
+					.read(new File("images\\assets\\age" + board.getCurrentAge() + ".png"));
 				g.drawImage(wonderbackground, 0, 0, LENGTH, HEIGHT, null);
 				g.drawImage(sampleWonder, 250, 250, 1100, 342, null);
 				g.drawImage(currentage, 750, 100, 100, 100, null);
@@ -108,29 +115,35 @@ public class PlayerFrame extends JFrame implements MouseListener {
 				else
 					g.setColor(new Color(0, 0, 0, 0));
 				g.drawRect(980, 510, 280, 85); // Wonder stage 3
-			} catch (IOException e) {
 			}
+			catch (IOException e)
+			{}
 		}
 	}
 
 	@SuppressWarnings("unused")
-	public void mouseClicked(MouseEvent event) {
+	public void mouseClicked(MouseEvent event)
+	{
 
 	}
 
-	public void mouseEntered(MouseEvent arg0) {
+	public void mouseEntered(MouseEvent arg0)
+	{
 
 	}
 
-	public void mouseExited(MouseEvent arg0) {
+	public void mouseExited(MouseEvent arg0)
+	{
 
 	}
 
-	public void mousePressed(MouseEvent arg0) {
+	public void mousePressed(MouseEvent arg0)
+	{
 
 	}
 
-	public void mouseReleased(MouseEvent event) {
+	public void mouseReleased(MouseEvent event)
+	{
 		Player player = this.player;
 		// 1000, 100, 100, 100
 		if (event.getX() < 1100 && event.getY() < 200 && event.getX() > 1000 && event.getY() > 100) // shows card window
@@ -140,23 +153,28 @@ public class PlayerFrame extends JFrame implements MouseListener {
 		repaint();
 	}
 
-	public Board getBoard() {
+	public Board getBoard()
+	{
 		return board;
 	}
 
-	public Player getPlayer() {
+	public Player getPlayer()
+	{
 		return player;
 	}
 
-	public void setPlayer(Player player) {
+	public void setPlayer(Player player)
+	{
 		this.player = player;
 	}
 
-	public boolean isMain() {
+	public boolean isMain()
+	{
 		return isMain;
 	}
 
-	public void setMain(boolean isMain) {
+	public void setMain(boolean isMain)
+	{
 		this.isMain = isMain;
 	}
 }
