@@ -1,4 +1,4 @@
-# 4asians-7wonders
+# Seven Wonders
 **SLHS Compsci II**
 **CREDITS**
 
