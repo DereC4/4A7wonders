@@ -1,5 +1,5 @@
 //NAME|COLOR|EFFECT|AGE|Chaining|Free|Cost //
-
+ 
 Academy|Green|S math|3|School|false|Stone,Stone,Stone,Glass
 Altar|Blue|VP 2|1| |true| 
 Apothecary|Green|S math|1| |false|Loom
