@@ -1,12 +1,11 @@
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-public class Player implements Comparable<Player>
-{
+public class Player implements Comparable<Player> {
 	private int money, warMinusPoints, warPlusPoints, armies, index, vp;
 	private TreeMap<String, Integer> vpSources;
 	private TreeMap<String, Boolean> reducedList;
-	private TreeMap<String, Integer> sciList; 
+	private TreeMap<String, Integer> sciList;
 	private TreeMap<String, ArrayList<Card>> playedCards;
 	private ArrayList<Card> hand;
 	private Wonder wonder;
@@ -16,18 +15,17 @@ public class Player implements Comparable<Player>
 	private boolean ignoreCost;
 	private boolean buildWonder;
 	private boolean Has_VP_Effect;
-	private TreeMap<Integer, ArrayList<Resources>> trade; //Player index, resources
+	private TreeMap<Integer, ArrayList<Resources>> trade; // Player index, resources
 	private boolean isDrawDiscard;
-	
-	public Player(int index) 
-	{
-		vp=0;
+
+	public Player(int index) {
+		vp = 0;
 		money = 3;
 		warMinusPoints = 0;
 		warPlusPoints = 0;
 		armies = 0;
 		reducedList = new TreeMap<String, Boolean>();
-		this.index=index;
+		this.index = index;
 		trade = new TreeMap<Integer, ArrayList<Resources>>();
 
 		reducedList.put("leftR", false); // left Resource
@@ -36,11 +34,11 @@ public class Player implements Comparable<Player>
 		reducedList.put("rightC", false); // right commodities
 
 		sciList = new TreeMap<String, Integer>();
-		
-		resources=new ArrayList<Resources>();
+
+		resources = new ArrayList<Resources>();
 
 		sciList.put("lit", 0); // tablet
-		
+
 		sciList.put("math", 0); // weird triangle
 		sciList.put("gear", 0); // engineer
 
@@ -54,11 +52,12 @@ public class Player implements Comparable<Player>
 		vpSources = new TreeMap<String, Integer>();
 		setDrawDiscard(false);
 	}
-	public void play(Card c)
-	{
+
+	public void play(Card c) {
 		addTempPlayedCard(c);
 		getHand().remove(c);
 	}
+
 	public TreeMap<Integer, ArrayList<Resources>> getTrade() {
 		return trade;
 	}
@@ -66,24 +65,31 @@ public class Player implements Comparable<Player>
 	public void setTrade(TreeMap<Integer, ArrayList<Resources>> trade) {
 		this.trade = trade;
 	}
+
 	public boolean isBurnCard() {
 		return burnCard;
 	}
+
 	public void setBurnCard(boolean burnCard) {
 		this.burnCard = burnCard;
 	}
+
 	public ArrayList<Card> getTempPlayedCards() {
 		return tempPlayedCards;
 	}
+
 	public void addTempPlayedCard(Card tempPlayedCard) {
 		this.tempPlayedCards.add(tempPlayedCard);
 	}
+
 	public void addToResources(Resources r) {
 		resources.add(r);
 	}
+
 	public void addToHand(Card c) {
 		hand.add(c);
 	}
+
 	public int getMoney() {
 		return money;
 	}
@@ -151,59 +157,60 @@ public class Player implements Comparable<Player>
 	public ArrayList<Card> getHand() {
 		return hand;
 	}
-	public int getWonderStage()
-	{
+
+	public int getWonderStage() {
 		return wonder.getCurrentStage();
 	}
+
 	public void setHand(ArrayList<Card> hand) {
 		this.hand = hand;
 	}
+
 	public Wonder getWonder() {
 		return wonder;
 	}
+
 	public void setWonder(Wonder w) {
-		wonder=w;
+		wonder = w;
 	}
+
 	public void addVP(int i) {
 		vp += i;
 	}
-	public int getVP()
-	{
+
+	public int getVP() {
 		return vp;
 	}
-	public ArrayList <Resources> getResources()
-	{
+
+	public ArrayList<Resources> getResources() {
 		return resources;
 	}
-	public boolean isIgnoreCost() 
-	{
+
+	public boolean isIgnoreCost() {
 		return ignoreCost;
 	}
-	public void setIgnoreCost(boolean ignoreCost) 
-	{
+
+	public void setIgnoreCost(boolean ignoreCost) {
 		this.ignoreCost = ignoreCost;
 	}
-	
-	public boolean isBuildWonder() 
-	{
+
+	public boolean isBuildWonder() {
 		return buildWonder;
 	}
 
-	public void setBuildWonder(boolean buildWonder) 
-	{
+	public void setBuildWonder(boolean buildWonder) {
 		this.buildWonder = buildWonder;
 	}
-	public boolean has_VP_Effect() 
-	{
+
+	public boolean has_VP_Effect() {
 		return Has_VP_Effect;
 	}
 
-	public void setHas_VP_Effect(boolean buildWonder) 
-	{
+	public void setHas_VP_Effect(boolean buildWonder) {
 		this.Has_VP_Effect = buildWonder;
 	}
-	public String toString()
-	{
+
+	public String toString() {
 		return getIndex() + "";
 	}
 
@@ -214,6 +221,7 @@ public class Player implements Comparable<Player>
 	public void setVp(int vp) {
 		this.vp = vp;
 	}
+
 	public TreeMap<String, Integer> getVpSources() {
 		return vpSources;
 	}
@@ -221,6 +229,7 @@ public class Player implements Comparable<Player>
 	public void setVpSources(TreeMap<String, Integer> vpSources) {
 		this.vpSources = vpSources;
 	}
+
 	public boolean isDrawDiscard() {
 		return isDrawDiscard;
 	}
@@ -228,8 +237,8 @@ public class Player implements Comparable<Player>
 	public void setDrawDiscard(boolean isDrawDiscard) {
 		this.isDrawDiscard = isDrawDiscard;
 	}
-	public int compareTo(Player p)
-	{
+
+	public int compareTo(Player p) {
 		if (p.getVp() > getVp())
 			return -1;
 		else if (p.getVp() < getVp())
@@ -237,18 +246,14 @@ public class Player implements Comparable<Player>
 		else
 			return 0;
 	}
-	
-	public void addToPlayedCards(Card c) 
-	{
+
+	public void addToPlayedCards(Card c) {
 		String type = c.getType().toLowerCase();
-		if (playedCards.containsKey(type)) 
-		{
+		if (playedCards.containsKey(type)) {
 			ArrayList<Card> temp = playedCards.get(type);
 			temp.add(c);
 			playedCards.put(type, temp);
-		} 
-		else 
-		{
+		} else {
 			ArrayList<Card> temp = new ArrayList<Card>();
 			temp.add(c);
 			playedCards.put(type, temp);
