@@ -2,11 +2,11 @@
 **SLHS Compsci II**
 **CREDITS**
 
-@DarshShah1008 @DereC4
+Darsh Shah and Derek Chen (@DarshShah1008 @DereC4)
 Coding/Asset finding 
 
-@N1v3x
+Kevin Zhang (@N1v3x)
 Graphics Development
 
-@ethanhuynh5
+Ethan Huy (@ethanhuynh5)
 Text file development
